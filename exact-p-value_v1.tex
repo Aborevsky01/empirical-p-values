@@ -1,0 +1,147 @@
+\documentclass[journal=jpr,manuscript=article]{achemso}
+%\usepackage[margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools,amssymb}
+%\usepackage{color}
+\usepackage[english]{babel}
+%\usepackage{authblk}
+%\usepackage{url}
+%\usepackage{soul}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{algorithmic}
+
+
+%\graphicspath{{figs/}}  Store figures at the level of the main doc
+\newcommand{\argmax}{\text{argmax}}
+\newcommand{\todo}[2]{{\color{red} {\bf TODO-#1}: #2}}
+\newcommand{\comment}[2]{{\color{blue} {\bf Comment-#1}: #2}}
+\newcommand{\correction}[2]{{\color{red} \st{#1} }{\color{red} #2}}
+%\newcommand{\correction}[2]{#2}  % Use this to make a document with hiding track changes.
+
+%\usepackage[backend=biber,style=nature,articletitle=false]{biblatex}
+%\usepackage[backend=biber,style=nature]{biblatex}
+%\addbibresource{bibliography.bib}
+
+%\usepackage[backend=biber]{biblatex}
+%\usepackage{natbib}
+%\addbibresource{bibliography.bib}
+\newcommand{\pe}[0]{\mathrel{{+}{=}}}
+
+%\usepackage{setspace}
+%\doublespacing
+%\newcommand*{\DOUBLEBLINDREVIEW}{} %Uncomment to hide author information for double-blind peer review
+
+
+\author{Andrey Borevsky}
+\author{Attila Kertesz-Farkas$\ast$}
+\affiliation{Laboratory on AI for Computational Biology, Faculty of Computer Science, HSE University,  11 Pokrovsky Bvld., Moscow 109028, Russian Federation}
+\email{akerteszfarkas@hse.ru}
+%\phone{+7 (499) 152-07-41}
+
+\title{Utilizing exact p-values for improved classification and accurate false discovery rate control}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Exact p-value (XPV)-based methods for dot product-like score functions ...
+
+
+\end{abstract}
+\textbf{Key words:} Exact p-values, empirical p-values, False discover rate control, classification, score calibration
+\section{Introduction}
+
+Score functions in spectrum identification \cite{aebersold2003mass,kertesz2012database,kudriavtseva2021deep,sulimov2020annotation,noble2012computational} are hindered by (a) the presence of many unexplained peaks, which stem from the unusual fragmentation of the peptide or contaminating molecules, or (b) the lack of expected fragmentation ions, which fail to be observed in the mass spectrometer \cite{noble2012computational}. Depending on the observed spectrum, raw scores of peptide spectrum match (PSM) may indicate different match quality. For instance, a raw score of  say, 2.5 may imply a correct annotation for a doubly, but an incorrect annotation for a triply charged peptide molecule \cite{keich2014importance}. Spectrum-specific score calibration methods aim to provide a sort of score normalization so that spectrum assignments become comparable with each other. Therefore, a single threshold can be selected to accept or reject spectrum annotations. The calibration allows one to obtain many more spectrum annotations at any desired false discovery rate (FDR) \cite{keich2014importance}. Score calibration methods involve a null distribution and calibrate a raw score to either the mean or the tail of the null distribution \cite{sadygov2003hypergeometric, spirin2011assigning, sulimov2019tailor, fenyo2003method, kim2008spectral, kim2010generating, kim2014ms, alves2010raid_aps}.
+
+Exact methods ... 
+Let us discuss this method in detail. This method requires the following elements:
+\begin{enumerate}
+	\itemsep-3pt  		
+	\item Mass ...
+	
+	\item Exact methods employ ...
+\end{enumerate}
+
+The XPV method begins by placing a 1.0 to the $D[n,0]$, where $n$ indicates the discretized mass of the N-terminal group. This means that, there is exactly one N-terminal residue but its corresponding score is exactly 0, because N-terminal residues are not considered in the scoring. The elements of the dynamic programming table are filled recursively. Let us consider the cell $D[r,c]=n$, where there are exactly $n$ peptide fragments whose discretized mass is $c$ and they all score exactly $r$. Consequently, when all of these $n$ different peptide fragments are appended with an amino acid $X$, then there are $n$ peptides with a discretized mass of 
+\begin{equation}
+b=c+d_w(X)
+\label{eq:new_column}
+\end{equation}
+ and their score
+
+\section{Data sets and methods}
+
+
+\subsection{Data sets}
+In our experiments, we used four, publicly availabl
+
+\begin{table}[t]
+	\centering
+	\caption{Summary of mass spectrometry data sets}
+	\label{tb:dataset_ms_summary}
+	\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}llrr} 
+		\hline
+		ID& Name&Instrument& Num. of spectra & ACP$^1$\\
+		\hline
+		HumVar & H. Sapiens, Human Variation& LTQ Orbitrap& 15,057 & 2771.89  \\
+		Malaria& P. Falciparum & LTQ Orbitrap& 12,594  & 1024.06\\	
+		Kingdom& H. Sapiens  & Q Exactive HF-X Orbitrap	&  178,024& 2124.93\\
+		LUAD &  H. Sapiens, Lung Adeno Carcinoma & Q Exactive HF-X Orbitrap & 41,613 &2771.92\\
+		\hline		
+	\end{tabular*}\\
+	\raggedright \footnotesize Notes: The precursor ion tolerance was set to 10 ppm for all data sets, no isotope error was allowed. $^1$Average candidate peptide per spectrum.
+\end{table}
+
+\section{Results and discussion}
+\subsection{Main results}
+We begin 
+\begin{figure}[h]
+   \centering
+   \footnotesize
+   \setlength{\tabcolsep}{0pt}	
+  % \begin{tabular}{cc}	
+%		(A)\raisebox{-0.90\height}{\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true, width=0.45\textwidth]{HUMVAR.pdf}} &
+%		(B)\raisebox{-0.90\height}{\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true, width=0.45\textwidth]{MALARIA.pdf}}\\ 
+%		(C)\raisebox{-0.90\height}{\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true, width=0.45\textwidth]{KINGDOM.pdf}}& 
+%		(D)\raisebox{-0.90\height}{\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true, width=0.45\textwidth]{LUAD.pdf}} \\
+%	\end{tabular}
+\caption{The number of PSMs accepted at various FDR levels obtained with refactored XCorr, Tailor, and XPV methods using HRFS and LRFS in our benchmark data sets.}
+\label{fg:hrxpv-perf}
+\end{figure}
+
+\section{Conclusions}
+The original exact p-value (XPV) calculation methods for scoring tandem mass spectrometry data using a dot-product-like scoring function were introduced for low-resolution fragmentation settings almost 15 years ago. Until now, it has remained an open question whether this algorithm can be made suitable for high resolution fragmentation settings. In this article we showed a generalization of the XPV method, termed HR-XPV, which is capable of producing accurate and well calibrated exact p-values for XCorr scores obtained with scoring high resolution MS/MS data. Unfortunately, our solution can be considered rather slow, which raise questions about its practicality. However, we hope that, the ideas in HR-XPV presented might be a significant step toward the development of efficient methods for calibrating exact p-values for high resolution MS/MS data. 
+
+\section*{Author contributions}
+\ifdefined\DOUBLEBLINDREVIEW
+Omitted for double-blind peer-review.
+\else
+AP and DV developed various early versions of HR-XPV in python. DV performed initial statistics on the resource consumption and assessed the final performance. KB implemented the method and performed the experiments. A.K.F. conceived the idea and designed the experiments, performed data analysis, and wrote the manuscript. All authors read and approved the final manuscript.
+\fi
+
+\section*{Competing financial interests}
+The authors declare no competing financial interests.
+
+
+\section*{Availability}
+The HR-XPV is freely available in the Tide-search program from a forked version the Crux toolkit and it can be downloaded from \url{https://github.com/MrBhimani/crux-toolkit/}. The HR-XPV can be activated with \url{exact-p-value T} parameter setting and specifying the \url{--mz-bin-width} parameter less than 1.0, for instance \url{ms-bin-width 0.02}. The source code can be found in the \url{calcScoreCountHighRes(..)} function call in TideSearchApplication.cpp at line around 1989 in the GitHub project of Crux: \url{https://github.com/MrBhimani/crux-toolkit/}.
+
+
+\begin{suppinfo}
+	The following supporting information is available free of charge at ACS website \url{http://pubs.acs.org}.
+	\begin{itemize}		
+		\itemsep0cm 	
+		\item Supplementary Note S1: Detailed description of the experimental data used. 
+		\item Supplementary Note S2: Detailed description of the methods used.
+		\item Supplementary Algorithm S1: Detailed pseudo code of the standard exact p-value (XPV) algorithm for XCorr scoring.
+		\item Supplementary Algorithm S2: Detailed pseudo code of the high -resolution exact p-value (HR-XPV) algorithm for XCorr scoring of high resolution MS/MS data.
+		\item Supplementary Data File S1 ({\bf \url{scripts.zip} (Zipped Linux bash scripts)}.): Script files to reproduce our experiments containing all the parameters used.
+	\end{itemize}	
+\end{suppinfo}
+
+%\printbibliography	
+\bibliographystyle{plain}           % Style BST file.
+\bibliography{bibliography}
+
+\end{document}
