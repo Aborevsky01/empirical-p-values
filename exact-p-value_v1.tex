@@ -1,11 +1,12 @@
-\documentclass[journal=jpr,manuscript=article]{achemso}
-%\usepackage[margin=0.5in]{geometry}
+%\documentclass[journal=jpr,manuscript=article]{achemso}
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
 \usepackage{graphicx}
 \usepackage{mathtools,amssymb}
-%\usepackage{color}
+\usepackage{color}
 \usepackage[english]{babel}
-%\usepackage{authblk}
-%\usepackage{url}
+\usepackage{authblk}
+\usepackage{url}
 %\usepackage{soul}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage{algorithmic}
@@ -27,15 +28,15 @@
 %\addbibresource{bibliography.bib}
 \newcommand{\pe}[0]{\mathrel{{+}{=}}}
 
-%\usepackage{setspace}
-%\doublespacing
+\usepackage{setspace}
+\doublespacing
 %\newcommand*{\DOUBLEBLINDREVIEW}{} %Uncomment to hide author information for double-blind peer review
 
 
 \author{Andrey Borevsky}
 \author{Attila Kertesz-Farkas$\ast$}
-\affiliation{Laboratory on AI for Computational Biology, Faculty of Computer Science, HSE University,  11 Pokrovsky Bvld., Moscow 109028, Russian Federation}
-\email{akerteszfarkas@hse.ru}
+\affil{Laboratory on AI for Computational Biology, Faculty of Computer Science, HSE University,  11 Pokrovsky Bvld., Moscow 109028, Russian Federation}
+%\email{akerteszfarkas@hse.ru}
 %\phone{+7 (499) 152-07-41}
 
 \title{Utilizing exact p-values for improved classification and accurate false discovery rate control}
@@ -51,8 +52,21 @@ Exact p-value (XPV)-based methods for dot product-like score functions ...
 \end{abstract}
 \textbf{Key words:} Exact p-values, empirical p-values, False discover rate control, classification, score calibration
 \section{Introduction}
+The performance of machine learning methods, classifiers are typically evaluated with accuracy, ROC, and precision/recall metrics. However, in certain applications, such as those in biomedical area, False discovery rate (FDR) control is preferred. Several methods have been proposed to control FDR at a certain, user-controlled level. Perhaps, the most well-known FDR control method is the Benjamini-Hochberg protocol (BHP). Some FDR control methods rely on knock-off \todo{akf}{Check these knock off methods} or decoy samples. Perhaps, other types of FDR control methods rely on accurate p-values associated to each prediction.
 
-Score functions in spectrum identification \cite{aebersold2003mass,kertesz2012database,kudriavtseva2021deep,sulimov2020annotation,noble2012computational} are hindered by (a) the presence of many unexplained peaks, which stem from the unusual fragmentation of the peptide or contaminating molecules, or (b) the lack of expected fragmentation ions, which fail to be observed in the mass spectrometer \cite{noble2012computational}. Depending on the observed spectrum, raw scores of peptide spectrum match (PSM) may indicate different match quality. For instance, a raw score of  say, 2.5 may imply a correct annotation for a doubly, but an incorrect annotation for a triply charged peptide molecule \cite{keich2014importance}. Spectrum-specific score calibration methods aim to provide a sort of score normalization so that spectrum assignments become comparable with each other. Therefore, a single threshold can be selected to accept or reject spectrum annotations. The calibration allows one to obtain many more spectrum annotations at any desired false discovery rate (FDR) \cite{keich2014importance}. Score calibration methods involve a null distribution and calibrate a raw score to either the mean or the tail of the null distribution \cite{sadygov2003hypergeometric, spirin2011assigning, sulimov2019tailor, fenyo2003method, kim2008spectral, kim2010generating, kim2014ms, alves2010raid_aps}.
+\section{Methods}
+
+It is important to keep it in mind that methods reporting p-values using either analytical models (such as normal distribution) or some empirical methods are just estimations/approximatinos of the true but unknow p-values. The question remains that how accurate the p-value estimation. If a p-value calculation method systematically produces more significant p-values, i.e. smaller numbers, than the true (but unknown) p-values, then it is called a liberal or optimistic; otherwise, if it systematically produces less significant p-values, i.e. larger numbers than the true p-values, it is called a conservative estimation. 
+
+Luckily, there is a way to provide an estimation on the bias in p-values. It is known that, sampling from a distribution, the corresponding p-values are uniformly distributed. In order to show this, let us assume we are given a continuous, cumulative distribution function $F_X(X)$ and it is invertible, i.e. $F_X^{-1}$ exists. We want to show that, the p-values $Z = 1-F_X(X)$ are uniformly distributed, that is $F_Z(X)$ is uniformly distributed. Note that $Z\in [0,1]$. For the uniform distribution on $U\sim U_{[0,1]}$, we also have $1-U\sim U_{[0,1]}$ uniformly distributed, furthermore $P(U\le u)=u$ and $P(U>u) = 1-u$ for any $u\in[0,1]$. Thus,
+\begin{equation}
+	F_Z(u)=P(Z \le u) = P(1-F_X(X)\le u)= 1-P(X\le F_X^{-1}(u))=1-F_X(F_X^{-1}(u))=1-u.
+\end{equation}
+
+Therefore, one can plot a histogram of the p-values of the incorrect annotations in order to visually verify that the p-values are well calibrated. The plots in Figure \ref{fg:score_hist_pvals} show some visual verification of the p-values. 
+
+
+
 
 Exact methods ... 
 Let us discuss this method in detail. This method requires the following elements:
@@ -126,19 +140,19 @@ The authors declare no competing financial interests.
 
 \section*{Availability}
 The HR-XPV is freely available in the Tide-search program from a forked version the Crux toolkit and it can be downloaded from \url{https://github.com/MrBhimani/crux-toolkit/}. The HR-XPV can be activated with \url{exact-p-value T} parameter setting and specifying the \url{--mz-bin-width} parameter less than 1.0, for instance \url{ms-bin-width 0.02}. The source code can be found in the \url{calcScoreCountHighRes(..)} function call in TideSearchApplication.cpp at line around 1989 in the GitHub project of Crux: \url{https://github.com/MrBhimani/crux-toolkit/}.
-
-
-\begin{suppinfo}
-	The following supporting information is available free of charge at ACS website \url{http://pubs.acs.org}.
-	\begin{itemize}		
-		\itemsep0cm 	
-		\item Supplementary Note S1: Detailed description of the experimental data used. 
-		\item Supplementary Note S2: Detailed description of the methods used.
-		\item Supplementary Algorithm S1: Detailed pseudo code of the standard exact p-value (XPV) algorithm for XCorr scoring.
-		\item Supplementary Algorithm S2: Detailed pseudo code of the high -resolution exact p-value (HR-XPV) algorithm for XCorr scoring of high resolution MS/MS data.
-		\item Supplementary Data File S1 ({\bf \url{scripts.zip} (Zipped Linux bash scripts)}.): Script files to reproduce our experiments containing all the parameters used.
-	\end{itemize}	
-\end{suppinfo}
+%
+%
+%\begin{suppinfo}
+%	The following supporting information is available free of charge at ACS website \url{http://pubs.acs.org}.
+%	\begin{itemize}		
+%		\itemsep0cm 	
+%		\item Supplementary Note S1: Detailed description of the experimental data used. 
+%		\item Supplementary Note S2: Detailed description of the methods used.
+%		\item Supplementary Algorithm S1: Detailed pseudo code of the standard exact p-value (XPV) algorithm for XCorr scoring.
+%		\item Supplementary Algorithm S2: Detailed pseudo code of the high -resolution exact p-value (HR-XPV) algorithm for XCorr scoring of high resolution MS/MS data.
+%		\item Supplementary Data File S1 ({\bf \url{scripts.zip} (Zipped Linux bash scripts)}.): Script files to reproduce our experiments containing all the parameters used.
+%	\end{itemize}	
+%\end{suppinfo}
 
 %\printbibliography	
 \bibliographystyle{plain}           % Style BST file.
