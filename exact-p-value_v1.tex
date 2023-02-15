@@ -100,15 +100,25 @@ We arbitrarily chose the class "2" as a positive class from the MNIST data, and 
 
 \begin{figure}
 	\centering
-	\begin{tabular}{cc}
-		\todo{AB}{Add figure} &
-		\todo{AB}{Add figure} \\
-%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
-		A & B \\
-		\todo{AB}{Add figure} &
-		\todo{AB}{Add figure} \\
-		C & D \\
+	\begin{tabular}{ccc}
+ 		\includegraphics[width=2in]{misc/QQ_with_labels.png} &
+		\includegraphics[width=2in]{misc/test_pred_with_labels.png} & 
+            \includegraphics[width=2in]
+            {misc/test_pred_with_labels_loc.png}
+		\\
+		%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
+		A & B & C\\
+            \includegraphics[width=2in]{misc/QQ_no_labels.png} &
+		\includegraphics[width=2in]{misc/test_pred_no_labels.png} &  
+            \includegraphics[width=2in]{misc/test_pred_no_labels_loc.png}  \\
+		D & E & F \\
 	\end{tabular}
+	\caption{{\bf FDR control with p-values.}
+		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A). $\pi_0$ is estimated on the test data.
+		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
+	}
+	\label{fig:examples}
+\end{figure}
 	\caption{{\bf FDR control with p-values.}
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A). $\pi_0$ is estimated on the test data.
 		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
