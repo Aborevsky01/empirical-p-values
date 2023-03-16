@@ -128,15 +128,11 @@ For multi class classification, the p-value indicates significance of that a sam
 
 
 \begin{figure}
-	\centering
+    \centering
 	\begin{tabular}{cc}
-		\todo{AB}{Add figure} &
-		\todo{AB}{Add figure} \\
-		%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
+		\includegraphics[width=2in]{misc/QQ_multi.png} &
+		\includegraphics[width=2in]{misc/test_pred_multi.png} \\	
 		A & B \\
-		\todo{AB}{Add figure} &
-		\todo{AB}{Add figure} \\
-		C & D \\
 	\end{tabular}
 	\caption{{\bf FDR control with p-values for multi-class classification.}
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
@@ -149,6 +145,27 @@ For multi class classification, the p-value indicates significance of that a sam
 \subsection{detecting data distribution shift}
 
 For further examination of p-values’ nature, we introduced a brief experiment on data distribution shift. After training logistic regression on the MIST dataset, a 1-by-1 pixel move was performed for each image. Then the newly born samples were run through the already trained model. However, the emerged QQ plots have shown a radical alteration compared to the preceding graphs. The comparison outlines the p-values’ initial uniform distribution’s elimination. 
+
+\begin{figure}
+    \centering
+        \begin{tabular}{ccc}
+ 		\includegraphics[width=2in]{misc/QQ_shift_binary_with.png} &
+		\includegraphics[width=2in]{misc/shift_test_pred_with_labels.png} & 
+            \includegraphics[width=2in]
+            {misc/shift_test_pred_with_labels_loc.png}
+		\\	
+		A & B & C\\
+            \includegraphics[width=2in]{misc/QQ_shift_binary_no.png} &
+		\includegraphics[width=2in]{misc/shift_test_pred_no_labels.png} &  
+            \includegraphics[width=2in]{misc/shift_test_pred_no_labels_loc.png}  \\
+		D & E & F \\
+	\end{tabular}
+	\caption{{\bf  FDR control with p-values for detecting data distribution shift.}
+		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
+		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
+	}
+	\label{fig:examplesssss}
+\end{figure}
 
 %
 %Exact methods ... 
