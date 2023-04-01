@@ -82,35 +82,29 @@ The FDR control could potentially be carried out by controlling the FDR on the t
 
 \section{Data and methods}
 \subsection{MNIST dataset}
-
 The ubiquitously known MNIST dataset is a rich collection of handwritten digits, becoming a baseline for any classification task nowadays. It contains 60k samples for the training stage and only 10k for the test, where all classes (from 0 to 9) are evenly distributed. Also to be mentioned is the strict normalization of the digits in the image in terms of size and centering, so the algorithms receive unified examples as input.
-
 \subsection{Logistic regression classifier}
+We have accomplished a major part of the research's first stages through the standard logistic regression model. It comprised a single linear layer renewed by Adam optimizer with a learning rate equal to 0.01 and a BCEWithLogitsLoss cost function. The motivation was straightforward: if we find ourselves able to ameliorate a particular quality of an elementary model on the resolvable MNIST dataset, then we could extend our approach to more comprehensive tasks and algorithms.
 
-We have accomplished a major part of the research through the standard logistic regression model. It comprised a single linear layer renewed by Adam optimizer with a learning rate equal to 0.01 and a BCEWithLogitsLoss cost function. The motivation was straightforward: if we find ourselves able to ameliorate a particular quality of an elementary model on the resolvable MNIST dataset, then we could extend our approach to more comprehensive tasks and algorithms.
+\subsection{Convolutional neural network classifier}
+Nevertheless, all the presented figures correspond to the usage of a more powerful CNN model. It consists of two convolutional 2d layers, each followed by a rectifier activation function. The output layer is presented by a simple linear unit, providing as much classes, as it was initialized by the user.   
 
 
 \section{Results}
 
-\subsection{p-values for binary classification}
-
-For binary classification, one can use the prediction scores negative training data as a null distribution. The BHP requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the proportion of the negative classification among all classifications in the test data.  
-
-We arbitrarily chose the class "2" as a positive class from the MNIST data, and all other data corresponding to other classes were treated as negative data.
-
 \begin{figure}
 	\centering
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/QQ_with_labels.png} &
-		\includegraphics[width=2in]{img/test_pred_with_labels.png} & 
+ 		\includegraphics[width=2in]{img/cnn_QQ_with_labels.png} &
+		\includegraphics[width=2in]{img/cnn_test_pred_with_labels.png} & 
             \includegraphics[width=2in]
-            {img/test_pred_with_labels_loc.png}
+            {img/cnn_test_pred_with_labels_loc.png}
 		\\
 		%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
 		A & B & C\\
-            \includegraphics[width=2in]{img/QQ_no_labels.png} &
-		\includegraphics[width=2in]{img/test_pred_no_labels.png} &  
-            \includegraphics[width=2in]{img/test_pred_no_labels_loc.png}  \\
+            \includegraphics[width=2in]{img/cnn_QQ_no_labels.png} &
+		\includegraphics[width=2in]{img/cnn_test_pred_no_labels.png} &  
+            \includegraphics[width=2in]{img/cnn_test_pred_no_labels_loc.png}  \\
 		D & E & F \\
 	\end{tabular}
 	\caption{{\bf FDR control with p-values.}
@@ -118,20 +112,21 @@ We arbitrarily chose the class "2" as a positive class from the MNIST data, and 
 		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
 	}
 	\label{fig:examples}
-\end{figure}
+\end{figure}  
 
+\subsection{p-values for binary classification}
 
-\subsection{p-values for multi-class classification}
+For binary classification, one can use the prediction scores negative training data as a null distribution. The BHP requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the proportion of the negative classification among all classifications in the test data.  
 
-For multi class classification, the p-value indicates significance of that a sample is correctly classified. The null distribution is constructed from the miss-classified training data. Therefore, we aim to control that whether a test data is correctly classified to its class or not. The $\pi_0$, again is estimated by the proportion of the negative classification among all classifications.
-
+We arbitrarily chose the class "2" as a positive class from the MNIST data, and all other data corresponding to other classes were treated as negative data. \todo{AB}{Use can chose other target class}.
+  
 
 
 \begin{figure}
     \centering
 	\begin{tabular}{cc}
-		\includegraphics[width=2in]{img/QQ_multi.png} &
-		\includegraphics[width=2in]{img/test_pred_multi.png} \\	
+		\includegraphics[width=2in]{img/cnn_QQ_multi.png} &
+		\includegraphics[width=2in]{img/cnn_test_pred_multi.png} \\	
 		A & B \\
 	\end{tabular}
 	\caption{{\bf FDR control with p-values for multi-class classification.}
@@ -142,22 +137,18 @@ For multi class classification, the p-value indicates significance of that a sam
 \end{figure}
 
 
-\subsection{detecting data distribution shift}
-
-For further examination of p-values’ nature, we introduced a brief experiment on data distribution shift. After training logistic regression on the MIST dataset, a 1-by-1 pixel move was performed for each image. Then the newly born samples were run through the already trained model. However, the emerged QQ plots have shown a radical alteration compared to the preceding graphs. The comparison outlines the p-values’ initial uniform distribution’s elimination. 
-
 \begin{figure}
     \centering
         \begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/QQ_shift_binary_with.png} &
-		\includegraphics[width=2in]{img/shift_test_pred_with_labels.png} & 
+ 		\includegraphics[width=2in]{img/cnn_QQ_shift_binary_with.png} &
+		\includegraphics[width=2in]{img/cnn_shift_test_pred_with_labels.png} & 
             \includegraphics[width=2in]
-            {img/shift_test_pred_with_labels_loc.png}
+            {img/cnn_shift_test_pred_with_labels_loc.png}
 		\\	
 		A & B & C\\
-            \includegraphics[width=2in]{img/QQ_shift_binary_no.png} &
-		\includegraphics[width=2in]{img/shift_test_pred_no_labels.png} &  
-            \includegraphics[width=2in]{img/shift_test_pred_no_labels_loc.png}  \\
+            \includegraphics[width=2in]{img/cnn_QQ_shift_binary_no.png} &
+		\includegraphics[width=2in]{img/cnn_shift_test_pred_no_labels.png} &  
+            \includegraphics[width=2in]{img/cnn_shift_test_pred_no_labels_loc.png}  \\
 		D & E & F \\
 	\end{tabular}
 	\caption{{\bf  FDR control with p-values for detecting data distribution shift.}
@@ -166,6 +157,16 @@ For further examination of p-values’ nature, we introduced a brief experiment 
 	}
 	\label{fig:examplesssss}
 \end{figure}
+
+
+\subsection{p-values for multi-class classification}
+
+For multi class classification, the p-value indicates significance of that a sample is correctly classified. The null distribution is constructed from the miss-classified training data. Therefore, we aim to control that whether a test data is correctly classified to its class or not. The $\pi_0$, again is estimated by the proportion of the negative classification among all classifications.
+
+\subsection{detecting data distribution shift}
+
+For further examination of p-values’ nature, we introduced a brief experiment on data distribution shift. After training model on the MIST dataset, a 1-by-1 pixel move was performed for each image. Then the newly born samples were run through the already trained model. However, the emerged QQ plots have shown a radical alteration compared to the preceding graphs. The comparison outlines the p-values’ initial uniform distribution’s elimination. 
+
 
 %
 %Exact methods ... 
