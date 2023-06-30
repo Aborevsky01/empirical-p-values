@@ -91,7 +91,7 @@ The FDR control could potentially be carried out by controlling the FDR on the t
 
 We are working solely on the ubiquitously known MNIST dataset, a rich collection of handwritten digits, becoming a baseline for any classification task nowadays. It contains 60k samples for the training stage and only 10k for the test, where all classes (from 0 to 9) are evenly distributed. Also to be mentioned is the strict normalization of the digits in the image in terms of size and centering, so the algorithms receive unified examples as input.
 
-We have accomplished all our experiments through a standard convolutional neural network \cite{cnn}. It comprises two convolutional 2d layers, both with 8 channels, kernels of size 3 and two-step strides. Single rectifier activation function is following each of them.  The output layer is represented by a simple linear unit, providing as much classes, as it was initialized by the user.   
+We have accomplished all our experiments through a standard convolutional neural network. It comprises two convolutional 2d layers, both with 8 channels, kernels of size 3 and two-step strides. Single rectifier activation function is following each of them.  The output layer is represented by a simple linear unit, providing as much classes, as it was initialized by the user.   
 
 Model is trained with Adam optimizer with a learning rate equal to 0.01 and a BCEWithLogitsLoss cost function unless otherwise specified. The motivation for introducing such a naive model was straightforward: if we find ourselves able to ameliorate a particular quality compared to the ground truth via an elementary model on the resolvable MNIST dataset, then we could extend our approach to more comprehensive real-life tasks and models.
 
@@ -160,7 +160,7 @@ Getting closer to the plots \ref{fig:multi}, we should outline that only two wer
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
 		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
 	}
-	\label{fig:shifted}
+	\label{fig:shift}
 \end{figure}
 
 \subsection{Shift case}
