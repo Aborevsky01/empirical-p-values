@@ -117,7 +117,7 @@ Hence, a bias assessment is opted to be carried out by drawing a QQ plot of the 
 The described above algorithm seems to be a reasonable strategy to estimate $\alpha$ level of FP at each particular threshold. Nevertheless, the major issue with such a straightforward approach is a colossal reliance on the heuristics, describing the training scores distribution. The consequence appears to be its negligible robustness and adaptation to the class distribution nor to the data distribution shifts. Thus, the method we propose here 
 encapsulates the explored concept together with embodying specific rules to counter the alterations of test data.
 
-\subsection{FWER-based approach}
+\subsection{Learn-then-test}
 
 Obviously, FDR is just a single example of the statistical guarantees we can address to the algorithm. An attempt to establish a unified approach for calibrating models to satisfy such explicit constraints was accomplished by \textcite{ltt}. Their two-stage Learn-then-Test (LTT) framework proposes acquiring a trained model and modifying its predictions through multiple hypothesis testing. Thus, the acceptable set of hyperparameters is determined to preserve any selected statistical error (including FDR). “\textit{Put plainly, we learn a base model and then test which parameter values lead to risk control}” \cite{ltt}. 
 
@@ -318,9 +318,9 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 \begin{figure}
 	\centering
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/pcam_QQ.jpeg} &
-		\includegraphics[width=2in]{img/pcam_fdr_control.jpeg} & 
-            \includegraphics[width=2in]{img/pcam_fdr_control_loc.jpeg}
+ 		\includegraphics[width=2in]{img/pcam_QQ.png} &
+		\includegraphics[width=2in]{img/pcam_fdr_control.png} & 
+            \includegraphics[width=2in]{img/pcam_fdr_control_loc.png}
 		\\	
 		A & B & C
 	\end{tabular}
@@ -329,6 +329,19 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 \end{figure} 
 
 \subsubsection{Rebalanced case}
+
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+ 		\includegraphics[width=2in]{img/pcam_balanced_QQ.png} &
+		\includegraphics[width=2in]{img/pcam_balanced_fdr_control.png} & 
+            \includegraphics[width=2in]{img/pcam_balanced_fdr_control_loc.png}
+		\\	
+		A & B & C
+	\end{tabular}
+	\caption{\bf FDR control with p-values for rebalanced PCam dataset.}
+	\label{fig:pcam}
+\end{figure} 
 
 \subsection{Loan exposure data}
 
@@ -362,7 +375,7 @@ AKF concieved the idea that accurate empirical p-values would be derived from tr
 \fi
 
 %\printbibliography	
-\bibliographystyle{plain}           % Style BST file.
-\bibliography{bibliography}
+%\bibliographystyle{plain}           % Style BST file.
+%\bibliography{bibliography}
 
 \end{document}
