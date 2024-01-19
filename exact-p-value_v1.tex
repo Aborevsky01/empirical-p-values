@@ -197,11 +197,11 @@ The entire algorithm was written on the PyTorch framework and includes several k
 However, besides only generating uniform p-values, we need an understanding of the algorithm’s efficiency. Thus, we introduce two types of graphs: the “QQ” plots and the “FDR control” plots. The former depicts p-values from the uniform distribution for visual verification. We plot these p-values obtained with negative training data and their rank along the x-axis for both training (simply a diagonal) and test data. The closer our test samples get to the ideal line, the better our EPV approach operates. The second type of graphs visualizes the number of trusted classifications depending on the FDR when it is controlled with true labels (baseline) and with the BH protocol using the p-values. We also add rival LTT framework, representing the FWER methodology. As we progress towards the ground truth, our ability to function without test labels will improve as well as our capacity to forecast. The last paragraph remains true for the further experiments.
 
 \begin{figure}
-	\centering
+        \advance\leftskip-0.5cm
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/cnn_QQ_classical.png} &
-		\includegraphics[width=2in]{img/cnn_classical_fdr_control.png} & 
-            \includegraphics[width=2in]{img/cnn_classical_fdr_control_loc.png}
+ 		\includegraphics[width=2.5in]{img/cnn_QQ_classical.pdf} &
+		\includegraphics[width=2.5in]{img/cnn_classical_fdr_control.pdf} & 
+            \includegraphics[width=2.5in]{img/cnn_classical_fdr_control_loc.pdf}
 		\\
 		%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
 		A & B & C
@@ -226,8 +226,8 @@ Speaking of the QQ plots, one almost can not identify any distinctions between p
 \begin{figure}
     \centering
 	\begin{tabular}{cc}
-		\includegraphics[width=2in]{img/cnn_QQ_multi.png} &
-		\includegraphics[width=2in]{img/cnn_multi_fdr_control.png} \\	
+		\includegraphics[width=3in]{img/cnn_QQ_multi.pdf} &
+		\includegraphics[width=3in]{img/cnn_multi_fdr_control.pdf} \\	
 		A & B \\
 	\end{tabular}
 	\caption{{\bf FDR control with p-values for multi-class classification.}
@@ -239,11 +239,11 @@ Speaking of the QQ plots, one almost can not identify any distinctions between p
 
 
 \begin{figure}
-    \centering
+    \advance\leftskip-0.5cm
         \begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/cnn_QQ_shifted.png} &
-		\includegraphics[width=2in]{img/cnn_shifted_fdr_control.png} & 
-            \includegraphics[width=2in]{img/cnn_shifted_fdr_control_loc.png}
+ 		\includegraphics[width=2.5in]{img/cnn_QQ_shifted.pdf} &
+		\includegraphics[width=2.5in]{img/cnn_shifted_fdr_control.pdf} & 
+            \includegraphics[width=2.5in]{img/cnn_shifted_fdr_control_loc.pdf}
 		\\	
 		A & B & C
 	\end{tabular}
@@ -256,11 +256,11 @@ Speaking of the QQ plots, one almost can not identify any distinctions between p
 
 
 \begin{figure}
-    \centering
+    \advance\leftskip-0.5cm
         \begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/cnn_QQ_balanced.png} &
-		\includegraphics[width=2in]{img/cnn_balanced_fdr_control.png} & 
-            \includegraphics[width=2in]{img/cnn_balanced_fdr_control_loc.png}
+ 		\includegraphics[width=2.5in]{img/cnn_QQ_balanced.pdf} &
+		\includegraphics[width=2.5in]{img/cnn_balanced_fdr_control.pdf} & 
+            \includegraphics[width=2.5in]{img/cnn_balanced_fdr_control_loc.pdf}
 		\\	
 		A & B & C
 	\end{tabular}
@@ -297,7 +297,7 @@ Final conditions to be described imply another form of dataset's alteration. How
 
 Again, straightforward implementation of EPV without any statistical corrections was leading to the low algorithm's ability to describe the ground truth. However, transferring the entire approach into the current form made a drastic amelioration. As it can be seen on figure \ref{fig:balanced}, our method plus BH protocol work almost perfectly, with a little bit higher number of discoveries predicted on the local range. On the contrary, the LTT framework, based on FWER-family approach, shows comparatively dreary results, behaving illogically in terms of ground truth. If moving to the \ref{fig:balanced}A, we can see ultimately close scatter plot to the "Train" diagonal.
 
-\subsection{Biomedical data}
+\subsection{Biomedical data: tumor classification}
 
 \begin{figure}
 	\centering
@@ -325,9 +325,9 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 \begin{figure}
 	\centering
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/pcam_QQ.png} &
-		\includegraphics[width=2in]{img/pcam_fdr_control.png} & 
-            \includegraphics[width=2in]{img/pcam_fdr_control_loc.png}
+ 		\includegraphics[width=2in]{img/pcam_QQ.pdf} &
+		\includegraphics[width=2in]{img/pcam_fdr_control.pdf} & 
+            \includegraphics[width=2in]{img/pcam_fdr_control_loc.pdf}
 		\\	
 		A & B & C
 	\end{tabular}
@@ -340,15 +340,49 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 \begin{figure}
 	\centering
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/pcam_balanced_QQ.png} &
-		\includegraphics[width=2in]{img/pcam_balanced_fdr_control.png} & 
-            \includegraphics[width=2in]{img/pcam_balanced_fdr_control_loc.png}
+ 		\includegraphics[width=2in]{img/pcam_balanced_QQ.pdf} &
+		\includegraphics[width=2in]{img/pcam_balanced_fdr_control.pdf} & 
+            \includegraphics[width=2in]{img/pcam_balanced_fdr_control_loc.pdf}
 		\\	
 		A & B & C
 	\end{tabular}
 	\caption{\bf FDR control with p-values for rebalanced PCam dataset.}
 	\label{fig:pcam}
 \end{figure} 
+
+\subsection{Biomedical data: cells segmentation}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=8in]{img/tissuenet.pdf}
+	\caption{{\bf Instance of TissueNet dataset.} Two-channel original images are being processed by the model, in turn producing masks \& flows to correctly segment cells}
+	\label{fig:tissue_example}
+\end{figure} 
+
+\subsubsection{Datasets and Models}
+
+The PatchCamelyon (PCam) benchmark dataset is a fairly rich collection of histopathologic scans of lymph node sections. It consists of 327.680 colored images of size (96, 96) each. The provided task demands performing a binary classification, identifying the presence or absence of any histopathology. PCam was deduced from Camelyon16 dataset by splitting images into patches. However, it appears to be far easier in generalization by the neural networks, in turn still showing a high accuracy in metastasis detection on the ancestor. We believe this is a relevant clinical task, which strives to have the control over the possible error rate.
+
+The creators underscore that all the subsets - training, validation, test - are equally divided, persisting the class balance of 1:1. Moreover, the patches do comprise a synthetic beginning since the tumor cells could be found only in the centre region of the image with size (32, 32). Nevertheless, authors still provide the outer region for model's compliance with Camelyon16, but they do slightly lighten the task by reducing the area of interest.
+
+For the sake of proving practicality of our method, we will manually change the classes' proportions. However, no data distribution shift could be performed except the one laid in test subset.
+
+Speaking of the model, we rely on the pretrained neural network from the \href{https://tiatoolbox.readthedocs.io}{TIA toolbox}. This toolbox for tissue image analysis provides a torch-written API with distinct efficient algorithms for a bunch of various biomedical tasks. Except the trained models themselves, package also introduces tools for data loading, pre- and post-processing, visualization together with the overall inference. For the PCam dataset, TIA package suggest over a dozen of models. We chose the \href{https://huggingface.co/1aurent/resnet34.tiatoolbox-pcam}{resnet34-pcam}. It is the ubiquitously known model from the torchvision deep residual learning collection being further advanced by TIA research centre with the use of PCam data.
+
+\subsubsection{Standard case}
+
+\begin{figure}
+	\centering
+	\begin{tabular}{ccc}
+ 		\includegraphics[width=2in]{img/segment_cls_QQ.pdf} &
+		\includegraphics[width=2in]{img/segment_cls_fdr_control.pdf} & 
+            \includegraphics[width=2in]{img/segment_cls_fdr_control_loc.pdf}
+		\\	
+		A & B & C
+	\end{tabular}
+	\caption{\bf FDR control with p-values for TissueNet dataset.}
+	\label{fig:pcam}
+\end{figure}
 
 \subsection{Loan exposure data}
 
