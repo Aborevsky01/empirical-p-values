@@ -39,20 +39,28 @@
 %\email{akerteszfarkas@hse.ru}
 %\phone{+7 (499) 152-07-41}
 
-\title{Utilizing exact p-values for improved classification and accurate false discovery rate control}
-
+\title{Accurate false discovery rate control in classification problems with valid empirical p-values}
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-Artificial Intelligence has been demonstrated as an incredibly useful instrument for a broad range of tasks. One of them — Bioinformatics — proposed fundamentally novel techniques at the intersection of machine learning and statistics. Despite their potential, these methods have not been utilized for more general tasks yet. Accordingly, in our work, we elaborate a drastically new approach called empirical p-values (EPV). Assuming negative training data of classification task to be the null hypothesis distribution, we calculate the corresponding p-values for the test samples. Later, we expand the BH procedure to control FDR, making it possible both to regulate the interrelation of train and test data distributions, as well as to predict new labels based on those already investigated. The major goal is to accurately predict number of accepted discoveries at each level without true labels.
+	The performance of machine learning-based classifiers can significantly degrade in software production due to domain shifts of batch effects that was not considered during training and validation. In this paper, we present a simple to accurately estimate and control the false discovery rate (FDR) on the test data without using class labels which is also robust to domain shifts. Our technique is based on valid, i.e. uniformly distributed, empirical p-values derived from the distribution of the prediction scores of the negative data, i.e. the null-distribution, produced by the classifier. Then, the FDR can be accurately controlled with, for instance, Benjamini-Hochberg protocol or similar ones. Domain shits can be visually detected by comparing the null distributions of the train and test sets with Q-Q plots. In case of domain shift, simply by re-scaling the test null distribution to the train one provides  accurate FDR control. We compared our method with the Learn-Then-Test approach recently developed by Michael Jordan's lab and our experimental results shows that our technique is more robust to data- and class-label distribution shits. 
+	
+	 
+%Artificial Intelligence has been demonstrated as an incredibly useful instrument for a broad range of tasks. One of them — Bioinformatics — proposed fundamentally novel techniques at the intersection of machine learning and statistics. Despite their potential, these methods have not been utilized for more general tasks yet. Accordingly, in our work, we elaborate a drastically new approach called empirical p-values (EPV). Assuming negative training data of classification task to be the null hypothesis distribution, we calculate the corresponding p-values for the test samples. Later, we expand the BH procedure to control FDR, making it possible both to regulate the interrelation of train and test data distributions, as well as to predict new labels based on those already investigated. The major goal is to accurately predict number of accepted discoveries at each level without true labels.
 
 
 \end{abstract}
-\textbf{Key words:} Exact p-values, empirical p-values, False discover rate control, ML, Benjamini-Hochberg protocol
+\textbf{Key words:} P-values, Empirical P-values, False Discover Rate, Error Control, False Discovery Rate Control, Benjamini-Hochberg Protocol
 
 \section{Introduction}
+
+The performance of a machine learning-based classifier in the software production phase is assumed to be the same as its performance on a validation set. Unfortunately, the real performance can be significantly worse than thought due to domain shifts, also known as data distribution shift, class label distribution shift, or batch effects. In life sciences, this shift in data can be attributed including, but not limited, to laboratory and environmental conditions, change in the reagent, atmospheric ozone levels, personnel differences \cite{leek2010tackling}. Different instruments may also produce slight differently distributed data about the same experiments. Light microscopic images may vary due to the ambient light conditions. These effects may lead to incorrect conclusions about the experiments. Machine learning-based methods for credit risk assessment become inaccurate after economic or geopolitical turbulence. 
+
+Type I and type II errors can have significantly different costs or impacts on society. An incorrectly diagnosed HIV or COVID positive person will undergo a more elaborated clinical tests until the correct diagnosis established, while an incorrectly diagnosed infected person will put many other peoples' life in danger.
+
+
 
 Classification is a renown machine learning task, being enriched throughout last decades with various metrics. Each of them expects a growth only with the simultaneous enhancement of the model’s classification power, revealing a certain level of effectiveness. Meanwhile, a broad family of evaluation approaches has been introduced to present a comprehensive analysis. 
 
@@ -119,7 +127,7 @@ encapsulates the explored concept together with embodying specific rules to coun
 
 \subsection{Learn-then-test}
 
-Obviously, FDR is just a single example of the statistical guarantees we can address to the algorithm. An attempt to establish a unified approach for calibrating models to satisfy such explicit constraints was accomplished by \textcite{ltt}. Their two-stage Learn-then-Test (LTT) framework proposes acquiring a trained model and modifying its predictions through multiple hypothesis testing. Thus, the acceptable set of hyperparameters is determined to preserve any selected statistical error (including FDR). “\textit{Put plainly, we learn a base model and then test which parameter values lead to risk control}” \cite{ltt}. 
+Obviously, FDR is just a single example of the statistical guarantees we can address to the algorithm. An attempt to establish a unified approach for calibrating models to satisfy such explicit constraints was accomplished by \cite{ltt}. Their two-stage Learn-then-Test (LTT) framework proposes acquiring a trained model and modifying its predictions through multiple hypothesis testing. Thus, the acceptable set of hyperparameters is determined to preserve any selected statistical error (including FDR). “\textit{Put plainly, we learn a base model and then test which parameter values lead to risk control}” \cite{ltt}. 
 
 In the FDR case, we are simply searching for an optimal threshold $t$ to be chosen for each desired metric value. Such a strategy, being an extensive way to calibrate the error rate, introduces a brand new technique that will be used as a direct competitor to the introduced method. Speaking more formally, we can take some threshold $t$. Then, we could say that the corresponding classification function $f_t$ (basically, our neural network) is producing $(\alpha, \beta)$-risk-controlling predictions only if:
 
@@ -412,7 +420,7 @@ AKF concieved the idea that accurate empirical p-values would be derived from tr
 \fi
 
 %\printbibliography	
-%\bibliographystyle{plain}           % Style BST file.
-%\bibliography{bibliography}
+\bibliographystyle{plain}           % Style BST file.
+\bibliography{bibliography}
 
 \end{document}
