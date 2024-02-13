@@ -56,10 +56,24 @@
 
 \section{Introduction}
 
-The performance of a machine learning-based classifier in the software production phase is assumed to be the same as its performance on a validation set. Unfortunately, the real performance can be significantly worse than thought due to domain shifts, also known as data distribution shift, class label distribution shift, or batch effects. In life sciences, this shift in data can be attributed including, but not limited, to laboratory and environmental conditions, change in the reagent, atmospheric ozone levels, personnel differences \cite{leek2010tackling}. Different instruments may also produce slight differently distributed data about the same experiments. Light microscopic images may vary due to the ambient light conditions. These effects may lead to incorrect conclusions about the experiments. Machine learning-based methods for credit risk assessment become inaccurate after economic or geopolitical turbulence. 
+The performance of machine learning-based classifiers in software production phase is assumed to be the same as its performance on a validation set  \cite{dmlsbook2022}. Unfortunately, the  performance in real world applications can often be significantly worse than thought due to data distribution shift, data label distribution shift, and batch effects \cite{Candela2009DatasetShift}. In life sciences, this shift can be attributed including, but not limited, to change in laboratory or environmental conditions, change in the reagents or atmospheric ozone levels, as well as to personnel differences and to variation of technical sources \cite{leek2010tackling}. Different high-throughput instruments produced by different manufacturers may also produce slightly differently distributed data about the same experiments. Light microscopic images may vary due to the ambient light conditions. Tandem mass spectrometry data are affected by differences in experimental protocols and data acquisition conditions, reagent batches, or changes in instrumentation \cite{phua2022perspectives, vcuklina2021diagnostics}. These impacts may lead to incorrect conclusions about the experiments, and improper clinical drug therapies etc. 
 
-Type I and type II errors can have significantly different costs or impacts on society. An incorrectly diagnosed HIV or COVID positive person will undergo a more elaborated clinical tests until the correct diagnosis established, while an incorrectly diagnosed infected person will put many other peoples' life in danger.
+Similarly in economics and industry, machine learning-based predictions may also become inaccurate after economic shock, technological advancement, geopolitical turbulence, and pandemic \cite{ramey2016macroeconomic}. For instance, energy consumption prediction needs to be re-calibrated after energy price change in order maintain carbon emission reasonably low \cite{clement2023coping}; credit risk assessment needs to be adapted to, for instance, monetary policy tightening, increased government expenditure, and income distribution shift caused by inflation \cite{kritzman2012regime,guo2023predict}.
+% \cite{Zhang:EECS-2021-262}  % Inflation Reduction Act (IRA)
 
+False positive (FP, aka type I) and false negative (FN, aka type II) errors can have significantly different costs or impacts on people and society \cite{wynants2019three}. For instance, a false positive diagnoses of HIV, COVID-19, and cancer can cause emotional trauma and the person may undergo invasive treatments with undesirable complications and side effects \cite{newman2021rate, salz2010meta, Tosteson2014Consequences, xu2016frequency} until a more elaborated clinical test establishes the correct diagnosis. However; a falsely diagnosed person with infectious disease may lead to a false sense of safety \cite{mouliou2021false}, may put not only their but other peoples' life in danger \cite{woloshin2020false}, an undetected cancer may prolong and hinder treatment \cite{bradley2021interpreting}, misdiagnosed human papillomavirus (HPV) may progress to cancer precursor lesions \cite{macios2022false,pinsky2015principles}. \todo{AB}{We need citations and examples about FP and FN in social sciences, economics, industry and finance}.
+
+%Modern AI applications decision threshold between positive and negative cases should be carefully chosen which not only minimizes the risk of progression of the disease that escaped detection, unfavorable prognosis, and delayed treatment, but also reduces the over-diagnosis, over-treatment, high costs, and needless anxiety .
+
+
+Modern AI applications not only do they need to increase their discriminative power to reduce the overall number of incorrect predictions, but they also need to simultaneously minimize a quantified risks of false positive and negative errors by an optimal decision threshold calibration while also being robust to and able to handle data distribution shift \cite{feng2022clinical, al2023artificial}. False discovery rate (FDR) control procedures are plausible techniques to keep the false positive rate among the total positive classifications at a certain, user-defined level. This is particularly useful when the risk of false positive prediction is significantly higher than leaving many positive predictions out. \todo{AKF}{Here comes the FDR and high throughput screening, shotgun experiments, then example of the needle biospy and patch-clamp stuff}.
+
+%progression of the disease that escaped detection, unfavorable prognosis, and delayed treatment, but also reduces the over-diagnosis, over-treatment, high costs, and needless anxiety \cite{pinsky2015principles}.
+
+ \
+
+ \
+ 
 
 
 Classification is a renown machine learning task, being enriched throughout last decades with various metrics. Each of them expects a growth only with the simultaneous enhancement of the model’s classification power, revealing a certain level of effectiveness. Meanwhile, a broad family of evaluation approaches has been introduced to present a comprehensive analysis. 
@@ -419,8 +433,9 @@ Omitted for double-blind peer-review.
 AKF concieved the idea that accurate empirical p-values would be derived from training data. AB worked out the methods and carried out experiments. AKF and AB wrote the manuscript.
 \fi
 
-%\printbibliography	
-\bibliographystyle{plain}           % Style BST file.
+%\printbibliography	 
+%\bibliographystyle{plain}           % Style BST file.
+\bibliographystyle{unsrt}           % Style BST file.
 \bibliography{bibliography}
 
 \end{document}
