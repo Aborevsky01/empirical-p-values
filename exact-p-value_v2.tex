@@ -3,7 +3,7 @@
 \usepackage[margin=0.5in]{geometry}
 \usepackage{graphicx}
 \usepackage{mathtools,amssymb}
-%\usepackage{dsfont}
+\usepackage{dsfont}
 \usepackage{color}
 \usepackage[english]{babel}
 \usepackage{authblk}
@@ -28,6 +28,7 @@
 %\usepackage{natbib}
 %\addbibresource{bibliography.bib}
 \newcommand{\pe}[0]{\mathrel{{+}{=}}}
+\newcommand{\mathone}{\mathds{1}}
 
 \usepackage{setspace}
 \doublespacing
@@ -40,7 +41,7 @@
 %\email{akerteszfarkas@hse.ru}
 %\phone{+7 (499) 152-07-41}
 
-\title{Accurate false discovery rate control in classification problems with valid empirical p-values}
+\title{Accurate false discovery rate control in classification problems with valid empirical p-values under distribution shift}
 \begin{document}
 
 \maketitle
@@ -72,7 +73,7 @@ Modern AI applications not only do they need to increase their discriminative po
 The False Selection Rate (FRS) control procedure can restrain the FP and FN errors simultaneously \cite{zhao2023controlling}. This approach determines two thresholds, one to make definitive positive, and another one to make definitive negative predictions. Any samples not passing either thresholds are remain in {\em indecision}. Therefore, the misclassification error (accuracy) among definitive predictions can be bounded, while a subset of samples without predictions are returned for manual investigation by a human expert or for further data collection \cite{rava2021burden}. 
 
 Typically, the FDR (and the FSR) control heavily relies on valid, i.e. uniformly distributed, p-values, while typical deep learning models produce raw discriminative scores, logits for samples. %Recent methods in outlier detection \cite{bates2023testing,marandon2023adaptive} and in classification \cite{rava2021burden, angelopoulos2021learn} have proposed using empirical p-values, also known as conformal p-values, in which a p-value of a given discriminative score $s$ is defined as the fraction of a set of validation  scores that are larger than or equal to $s$, formally: $p=(1+\sum_{s_i\in C} \mathds{1}\{s_i\ge s\})/(n+1)$. 
-The empirical p-value (EPV), also known as conformal p-value, of a given discriminative score $s$ is defined as the fraction of a set of validation scores that are greater than or equal to $s$, formally: $p=(1+\sum_{s_i\in N_0} {1}\{s_i \ge s\})/(n+1) \label{eq:epv}$ [eq. \ref{eq:epv}]. The set $N_0$ contains $n$ scores produced by a machine learning method (scoring function) on negative samples of the validation set, which can be constructed from the labeled training data or it can be created from the decoy peptides in tandem mass spectrometry data annotation \cite{elias2007target,danilova2019bias}. The p-values of the negative test samples are super uniform under the null if the data distribution of the test and validation samples are identically and independently distributed. This property is called exchangeability. In this case, the Benjamini-Hochberg (BH) procedure controls the FDR at $\pi_0\alpha$ level, where $\pi_0$ denotes the fraction of nulls (negatives) among the test samples, and $\alpha$ is a user-defined confidence level. The EPVs have been successfully used in recent methods for outlier detection \cite{bates2023testing,marandon2023adaptive} and in classification \cite{rava2021burden, angelopoulos2021learn} under the assumption of exchangeability.   However, in practice, this assumption is often violated due to data shifts, batch effects, as discussed above; thus, the FDR control may be conservatively or liberally (anti-conservatively) biased. 
+The empirical p-value (EPV), also known as conformal p-value, of a given discriminative score $s$ is defined as the fraction of a set of validation scores that are greater than or equal to $s$, formally: $p=(1+\sum_{s_i\in N_0} \mathone\{s_i \ge s\})/(n+1) \label{eq:epv}$ [eq. \ref{eq:epv}]. The set $N_0$ contains $n$ scores produced by a machine learning method (scoring function) on negative samples of the validation set, which can be constructed from the labeled training data or it can be created from the decoy peptides in tandem mass spectrometry data annotation \cite{elias2007target,danilova2019bias}. The p-values of the negative test samples are super uniform under the null if the data distribution of the test and validation samples are identically and independently distributed. This property is called exchangeability. In this case, the Benjamini-Hochberg (BH) procedure controls the FDR at $\pi_0\alpha$ level, where $\pi_0$ denotes the fraction of nulls (negatives) among the test samples, and $\alpha$ is a user-defined confidence level. The EPVs have been successfully used in recent methods for outlier detection \cite{bates2023testing,marandon2023adaptive} and in classification \cite{rava2021burden, angelopoulos2021learn} under the assumption of exchangeability.   However, in practice, this assumption is often violated due to data shifts, batch effects, as discussed above; thus, the FDR control may be conservatively or liberally (anti-conservatively) biased. 
 
 Recent methods, which deal with data shift, aim to (1) detect data shift  \cite{ dasu2009change}, (2) identify features which cause data shift \cite{kulinski2020feature}, (3) detect and correct label shift \cite{lipton2018detecting}, (4) provide explainability about data shift \cite{budhathoki2021did,kulinski2023towards}, and adapt to data shifts \cite{sui2024unleashing, zhang2021adaptive, zhang2022memo}. Most of the recent methods operate in the feature space and rely on data clustering or graphical cuasel models; and, are challenged by high-dimensional space, data sparsity, and correlated features. 
 
@@ -187,18 +188,18 @@ In this paper we propose a method to adapt the distribution of the scores of neg
 
 \section{Some catchy name for our method}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ denote the training data and $T\subseteq D$ denote the test data samples. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be an appropriately trained discriminator (classifier), such as a deep neural network, to indicate class membership ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max\{f_k(t) \}$, and the predicted class label be $L(t)=\text{argmax}_k\{f_k(t)\}$ for $t\in D$. The null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications. We say that, we trust a prediction if $f(t)>s_t$ for a decision threshold $s_t$ and we make indecision for samples if $f(t)<s_t$. The false discovery proportion (FDP) at a score threshold $s_t$ is calculated as 
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications. We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation}
-	FDP(s_t)=\frac{|\{t: Y_t\ne L(t),\,f(t)>s_t\}|+1}{|\{t:f(t)>s_t\}|},
+	FDP(s_t)=\frac{1+|\{t: Y_t\ne L(t),\,f(t)\ge s_t\}|}{|\{t:f(t)\ge s_t\}|},
 \end{equation}
 \noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
 %A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
 
-For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $L(t)=1\{f(t)>s_t\}$ the label prediction with using a decision threshold $s_t$, $N_0=\{f(t):t\in X,\, Y_t=0\}$ the null distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)>s_t\}|)/|\{t:f(t)>s_t\}|}$. We note that, the FDR control is not related to FSR control in this binary case. 
+For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the null distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
-The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets. In this case we propose to use an empirical cumulative histogram of $N_0$ and calculate the p-values accordingly. The FDR in $T$ is controlled with using the BH protocol at a predetermined $\alpha$ level. \todo{AKF}{use the $\pi_0$ adjusted FDR control from Storey.} The q-value of a test sample $t\in T$ is defined as $q_t=\inf{s}$ \todo{AKF}{Get the definition from the storey paper}. 
+The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sampe would depend on the other samples in the set. The lower the q-value the most trusted the prediction is.
 
-\paragraph{Example 1.} For demonstratoin, we trained a two-layer convolutional neural network to classify MNIST samples. It contains 60K training and 10K test images of hand-written digits of 28x28 pixels in 10 classes. There is no data shift in the test set. The accuracy of the trained model is XXX. 
+\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no data shift in the test set. The accuracy of the trained model is XXX. The score distributions 
 
 
 
