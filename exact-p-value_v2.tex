@@ -83,7 +83,7 @@ Recent methods, which deal with data shift, aim to (1) detect data shift  \cite{
 
 In this paper we propose a method to adapt the distribution of the scores of negative test samples to the null (i.e. the distribution of the scores of the negative train samples) in order to maintain accurate FDR control under data distribution shift. In detail, the empirical p-values of the test samples are calculated with using the whole negative training data as $H_0$ with eq. \ref{eq:epv}. In the absence of data shift, the p-values should be uniformly distributed. We propose to visually monitor the uniformity of the p-values with Q-Q plots, in which the p-values are plotted against their ordered normalized positions. Any deviation from the diagonal line of the Q-Q plot would indicate data shift. Alternatively, the Fisher's combinatorial test may also be used to test uniformity \cite{fisher1928statistical}. The distribution of the test scores are adjusted so that the mode of the predicted negative test samples fits to the distribution of scores of the negative training samples. \todo{akf-ab}{summarize the method and cite}. Then, the decision threshold can be calibrated with $\pi_0$-BH method directly for the actual test samples so that it controls the FDR at a predefined $\alpha$-level. This approach is also robust to data label shifts because the $pi_0$ estimation automatically considers the actual rate of the classes; therefore adaptation to altered class balances is not required.
 
- Or approach operates solely at the space of prediction score, which is typically one dimensional for binary classification, or $k$-dimensional for $k$-class classification problems. Therefore, our approach is not hindered by the course-of-dimensionality; moreover, it can be employed with any machine learning model, given that classification is based on discriminative scores; this includes deep neural networks, black box models, with any kind of data such as tabular, text, audio, image, graph data. Our method is data driven. The only one assumption of our method is that the discriminative score distributions resembles to the ones depicted in Figure \ref{fig:illustration}.
+ Or approach operates solely at the space of prediction score, which is typically one dimensional for binary classification, or $k$-dimensional for $k$-class classification problems. Therefore, our approach is not hindered by the course-of-dimensionality; moreover, it can be employed with any machine learning model, given that classification is based on discriminative scores; this includes deep neural networks, black box models, with any kind of data such as tabular, text, audio, image, graph data. Our method is data driven. The only one assumption of our method is that the discriminative score distributions resembles to the ones depicted in Figure \ref{fig:illustration}. We note that the FDR control procedures applied within our framework may require that the test samples are independently sampled.
 
 \begin{figure}
 	\centering
@@ -188,33 +188,34 @@ In this paper we propose a method to adapt the distribution of the scores of neg
 
 \section{Some catchy name for our method}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications. We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications. The true test null and true test target distributions are constructed in a similar way from the test samples with using the true labels, respectively.  We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation}
 	FDP(s_t)=\frac{1+|\{t: Y_t\ne L(t),\,f(t)\ge s_t\}|}{|\{t:f(t)\ge s_t\}|},
 \end{equation}
 \noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
 %A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
 
-For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the null distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
+For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_0=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
 The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sampe would depend on the other samples in the set. The lower the q-value the most trusted the prediction is.
 
-\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no data shift in the test set. The accuracy of the trained model is XXX. The score distributions 
+\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
 
 
 
 
 \begin{figure}
 	\centering
-	\begin{tabular}{cc}
-		\includegraphics[width=3in]{img/cnn_QQ_multi.pdf} &
-		\includegraphics[width=3in]{img/cnn_multi_fdr_control.pdf} \\	
-		A & B \\
+	\begin{tabular}{cccc}
+		\includegraphics[width=1.5in]{img/Mnist_multi_score_dist.pdf}&
+		\includegraphics[width=1.5in]{img/cnn_QQ_multi.pdf} &
+		\includegraphics[width=1.5in]{img/cnn_multi_fdr_control.pdf} &
+		\includegraphics[width=1.5in]{img/tg_image_2497405997.jpeg} \\
+			
+		A & B & C & D \\
 	\end{tabular}
-	\caption{{\bf FDR control with p-values for multi-class classification.}
-		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
-		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
-	}
+	\caption{{\bf FDR control in MNIST predictions with empirical p-values. }\todo{AB}{Format the plots in the same style, make the text readable.  Capitalize only the first word in a phrase. ``Normalized rank'', etc }
+		(A) The discriminative score distributions. \todo{AB}{The x-axis label should be ``Discriminative score''. the legends should be: Train null ($N_0$), Train target ($N_1$), True test null, True test target.}.(B) The QQ plot of the empirical p-values of the test samples that are .  \todo{AB}{The y-axis should be Empirical p-value.} (C).  \todo{AB}{The x-axis ``Q-value'' y-axis: ``Number of trusted predictions".} (D) \todo{AB}{Put the legends on. Also add the line for the LTT.} }
 	\label{fig:multi}
 \end{figure}
 
