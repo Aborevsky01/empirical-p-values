@@ -195,22 +195,23 @@ Let us suppose that we are given a domain $D$ such as images, text, speech, grap
 \noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
 %A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
 
-For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_0=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
+For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
 The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sampe would depend on the other samples in the set. The lower the q-value the most trusted the prediction is.
 
-\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
+%\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network containing 8 kernels with size of $3\times3$ at each layers, respectively, to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
 
+\paragraph{Example 1.} For demonstration, we trained a convolutional neural network for binary classification to classify the digit '1' as target (positive) against all the other digits (negative) of the MNIST dataset. The model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, respectively, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the data. The trained model achieved a 99\% accuracy on the test set.
 
 
 
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
-		\includegraphics[width=1.5in]{img/Mnist_multi_score_dist.pdf}&
-		\includegraphics[width=1.5in]{img/cnn_QQ_multi.pdf} &
-		\includegraphics[width=1.5in]{img/cnn_multi_fdr_control.pdf} &
-		\includegraphics[width=1.5in]{img/tg_image_2497405997.jpeg} \\
+		\includegraphics[width=1.7in]{img/cls_overview.png}&
+		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
+		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
+		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
 			
 		A & B & C & D \\
 	\end{tabular}
