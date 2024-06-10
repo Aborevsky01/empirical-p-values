@@ -237,7 +237,7 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 \section{Empirical P-Values}
 
 \subsection{Methodology}
-After a number of various permutations, each being scrutinized for the sake of higher efficiency, a particular approach was elaborated. It includes the following stages:
+After performing a number of various permutations, each being scrutinized for the sake of higher efficiency, a particular approach was elaborated. It includes the following stages:
 
 
 \begin{enumerate}%[label=\arabic*.]
@@ -249,12 +249,12 @@ After a number of various permutations, each being scrutinized for the sake of h
     \item  After we acquired the modified test distributions, we stack them together: $\hat{X}^{\text{test}} = [\hat{P}^{\text{test}}, \hat{N}^{\text{test}}]$. Deriving our final data representation allows to launch statistical algorithm on competing approaches, either including or eliminating statical adjustment of test data.
 
     \item The empirical p-values extraction incorporates several stages. \begin{itemize}
-        \item  Firstly, we calculate such p-values that reflect the position of the particular test sample according to the $N^{\text{train}}$:
+        \item  Firstly, we calculate such p-values that reflect the position of the particular test sample according to the negative distribution - null hypothesis $H_0$. The choice of particular reference $H_0$ is also scrutinized in \ref{StatAd}.
 
     \begin{equation}
-        \text{p}_i = \frac{L_{N^{\text{train}}} - \text{position}(N^\text{train}, \hat{X}^{\text{test}}_i)}{L_{N^{\text{train}}}}
+        \text{p}_i = \frac{L_{H_0} - \text{position}(H_0, \hat{X}^{\text{test}}_i)}{L_{H_0}}
     \end{equation}
-    where $L_{N^{\text{train}}}$ is the total number of samples in $\hat{N}^{\text{train}}$; position is the output of binary search algorithm, declaring sample's $\hat{X}^{\text{test}}_i)$ position in the sequence $N^{\text{train}}$. 
+    where $L_{H_0}$ is the total number of samples in $H_0$; position is the output of binary search algorithm, declaring sample's $\hat{X}^{\text{test}}_i)$ position in the sequence $H_0$. 
 
     \item Next, the sorted sequence of EPVs is returned to become an input for the BH procedure. There, we deduce the corresponding q-values by the formula\ref{eq:bh2}. It requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications. Such a value is denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the share of those samples predicted to be negative among the entire test dataset. 
     \item Final operation implies the same procedure, as shown in equation\ref{eq:q}.
@@ -262,29 +262,57 @@ After a number of various permutations, each being scrutinized for the sake of h
     \end{itemize}
 \end{enumerate}
 
-\subsection{Statistical adjustment}\label{StatAd}
+\subsection{Distribution shift disposal}\label{StatAd}
 
-\subsubsection{Distribution shift disposal}
+Alterations among the test samples compared to the training ones are a well-known issue. Therefore, the established method should demonstrate resilience by maintaining the quality of predictions. This is achieved through a multi-stage algorithm, containing several key steps.
 
-Alterations among the test samples compared to the training ones are a well-known issue. Therefore, the established method should demonstrate resilience by maintaining the quality of predictions. This is achieved through a multi-stage algorithm.
+\subsubsection{Gaussian extrapolation}
 
-Firstly, we apply the kernel density estimation separately to the $P^{\text{test}}$ and $N^{\text{test}}$ subsets, which are initially split according to the given threshold. Next, we extrapolate both resulting functions and determine the two lines' point of intersection to be the novel, slightly displaced border. This deviation from the standard methodology was implemented to address potential challenges caused by shifts in data distribution, wreaking havoc in estimations. Additionally, this technique enables the approximation of hidden tails, which can significantly affect overall performance. 
+Firstly, we opted to apply the kernel density estimation separately to the $P^{\text{test}}$ and $N^{\text{test}}$ subsets, which had been initially split according to the pre-defined border. Next, we extrapolate both resulting functions and determine the two lines' point of intersection to be the novel, slightly displaced border. This deviation from the standard methodology was implemented to address potential challenges caused by shifts in data distribution, wreaking havoc in estimations. Additionally, this technique enables the initial approximation of hidden tails, which can significantly affect overall performance. 
 
-The mean and standard deviation of both $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$ are then calculated to describe them based on their true labels, which the model initially learned from. We then substitute $\mu^{\text{test}}_N$ and $\sigma^{\text{test}}_N$ by the training ones. In the case of a positive subset, only $\mu^{\text{test}}_P$ is modified.
+\subsubsection{Statistical adjustment}
+
+Normal-shaped distributions could be altered in such a manner to become close to some reference distribution. Hence, we proposing a technique that takes negative and positive reference distributions: $N_{\text{ref}}$ and $P_{\text{ref}}$, respectively. We also require the distributions being processed: $N_p$ and $P_p$. 
+
+The mean and standard deviation of both $P_{\text{ref}}$ and $N_{\text{ref}}$ are then calculated. After, we do substitute $\mu_{N_{\text{p}}}$ and $\sigma_{_N_{\text{p}}}$ by the reference ones ones. In the case of a positive $P_p$, only mean statistics is modified.
     \begin{equation}
-            \hat{N}^{\text{test}} = \frac{(N^{\text{test}} - \mu^{\text{test}}_N)}{\sigma^{\text{test}}_N} \cdot \sigma^{\text{train}}_{N_{\text{true}}} + \mu^{\text{train}}_N{\text{true}}
+            \hat{N}_{\text{p}} = \frac{(N_{\text{p}} - \mu_{N_{\text{p}}})}{\sigma_{N_{\text{p}}}} \cdot \sigma_{N_{\text{ref}}} + \mu_{N{\text{ref}}}
     \end{equation}
-The changes listed bring the test data closer to the training data, resulting in greater uniformity  of $\hat{N}^{\text{test}}$ EPVs.
+The listed changes bring the test data closer to the reference data, resulting in greater uniformity of EPVs.
 
-
+Our approach suggests processing the normal-shaped distributions of scores. Hence, we propose to work with renown characteristics of such distributions. In case of being provided only logits, we apply reverse sigmoid function with to return back to the accepted data form.
 
 \subsubsection{Tail Approximation}
 
-As the study focuses primarily on the FP notion, it is crucial to acknowledge the presence of tails in test distributions. While we do not have access to the labels, we cannot accurately prolongate either $\hat{P}^{\text{test}}$ or $ \hat{N}^{\text{test}}$. However, we have information not only on the correct training distribution - $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$ -, but also on the transformation towards the predicted case. To clarify, the latter is when training values are split based only on model's prediction: $P^{\text{train}}_{\text{pred}}$ and $N^{\text{train}}_{\text{pred}}$. 
+As the study focuses primarily on the FP notion, it is crucial to acknowledge the presence of unidentified tails in test distributions. While we do not have access to the true labels, we cannot accurately prolongate either $\hat{P}^{\text{test}}$ or $ \hat{N}^{\text{test}}$. Nevertheless, we know the desired information can be accessed through the true distributions of training data, owing to the provided labels. 
 
-After  the difference between the shapes of the train and test subsets, we can now perform the following strategy. Initially, we consider $p^{\text{train}}_{b}$ to be the rightwards p-value of the updated classification's threshold value in terms of $\hat{N}^{\text{test}}_{\text{true}}$. Next, we take the identical leftwards p-value of the negative test distribution $ \hat{N}^{\text{test}}$, striving to create a symmetric plot.Our next step is to concatenate the left-side tail, starting from $-p^{\text{train}}_{b}$, to the right side of the negative test distribution. Reversing the tail while keeping the relative proportions is not a significant issue. However, it seems that after making rough estimate of the tail, opting to name $ \hat{N}^{\text{test}}$ and $N^{\text{train}}_{\text{pred}}$ similar, we extended our test data with synthetic samples. This might result a vast range of negative consequences. 
+Hence, after limiting the difference between the training and test distributions through the previous steps, we could elaborate a specific method to estimate the tails of test data based on those of $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$. Its idea is straightforward: we identically apply either logspace or linspace binning technique both to $N^{\text{train}}_{\text{true}}$ and $X^\text{train}$. Afterwards, for each bin a proportion of negative samples is calculated. This is the percentage of $X^\text{test}$ in that particular bin that should be considered as negative samples in random manner. Such a stochastic approach would not break method's statistical integrity since we are interested in the rate of false discovery rather than individual classification. Finally, the chosen scores in each bin are now considered as a new $N^{\text{test}}$ and $P^{\text{test}}$. Such an approach allows to maintain only real samples in test data without adding synthetic tails.
 
-To address this issue, we have elaborated a specific technique. We apply a binning technique for the values within the range of the synthetic tail. Next, we calculate the proportion of those values sampled and reversed from $ \hat{N}^{\text{test}}$ left side in relation to the real data from $P^{\text{train}}_{\text{pred}}$. Thus, we acquire the probability of changing the label of real positively predicted training data for each bin. Such an algorithm allows for the maintainance of only real samples in data, while also predicting the tail of the $ \hat{N}^{\text{test}}$. The same procedure can be performed for $ \hat{P}^{\text{test}}$.
+However, in case of rebalanced class proportions the presented mathematical adjustment would result in a vast range of negative consequences. To control such a risk, we suggest recalculating the percentage of negative samples for the region of two distributions' intersection:
+
+\[\hat{\text{percenatge}} = \frac{\text{percenatge} \cdot \frac{L_{N^{\text{train}}}}{L){X^{\text{train}}}}}{\frac{L_{N^{\text{test}}}}{L){X^{\text{test}}}}}\]
+
+\subsubsection{Final Strategy}
+
+During the explored research, two distinct cases were identified. Usually, the data samples themselves are coming from similar data distributions both during training and validation. Nevertheless, since the model is elaborating the test data for the first time, it usually faces comparative challenges. In result, the positive and negative test distributions appear to shift towards each other, increasing the area of intersection. But the true distribution should have been more similar to the known $N^{\text{train}}_{\text{true}}$ respectively. So, the basic idea for such situations is to alter the predicted test distributions $P^{\text{test}}$ and $N^{\text{test}}$ to make them more similar to the reference $H_0$ and $H_1$ hypothesis, leading to better estimation of FDR level. 
+
+Such situations imply the following strategy:
+
+\begin{enumerate}
+    \item Split $P^{\text{test}}$ and $N^{\text{test}}$ according to the given border. Find the new border of $X^{\text{test}}$ through the Gaussian Extrapolation. 
+    \item Perform Statistical adjustment to the repeatedly split $P^{\text{test}}$ and $N^{\text{test}}$ with $P^{\text{train}}$ and $N^{\text{train}}$ as reference distributions. 
+    \item Launch Tails Approximation for acquired $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$. 
+    \item Simple redesign of predicted test distributions does not affect EPV calculation in any manner, since it is relying on the position of the scores in terms of $N^{\text{train}}$. Hence, we repeatedly perform Statistical adjustment for newly calculated $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$ with the same reference - training distributions. The output is then collected into final $X^{\text{test}}$ array.
+\end{enumerate}
+
+At the same, the described case is not the only possible. Real-world problems usually imply severe differentiation of data distributions through time. Hence, training and test data might significantly drift apart, causing terrible miscalculations in predictions of FDR. Such cases require ignorance of $N^{\text{train}}$ in terms of null hypothesis:
+
+\begin{enumerate}
+    \item Identically perform Gaussian Interpolation for $X^{\text{test}}$.
+    \item Perform Statistical adjustment to the $P^{\text{train}}$ and $N^{\text{train}}$ with $P^{\text{test}}$ and $N^{\text{test}}$ as reference distributions. It is vital to underscore the diametric change of proposed approach: instead of relying on acknowledged training data, we shift it towards the predicted test distributions. Otherwise, $X^{\text{train}}$ would mislead the EPV calculation methodology, fully ignoring the ongoing data alterations.
+    \item Resulting $\hat{X}^{\text{train}}$ from the previous step is transmitted to the Tails Approximation method in order to bolster $P^{\text{test}}$ and $N^{\text{test}}$ extrapolation around the border. 
+    \item Again, leaving the distributions in the same range as they were before leads to zero impact on the EPV calculation. Hence, Statistical Adjustment is applied to $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$, where reference distributions are the initial $P^{\text{test}}$ and $N^{\text{test}}$. Such a selection of reference id dictated by necessity to stay in the shifted domain of test data.
+\end{enumerate}
 
 \section{Experiments}
 \subsection{Synthetic data}
