@@ -186,22 +186,34 @@ In this paper we propose a method to adapt the distribution of the scores of neg
 %    \item After the best threshold-score was selected, we can measure percentage of test scores above it. Consequently, calculating such a share for the test data, we can not only separate distribution into positive and negative subsets, but also identify particular number of accepted discoveries at particular $\alpha$.
 %\end{enumerate}
 
-\section{Some catchy name for our method}
+\section{Preliminaries}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications. The true test null and true test target distributions are constructed in a similar way from the test samples with using the true labels, respectively.  We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
-\begin{equation}
-	FDP(s_t)=\frac{1+|\{t: Y_t\ne L(t),\,f(t)\ge s_t\}|}{|\{t:f(t)\ge s_t\}|},
-\end{equation}
-\noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be appropriately trained binary discriminators (classifiers), such as a deep neural network, to indicate positive class, where $R$ denotes the real values. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications, and the train score distribution is $N_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$ , and the true score $T_s$ distributions are constructed in a similar way from the test samples with using the true labels. We say that we trust (or accept) a positive prediction of sample $t$ if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+\begin{equation*}
+	FDP(s_t,D)=\frac{1+|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
+\end{equation*}
+\noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. % We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
 %A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
 
-For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
+% For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
-The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sample would depend on the other samples in the set. The lower the q-value the most trusted the prediction is.
+The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sample would depend on the other samples in the set. The lower the q-value the most trusted the positive prediction is.
+%
+% THIS IS WITH MULTI CLASS CLASSIFICATION
+%Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications. The true test null and true test target distributions are constructed in a similar way from the test samples with using the true labels, respectively.  We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+%\begin{equation}
+%	FDP(s_t)=\frac{1+|\{t: Y_t\ne L(t),\,f(t)\ge s_t\}|}{|\{t:f(t)\ge s_t\}|},
+%\end{equation}
+%\noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
+%%A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
+%
+%For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
+%
+%The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sample would depend on the other samples in the set. The lower the q-value the most trusted the prediction is.
 
 %\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network containing 8 kernels with size of $3\times3$ at each layers, respectively, to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
 
-\paragraph{Example 1.} For demonstration, we trained a convolutional neural network for binary classification to classify the digit '1' as target (positive) against all the other digits (negative) of the MNIST dataset. The model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, respectively, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the data. The trained model achieved a 99\% accuracy on the test set.
+\paragraph{Example 1.} \label{ex:vanilla} For demonstration, we trained a convolutional neural network for binary classification to classify the digit '1' as target (positive) against all the other digits (negative) of the MNIST dataset. The model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, respectively, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the data. The trained model achieved a 99\% accuracy on the test set.
 
 
 
@@ -214,105 +226,136 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
 			
 		A & B & C & D \\
-		\includegraphics[width=1.7in]{img/cls_overview.png}&
-		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
-		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
-		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
-
-		E & F & G & H \\
+%		\includegraphics[width=1.7in]{img/cls_overview.png}&
+%		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
+%		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
+%		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
+%
+%		E & F & G & H \\
 	\end{tabular}
 	\caption{{\bf FDR control in MNIST predictions with empirical p-values. }\todo{AB}{Format the plots in the same style, make the text readable.  Capitalize only the first word in a phrase. ``Normalized rank'', etc }
 		(A) The discriminative score distributions. \todo{AB}{The x-axis label should be ``Discriminative score''. the legends should be: Train null ($N_0$), Train target ($N_1$), True test null, True test target.}.(B) The QQ plot of the empirical p-values of the test samples that are .  \todo{AB}{The y-axis should be Empirical p-value.} (C).  \todo{AB}{The x-axis ``Q-value'' y-axis: ``Number of trusted predictions".} (D) \todo{AB}{Put the legends on. Also add the line for the LTT.} }
 	\label{fig:multi}
 \end{figure}
 
+\  
+
+\  
 
 \ 
+  
 
-\ 
 
-\ 
- 
+\section{Test Null Approximation}
 
-\section{Empirical P-Values}
-
-\subsection{Methodology}
-After performing a number of various permutations, each being scrutinized for the sake of higher efficiency, a particular approach was elaborated. It includes the following stages:
+The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
 
 
 \begin{enumerate}%[label=\arabic*.]
-    \item The neural network is trained in a classic manner on training data $X^{\text{train}}$, regardless of the classification type (binary or multiclass).
-    \item Trained model is switched to the inference mode. Particular scores are then divided into the positive training data $P^{\text{train}}$, negative training data $N^{\text{train}}$ and the entire test dataset $X^{\text{test}}$.
+    \item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
     
-    \item $X^{\text{test}}$ is generalized and statistically adjusted in order to prevent issues with data distribution / class balance shifts, acquiring in result the $\hat{X}^{\text{test}}$. It is in-depth explored further in \ref{StatAd}.
-
-    \item  After we acquired the modified test distributions, we stack them together: $\hat{X}^{\text{test}} = [\hat{P}^{\text{test}}, \hat{N}^{\text{test}}]$. Deriving our final data representation allows to launch statistical algorithm on competing approaches, either including or eliminating statical adjustment of test data.
-
-    \item The empirical p-values extraction incorporates several stages. \begin{itemize}
-        \item  Firstly, we calculate such p-values that reflect the position of the particular test sample according to the negative distribution - null hypothesis $H_0$. The choice of particular reference $H_0$ is also scrutinized in \ref{StatAd}.
-
-    \begin{equation}
-        \text{p}_i = \frac{L_{H_0} - \text{position}(H_0, \hat{X}^{\text{test}}_i)}{L_{H_0}}
-    \end{equation}
-    where $L_{H_0}$ is the total number of samples in $H_0$; position is the output of binary search algorithm, declaring sample's $\hat{X}^{\text{test}}_i)$ position in the sequence $H_0$. 
-
-    \item Next, the sorted sequence of EPVs is returned to become an input for the BH procedure. There, we deduce the corresponding q-values by the formula\ref{eq:bh2}. It requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications. Such a value is denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the share of those samples predicted to be negative among the entire test dataset. 
-    \item Final operation implies the same procedure, as shown in equation\ref{eq:q}.
-    \item The extent of algorithm's predictions' correctness is assessed through the verification procedure. After the entire method has culminated, we can calculate the deviation of estimated EPVs from the perfect diagonal, being visualized on the QQ plots. 
-    \end{itemize}
+    \item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
+    
+    \item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
+    
+    \item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
+    
 \end{enumerate}
 
-\subsection{Distribution shift disposal}\label{StatAd}
+This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
+    
 
-Alterations among the test samples compared to the training ones are a well-known issue. Therefore, the established method should demonstrate resilience by maintaining the quality of predictions. This is achieved through a multi-stage algorithm, containing several key steps.
+\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as traind in Example \ref{ex:vanilla}) went from 99 \% to xx \%. The evaluation plots are shown in Figure \ref{fig:mnistshfit}.
 
-\subsubsection{Gaussian extrapolation}
 
-Firstly, we opted to apply the kernel density estimation separately to the $P^{\text{test}}$ and $N^{\text{test}}$ subsets, which had been initially split according to the pre-defined border. Next, we extrapolate both resulting functions and determine the two lines' point of intersection to be the novel, slightly displaced border. This deviation from the standard methodology was implemented to address potential challenges caused by shifts in data distribution, wreaking havoc in estimations. Additionally, this technique enables the initial approximation of hidden tails, which can significantly affect overall performance. 
-
-\subsubsection{Statistical adjustment}
-
-Normal-shaped distributions could be altered in such a manner to become close to some reference distribution. Hence, we proposing a technique that takes negative and positive reference distributions: $N_{\text{ref}}$ and $P_{\text{ref}}$, respectively. We also require the distributions being processed: $N_p$ and $P_p$. 
-
-The mean and standard deviation of both $P_{\text{ref}}$ and $N_{\text{ref}}$ are then calculated. After, we do substitute $\mu_{N_{\text{p}}}$ and $\sigma_{_N_{\text{p}}}$ by the reference ones ones. In the case of a positive $P_p$, only mean statistics is modified.
-    \begin{equation}
-            \hat{N}_{\text{p}} = \frac{(N_{\text{p}} - \mu_{N_{\text{p}}})}{\sigma_{N_{\text{p}}}} \cdot \sigma_{N_{\text{ref}}} + \mu_{N{\text{ref}}}
-    \end{equation}
-The listed changes bring the test data closer to the reference data, resulting in greater uniformity of EPVs.
-
-Our approach suggests processing the normal-shaped distributions of scores. Hence, we propose to work with renown characteristics of such distributions. In case of being provided only logits, we apply reverse sigmoid function with to return back to the accepted data form.
-
-\subsubsection{Tail Approximation}
-
-As the study focuses primarily on the FP notion, it is crucial to acknowledge the presence of unidentified tails in test distributions. While we do not have access to the true labels, we cannot accurately prolongate either $\hat{P}^{\text{test}}$ or $ \hat{N}^{\text{test}}$. Nevertheless, we know the desired information can be accessed through the true distributions of training data, owing to the provided labels. 
-
-Hence, after limiting the difference between the training and test distributions through the previous steps, we could elaborate a specific method to estimate the tails of test data based on those of $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$. Its idea is straightforward: we identically apply either logspace or linspace binning technique both to $N^{\text{train}}_{\text{true}}$ and $X^\text{train}$. Afterwards, for each bin a proportion of negative samples is calculated. This is the percentage of $X^\text{test}$ in that particular bin that should be considered as negative samples in random manner. Such a stochastic approach would not break method's statistical integrity since we are interested in the rate of false discovery rather than individual classification. Finally, the chosen scores in each bin are now considered as a new $N^{\text{test}}$ and $P^{\text{test}}$. Such an approach allows to maintain only real samples in test data without adding synthetic tails.
-
-However, in case of rebalanced class proportions the presented mathematical adjustment would result in a vast range of negative consequences. To control such a risk, we suggest recalculating the percentage of negative samples for the region of two distributions' intersection:
-
-\[\hat{\text{percenatge}} = \frac{\text{percenatge} \cdot \frac{L_{N^{\text{train}}}}{L){X^{\text{train}}}}}{\frac{L_{N^{\text{test}}}}{L){X^{\text{test}}}}}\]
-
-\subsubsection{Final Strategy}
-
-During the explored research, two distinct cases were identified. Usually, the data samples themselves are coming from similar data distributions both during training and validation. Nevertheless, since the model is elaborating the test data for the first time, it usually faces comparative challenges. In result, the positive and negative test distributions appear to shift towards each other, increasing the area of intersection. But the true distribution should have been more similar to the known $N^{\text{train}}_{\text{true}}$ respectively. So, the basic idea for such situations is to alter the predicted test distributions $P^{\text{test}}$ and $N^{\text{test}}$ to make them more similar to the reference $H_0$ and $H_1$ hypothesis, leading to better estimation of FDR level. 
-
-Such situations imply the following strategy:
-
-\begin{enumerate}
-    \item Split $P^{\text{test}}$ and $N^{\text{test}}$ according to the given border. Find the new border of $X^{\text{test}}$ through the Gaussian Extrapolation. 
-    \item Perform Statistical adjustment to the repeatedly split $P^{\text{test}}$ and $N^{\text{test}}$ with $P^{\text{train}}$ and $N^{\text{train}}$ as reference distributions. 
-    \item Launch Tails Approximation for acquired $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$. 
-    \item Simple redesign of predicted test distributions does not affect EPV calculation in any manner, since it is relying on the position of the scores in terms of $N^{\text{train}}$. Hence, we repeatedly perform Statistical adjustment for newly calculated $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$ with the same reference - training distributions. The output is then collected into final $X^{\text{test}}$ array.
-\end{enumerate}
-
-At the same, the described case is not the only possible. Real-world problems usually imply severe differentiation of data distributions through time. Hence, training and test data might significantly drift apart, causing terrible miscalculations in predictions of FDR. Such cases require ignorance of $N^{\text{train}}$ in terms of null hypothesis:
-
-\begin{enumerate}
-    \item Identically perform Gaussian Interpolation for $X^{\text{test}}$.
-    \item Perform Statistical adjustment to the $P^{\text{train}}$ and $N^{\text{train}}$ with $P^{\text{test}}$ and $N^{\text{test}}$ as reference distributions. It is vital to underscore the diametric change of proposed approach: instead of relying on acknowledged training data, we shift it towards the predicted test distributions. Otherwise, $X^{\text{train}}$ would mislead the EPV calculation methodology, fully ignoring the ongoing data alterations.
-    \item Resulting $\hat{X}^{\text{train}}$ from the previous step is transmitted to the Tails Approximation method in order to bolster $P^{\text{test}}$ and $N^{\text{test}}$ extrapolation around the border. 
-    \item Again, leaving the distributions in the same range as they were before leads to zero impact on the EPV calculation. Hence, Statistical Adjustment is applied to $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$, where reference distributions are the initial $P^{\text{test}}$ and $N^{\text{test}}$. Such a selection of reference id dictated by necessity to stay in the shifted domain of test data.
-\end{enumerate}
+\begin{figure}[hp]
+	\centering
+	\begin{tabular}{cccc}
+%		\includegraphics[width=1.7in]{img/cls_overview.png}&
+%		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
+%		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
+%		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\		
+		A & B & C & D \\
+	\end{tabular}
+	\caption{{\bf FDR control in MNIST predictions with empirical p-values. }\todo{AB}{Format the plots in the same style, make the text readable.  Capitalize only the first word in a phrase. ``Normalized rank'', etc }
+		(A) The discriminative score distributions. \todo{AB}{The x-axis label should be ``Discriminative score''. the legends should be: Train null ($N_0$), Train target ($N_1$), True test null, True test target.}.(B) The QQ plot of the empirical p-values of the test samples that are .  \todo{AB}{The y-axis should be Empirical p-value.} (C).  \todo{AB}{The x-axis ``Q-value'' y-axis: ``Number of trusted predictions".} (D) \todo{AB}{Put the legends on. Also add the line for the LTT.} }
+	\label{fig:mnistshfit}
+\end{figure}
+   
+%    
+%    
+%    The neural network is trained in a classic manner on training data $X^{\text{train}}$, regardless of the classification type (binary or multiclass).
+%    \item Trained model is switched to the inference mode. Particular scores are then divided into the positive training data $P^{\text{train}}$, negative training data $N^{\text{train}}$ and the entire test dataset $X^{\text{test}}$.
+%    
+%    \item $X^{\text{test}}$ is generalized and statistically adjusted in order to prevent issues with data distribution / class balance shifts, acquiring in result the $\hat{X}^{\text{test}}$. It is in-depth explored further in \ref{StatAd}.
+%
+%    \item  After we acquired the modified test distributions, we stack them together: $\hat{X}^{\text{test}} = [\hat{P}^{\text{test}}, \hat{N}^{\text{test}}]$. Deriving our final data representation allows to launch statistical algorithm on competing approaches, either including or eliminating statical adjustment of test data.
+%
+%    \item The empirical p-values extraction incorporates several stages. \begin{itemize}
+%        \item  Firstly, we calculate such p-values that reflect the position of the particular test sample according to the negative distribution - null hypothesis $H_0$. The choice of particular reference $H_0$ is also scrutinized in \ref{StatAd}.
+%
+%    \begin{equation}
+%        \text{p}_i = \frac{L_{H_0} - \text{position}(H_0, \hat{X}^{\text{test}}_i)}{L_{H_0}}
+%    \end{equation}
+%    where $L_{H_0}$ is the total number of samples in $H_0$; position is the output of binary search algorithm, declaring sample's $\hat{X}^{\text{test}}_i)$ position in the sequence $H_0$. 
+%
+%    \item Next, the sorted sequence of EPVs is returned to become an input for the BH procedure. There, we deduce the corresponding q-values by the formula\ref{eq:bh2}. It requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications. Such a value is denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the share of those samples predicted to be negative among the entire test dataset. 
+%    \item Final operation implies the same procedure, as shown in equation\ref{eq:q}.
+%    \item The extent of algorithm's predictions' correctness is assessed through the verification procedure. After the entire method has culminated, we can calculate the deviation of estimated EPVs from the perfect diagonal, being visualized on the QQ plots. 
+%    \end{itemize}
+%\end{enumerate}
+%
+%\subsection{Distribution shift disposal}\label{StatAd}
+%
+%Alterations among the test samples compared to the training ones are a well-known issue. Therefore, the established method should demonstrate resilience by maintaining the quality of predictions. This is achieved through a multi-stage algorithm, containing several key steps.
+%
+%\subsubsection{Gaussian extrapolation}
+%
+%Firstly, we opted to apply the kernel density estimation separately to the $P^{\text{test}}$ and $N^{\text{test}}$ subsets, which had been initially split according to the pre-defined border. Next, we extrapolate both resulting functions and determine the two lines' point of intersection to be the novel, slightly displaced border. This deviation from the standard methodology was implemented to address potential challenges caused by shifts in data distribution, wreaking havoc in estimations. Additionally, this technique enables the initial approximation of hidden tails, which can significantly affect overall performance. 
+%
+%\subsubsection{Statistical adjustment}
+%
+%Normal-shaped distributions could be altered in such a manner to become close to some reference distribution. Hence, we proposing a technique that takes negative and positive reference distributions: $N_{\text{ref}}$ and $P_{\text{ref}}$, respectively. We also require the distributions being processed: $N_p$ and $P_p$. 
+%
+%The mean and standard deviation of both $P_{\text{ref}}$ and $N_{\text{ref}}$ are then calculated. After, we do substitute $\mu_{N_{\text{p}}}$ and $\sigma_{N_{\text{p}}}$ by the reference ones ones. In the case of a positive $P_p$, only mean statistics is modified.
+%    \begin{equation}
+%            \hat{N}_{\text{p}} = \frac{(N_{\text{p}} - \mu_{N_{\text{p}}})}{\sigma_{N_{\text{p}}}} \cdot \sigma_{N_{\text{ref}}} + \mu_{N{\text{ref}}}
+%    \end{equation}
+%The listed changes bring the test data closer to the reference data, resulting in greater uniformity of EPVs.
+%
+%Our approach suggests processing the normal-shaped distributions of scores. Hence, we propose to work with renown characteristics of such distributions. In case of being provided only logits, we apply reverse sigmoid function with to return back to the accepted data form.
+%
+%\subsubsection{Tail Approximation}
+%
+%As the study focuses primarily on the FP notion, it is crucial to acknowledge the presence of unidentified tails in test distributions. While we do not have access to the true labels, we cannot accurately prolongate either $\hat{P}^{\text{test}}$ or $ \hat{N}^{\text{test}}$. Nevertheless, we know the desired information can be accessed through the true distributions of training data, owing to the provided labels. 
+%
+%Hence, after limiting the difference between the training and test distributions through the previous steps, we could elaborate a specific method to estimate the tails of test data based on those of $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$. Its idea is straightforward: we identically apply either logspace or linspace binning technique both to $N^{\text{train}}_{\text{true}}$ and $X^\text{train}$. Afterwards, for each bin a proportion of negative samples is calculated. This is the percentage of $X^\text{test}$ in that particular bin that should be considered as negative samples in random manner. Such a stochastic approach would not break method's statistical integrity since we are interested in the rate of false discovery rather than individual classification. Finally, the chosen scores in each bin are now considered as a new $N^{\text{test}}$ and $P^{\text{test}}$. Such an approach allows to maintain only real samples in test data without adding synthetic tails.
+%
+%However, in case of rebalanced class proportions the presented mathematical adjustment would result in a vast range of negative consequences. To control such a risk, we suggest recalculating the percentage of negative samples for the region of two distributions' intersection:
+%
+%\[\hat{\text{percenatge}} = \frac{\text{percenatge} \cdot \frac{L_{N^{\text{train}}}}{L){X^{\text{train}}}}}{\frac{L_{N^{\text{test}}}}{L){X^{\text{test}}}}}\]
+%
+%\subsubsection{Final Strategy}
+%
+%During the explored research, two distinct cases were identified. Usually, the data samples themselves are coming from similar data distributions both during training and validation. Nevertheless, since the model is elaborating the test data for the first time, it usually faces comparative challenges. In result, the positive and negative test distributions appear to shift towards each other, increasing the area of intersection. But the true distribution should have been more similar to the known $N^{\text{train}}_{\text{true}}$ respectively. So, the basic idea for such situations is to alter the predicted test distributions $P^{\text{test}}$ and $N^{\text{test}}$ to make them more similar to the reference $H_0$ and $H_1$ hypothesis, leading to better estimation of FDR level. 
+%
+%Such situations imply the following strategy:
+%
+%\begin{enumerate}
+%    \item Split $P^{\text{test}}$ and $N^{\text{test}}$ according to the given border. Find the new border of $X^{\text{test}}$ through the Gaussian Extrapolation. 
+%    \item Perform Statistical adjustment to the repeatedly split $P^{\text{test}}$ and $N^{\text{test}}$ with $P^{\text{train}}$ and $N^{\text{train}}$ as reference distributions. 
+%    \item Launch Tails Approximation for acquired $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$. 
+%    \item Simple redesign of predicted test distributions does not affect EPV calculation in any manner, since it is relying on the position of the scores in terms of $N^{\text{train}}$. Hence, we repeatedly perform Statistical adjustment for newly calculated $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$ with the same reference - training distributions. The output is then collected into final $X^{\text{test}}$ array.
+%\end{enumerate}
+%
+%At the same, the described case is not the only possible. Real-world problems usually imply severe differentiation of data distributions through time. Hence, training and test data might significantly drift apart, causing terrible miscalculations in predictions of FDR. Such cases require ignorance of $N^{\text{train}}$ in terms of null hypothesis:
+%
+%\begin{enumerate}
+%    \item Identically perform Gaussian Interpolation for $X^{\text{test}}$.
+%    \item Perform Statistical adjustment to the $P^{\text{train}}$ and $N^{\text{train}}$ with $P^{\text{test}}$ and $N^{\text{test}}$ as reference distributions. It is vital to underscore the diametric change of proposed approach: instead of relying on acknowledged training data, we shift it towards the predicted test distributions. Otherwise, $X^{\text{train}}$ would mislead the EPV calculation methodology, fully ignoring the ongoing data alterations.
+%    \item Resulting $\hat{X}^{\text{train}}$ from the previous step is transmitted to the Tails Approximation method in order to bolster $P^{\text{test}}$ and $N^{\text{test}}$ extrapolation around the border. 
+%    \item Again, leaving the distributions in the same range as they were before leads to zero impact on the EPV calculation. Hence, Statistical Adjustment is applied to $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$, where reference distributions are the initial $P^{\text{test}}$ and $N^{\text{test}}$. Such a selection of reference id dictated by necessity to stay in the shifted domain of test data.
+%\end{enumerate}
 
 \section{Experiments}
 \subsection{Synthetic data}
