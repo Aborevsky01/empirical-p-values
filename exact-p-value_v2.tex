@@ -271,207 +271,34 @@ This final histogram $H_{T_0}$ is used to calculate the empirical p-values for e
 \begin{figure}[hp]
 	\centering
 	\begin{tabular}{cccc}
-%		\includegraphics[width=1.7in]{img/cls_overview.png}&
-%		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
-%		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
-%		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\		
+		\includegraphics[width=1.7in]{img/cnn_QQ_intensity_down.png}&
+		\includegraphics[width=1.7in]{img/cnn_intensity_down_fdr_control_loc.png} &
+		\includegraphics[width=1.7in]
+        {img/cnn_intensity_down_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_intensity_down.png} \\		
 		A & B & C & D \\
-	\end{tabular}
-	\caption{{\bf FDR control in MNIST predictions with empirical p-values. }\todo{AB}{Format the plots in the same style, make the text readable.  Capitalize only the first word in a phrase. ``Normalized rank'', etc }
-		(A) The discriminative score distributions. \todo{AB}{The x-axis label should be ``Discriminative score''. the legends should be: Train null ($N_0$), Train target ($N_1$), True test null, True test target.}.(B) The QQ plot of the empirical p-values of the test samples that are .  \todo{AB}{The y-axis should be Empirical p-value.} (C).  \todo{AB}{The x-axis ``Q-value'' y-axis: ``Number of trusted predictions".} (D) \todo{AB}{Put the legends on. Also add the line for the LTT.} }
-	\label{fig:mnistshfit}
-\end{figure}
-   
-%    
-%    
-%    The neural network is trained in a classic manner on training data $X^{\text{train}}$, regardless of the classification type (binary or multiclass).
-%    \item Trained model is switched to the inference mode. Particular scores are then divided into the positive training data $P^{\text{train}}$, negative training data $N^{\text{train}}$ and the entire test dataset $X^{\text{test}}$.
-%    
-%    \item $X^{\text{test}}$ is generalized and statistically adjusted in order to prevent issues with data distribution / class balance shifts, acquiring in result the $\hat{X}^{\text{test}}$. It is in-depth explored further in \ref{StatAd}.
-%
-%    \item  After we acquired the modified test distributions, we stack them together: $\hat{X}^{\text{test}} = [\hat{P}^{\text{test}}, \hat{N}^{\text{test}}]$. Deriving our final data representation allows to launch statistical algorithm on competing approaches, either including or eliminating statical adjustment of test data.
-%
-%    \item The empirical p-values extraction incorporates several stages. \begin{itemize}
-%        \item  Firstly, we calculate such p-values that reflect the position of the particular test sample according to the negative distribution - null hypothesis $H_0$. The choice of particular reference $H_0$ is also scrutinized in \ref{StatAd}.
-%
-%    \begin{equation}
-%        \text{p}_i = \frac{L_{H_0} - \text{position}(H_0, \hat{X}^{\text{test}}_i)}{L_{H_0}}
-%    \end{equation}
-%    where $L_{H_0}$ is the total number of samples in $H_0$; position is the output of binary search algorithm, declaring sample's $\hat{X}^{\text{test}}_i)$ position in the sequence $H_0$. 
-%
-%    \item Next, the sorted sequence of EPVs is returned to become an input for the BH procedure. There, we deduce the corresponding q-values by the formula\ref{eq:bh2}. It requires the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications. Such a value is denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the share of those samples predicted to be negative among the entire test dataset. 
-%    \item Final operation implies the same procedure, as shown in equation\ref{eq:q}.
-%    \item The extent of algorithm's predictions' correctness is assessed through the verification procedure. After the entire method has culminated, we can calculate the deviation of estimated EPVs from the perfect diagonal, being visualized on the QQ plots. 
-%    \end{itemize}
-%\end{enumerate}
-%
-%\subsection{Distribution shift disposal}\label{StatAd}
-%
-%Alterations among the test samples compared to the training ones are a well-known issue. Therefore, the established method should demonstrate resilience by maintaining the quality of predictions. This is achieved through a multi-stage algorithm, containing several key steps.
-%
-%\subsubsection{Gaussian extrapolation}
-%
-%Firstly, we opted to apply the kernel density estimation separately to the $P^{\text{test}}$ and $N^{\text{test}}$ subsets, which had been initially split according to the pre-defined border. Next, we extrapolate both resulting functions and determine the two lines' point of intersection to be the novel, slightly displaced border. This deviation from the standard methodology was implemented to address potential challenges caused by shifts in data distribution, wreaking havoc in estimations. Additionally, this technique enables the initial approximation of hidden tails, which can significantly affect overall performance. 
-%
-%\subsubsection{Statistical adjustment}
-%
-%Normal-shaped distributions could be altered in such a manner to become close to some reference distribution. Hence, we proposing a technique that takes negative and positive reference distributions: $N_{\text{ref}}$ and $P_{\text{ref}}$, respectively. We also require the distributions being processed: $N_p$ and $P_p$. 
-%
-%The mean and standard deviation of both $P_{\text{ref}}$ and $N_{\text{ref}}$ are then calculated. After, we do substitute $\mu_{N_{\text{p}}}$ and $\sigma_{N_{\text{p}}}$ by the reference ones ones. In the case of a positive $P_p$, only mean statistics is modified.
-%    \begin{equation}
-%            \hat{N}_{\text{p}} = \frac{(N_{\text{p}} - \mu_{N_{\text{p}}})}{\sigma_{N_{\text{p}}}} \cdot \sigma_{N_{\text{ref}}} + \mu_{N{\text{ref}}}
-%    \end{equation}
-%The listed changes bring the test data closer to the reference data, resulting in greater uniformity of EPVs.
-%
-%Our approach suggests processing the normal-shaped distributions of scores. Hence, we propose to work with renown characteristics of such distributions. In case of being provided only logits, we apply reverse sigmoid function with to return back to the accepted data form.
-%
-%\subsubsection{Tail Approximation}
-%
-%As the study focuses primarily on the FP notion, it is crucial to acknowledge the presence of unidentified tails in test distributions. While we do not have access to the true labels, we cannot accurately prolongate either $\hat{P}^{\text{test}}$ or $ \hat{N}^{\text{test}}$. Nevertheless, we know the desired information can be accessed through the true distributions of training data, owing to the provided labels. 
-%
-%Hence, after limiting the difference between the training and test distributions through the previous steps, we could elaborate a specific method to estimate the tails of test data based on those of $P^{\text{train}}_{\text{true}}$ and $N^{\text{train}}_{\text{true}}$. Its idea is straightforward: we identically apply either logspace or linspace binning technique both to $N^{\text{train}}_{\text{true}}$ and $X^\text{train}$. Afterwards, for each bin a proportion of negative samples is calculated. This is the percentage of $X^\text{test}$ in that particular bin that should be considered as negative samples in random manner. Such a stochastic approach would not break method's statistical integrity since we are interested in the rate of false discovery rather than individual classification. Finally, the chosen scores in each bin are now considered as a new $N^{\text{test}}$ and $P^{\text{test}}$. Such an approach allows to maintain only real samples in test data without adding synthetic tails.
-%
-%However, in case of rebalanced class proportions the presented mathematical adjustment would result in a vast range of negative consequences. To control such a risk, we suggest recalculating the percentage of negative samples for the region of two distributions' intersection:
-%
-%\[\hat{\text{percenatge}} = \frac{\text{percenatge} \cdot \frac{L_{N^{\text{train}}}}{L){X^{\text{train}}}}}{\frac{L_{N^{\text{test}}}}{L){X^{\text{test}}}}}\]
-%
-%\subsubsection{Final Strategy}
-%
-%During the explored research, two distinct cases were identified. Usually, the data samples themselves are coming from similar data distributions both during training and validation. Nevertheless, since the model is elaborating the test data for the first time, it usually faces comparative challenges. In result, the positive and negative test distributions appear to shift towards each other, increasing the area of intersection. But the true distribution should have been more similar to the known $N^{\text{train}}_{\text{true}}$ respectively. So, the basic idea for such situations is to alter the predicted test distributions $P^{\text{test}}$ and $N^{\text{test}}$ to make them more similar to the reference $H_0$ and $H_1$ hypothesis, leading to better estimation of FDR level. 
-%
-%Such situations imply the following strategy:
-%
-%\begin{enumerate}
-%    \item Split $P^{\text{test}}$ and $N^{\text{test}}$ according to the given border. Find the new border of $X^{\text{test}}$ through the Gaussian Extrapolation. 
-%    \item Perform Statistical adjustment to the repeatedly split $P^{\text{test}}$ and $N^{\text{test}}$ with $P^{\text{train}}$ and $N^{\text{train}}$ as reference distributions. 
-%    \item Launch Tails Approximation for acquired $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$. 
-%    \item Simple redesign of predicted test distributions does not affect EPV calculation in any manner, since it is relying on the position of the scores in terms of $N^{\text{train}}$. Hence, we repeatedly perform Statistical adjustment for newly calculated $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$ with the same reference - training distributions. The output is then collected into final $X^{\text{test}}$ array.
-%\end{enumerate}
-%
-%At the same, the described case is not the only possible. Real-world problems usually imply severe differentiation of data distributions through time. Hence, training and test data might significantly drift apart, causing terrible miscalculations in predictions of FDR. Such cases require ignorance of $N^{\text{train}}$ in terms of null hypothesis:
-%
-%\begin{enumerate}
-%    \item Identically perform Gaussian Interpolation for $X^{\text{test}}$.
-%    \item Perform Statistical adjustment to the $P^{\text{train}}$ and $N^{\text{train}}$ with $P^{\text{test}}$ and $N^{\text{test}}$ as reference distributions. It is vital to underscore the diametric change of proposed approach: instead of relying on acknowledged training data, we shift it towards the predicted test distributions. Otherwise, $X^{\text{train}}$ would mislead the EPV calculation methodology, fully ignoring the ongoing data alterations.
-%    \item Resulting $\hat{X}^{\text{train}}$ from the previous step is transmitted to the Tails Approximation method in order to bolster $P^{\text{test}}$ and $N^{\text{test}}$ extrapolation around the border. 
-%    \item Again, leaving the distributions in the same range as they were before leads to zero impact on the EPV calculation. Hence, Statistical Adjustment is applied to $\hat{P}^{\text{test}}$ and $\hat{N}^{\text{test}}$, where reference distributions are the initial $P^{\text{test}}$ and $N^{\text{test}}$. Such a selection of reference id dictated by necessity to stay in the shifted domain of test data.
-%\end{enumerate}
-
-\section{Experiments}
-\subsection{Synthetic data}
-
-\subsubsection{Dataset and Model}
-
-In the preliminary part we are working solely on the ubiquitously known MNIST dataset, a rich collection of handwritten digits, becoming a baseline for any classification task nowadays. It contains 60k samples for the training stage and only 10k for the test, where all classes (from 0 to 9) are evenly distributed. Also to be mentioned is the strict normalization of the digits in the image in terms of size and centering, so the algorithms receive unified examples as input.
-
-We have accomplished all our experiments through a standard convolutional neural network \cite{cnn}. It generally comprises two convolutional 2d layers, both with 8 channels, kernels of size 3 and two-step strides. Single rectifier activation function is following each of them.  The output layer is represented by a simple linear unit, providing as much classes, as it was initialized by the user.   
-
-Model is trained with Adam optimizer with a learning rate equal to 0.01 and a BCEWithLogitsLoss cost function unless otherwise specified. The motivation for introducing such a naive model was straightforward: if we find ourselves able to ameliorate a particular quality compared to the ground truth via an elementary model on the resolvable MNIST dataset, then we could extend our approach to more comprehensive real-life tasks and models.
-
-The entire algorithm was written on the PyTorch framework and includes several key stages throughout all separate local experiments. If formalizing our goal, then we could express our dataset as $(X_i, Y_i)_{i\in\{1, ..., n\}}$, where $X_i \in \mathbb{X}$ is a feature vector and  $Y_i \in \mathbb{Y}$ is the labels. For instance, $\mathbb{X}$ can be images and $\mathbb{Y}$ - the corresponding classes. Thus, our machine learning model becomes in some sense a comprehensive function $f$, such that $f(\mathbb{X}): \  \mathbb{X} \rightarrow \mathbb{Y}$.
-
-However, besides only generating uniform p-values, we need an understanding of the algorithm’s efficiency. Thus, we introduce two types of graphs: the “QQ” plots and the “FDR control” plots. The former depicts p-values from the uniform distribution for visual verification. We plot these p-values obtained with negative training data and their rank along the x-axis for both training (simply a diagonal) and test data. The closer our test samples get to the ideal line, the better our EPV approach operates. The second type of graphs visualizes the number of trusted classifications depending on the FDR when it is controlled with true labels (baseline) and with the BH protocol using the p-values. We also add rival LTT framework, representing the FWER methodology. As we progress towards the ground truth, our ability to function without test labels will improve as well as our capacity to forecast. The last paragraph remains true for the further experiments.
-
-\begin{figure}
-        \advance\leftskip-0.5cm
-	\begin{tabular}{ccc}
- 		\includegraphics[width=2.5in]{img/cnn_QQ_classical.pdf} &
-		\includegraphics[width=2.5in]{img/cnn_classical_fdr_control.pdf} & 
-            \includegraphics[width=2.5in]{img/cnn_classical_fdr_control_loc.pdf}
-		\\
-		%    \includegraphics[width=3in]{digestion.pdf} & \includegraphics[width=3in]{cleavages.pdf} \\		
-		A & B & C
-	\end{tabular}
-	\caption{{\bf FDR control with p-values.}
-		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A). $\pi_0$ is estimated on the test data.
-		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
-	}
-	\label{fig:classical}
-\end{figure}  
-
-\subsubsection{Binary Case}
-
-Binary classification is a basic task, where $\mathbb{Y} \in {0, 1}$. Hence, both training and test sets can be easily divided into negative and positive shares. Speaking of the MNIST dataset, we get 10\% for positive class despite our choice for the positive class, not playing any crucial role for our research. We arbitrarily chose the class "2" as a positive class from the MNIST data, and all other data corresponding to other classes were treated as negative data. 
-
-As the model was trained, one can use the prediction scores for negative training data as a null distribution. Consequently, we have a zero hypothesis, giving us the probability of test item to either belong to negative class or not. However, the BH protocol requires
-the ratio of the positive (null hypothesis) and the negative (alternative hypothesis) classifications. Such a value is denoted as $\pi_0$. In our case, $\pi_0$ is estimated by the share of those samples predicted to be negative among the entire test dataset.  
-
-Speaking of the QQ plots, one almost can not identify any distinctions between perfect diagonal, corresponding to training p-values, and a scatterplot of empirical p-values. Another proof of EPV's high-performance for binary case is the second group of graphs, indicating the correlation of made discoveries' quantity to the proposed FDR. The ground truth seems to be mostly descriable by our method, having a little edge over the LTT method. It is especially visible on a more critical local scale.
-
-
-\begin{figure}
-    \centering
-	\begin{tabular}{cc}
-		\includegraphics[width=3in]{img/cnn_QQ_multi.pdf} &
-		\includegraphics[width=3in]{img/cnn_multi_fdr_control.pdf} \\	
-		A & B \\
-	\end{tabular}
-	\caption{{\bf FDR control with p-values for multi-class classification.}
-		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
-		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
-	}
-	\label{fig:multi}
-\end{figure}
-
-
-\begin{figure}
-    \advance\leftskip-0.5cm
-        \begin{tabular}{ccc}
- 		\includegraphics[width=2.5in]{img/cnn_QQ_shifted.pdf} &
-		\includegraphics[width=2.5in]{img/cnn_shifted_fdr_control.pdf} & 
-            \includegraphics[width=2.5in]{img/cnn_shifted_fdr_control_loc.pdf}
-		\\	
-		A & B & C
 	\end{tabular}
 	\caption{{\bf  FDR control with p-values for detecting data distribution shift.}
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
-		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
-	}
-	\label{fig:shift}
+		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).}
+	\label{fig:mnist_shfit}
 \end{figure}
 
-
-\begin{figure}
-    \advance\leftskip-0.5cm
-        \begin{tabular}{ccc}
- 		\includegraphics[width=2.5in]{img/cnn_QQ_balanced.pdf} &
-		\includegraphics[width=2.5in]{img/cnn_balanced_fdr_control.pdf} & 
-            \includegraphics[width=2.5in]{img/cnn_balanced_fdr_control_loc.pdf}
-		\\	
-		A & B & C
+\begin{figure}[hp]
+	\centering
+	\begin{tabular}{cccc}
+		\includegraphics[width=1.7in]{img/cnn_QQ_balanced.png}&
+		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control_loc.png} &
+		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_balanced.png} \\		
+		A & B & C & D \\
 	\end{tabular}
 	\caption{{\bf  FDR control with p-values for altered class proportions.}
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
 		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).
 	}
-	\label{fig:balanced}
+	\label{fig:mnist_rebalance}
 \end{figure}
-
-
-\subsubsection{Multi-class case}
-
-Another frequent problem statement is rather a number of classes with only one true label for each sample. The so-called multiclass classification implies getting simultaneously several scores as the model's output. At the same time, EPV approach necessitates separation of scores into negative and positive only. Thus, we insignificantly reformulate our workflow. Here, the p-value indicates significance a sample being correctly classified. Then, we work only with the greatest scores among all presented, and the null distribution is constructed from the maximum values for the entire miss-classified training data. Thereby, we aim to control that whether a test data is correctly classified to its class or not. The $\pi_0$, again is estimated by the proportion of the incorrect classification among all samples. It is a tiny number due to chosen high-performance model in context of resolvable MNIST dataset.
-
-Getting closer to the graphs, we should outline that only two plots were acquired. Such a situation is still a consequence of CNN superior results, when the error does not exceed several percents. Hence, we could only work with FDR on a very little range. Nevertheless, a little fall of quality compared to binary case can be seen on QQ plots. At the same time, EPV still appears to be adjacent to the diagonal at each point with a reasonable maximum distance. If moving to the FDR graph, one can see that EPV together with BH protocol still outperform LTT, preserving a high level of interpretability as a smoother version of ground truth. 
-
-\subsubsection{Shift case}
-
-As it was declared, MNIST has a set of properties, making it improper for a comprehensive analysis. For instance, it does not allow to check whethever methods are resilient to shifts in data distribution. Therefore, we trained the CNN on described binary task with preserved target label "2". However, for further examination of p-values’ nature, we introduce a 1-by-1 pixel move for each image. The newly born samples with shifted data distribution depict such a scenario, when upcoming test data has a visible difference from training phase. 
-
-So, the final part of the experiment implies running the altered images through the already trained model. On the resulting graphs, we can identify the first perceptible limitation of our EPV methodology. While it keeps maintaining a notable proximity to the ground truth plot in terms of the first 10\%, the rest of the range depict a significant rightward shift. At the same time, LTT, also experiencing difficulties, shows much better results on a long-run. Another evidence of EPV's inconsistency in case of data shifts is depicted on the QQ plot, where the test dots make a sufficient drift from the diagonal. 
-
-The reason for such a behavior is that for our particular experiment's environment a shift can be identified not only in data distribution, but also in scores distribution. The left boundary of test results has made a serious leftwards shift, meaning far more test cases started obtaining a unit p-value (1.0). This is why the EPV algorithm has such a drastic growth, when reaching the maximum FDR level.
-
-In order to deal with this, we propose to implement such an activation function to the given set of scores that will encapsulate all the values in a specific range during inference mode only. For instance, sigmoid can be used. Such a strategy allows to make our algorithm more resistant to any significant alterations in data distribution, whcih can be seen on the correspoding graph.
-
-
-However, the emerged QQ plots have shown a radical alteration compared to the preceding graphs. The comparison outlines the p-values’ initial uniform distribution’s elimination. 
-
-\subsubsection{Balance case}
-
-Final conditions to be described imply another form of dataset's alteration. However, this time the proportion of positive and negative classes is changed rather than the data itself. Instead of inferring on the entire available test dataset, we collect all the positive samples (composing only 10 percent) and append the equal amount of negative samples in accordance with true labels for the sake of experiment's requirements. The declared parity differs from the share of classes, which the model has seen during training. Hence, a highly probable real-life scenario is tested here.
-
-Again, straightforward implementation of EPV without any statistical corrections was leading to the low algorithm's ability to describe the ground truth. However, transferring the entire approach into the current form made a drastic amelioration. As it can be seen on figure \ref{fig:balanced}, our method plus BH protocol work almost perfectly, with a little bit higher number of discoveries predicted on the local range. On the contrary, the LTT framework, based on FWER-family approach, shows comparatively dreary results, behaving illogically in terms of ground truth. If moving to the \ref{fig:balanced}A, we can see ultimately close scatter plot to the "Train" diagonal.
 
 \subsection{Biomedical data: tumor classification}
 
@@ -500,12 +327,13 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 
 \begin{figure}
 	\advance\leftskip-0.5cm
-	\begin{tabular}{ccc}
- 		\includegraphics[width=2.5in]{img/pcam_QQ.pdf} &
-		\includegraphics[width=2.5in]{img/pcam_fdr_control.pdf} & 
-            \includegraphics[width=2.5in]{img/pcam_fdr_control_loc.pdf}
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/pcam_QQ.pdf} &
+		\includegraphics[width=1.7in]{img/pcam_fdr_control.pdf} & 
+            \includegraphics[width=1.7in]{img/pcam_fdr_control_loc.pdf} &
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.pdf}
 		\\	
-		A & B & C
+		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for PCam dataset.}
 	\label{fig:pcam}
@@ -515,15 +343,16 @@ Speaking of the model, we rely on the pretrained neural network from the \href{h
 
 \begin{figure}
 	\advance\leftskip-0.5cm
-	\begin{tabular}{ccc}
- 		\includegraphics[width=2.5in]{img/pcam_balanced_QQ.pdf} &
-		\includegraphics[width=2.5in]{img/pcam_balanced_fdr_control.pdf} & 
-            \includegraphics[width=2.5in]{img/pcam_balanced_fdr_control_loc.pdf}
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/pcam_balanced_QQ.png} &
+		\includegraphics[width=1.7in]{img/pcam_balanced_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/pcam_balanced_fdr_control_loc.png} &
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_pcam_balanced.png}
 		\\	
-		A & B & C
+		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for rebalanced PCam dataset.}
-	\label{fig:pcam}
+	\label{fig:pcam_rebalance}
 \end{figure} 
 
 \subsection{Biomedical data: cells segmentation}
@@ -545,36 +374,91 @@ The embodied model is derived from the Cellpose 2.0 package. It suggests an ense
 
 \begin{figure}
 	\centering
-	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/segment_cls_QQ.pdf} &
-		\includegraphics[width=2in]{img/segment_cls_fdr_control.pdf} & 
-            \includegraphics[width=2in]{img/segment_cls_fdr_control_loc.pdf}
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} &
+		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png}
+            & 
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment_TA.png}
 		\\	
-		A & B & C
+		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for TissueNet dataset.}
 	\label{fig:pcam}
 \end{figure}
 
-\subsection{Loan exposure data}
+\subsubsection{Rebalanced case}
+
+\begin{figure}
+	\centering
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} &
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}
+		\\	
+		A & B & C & D
+	\end{tabular}
+	\caption{\bf FDR control with p-values for rebalanced TissueNet dataset.}
+	\label{fig:pcam}
+\end{figure}
+
+
+\subsection{Biomedical data: breast cancer semantic segmentation}
+
+\begin{figure}
+	\advance\leftskip-0.5cm
+	\includegraphics[width=8in]{img/bcss_instance.jpeg}
+	\caption{{\bf Instance of BCSS dataset.}}
+	\label{fig:bcss_example}
+\end{figure} 
 
 \subsubsection{Datasets and Models}
 
-\subsubsection{Standard case}
+The BCSS dataset contains over 20,000 segmentation annotations of tissue regions from breast cancer images from The Cancer Genome Atlas (TCGA). This large-scale dataset was annotated through the collaborative effort of pathologists, pathology residents, and medical students using the Digital Slide Archive. It enables the generation of highly accurate machine-learning models for tissue segmentation.
 
+\subsubsection{Multiclass case}
 
 \begin{figure}
 	\centering
 	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/tinkoff_QQ.jpeg} &
-		\includegraphics[width=2in]{img/tinkoff_fdr_control.png} & 
-            \includegraphics[width=2in]{img/tinkoff_fdr_control_loc.png}
-		\\	
-		A & B & C
+ 		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.pdf} &
+		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.pdf}  \\
+		A & B 
 	\end{tabular}
-	\caption{\bf FDR control with p-values for credit risk.}
-	\label{fig:credit risk}
+	\caption{\bf FDR control with p-values for TissueNet dataset.}
+	\label{fig:pcam}
+\end{figure}
+
+\subsection{Biomedical data: chest x-ray dataset}
+
+\begin{figure}
+	\advance\leftskip-0.5cm
+	\includegraphics[width=8in]{img/chexpert.jpg}
+	\caption{{\bf Instance of CheXpert dataset.}}
+	\label{fig:bcss_example}
 \end{figure} 
+
+\subsubsection{Datasets and Models}
+
+The CheXpert dataset contains 224,316 chest radiographs of 65,240 patients with both frontal and lateral views available. The task is to do automated chest x-ray interpretation, featuring uncertainty labels and radiologist-labeled reference standard evaluation sets.
+
+\subsubsection{Standard case}
+
+\begin{figure}
+	\centering
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} &
+		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
+            \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
+            \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}
+		\\	
+		A & B & C & D
+	\end{tabular}
+	\caption{\bf FDR control with p-values for CheXpert dataset.}
+	\label{fig:pcam}
+\end{figure}
+
 
 \section{Conclusions}
 \todo{andrey}{rewrite conclusion, add discussion}
