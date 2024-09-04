@@ -233,60 +233,83 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 %
 %		E & F & G & H \\
 	\end{tabular}
-	\caption{{\bf FDR control in MNIST predictions with empirical p-values. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).}.(B) The QQ plot of the empirical p-values of the test samples against the theoretical uniform distribution. (C) The number of true and accepted positive predictions at various FDR levels (Q-values).  (D) \todo{AB}{Fix the x and y axis scales. it should be [0,1]. The legends should be: 1. BH with EPV, 2. LTT} }
+	\caption{{\bf FDR control in MNIST predictions with empirical p-values. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).}.(B) The QQ plot of the empirical p-values of the test samples against the theoretical uniform distribution. (C) The number of true and accepted positive predictions by LTT and BH at various FDR levels (Q-values).  (D) \todo{AB}{Fix the x and y axis scales. it should be [0,1]. The legends should be: 1. BH with EPV, 2. LTT} }
 	\label{fig:binary}
 \end{figure}
+ 
 
-\  
+%
+%\section{Test Null Approximation}
+%When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation.
+%
+%
+%The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
+%
+%
+%\begin{enumerate}%[label=\arabic*.]
+%    \item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
+%    
+%    \item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
+%    
+%    \item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
+%    
+%    \item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
+%    
+%\end{enumerate}
+%
+%This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
+%    
 
-\  
-
-\ 
-  
-
-
-\section{Test Null Approximation}
-When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation.
-
-
-The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
-
-
-\begin{enumerate}%[label=\arabic*.]
-    \item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
-    
-    \item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
-    
-    \item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
-    
-    \item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
-    
-\end{enumerate}
-
-This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
-    
-
-\section{Test null adjustment}
-When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation. Here, we describe our methods how to adjust the test scores so that 
-
-
-The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
-
+\section{Test null adjustment (TNA) method}
+When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe our methods how to adjust the test scores so that the test null distribution $T_0$ approximates the train null distribution $N_0$.
 
 \begin{enumerate}%[label=\arabic*.]
-	\item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
+	\itemsep-3pt  		
+	\item Get the histograms of $N_0$, $N$, and $T$ distributions with identical bin borders and denote them as $H_0$, $H_N$, and $H_T$, respectively. $H_x[i]$ denotes the counts in bin $i$.  In our experiments the bin width was set to 1.0 and it worked fine.
 	
-	\item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
+	\item Let $\pi_N$ be the proportions of negative samples in the training data, and $\pi_T$ be the proportions of the negative predictions among all test predictions, and let $\tau=\pi_T/\pi_N$. 
 	
-	\item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
+	\item Let us create a new histogram, which will be an approximation of the test null distribution, $\hat{T_0}[i]=T[i]\cdot c_i\cdot \tau$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
 	
-	\item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
+	\item Let $\mu_{N_0}$, $\sigma_{N_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $N_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
+	\item Adjust the test scores $\hat{t_s} = (t_s-\mu)/\sigma + \mu \sigma$ for each (positive and negative) test instances $t$. \todo{AB}{please correct this transformation}.
 \end{enumerate}
 
-This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
 
-\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as traind in Example \ref{ex:vanilla}) went from 99 \% to xx \%. The evaluation plots are shown in Figure \ref{fig:mnistshfit}.
+	Finally, Calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at desired level.
+	
+	
+	
+%	
+%	1. train 0, as fixed, named N0. calculate mu and sigma for N0. 
+%	2. take negative test predictions. calculate mu and sigma for test negative.
+%	3. move all test negative to train 0. This is not critical. 
+%	4. what do you do with test positive? can we also move test postivie with 
+%    4a . I think, should be done: test_instance_score: t_i := (t_i-mu)/sigma. skip this.
+%% Andrey says, steps 1-4 are not important.
+%    5. histograming train scores and test scores with identical bin (borders).
+%    6. calculate proportion of train negatives among train scores in each bin.
+%    7. estimate pi_0, based on the number of test positive and test negataive predictions. 
+%    8. bins on positive side of the x-axis: 
+%    9. here you do some scaling. 
+%    10. bin i. 
+%    11. calculate again mu and sigma of new test negative,  
+%    12. adjust test negative to N0,
+%    13. calculate p-values with the adjusted test negative? Use Storey method to estimate lambda, and estimate the pi_0.
+%    14. use BH to control FDR. 
+%	
+	
+%	
+%	\item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
+%	
+%	\item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
+%	
+%	\item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
+%	
+%	\item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
+	
+\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) went from 99 \% to xx \% \todo{AB}{get the accuracy}. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}.
 
 
 \begin{figure}[hp]
@@ -305,13 +328,16 @@ This final histogram $H_{T_0}$ is used to calculate the empirical p-values for e
 	\label{fig:mnist_shfit}
 \end{figure}
 
+
+\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles \todo{AB}{cite the papers which used rebalanced datasets}.The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) went from 99 \% to xx \% \todo{AB}{get the accuracy}. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}.
+
 \begin{figure}[hp]
 	\centering
 	\begin{tabular}{cccc}
 		\includegraphics[width=1.7in]{img/cnn_QQ_balanced.png}&
 		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control_loc.png} &
 		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control.png} & 
-            \includegraphics[width=1.7in]{img/cnn_FDPscat_balanced.png} \\		
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_balanced.png} \\		
 		A & B & C & D \\
 	\end{tabular}
 	\caption{{\bf  FDR control with p-values for altered class proportions.}
@@ -320,7 +346,6 @@ This final histogram $H_{T_0}$ is used to calculate the empirical p-values for e
 	}
 	\label{fig:mnist_rebalance}
 \end{figure}
-
 
 \section{Experimental results}
 
