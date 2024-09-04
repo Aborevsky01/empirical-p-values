@@ -188,16 +188,16 @@ In this paper we propose a method to adapt the distribution of the scores of neg
 
 \section{Preliminaries}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be appropriately trained binary discriminators (classifiers), such as a deep neural network, to indicate positive class, where $R$ denotes the real values. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications, and the train score distribution is $N_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$ , and the true score $T_s$ distributions are constructed in a similar way from the test samples with using the true labels. We say that we trust (or accept) a positive prediction of sample $t$ if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The train null distribution is constructed as $N_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the train target distribution is constructed as $N_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the train score distribution is $N_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$, and the true score $T_s$ distributions are constructed in a similar way from the test samples with using the true labels. We say that we trust (or accept) a positive prediction of sample $t$ if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation*}
 	FDP(s_t,D)=\frac{1+|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
 \end{equation*}
-\noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control aims to calibrate the $s_t$ so that the error rate among trusted predictions is at level of $\alpha$. % We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
+\noindent where $|.|$ denotes set cardinality. We reserve the FDR for the statistical expectation of FDP. FDR control methods aim to calibrate the $s_t$ so that the error rate among trusted predictions is at most level of $\alpha$. % We note that FDR control is related to FSR control in this case, even for $K=2$.%False positives are calculated as $FP=|\{t:Y_t\ne L(t)\}|$
 %A label of a sample $t\in D$ is predicted $L(t)=sign(f(t))$. Let $N_0=\{f(t):t\in X,\, Y_t=0\}$,  the null distribution; that is, the set of the discriminative scores of the negative training samples.
 
 % For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
-The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sample would depend on the other samples in the set. The lower the q-value the most trusted the positive prediction is.
+The p-values of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong}: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z:\le f(t)}FDP( z )$, that is the minimum $\alpha$ level when the sample $t$ would become a trusted prediction. The q-value of a sample would depend on the other samples in the set. The lower the q-value the most trusted a positive prediction is.
 %
 % THIS IS WITH MULTI CLASS CLASSIFICATION
 %Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications. The true test null and true test target distributions are constructed in a similar way from the test samples with using the true labels, respectively.  We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
@@ -213,7 +213,7 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 
 %\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network containing 8 kernels with size of $3\times3$ at each layers, respectively, to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
 
-\paragraph{Example 1.} \label{ex:vanilla} For demonstration, we trained a convolutional neural network for binary classification to classify the digit '1' as target (positive) against all the other digits (negative) of the MNIST dataset. The model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, respectively, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the data. The trained model achieved a 99\% accuracy on the test set.
+\paragraph{Example 1.} \label{ex:vanilla} We used the NIST dataset for demonstration. The MNIST dataset contains 60K training and 10K test images of 28x28 grey-scaled pixels in 10 classes. There is no shift between the train and test data. We trained a convolutional neural network to classify the digit '1' as target (positive) against all the other digits (negative) (binary classification). Our ConvNet model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. Our trained model achieved a 99\% accuracy on the test set. The relevant results are presented in Figure \ref{fig:binary}. The Figure \ref{fig:binary}A shows the train and test null and target distributions. This plot indicates that there is no shift between the train and test distributions. The Figure \ref{fig:binary}B shows a QQ plot of the empirical p-values calculated with Eq. [1] using $N_0$ against the theoretical uniform distributions. A diagonal line shows that the empirical p-values calculated are valid. We also performed the Fisher's combined test to check whether the empirical p-values are uniformly distribution. The test produces a p-value of 0.934 indicating uniformly distributed empirical p-values. Therefore, BH can control the FDR accurately at various levels (q-values). This is shown in \ref{fig:binary}C, where the true (black solid line) and the accepted predictions (green dashed line) are closely overlap at various FDR levels (q-values). As a comparison, we also evaluated the LTT method \cite{angelopoulos2021learn} (dashed blue line), and results confirm that LTT is also an accurate method to control the FDR in the lack of data distribution shift. Finally, the Figure \ref{fig:binary}D shows the deviation of the estimated FDRs from the true FDRs is small.
 
 
 
@@ -233,9 +233,8 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 %
 %		E & F & G & H \\
 	\end{tabular}
-	\caption{{\bf FDR control in MNIST predictions with empirical p-values. }\todo{AB}{Format the plots in the same style, make the text readable.  Capitalize only the first word in a phrase. ``Normalized rank'', etc }
-		(A) The discriminative score distributions. \todo{AB}{The x-axis label should be ``Discriminative score''. the legends should be: Train null ($N_0$), Train target ($N_1$), True test null, True test target.}.(B) The QQ plot of the empirical p-values of the test samples that are .  \todo{AB}{The y-axis should be Empirical p-value.} (C).  \todo{AB}{The x-axis ``Q-value'' y-axis: ``Number of trusted predictions".} (D) \todo{AB}{Put the legends on. Also add the line for the LTT.} }
-	\label{fig:multi}
+	\caption{{\bf FDR control in MNIST predictions with empirical p-values. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).}.(B) The QQ plot of the empirical p-values of the test samples against the theoretical uniform distribution. (C) The number of true and accepted positive predictions at various FDR levels (Q-values).  (D) \todo{AB}{Fix the x and y axis scales. it should be [0,1]. The legends should be: 1. BH with EPV, 2. LTT} }
+	\label{fig:binary}
 \end{figure}
 
 \  
@@ -247,6 +246,8 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 
 
 \section{Test Null Approximation}
+When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation.
+
 
 The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
 
@@ -264,6 +265,26 @@ The approximation of the null distribution in the distribution of the test score
 
 This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
     
+
+\section{Test null adjustment}
+When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation. Here, we describe our methods how to adjust the test scores so that 
+
+
+The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
+
+
+\begin{enumerate}%[label=\arabic*.]
+	\item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
+	
+	\item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
+	
+	\item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
+	
+	\item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
+	
+\end{enumerate}
+
+This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
 
 \paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as traind in Example \ref{ex:vanilla}) went from 99 \% to xx \%. The evaluation plots are shown in Figure \ref{fig:mnistshfit}.
 
@@ -299,6 +320,9 @@ This final histogram $H_{T_0}$ is used to calculate the empirical p-values for e
 	}
 	\label{fig:mnist_rebalance}
 \end{figure}
+
+
+\section{Experimental results}
 
 \subsection{Biomedical data: tumor classification}
 
