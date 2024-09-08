@@ -265,7 +265,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 
 \begin{enumerate}%[label=\arabic*.]
 	\itemsep-3pt  		
-	\item Get the histograms of $N_0$, $N$, and $T$ distributions with identical bin borders and denote them as $H_0$, $H_N$, and $H_T$, respectively. $H_x[i]$ denotes the counts in bin $i$.  In our experiments the bin width was set to 1.0 and it worked fine.
+	\item Get the histograms of $N_0$, $N$, and $T$ distributions with identical bin borders and denote them as $H_0$, $H_N$, and $H_T$, respectively. $H_x[i]$ denotes the counts in bin $i$.  In our experiments the bin width was set to 1.0 and it worked fine. \textbf{No, the bin width was either linear, with 100 bins being split across train distribution or at log scale,also 100 bins}
 	
 	\item Let $\pi_N$ be the proportions of negative samples in the training data, and $\pi_T$ be the proportions of the negative predictions among all test predictions, and let $\tau=\pi_T/\pi_N$. 
 	
@@ -329,7 +329,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 \end{figure}
 
 
-\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles \todo{AB}{cite the papers which used rebalanced datasets}.The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) went from 99 \% to xx \% \todo{AB}{get the accuracy}. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}.
+\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles \todo{AB}{cite the papers which used rebalanced datasets} \cite{viviano2021saliency}.The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) went from 99 \% to xx \% \todo{AB}{get the accuracy}. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}.
 
 \begin{figure}[hp]
 	\centering
