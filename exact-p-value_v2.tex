@@ -277,7 +277,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 \end{enumerate}
 
 
-	Finally, Calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at desired level.
+	Finally, calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at a desired level.
 	
 	
 	
@@ -309,7 +309,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 %	
 %	\item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
 	
-\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) went from 99 \% to xx \% \todo{AB}{get the accuracy}. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}.
+\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remained at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}. 
 
 
 \begin{figure}[hp]
@@ -322,7 +322,7 @@ When the train null distribution $N_0$ is different from the null distribution $
             \includegraphics[width=1.7in]{img/cnn_FDPscat_intensity_down.png} \\		
 		A & B & C & D \\
 	\end{tabular}
-	\caption{{\bf  FDR control with p-values for detecting data distribution shift.}
+	\caption{{\bf  FDR control with empirical p-values under data distribution shift.}
 		(A) a QQ plot of the p-values obtained with using negative training data. (B) The number of trusted classifications as a function of the FDR when it is controlled with true labels (red line) and with controlled with BHP (black line) using the p-values from panel (A).
 		(A) a QQ plot of the p-values obtained with using training data classified as negative. (B) The same as panel (B), but using p-values from panel (C).}
 	\label{fig:mnist_shfit}
