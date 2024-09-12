@@ -350,16 +350,8 @@ When the train null distribution $N_0$ is different from the null distribution $
 
 
 
-%Medical imaging itself becomes an area of elevated attention during last years of machine learning development. Various areas are found on the intersection of medicine and bioinformatics annually. Moreover, identification of disease presence by AI, while being an exhaustive topic of interest, cultivates the need in strict control over the chance of FP error. Thereby, we present a set of various biomedical datasets for classification task, each being analyzed by the proposed algorithm.
+The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic scans of lymph node sections \todo{AB}{Add citation} derived from the Camelyon 16 challenge \todo{AB}{Add citation}. PCam consists of 327,680 colored images of size 96x96 each. The challenge is to identify the presence (positive) or absence (negative) of any histopathology. The dataset creators of PCam underline that all the positive and negative instances in the training, validation, test sets are equally distributed, resulting in a class balance of 50:50\%; while the positive and negative class balance in the Camelyon 16 test dataset is 31\% :69\%. Therefore,  the actual true class proportions in PCcam might be significantly different in real-life applications, making the FDR control with methods like LTT inaccurate in practical applications. We manually resampled the test data sets of the PCam so that the class ratios become the same as of the Camelyon 16 dataset, because,  in our opinion,  this class ratio is probably more realistic for real life scenarios. We used the trained resnet34-pcam model, which is a popular, deep residual network from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022}.  \todo{AB}{Add info about the accuracies.} 
 
-%\subsubsection{Datasets and Models}
-
-The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic scans of lymph node sections \todo{AB}{Add citation} derived from the Camelyon 16 challenge \todo{AB}{Add citation}. It consists of 327,680 colored images of size 96x96 each. The challenge is to identify the presence (positive) or absence (negative) of any histopathology. %PCam was deduced from Camelyon16 dataset by splitting images into patches. However, it appears to be far easier in generalization by the neural networks, in turn still showing a high accuracy in metastasis detection on the ancestor. We believe this is a relevant clinical task, which strives to have the control over the possible error rate.
-The dataset creators of PCam underline that all the positive and negative instances in the training, validation, test sets are equally distributed, resulting in a class balance of 1:1; while the positive and negative class balance in the Camelyon 16 test dataset is 30.6\% to 69.4 \% . Therefore,  the actual true class proportions might be significantly different in real-life applications, making the FDR control with methods like LTT inaccurate. We manually resampled the test data sets of the PCam so that the class ratios become the same as of the Camelyon, because in our opinion this class ratio is probably closer to the one in real life scenarios.
-
-We used the  resnet34-pcam model \todo{AB}{Add citation, not link}, a popular, deep residual network from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022}.  \todo{AB}{Andrey information about the training pretraining and the accuracies.} %This toolbox for tissue image analysis provides a torch-written API with distinct efficient algorithms for a bunch of various biomedical tasks. Except the trained models themselves, package also introduces tools for data loading, pre- and post-processing, visualization together with the overall inference. 
-%For the PCam dataset, TIA package suggest over a dozen of models. We chose the \href{https://huggingface.co/1aurent/resnet34.tiatoolbox-pcam}{resnet34-pcam}. It is the ubiquitously known model from the torchvision deep residual learning collection being further advanced by TIA research centre with the use of PCam data. \todo{AB}{So what is the model we used and what is TIA?} \todo{andrey}{accuracy of model}
-%Moreover, the patches do comprise a synthetic beginning since the tumor cells could be found only in the centre region of the image with size of 32x32. %Nevertheless, authors still provide the outer region for model's compliance with Camelyon16, but they do slightly lighten the task by reducing the area of interest.
 
 \begin{figure}
 	\centering
@@ -369,13 +361,8 @@ We used the  resnet34-pcam model \todo{AB}{Add citation, not link}, a popular, d
 \end{figure} 
 
 
-%XFor the sake of proving practicality of our method, we will manually change the classes' proportions. However, no data distribution shift could be performed except the one laid in test subset.
+The evaluation of FDR controlling methods on the PCam dataset is shown in the Figure \ref{fig:pcam} with original class distribution. The plots indicate that all three FDR control methods are fairly accurate in practice. Perhaps, the QQ plots of the test EPVs (red dots) and the test NTA EPVs (green dots) in the Figure \ref{fig:pcam}A indicate that the test p-values are slightly biased; however, the NSA method manages to reduce this bias in the EPVs. This indicates a slight overfitting and/or distribution shifts between the training and test data sets. However, when we changed the even class distribution to 31\%:69\%, the LTT FDR control method resulted in liberal FDR control, the BH protocol with standard EPVs resulted in conservative FDR control; whereas, the BH with the TNA EPVs resulted in accurate FDR control,  especially at critical $\alpha$ levels (0-0.1). These results are shown in the Figure \ref{fig:pcam_rebalance}.
 
-%Speaking of the model, we rely on the pretrained neural network from the \href{https://tiatoolbox.readthedocs.io}{TIA toolbox}. This toolbox for tissue image analysis provides a torch-written API with distinct efficient algorithms for a bunch of various biomedical tasks. Except the trained models themselves, package also introduces tools for data loading, pre- and post-processing, visualization together with the overall inference. For the PCam dataset, TIA package suggest over a dozen of models. We chose the \href{https://huggingface.co/1aurent/resnet34.tiatoolbox-pcam}{resnet34-pcam}. It is the ubiquitously known model from the torchvision deep residual learning collection being further advanced by TIA research centre with the use of PCam data.
-
-
-
-%\subsubsection{Standard case}
 
 \begin{figure}
 	\advance\leftskip-0.5cm
@@ -387,11 +374,10 @@ We used the  resnet34-pcam model \todo{AB}{Add citation, not link}, a popular, d
 		\\	
 		A & B & C & D
 	\end{tabular}
-	\caption{\bf FDR control with p-values for PCam dataset.}
+	\caption{{\bf FDR control on PCam dataset.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
 	\label{fig:pcam}
 \end{figure} 
 
-%\subsubsection{Rebalanced case}
 
 \begin{figure}
 	\advance\leftskip-0.5cm
@@ -403,7 +389,7 @@ We used the  resnet34-pcam model \todo{AB}{Add citation, not link}, a popular, d
 		\\	
 		A & B & C & D
 	\end{tabular}
-	\caption{\bf FDR control with p-values for rebalanced PCam dataset.}
+	\caption{\bf FDR control on PCam dataset under class distribution shift. (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. The EPVs are slight inflated,  (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
 	\label{fig:pcam_rebalance}
 \end{figure} 
 
@@ -416,18 +402,16 @@ We used the  resnet34-pcam model \todo{AB}{Add citation, not link}, a popular, d
 	\label{fig:tissue_example}
 \end{figure} 
 
-TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} (positive) or not (negative). The overall class ratio was XX to YY \todo{AB}{Add the ratio}; however, the ratio varies over the images considerably.
+TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} (positive) or not (negative). The overall class ratio was XX to YY \todo{AB}{Add the ratio}; however, the ratio varies over the images considerably. \todo{AB}{Add details about the methods, follow the structure of the PCam section.}
 
 
-% was introduced as a new word in pixel-level segmentation task, declaring more than 1.3 million manually labeled and paired whole-cell and nuclear annotations. Outperforming any rival collection of data in this field, TissueNet was constructed through a multi-stage human-in-the-loop approach. It contains (512, 512) images from six various platforms and nine organs, all implying inclusion of both histologically healthy and diseased tissues. In total, there are 13 distinct classes presented. However, we do transform the task towards binary identification of the null class, simply striving to disassociate each cell.   
-
-%The embodied model is derived from the Cellpose 2.0 package. It suggests an ensemble of numerous  pretrained models joined with human-in-the-loop pipeline. Together, they allow to easily fine-tune the particular model for any cell segmentation dataset.
 
 
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} &
+ 		%\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} 
+ 		&
 		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control.png} & 
             \includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png}
             & 
@@ -436,7 +420,7 @@ TissueNet dataset contains 1.3 million microscopic images of cells obtained from
 		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for TissueNet dataset.}
-	\label{fig:pcam}
+	\label{fig:tissue}
 \end{figure}
 
 
@@ -445,7 +429,8 @@ TissueNet dataset contains 1.3 million microscopic images of cells obtained from
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} &
+ 		%\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} 
+ 		&
 		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control.png} & 
             \includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
             \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}
@@ -453,24 +438,21 @@ TissueNet dataset contains 1.3 million microscopic images of cells obtained from
 		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for rebalanced TissueNet dataset.}
-	\label{fig:pcam}
+	\label{fig:tissue_rebalance}
 \end{figure}
 
 
-\subsection{Biomedical data: breast cancer semantic segmentation}
+\subsection{BCSS: Breast cancer semantic segmentation dataset}
 
 \begin{figure}
 	\advance\leftskip-0.5cm
-	\includegraphics[width=8in]{img/bcss_instance.jpeg}
-	\caption{{\bf Instance of BCSS dataset.}}
+	\includegraphics[width=3in]{img/bcss_instance.jpeg}
+	\caption{{\bf An instance from BCSS dataset.}}
 	\label{fig:bcss_example}
 \end{figure} 
 
-\subsubsection{Datasets and Models}
-
 The BCSS dataset contains over 20,000 segmentation annotations of tissue regions from breast cancer images from The Cancer Genome Atlas (TCGA). This large-scale dataset was annotated through the collaborative effort of pathologists, pathology residents, and medical students using the Digital Slide Archive. It enables the generation of highly accurate machine-learning models for tissue segmentation.
 
-\subsubsection{Multiclass case}
 
 \begin{figure}
 	\centering
@@ -480,28 +462,27 @@ The BCSS dataset contains over 20,000 segmentation annotations of tissue regions
 		A & B 
 	\end{tabular}
 	\caption{\bf FDR control with p-values for BCSS dataset.}
-	\label{fig:pcam}
+	\label{fig:bcss}
 \end{figure}
 
-\subsection{Biomedical data: chest x-ray dataset}
 
+
+\subsection{CheXpert: chest x-ray dataset}
+
+The CheXpert dataset contains 224,316 chest radiographs obtained from 65,240 patients with both frontal and lateral views available. The task is to do automated chest x-ray interpretation, featuring uncertainty labels and radiologist-labeled reference standard evaluation sets.
 \begin{figure}
 	\advance\leftskip-0.5cm
-	\includegraphics[width=8in]{img/chexpert.jpg}
-	\caption{{\bf Instance of CheXpert dataset.}}
-	\label{fig:bcss_example}
+	\includegraphics[width=3in]{img/chexpert.jpg}
+	\caption{{\bf An instance from CheXpert dataset.}}
+	\label{fig:chexpert_example}
 \end{figure} 
 
-\subsubsection{Datasets and Models}
-
-The CheXpert dataset contains 224,316 chest radiographs of 65,240 patients with both frontal and lateral views available. The task is to do automated chest x-ray interpretation, featuring uncertainty labels and radiologist-labeled reference standard evaluation sets.
-
-\subsubsection{Standard case}
 
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} &
+ 		%\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 
+ 		&
 		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
             \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
             \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}
@@ -509,7 +490,7 @@ The CheXpert dataset contains 224,316 chest radiographs of 65,240 patients with 
 		A & B & C & D
 	\end{tabular}
 	\caption{\bf FDR control with p-values for CheXpert dataset.}
-	\label{fig:pcam}
+	\label{fig:chexpert}
 \end{figure}
 
 
