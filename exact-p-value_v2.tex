@@ -273,7 +273,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 	
 	\item Let $\mu_{N_0}$, $\sigma_{N_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $N_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
-	\item Adjust the test scores $\hat{t_s} = (t_s-\mu)/\sigma + \mu \sigma$ for each (positive and negative) test instances $t$. \todo{AB}{please correct this transformation}.
+	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{N_0}} + \mu_{N_0}$ for approximated as negative test instances $t$ of distribution $\hat{T_0}$. \todo{AB}{please correct this transformation}.
 \end{enumerate}
 
 
@@ -350,13 +350,18 @@ When the train null distribution $N_0$ is different from the null distribution $
 
 
 
-The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic scans of lymph node sections \todo{AB}{Add citation} derived from the Camelyon 16 challenge \todo{AB}{Add citation}. PCam consists of 327,680 colored images of size 96x96 each. The challenge is to identify the presence (positive) or absence (negative) of any histopathology. The dataset creators of PCam underline that all the positive and negative instances in the training, validation, test sets are equally distributed, resulting in a class balance of 50:50\%; while the positive and negative class balance in the Camelyon 16 test dataset is 31\% :69\%. Therefore,  the actual true class proportions in PCcam might be significantly different in real-life applications, making the FDR control with methods like LTT inaccurate in practical applications. We manually resampled the test data sets of the PCam so that the class ratios become the same as of the Camelyon 16 dataset, because,  in our opinion,  this class ratio is probably more realistic for real life scenarios. We used the trained resnet34-pcam model, which is a popular, deep residual network from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022}.  \todo{AB}{Add info about the accuracies.} 
+The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic scans of lymph node sections \cite{Veeling2018-qh} derived from the Camelyon 16 challenge \cite{camelyon16}. PCam consists of 327,680 colored images of size 96x96 each. The challenge is to identify the presence (positive) or absence (negative) of any histopathology. The dataset creators of PCam underline that all the positive and negative instances in the training, validation, test sets are equally distributed, resulting in a class balance of 50:50\%; while the positive and negative class balance in the Camelyon 16 test dataset is 31\% :69\%. Therefore,  the actual true class proportions in PCcam might be significantly different in real-life applications, making the FDR control with methods like LTT inaccurate in practical applications. We manually resampled the test data sets of the PCam so that the class ratios become the same as of the Camelyon 16 dataset, because,  in our opinion,  this class ratio is probably more realistic for real life scenarios. We used the trained resnet34-pcam model, which is a popular, deep residual network from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} with an overall f1-score of 0.889, as stated by the authors.
 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=6in]{img/pcam_example.png}
-	\caption{{\bf Instances of PCam dataset.} Green boxes in center region indicate a tumor tissue (positive instance), while the lack of a green box indicates a negative tissue. \todo{AB}{Can you make 2x2 negative, left hand side and 2x2 positive instances right hand side. Please remove the green box. no to confuse the reades that the green box is in the original data image. }}
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.7in]{img/pcam1.jpg} &
+		\includegraphics[width=1.7in]{img/pcam2.jpg} & 
+            \includegraphics[width=1.7in]{img/pcam3.jpg} &
+             \includegraphics[width=1.7in]{img/pcam4.jpg}
+        \end{tabular}
+	\caption{{\bf Instances of PCam dataset.}}
 	\label{fig:pcam_example}
 \end{figure} 
 
@@ -389,7 +394,7 @@ The evaluation of FDR controlling methods on the PCam dataset is shown in the Fi
 		\\	
 		A & B & C & D
 	\end{tabular}
-	\caption{\bf FDR control on PCam dataset under class distribution shift. (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. The EPVs are slight inflated,  (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
+	\caption{{\bf FDR control on PCam dataset under class distribution shift.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. The EPVs are slight inflated,  (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
 	\label{fig:pcam_rebalance}
 \end{figure} 
 
@@ -402,7 +407,7 @@ The evaluation of FDR controlling methods on the PCam dataset is shown in the Fi
 	\label{fig:tissue_example}
 \end{figure} 
 
-TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} (positive) or not (negative). The overall class ratio was XX to YY \todo{AB}{Add the ratio}; however, the ratio varies over the images considerably. \todo{AB}{Add details about the methods, follow the structure of the PCam section.}
+TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} {\bf yes!} (positive) or not (negative). The overall share of positive class pixels was reaching 59\% for train data against already 66\% for those of test; however, the ratio varies over the images considerably. \todo{AB}{Add details about the methods, follow the structure of the PCam section.}
 
 
 
