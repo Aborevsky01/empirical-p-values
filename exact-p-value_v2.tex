@@ -273,7 +273,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 	
 	\item Let $\mu_{N_0}$, $\sigma_{N_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $N_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
-	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{N_0}} + \mu_{N_0}$ for approximated as negative test instances $t$ of distribution $\hat{T_0}$. \todo{AB}{please correct this transformation}.
+	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{N_0}} + \mu_{N_0}$ for approximated as negative test instances $t$ of distribution $\hat{T_0}$.
 \end{enumerate}
 
 
@@ -407,7 +407,7 @@ The evaluation of FDR controlling methods on the PCam dataset is shown in the Fi
 	\label{fig:tissue_example}
 \end{figure} 
 
-TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} {\bf yes!} (positive) or not (negative). The overall share of positive class pixels was reaching 59\% for train data against already 66\% for those of test; however, the ratio varies over the images considerably. The reached quality with the Cellpose model \cite{cellpose} reaches 77\%  of average precision after five epochs considering the semantic segmentatio task. However, when it comes to the task reformulation towards binary classification, the final accuracy achieves of 95\% and 94\% on training and test data respectively.\todo{AB}{Add details about the methods, follow the structure of the PCam section.}
+TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} {\bf yes!} (positive) or not (negative). The overall share of positive class pixels was reaching 59\% for train data against already 66\% for those of test; however, the ratio varies over the images considerably. The reached quality with the Cellpose model \cite{cellpose} reaches 77\%  of average precision after five epochs considering the semantic segmentatio task. However, when it comes to the task reformulation towards binary classification, the final accuracy achieves of 95\% and 94\% on training and test data respectively.
 
 
 
@@ -474,7 +474,10 @@ The BCSS dataset contains over 20,000 segmentation annotations of tissue regions
 
 \subsection{CheXpert: chest x-ray dataset}
 
-The CheXpert dataset contains 224,316 chest radiographs obtained from 65,240 patients with both frontal and lateral views available. The task is to do automated chest x-ray interpretation, featuring uncertainty labels and radiologist-labeled reference standard evaluation sets.
+The CheXpert dataset comprises a total of 224,316 chest radiographs, representing a single collection of more than 65,000 unique patients' images. This comprehensive corpus encompasses both frontal and lateral views of the thorax. The principal objective of this dataset is to facilitate the automated interpretation of chest X-rays for the task of multi-label classification. It is noteworthy that the dataset is enhanced with uncertainty labels, which provide additional context surrounding the confidence levels of the predictions made by automated systems. Furthermore, the CheXpert dataset includes radiologist-labeled reference standard evaluation sets, which serve as a benchmark for assessing the accuracy and reliability of automated interpretation algorithms in comparison to human expert evaluations. The integration of diverse data types and reference standards positions the CheXpert dataset as a significant resource for advancing research and development in medical imaging and machine learning applications.
+
+As for the selected model, a DenseNet121, being specifically elaborated for the CheXpert dataset as a part of extensive package called 'Torchxrayvision' \cite{cohen2020limits}\cite{Cohen2022xrv}, was chosen. While it initially was designed to solve a task of multilabel classification among xray images, we further finetuned it for classifying 'Pleural Effusion' only. The proportion of positive class within the training set reached 27\%, insignificantly overwhelming the same number for test - 23\%. Similar situation is seen in context of the measured quality: 89\% accuracy against 84\% for train and test respectively. Therefore, no significant shift of data or class proportion rebalance is identified, which in turn might lead to challenges for those models trained when dealing with real-life applications. For instance, in \cite{joseph_d__viviano__2019} authors elaborate on the issue of poor generalisation abilities of algorithms being trained on a specific dataset of xray images and then tested on another, being a straight consequence of data distribution shifts.
+
 \begin{figure}
 	\advance\leftskip-0.5cm
 	\includegraphics[width=3in]{img/chexpert.jpg}
