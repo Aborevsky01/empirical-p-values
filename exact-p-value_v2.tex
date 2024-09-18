@@ -456,8 +456,11 @@ TissueNet dataset contains 1.3 million microscopic images of cells obtained from
 	\label{fig:bcss_example}
 \end{figure} 
 
-The BCSS dataset contains over 20,000 segmentation annotations of tissue regions from breast cancer images from The Cancer Genome Atlas (TCGA). This large-scale dataset was annotated through the collaborative effort of pathologists, pathology residents, and medical students using the Digital Slide Archive. It enables the generation of highly accurate machine-learning models for tissue segmentation.
+The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} comprises more than 20,000 meticulously annotated segmentation instances, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The extensive nature of this dataset is a consequence of the collaborative efforts of a diverse group of contributors, including experienced pathologists, pathology residents, and medical students. These annotations were performed using the Digital Slide Archive, a platform designed to facilitate the management and analysis of digital pathology images. The comprehensive annotations provided by this dataset play a critical role in ameliorating the field of machine learning, particularly in the development of highly accurate machine-learning models for the segmentation of tissue regions. 
 
+This particular dataset is a multilabel classification in terms of our method, where each pixel belongs to one of the classes, including 'Stroma', 'Necrosis', 'Tumor' and 'Others'. While no significant data shift or alterations in class proportions were found when comparing train and test subsets, nevertheless, each particular image represents a unique story, drastically different from the average statistics.
+
+The overall train quality equals 84\%, slightly surpassing that of test - 82\%. The model is once again incorporated from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} and is called 'fcn resnet50 unet-bcss'. A prominent fact is that the previously described method, being expanded for the multiclass case, reaches 81\% of accuracy in standard method on test data, being almost identical to the optimal quality and relying on qvalues only.
 
 \begin{figure}
 	\centering
