@@ -31,7 +31,7 @@
 \newcommand{\mathone}{\mathds{1}}
 
 \usepackage{setspace}
-\doublespacing
+%\doublespacing
 %\newcommand*{\DOUBLEBLINDREVIEW}{} %Uncomment to hide author information for double-blind peer review
 
 
@@ -78,8 +78,6 @@ The empirical p-value (EPV), also known as conformal p-value, of a given discrim
 Recent methods, which deal with data shift, aim to (1) detect data shift  \cite{ dasu2009change}, (2) identify features which cause data shift \cite{kulinski2020feature}, (3) detect and correct label shift \cite{lipton2018detecting}, (4) provide explainability about data shift \cite{budhathoki2021did,kulinski2023towards}, and adapt to data shifts \cite{sui2024unleashing, zhang2021adaptive, zhang2022memo}. Most of the recent methods operate in the feature space and rely on data clustering or graphical cuasel models; and, are challenged by high-dimensional space, data sparsity, and correlated features. 
 
 
-%These methods usually tackle data shift problems down with (1) data clustering or kernel density estimator algorithms to discover new data clusters, graphical causal models
-
 
 In this paper we propose a method to adapt the distribution of the scores of negative test samples to the null (i.e. the distribution of the scores of the negative train samples) in order to maintain accurate FDR control under data distribution shift. In detail, the empirical p-values of the test samples are calculated with using the whole negative training data as $H_0$ with eq. \ref{eq:epv}. In the absence of data shift, the p-values should be uniformly distributed. We propose to visually monitor the uniformity of the p-values with Q-Q plots, in which the p-values are plotted against their ordered normalized positions. Any deviation from the diagonal line of the Q-Q plot would indicate data shift. Alternatively, the Fisher's combinatorial test may also be used to test uniformity \cite{fisher1928statistical}. The distribution of the test scores are adjusted so that the mode of the predicted negative test samples fits to the distribution of scores of the negative training samples. \todo{akf-ab}{summarize the method and cite}. Then, the decision threshold can be calibrated with $\pi_0$-BH method directly for the actual test samples so that it controls the FDR at a predefined $\alpha$-level. This approach is also robust to data label shifts because the $pi_0$ estimation automatically considers the actual rate of the classes; therefore adaptation to altered class balances is not required.
 
@@ -94,97 +92,6 @@ In this paper we propose a method to adapt the distribution of the scores of neg
 
 
 
-
-%progression of the disease that escaped detection, unfavorable prognosis, and delayed treatment, but also reduces the over-diagnosis, over-treatment, high costs, and needless anxiety \cite{pinsky2015principles}.
-
- \
-
- \
- 
-%
-%
-%Classification is a renown machine learning task, being enriched throughout last decades with various metrics. Each of them expects a growth only with the simultaneous enhancement of the model’s classification power, revealing a certain level of effectiveness. Meanwhile, a broad family of evaluation approaches has been introduced to present a comprehensive analysis. 
-%
-%Specific cases mandate careful selection of the metric to be used, distinguishing two basic types of errors, which could be made by a classification method. If implying existence of two classes only, then the model might either propose a negative sample to be positive (false negative, FN) or vice versa (false positive, FP). Usually, the type of mistake is indifferent to the inference. However, some situations require diametrically opposite evaluation policy. For instance, we could dive into a biomedical task, such as brain cancer. A neural network processes snapshots of living-patient’s brain cells, searching for those infected. Hence, separating two kinds of error is of paramount importance. Incorrectly recognizing healthy cells as rogue ones (FP) is much more hazardous since the surgeon will remove a wrong part of the brain - action, which can not be undone. Another renown example could be the loan exposure, when a person with a low estimation of credit risk appears to fail to return the debt. So, there is a pool of applications that demand extremely strict control of the extent to which the algorithm makes FP mistakes. In such cases, False Discovery Rate (FDR) seems to be preferable \cite{peaks_de_novo}.
-%
-%This metric denotes a proportion of samples that belong to type I errors (FP). In other words, this is simply a share of observations, falsely rejecting  $H_0$:
-%
-%\begin{equation}
-%            \text{FDR} = \mathbb{E}(V / R \ | \ R > 0) \times \mathbb{P}(R>0)
-%        \end{equation}
-%        where V is the number of false discoveries; R is the total number of discoveries \cite{BH}.
-%
-%Hence, we intend to elaborate a specific approach to produce uniformly distributed p-values of test objects in terms of the negative training data that would further allow to establish certain FDR control policy. Thus, we strive to take statistical methods of bioinformatics and dive into a broader area of ML classification.
-%
-%Acquiring empirical p-values (EPVs) of test samples towards some null distribution, built from the negatively labeled training data, would allow us to calculate the number of accepted discoveries at each possible error rate without using true labels. Consequently, we will consider identity between rate of FP errors and FDR. However, not only do we want to measure classification results through the FDR metric, but also the latter to be controlled at a certain ground-truth level. Such a task, where an inference strategy should be highly compatible both with the alternative solutions and the ground truth, must consider all potential ramifications of conditions, including data distribution shifts, alterations of class proportions, etc. As a preliminary stage to deduce discoveries at each FDR, it is still vital to approach the uniformly distributed p-values of train data with manually extracted EPVs from test data 
-%
-%We will hold the synthetic part of the investigation with the convolutional model, processing the MNIST dataset, while later opting to dive into real-life applications. The latter include both a certain range of biomedical application and specific commercial tasks,  specifically, loan exposure risk estimation.
-%
-%The paper is organized in a classical manner: the introduction is followed by an overview of suggested method with further in-depth exploration of rival  statistical mechanics.  We then dive into the algorithm's embodiment methodology.  Finally, we perform the experiments and consequently depict the outcomes. The entire code can be found in our paper’s \href{https://github.com/Aborevsky01/pvalues_classification}{GitHub repository}.
-%
-%\section{Concept}
-%
-%\subsection{FDR-based approach}
-%
-%In this paper, we propose to put a statistical guarantee with a certain confidence and without any reliance on true labels over the proportion of FP errors, treating it in terms of FDR control. The latter is a family of statistical procedures aimed at formulating a certain $\alpha$ level of FDR metric for a particular number of accepted discoveries. Thereby, we claim to use the negative training data to produce a null distribution $H_0$. In turn, this will allow us to define for a given prediction score $s$ its p-value: 
-%\begin{equation}
-%P_{H_0}(s)=\frac{|\{x\mid x>s, x \in H_0\}|}{|H_0|}
-%\end{equation}
-%, where $|.|$ denotes the cardinality of set. 
-%
-%The acquired p-values do allow to establish the FDR control if implementing the Benjamini-Hochberg protocol (BH). It is a ubiquitously recognized step-up technique, elaborated to control FDR at particular $\alpha$ level \cite{BH}. Imagine getting a p-value of 5\% in terms of the constructed $H_0$. Such a result would mean there is only a 5\% chance that a sample belongs to the negative class.  However, sometimes we accidentally discard false positives during our calculations, in turn leading to the higher level of misclassification. As a solution, BH entails first determining p-values by the aforementioned formula. Then, it suggests ordering all p-values in an ascending manner. Next stage is to calculate critical values of each sample by the following formula:
-%\begin{equation}\label{eq:bh}
-%    \text{critical value} = \frac{i \cdot \alpha}{m\cdot \pi_0}
-%\end{equation}
-%where $i$ is the rank of a p-value;  $\alpha$ is a certain user-defined FDR control level; $m$ is the total number of test samples; $\pi_0$ is the proportion of negative samples in the data, specific correction factor. We need to immediately underscore the fact that no aspect ratio could be available for the test data, if eliminating reliance on true labels. Solution to this issue is later described in the methodology overview. 
-%
-%As we acquire the BH critical values, it becomes possible to re-establish the particular boundary: the highest rank, so that the corresponding p-value is below its critical value. All the p-values above are considered significant, with a new threshold asserted \cite{qvalues}.
-%
-%Nevertheless, our key goal is quite different. Instead of moving the border to control FDR at $\alpha$ level, we strive to get an estimation of the latter for each of the possible thresholds. For instance, BH would declare to us how great should be the border of acceptance for credit scores to get an overall FP rate near 10\%. However, we are looking for this very percent of FP at each possible border of acceptance. 
-%
-%This discourse leads us to the notion of q-values - the adjusted p-values in such a manner that they can be interpreted as FDR. Calculation of those is almost straightly derived from the BH strategy. Firstly, we find $\alpha$ for the particular border in the equation \ref{eq:bh}\footnote{$p_i$ is basically identical to the critical value in the \ref{eq:bh}}. However, range of borders could be represented by the sequence of acquired p-values $p_i$:
-%
-%\begin{equation}\label{eq:bh2}
-%    \alpha(p_i) = \alpha_i = \frac{p_i \cdot m \cdot \pi_0}{i}
-%\end{equation}
-%
-%The second phase implies finding minimum among all previous p-values in the sorted sequence, which finally gives us q-value for each of the p-values:
-%
-%    \begin{equation}\label{eq:q}
-%        \text{q}_{i}(p_{i}) = \min\limits_{t>p_{i}}\alpha(t) \leftrightarrow \min(\alpha_i, \alpha_{i+1})
-%    \end{equation}
-%
-%The outcome is the desired estimation of FP rate for some boarder of class division, defined by the previously calculated samples' p-values in terms of negative training distribution. It could and should be visualised via a graph, denoting number of accepted discoveries against the estimated FDR rate. 
-%
-%At the same time, besides referring to the final inference, we also need an intermediate verification of our method's coherency with reality. Since we propose a practical method excluding the use of true labels and relying on the particular model's accuracy, there is a need to understand how close are our predictions to the reality. At the same time, it is a known fact that if sampling from a distribution, the resulting p-values will be uniformly distributed. \todo{attila}{pls check this part}\textit{Let us assume we are given a continuous, cumulative distribution function $F_X(X)$ and it is invertible, i.e. $F_X^{-1}$ exists. We want to show that the p-values $Z = 1-F_X(X)$ are uniformly distributed, that is $F_Z(X)$ is uniformly distributed. Note that $Z\in [0,1]$. For the uniform distribution on $U\sim U_{[0,1]}$, we also have $1-U\sim U_{[0,1]}$ uniformly distributed, furthermore $P(U\le u)=u$ and $P(U>u) = 1-u$ for any $u\in[0,1]$. Thus,}
-%\begin{equation}
-%	F_Z(u)=P(Z \le u) = P(1-F_X(X)\le u)= 1-P(X\le F_X^{-1}(u))=1-F_X(F_X^{-1}(u))=1-u.
-%\end{equation}
-%
-%Hence, a bias assessment is opted to be carried out by drawing a QQ plot of the acquired p-values against the theoretical uniform distribution for visual verification.
-%
-%The described above algorithm seems to be a reasonable strategy to estimate $\alpha$ level of FP at each particular threshold. Nevertheless, the major issue with such a straightforward approach is a colossal reliance on the heuristics, describing the training scores distribution. The consequence appears to be its negligible robustness and adaptation to the class distribution nor to the data distribution shifts. Thus, the method we propose here 
-%encapsulates the explored concept together with embodying specific rules to counter the alterations of test data.
-%
-%\subsection{Learn-then-test}
-%
-%Obviously, FDR is just a single example of the statistical guarantees we can address to the algorithm. An attempt to establish a unified approach for calibrating models to satisfy such explicit constraints was accomplished by \cite{ltt}. Their two-stage Learn-then-Test (LTT) framework proposes acquiring a trained model and modifying its predictions through multiple hypothesis testing. Thus, the acceptable set of hyperparameters is determined to preserve any selected statistical error (including FDR). “\textit{Put plainly, we learn a base model and then test which parameter values lead to risk control}” \cite{ltt}. 
-%
-%In the FDR case, we are simply searching for an optimal threshold $t$ to be chosen for each desired metric value. Such a strategy, being an extensive way to calibrate the error rate, introduces a brand new technique that will be used as a direct competitor to the introduced method. Speaking more formally, we can take some threshold $t$. Then, we could say that the corresponding classification function $f_t$ (basically, our neural network) is producing $(\alpha, \beta)$-risk-controlling predictions only if:
-%
-%\begin{equation}
-%        \mathbb{P}(\mathcal{R}(\mathcal{T}_{\hat{\lambda}}(X)) \leq \alpha) \geq 1 - \beta
-%\end{equation}
-%where $\alpha$ and $\beta$ are particular hyperparameters of risk control; $R$ is the risk function, taking as input the prediction set for the particular t. In our case it is mainly the expectation of loss function. 
-%
-%We find it essential to dive into the underlying mechanism of the embodied algorithm.
-%\begin{enumerate}%[label=\arabic*.]
-%    \item As the first step, a sequence of the FDR values for each train sample is generated. We then present a set of possible thresholds in a form of linear space with $k=300$ samples evenly distributed across the entire training array. Consequently, the selected $t$ give us a set of corresponding FDR values from the sequence - risk function $\mathcal{R}$.
-%    \item Then, we get into a cycle, iterating over possible $\alpha$ values (identical to the estimated FDR level). 
-%    \item At each step, Hoeffding-Bentkus inequality p-value is estimated. Such a parameter equals minimum of two separate statistical heuristics, both using $\alpha$ and $\mathcal{R}$. The presented by authors formula was proven to offer highly efficient results, formulating the p-value $p_j^{HB}$ for the null hypothesis $\mathcal{H}_j: \ \mathcal{R}(f_t) > \alpha$. "\textit{A small p-value will indicate disagreement with $\mathcal{H}_j$, implying the risk is controlled.}" \cite{ltt}
-%    \item The second key stage of the LTT framework assumes multiple hypothesis testing through the Bonferonni correction. It allows to reject all the thresholds out of those selected earlier based on the inferred p-values, limiting the false rejection probability for the given $\beta$-level. Out of the preserved hypothesis the last is chosen.
-%    \item After the best threshold-score was selected, we can measure percentage of test scores above it. Consequently, calculating such a share for the test data, we can not only separate distribution into positive and negative subsets, but also identify particular number of accepted discoveries at particular $\alpha$.
-%\end{enumerate}
 
 \section{Preliminaries}
 
@@ -226,12 +133,7 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
 			
 		A & B & C & D \\
-%		\includegraphics[width=1.7in]{img/cls_overview.png}&
-%		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
-%		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
-%		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
-%
-%		E & F & G & H \\
+
 	\end{tabular}
 	\caption{{\bf FDR control in MNIST predictions with empirical p-values. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).}.(B) The QQ plot of the empirical p-values of the test samples against the theoretical uniform distribution. (C) The number of true and accepted positive predictions by LTT and BH at various FDR levels (Q-values).  (D)  (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), and (ii) LTT (blue line). \todo{AB}{The legends should be: 1. BH with EPV, 2. LTT} }
 	\label{fig:binary}
@@ -308,41 +210,47 @@ When the train null distribution $N_0$ is different from the null distribution $
 %	\item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
 %	
 %	\item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
-	
-\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset (but train images remained the same). The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remained at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}. The plots and tests show that standard EPVs became biased in the case of data distribution shift; however, TNA can correct the EPVs so that FDR control becomes unbiased.
 
-
-\begin{figure}[hp]
-	\centering
-	\begin{tabular}{cccc}
-		\includegraphics[width=1.7in]{img/cnn_QQ_intensity_down.png}&
-		\includegraphics[width=1.7in]{img/cnn_intensity_down_fdr_control_loc.png} &
-		\includegraphics[width=1.7in]
-        {img/cnn_intensity_down_fdr_control.png} & 
-            \includegraphics[width=1.7in]{img/cnn_FDPscat_intensity_down.png} \\		
-		A & B & C & D \\
-	\end{tabular}
-	\caption{{\bf  FDR control with empirical p-values under data distribution shift.}
-		(A) QQ plot of the EPVs (red dots) and the EPVs with TNA (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with EPV with TNA (green), and (iv) LTT (blue). (C) Same as (B) with over the entire Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line, (iii) LTT (blue line).}
-	\label{fig:mnist_shfit}
-\end{figure}
-
-
-\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles, e.g.  \cite{joseph_d__viviano__2019}. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remaind at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}. The results show that, in general, the EPV methods can adjust to the changed class proportions thanks to the $\pi_0$ estimation among the test instances for the BH protocol. However, the LTT method calibrates its parameters about class proportion with using a validation set, hence it becomes biased when class proportion change in the test data. 
 
 \begin{figure}[h!]
 	\centering
 	\begin{tabular}{cccc}
+		\multicolumn{4}{l}{\bf (i) Data distribution shift:}\\
+		\includegraphics[width=1.7in]{img/cnn_QQ_intensity_down.png}&
+		\includegraphics[width=1.7in]{img/cnn_intensity_down_fdr_control_loc.png} &
+		\includegraphics[width=1.7in]{img/cnn_intensity_down_fdr_control.png} & 
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_intensity_down.png} \\
+		\multicolumn{4}{l}{\bf (ii) Class distribution shit:}\\
 		\includegraphics[width=1.7in]{img/cnn_QQ_balanced.png}&
 		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control_loc.png} &
 		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control.png} & 
 		\includegraphics[width=1.7in]{img/cnn_FDPscat_balanced.png} \\		
 		A & B & C & D \\
 	\end{tabular}
-	\caption{{\bf  FDR control with EPV under altered class distribution shit.}
-		(A) QQ plot of the EPVs (red dots) and the EPVs with TNA (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with EPV with TNA (green), and (iv) LTT (blue). (C) Same as (B) with over the entire Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
-	\label{fig:mnist_rebalance}
+	\caption{{\bf  FDR control with empirical p-values.}
+		(A) QQ plot of the EPVs (red dots) and the EPVs with TNA (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with EPV with TNA (green), and (iv) LTT (blue). (C) Same as (B) with over the entire Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line, (iii) LTT (blue line).}
+	\label{fig:mnist_shfit}
 \end{figure}
+
+	
+\paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset (but train images remained the same). The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remained at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}-(i). The plots and tests show that standard EPVs became biased in the case of data distribution shift; however, TNA can correct the EPVs so that FDR control becomes unbiased.
+
+
+\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles, e.g.  \cite{joseph_d__viviano__2019}. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remaind at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}-(ii). The results show that, in general, the EPV methods can adjust to the changed class proportions thanks to the $\pi_0$ estimation among the test instances for the BH protocol. However, the LTT method calibrates its parameters about class proportion with using a validation set, hence it becomes biased when class proportion change in the test data. 
+%
+%\begin{figure}[h!]
+%	\centering
+%	\begin{tabular}{cccc}
+%		\includegraphics[width=1.7in]{img/cnn_QQ_balanced.png}&
+%		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control_loc.png} &
+%		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control.png} & 
+%		\includegraphics[width=1.7in]{img/cnn_FDPscat_balanced.png} \\		
+%		A & B & C & D \\
+%	\end{tabular}
+%	\caption{{\bf  FDR control with EPV under altered class distribution shit.}
+%		(A) QQ plot of the EPVs (red dots) and the EPVs with TNA (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with EPV with TNA (green), and (iv) LTT (blue). (C) Same as (B) with over the entire Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
+%	\label{fig:mnist_rebalance}
+%\end{figure}
 
 \section{Experimental results}
 
@@ -353,13 +261,13 @@ When the train null distribution $N_0$ is different from the null distribution $
 The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic scans of lymph node sections \cite{Veeling2018-qh} derived from the Camelyon 16 challenge \cite{camelyon16}. PCam consists of 327,680 colored images of size 96x96 each. The challenge is to identify the presence (positive) or absence (negative) of any histopathology. The dataset creators of PCam underline that all the positive and negative instances in the training, validation, test sets are equally distributed, resulting in a class balance of 50:50\%; while the positive and negative class balance in the Camelyon 16 test dataset is 31\% :69\%. Therefore,  the actual true class proportions in PCcam might be significantly different in real-life applications, making the FDR control with methods like LTT inaccurate in practical applications. We manually resampled the test data sets of the PCam so that the class ratios become the same as of the Camelyon 16 dataset, because,  in our opinion,  this class ratio is probably more realistic for real life scenarios. We used the trained resnet34-pcam model, which is a popular, deep residual network from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} with an overall f1-score of 0.889, as stated by the authors.
 
 
-\begin{figure}
+\begin{figure}[h!]
 	\centering
 	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/pcam1.jpg} &
-		\includegraphics[width=1.7in]{img/pcam2.jpg} & 
-            \includegraphics[width=1.7in]{img/pcam3.jpg} &
-             \includegraphics[width=1.7in]{img/pcam4.jpg}
+ 		\includegraphics[width=1.in]{img/pcam1.jpg} &
+		\includegraphics[width=1.in]{img/pcam2.jpg} & 
+            \includegraphics[width=1.in]{img/pcam3.jpg} &
+             \includegraphics[width=1.in]{img/pcam4.jpg}
         \end{tabular}
 	\caption{{\bf Instances of PCam dataset.}}
 	\label{fig:pcam_example}
@@ -369,140 +277,165 @@ The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic sc
 The evaluation of FDR controlling methods on the PCam dataset is shown in the Figure \ref{fig:pcam} with original class distribution. The plots indicate that all three FDR control methods are fairly accurate in practice. Perhaps, the QQ plots of the test EPVs (red dots) and the test NTA EPVs (green dots) in the Figure \ref{fig:pcam}A indicate that the test p-values are slightly biased; however, the NSA method manages to reduce this bias in the EPVs. This indicates a slight overfitting and/or distribution shifts between the training and test data sets. However, when we changed the even class distribution to 31\%:69\%, the LTT FDR control method resulted in liberal FDR control, the BH protocol with standard EPVs resulted in conservative FDR control; whereas, the BH with the TNA EPVs resulted in accurate FDR control,  especially at critical $\alpha$ levels (0-0.1). These results are shown in the Figure \ref{fig:pcam_rebalance}.
 
 
-\begin{figure}
-	\advance\leftskip-0.5cm
-	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/cnn_QQ_pcam.pdf} &
-		\includegraphics[width=1.7in]{img/cnn_pcam_fdr_control.pdf} & 
-        \includegraphics[width=1.7in]{img/cnn_pcam_fdr_control_loc.pdf} &
-        \includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.pdf}
-		\\	
-		A & B & C & D
-	\end{tabular}
-	\caption{{\bf FDR control on PCam dataset.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
-	\label{fig:pcam}
-\end{figure} 
-
-
-\begin{figure}
-	\advance\leftskip-0.5cm
-	\begin{tabular}{cccc}
- 		\includegraphics[width=1.7in]{img/cnn_QQ_pcam_balanced.png} &
-		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control.png} & 
-        \includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control_loc.png} &
-        \includegraphics[width=1.7in]{img/cnn_FDPscat_pcam_balanced.png}
-		\\	
-		A & B & C & D
-	\end{tabular}
-	\caption{{\bf FDR control on PCam dataset under class distribution shift.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. The EPVs are slight inflated,  (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
-	\label{fig:pcam_rebalance}
-\end{figure} 
+%
+%
+%\begin{figure}
+%
+%	\begin{tabular}{cccc}
+% 		\includegraphics[width=1.7in]{img/cnn_QQ_pcam_balanced.png} &
+%		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control.png} & 
+%        \includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control_loc.png} &
+%        \includegraphics[width=1.7in]{img/cnn_FDPscat_pcam_balanced.png}
+%		\\	
+%		A & B & C & D
+%	\end{tabular}
+%	\caption{{\bf FDR control on PCam dataset under class distribution shift.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. The EPVs are slight inflated,  (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
+%	\label{fig:pcam_rebalance}
+%\end{figure} 
 
 \subsection{TissueNet: cells segmentation}
 
 \begin{figure}
-	\advance\leftskip-0.5cm
-	\includegraphics[width=8in]{img/tissuenet.pdf}
+    \centering
+	\includegraphics[width=5in]{img/tissuenet.pdf}
 	\caption{{\bf Instance of TissueNet dataset.} Two-channel original images are being processed by the model, in turn producing masks \& flows to correctly segment cells}
 	\label{fig:tissue_example}
 \end{figure} 
 
-TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell \todo{AB}{or inside a nucleus?} {\bf yes!} (positive) or not (negative). The overall share of positive class pixels was reaching 59\% for train data against already 66\% for those of test; however, the ratio varies over the images considerably. The reached quality with the Cellpose model \cite{cellpose} reaches 77\%  of average precision after five epochs considering the semantic segmentatio task. However, when it comes to the task reformulation towards binary classification, the final accuracy achieves of 95\% and 94\% on training and test data respectively.
+TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has a size of 512x512 pixels. Each image was manually segmented at pixel level and paired whole-cell and nuclear annotations. Our binary classification task was to predict whether a pixel is inside a cell (positive) or not (negative). The overall positive:negative ration was 59:41\% in the training data and 66:34\% in the test data; however, the class ratio varies over the images considerably. We used the Cellpose pre-trained deep neural network model \cite{cellpose}, we fine tuned it for five epochs, and it achieves 95\% and 94\% of accuracies  on training and test data, respectively. Our evaluation is reported on Figure \ref{fig:pcam}-(iii). The plots reveal that the BH protocol with standard EPVs becomes liberally biased; i.e. the actual FDR is higher than the true FDR. This can be seen in the Figure  \ref{fig:pcam}-(iii)-D. As a consequence, it yields more trusted predictions at any q-value levels than the ground truth, c.f. dashed-red and black solid lines on Figure \ref{fig:pcam}-(iii)-BC. This bias might originate from data distribution shift, possibly resulting from overfitting. Both, LTT and the BH with TNA EPV remain accurate in the critical region (0-15 \% FDRs); however, both methods become conservative  at loos FDR levels (>15 \%). Conservative estimation is preffered in practice to liberal one; hoever, in this case we think this was just a mere coincidence. 
 
-
-
-
-\begin{figure}
-	\centering
-	\begin{tabular}{cccc}
- 		%\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} 
- 		&
-		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control.png} & 
-            \includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png}
-            & 
-            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment_TA.png}
-		\\	
-		A & B & C & D
-	\end{tabular}
-	\caption{\bf FDR control with p-values for TissueNet dataset.}
-	\label{fig:tissue}
-\end{figure}
-
-
+However, when we run the tests on a single images, \todo{AB}{come on!} 
 \todo{AB}{Can you just select one image, in which the class balance is different from the overall class balance, and run the evaluation on that single model?}
+%
+%\begin{figure}
+%	\centering
+%	\begin{tabular}{cccc}
+%		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} &
+%		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control.png} & 
+%        \includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png} & 
+%            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment_TA.png}\\	
+%		A & B & C & D
+%	\end{tabular}
+%	\caption{\bf FDR control with p-values for TissueNet dataset.}
+%	\label{fig:tissue}
+%\end{figure}
+%
 
-\begin{figure}
-	\centering
+%
+%\begin{figure}
+%	\centering
+%	\begin{tabular}{cccc}
+% 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} &
+%		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control.png} & 
+%            \includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
+%            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}\\	
+%		A & B & C & D
+%	\end{tabular}
+%	\caption{\bf FDR control with p-values for rebalanced TissueNet dataset.}
+%	\label{fig:tissue_rebalance}
+%\end{figure}
+
+
+\begin{figure}[h!]
+	
 	\begin{tabular}{cccc}
- 		%\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} 
- 		&
+		\multicolumn{4}{l}{\bf (i) Standard PCam dataset:}\\		
+		\includegraphics[width=1.7in]{img/cnn_QQ_pcam.pdf} &
+		\includegraphics[width=1.7in]{img/cnn_pcam_fdr_control.pdf} & 
+		\includegraphics[width=1.7in]{img/cnn_pcam_fdr_control_loc.pdf} &
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.pdf}\\	
+		\multicolumn{4}{l}{\bf (ii) PCam with class distribution shift.:}\\		
+		\includegraphics[width=1.7in]{img/cnn_QQ_pcam_balanced.png} &
+		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control.png} & 
+		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control_loc.png} &
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam_balanced.png}\\
+		\multicolumn{4}{l}{\bf (iii) Standard TissueNet dataset:}\\		
+		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment_TA_log.png} &
+		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control.png} & 
+		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png} & 
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment_TA.png}\\	
+		\multicolumn{4}{l}{\bf (iv) TissueNet with class distribution shift.:}\\		
+		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} &
 		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control.png} & 
-            \includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
-            \includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}
-		\\	
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}\\			
 		A & B & C & D
 	\end{tabular}
-	\caption{\bf FDR control with p-values for rebalanced TissueNet dataset.}
-	\label{fig:tissue_rebalance}
-\end{figure}
-
+	\caption{{\bf Performance evaluation of FDR controlling methods.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
+	\label{fig:pcam}
+\end{figure} 
 
 \subsection{BCSS: Breast cancer semantic segmentation dataset}
 
 \begin{figure}
-	\advance\leftskip-0.5cm
+	\centering
 	\includegraphics[width=3in]{img/bcss_instance.jpeg}
 	\caption{{\bf An instance from BCSS dataset.}}
 	\label{fig:bcss_example}
 \end{figure} 
 
-The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} comprises more than 20,000 meticulously annotated segmentation instances, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The extensive nature of this dataset is a consequence of the collaborative efforts of a diverse group of contributors, including experienced pathologists, pathology residents, and medical students. These annotations were performed using the Digital Slide Archive, a platform designed to facilitate the management and analysis of digital pathology images. The comprehensive annotations provided by this dataset play a critical role in ameliorating the field of machine learning, particularly in the development of highly accurate machine-learning models for the segmentation of tissue regions. 
+The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Necrosis', 'Tumor' and 'Others', and the corresponding class ratios in both the training and test sets are: X,Y,V,W\todo{AB}{Get the ratios}. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the four classes. The model achieved an 84 \% and 82 \% accuracies on the training and test datasets. 
 
-This particular dataset is a multilabel classification in terms of our method, where each pixel belongs to one of the classes, including 'Stroma', 'Necrosis', 'Tumor' and 'Others'. While no significant data shift or alterations in class proportions were found when comparing train and test subsets, nevertheless, each particular image represents a unique story, drastically different from the average statistics.
+We note that, because this dataset involves multi-class classification, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the minimal q-value and its class label  to each test instance. Therefore, an trusted prediction means that a sample is correctly classified.
 
-The overall train quality equals 84\%, slightly surpassing that of test - 82\%. The model is once again incorporated from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} and is called 'fcn resnet50 unet-bcss'. A prominent fact is that the previously described method, being expanded for the multiclass case, reaches 81\% of accuracy in standard method on test data, being almost identical to the optimal quality and relying on qvalues only.
+Our FDR evaluation is presented in Figure \ref{fig:bcss}-(i). We note that, we did not evaluate LTT here, because it is not clear how to adjust it to multi-class classification problems. The results reveal that BH with standard EPVs becomes overly liberal, possibly to data shift, while BH with TNA EPVs remains somewhat close to the ground truth. We also note that the ``flat step'' at the beginning of the ground truth indicates that the model's most confident predictions are incorrect. 
 
-\begin{figure}
-	\centering
-	\begin{tabular}{ccc}
- 		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.pdf} &
-		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.pdf}  \\
-		A & B 
-	\end{tabular}
-	\caption{\bf FDR control with p-values for BCSS dataset.}
-	\label{fig:bcss}
-\end{figure}
-
-
+However, when we run the tests on a single images,  the standard BH becomes even worse or better. \todo{AB}{come on!} 
 
 \subsection{CheXpert: chest x-ray dataset}
 
-The CheXpert dataset comprises a total of 224,316 chest radiographs, representing a single collection of more than 65,000 unique patients' images. This comprehensive corpus encompasses both frontal and lateral views of the thorax. The principal objective of this dataset is to facilitate the automated interpretation of chest X-rays for the task of multi-label classification. It is noteworthy that the dataset is enhanced with uncertainty labels, which provide additional context surrounding the confidence levels of the predictions made by automated systems. Furthermore, the CheXpert dataset includes radiologist-labeled reference standard evaluation sets, which serve as a benchmark for assessing the accuracy and reliability of automated interpretation algorithms in comparison to human expert evaluations. The integration of diverse data types and reference standards positions the CheXpert dataset as a significant resource for advancing research and development in medical imaging and machine learning applications.
+The CheXpert dataset comprises a total of 224,316 radiographs of both frontal and lateral views of the thorax from $\sim$65,000 patients in order to facilitate the automated interpretation of chest X-rays for multi-label classification tasks. We used the deep neural network model, called DenseNet121, from the \texttt{Torchxrayvision} package \cite{cohen2020limits,Cohen2022xrv}, specifically developed for this CheXpert dataset. While CheXpert is of multi-labeled, we turned it to a binary classification in which we treated the Pleural Effusion class as positive and all others as negative. The proportion of the positive class was 27 \% and 23 \% in the training and test datasets. and fine-tuned the DenseNet121 model accordingly, and it achieved 89 \% and 84 \% accuracies on the training and test sets.
 
-As for the selected model, a DenseNet121, being specifically elaborated for the CheXpert dataset as a part of extensive package called 'Torchxrayvision' \cite{cohen2020limits}\cite{Cohen2022xrv}, was chosen. While it initially was designed to solve a task of multilabel classification among xray images, we further finetuned it for classifying 'Pleural Effusion' only. The proportion of positive class within the training set reached 27\%, insignificantly overwhelming the same number for test - 23\%. Similar situation is seen in context of the measured quality: 89\% accuracy against 84\% for train and test respectively. Therefore, no significant shift of data or class proportion rebalance is identified, which in turn might lead to challenges for those models trained when dealing with real-life applications. For instance, in \cite{joseph_d__viviano__2019} authors elaborate on the issue of poor generalisation abilities of algorithms being trained on a specific dataset of xray images and then tested on another, being a straight consequence of data distribution shifts.
+We run our evaluation and we found out that all methods: BH with standard EPVs and with TNA EPVs, and the LTT method, provide accurate FDR control. In our opinion, this indicates the absence of any database distribution shits. The also shows that out TNA method does not mess up with the training or test null distributions when there is no data shift.
+
+% This comprehensive corpus encompasses both frontal and lateral views of the thorax. The principal objective of this dataset is to facilitate the automated interpretation of chest X-rays for the task of multi-label classification. It is noteworthy that the dataset is enhanced with uncertainty labels, which provide additional context surrounding the confidence levels of the predictions made by automated systems. Furthermore, the CheXpert dataset includes radiologist-labeled reference standard evaluation sets, which serve as a benchmark for assessing the accuracy and reliability of automated interpretation algorithms in comparison to human expert evaluations. The integration of diverse data types and reference standards positions the CheXpert dataset as a significant resource for advancing research and development in medical imaging and machine learning applications.
+
+%As for the selected model, a DenseNet121, being specifically elaborated for the CheXpert dataset as a part of extensive package called 'Torchxrayvision' \cite{cohen2020limits}\cite{Cohen2022xrv}, was chosen. While it initially was designed to solve a task of multilabel classification among xray images, we further finetuned it for classifying 'Pleural Effusion' only. The proportion of positive class within the training set reached 27\%, insignificantly overwhelming the same number for test - 23\%. Similar situation is seen in context of the measured quality: 89\% accuracy against 84\% for train and test respectively. Therefore, no significant shift of data or class proportion rebalance is identified, which in turn might lead to challenges for those models trained when dealing with real-life applications. For instance, in \cite{joseph_d__viviano__2019} authors elaborate on the issue of poor generalisation abilities of algorithms being trained on a specific dataset of xray images and then tested on another, being a straight consequence of data distribution shifts.
 
 \begin{figure}
-	\advance\leftskip-0.5cm
+		\centering
+%	\advance\leftskip-0.5cm
 	\includegraphics[width=3in]{img/chexpert.jpg}
-	\caption{{\bf An instance from CheXpert dataset.}}
+	\caption{{\bf An instance from CheXpert dataset.}\todo{AB}{Could oyu please put the 4 images in one row, just like for the PCam or TissueNet.}}
 	\label{fig:chexpert_example}
 \end{figure} 
 
 
-\begin{figure}
-	\centering
+\begin{figure}[h!]
+	
 	\begin{tabular}{cccc}
- 		%\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 
- 		&
+		\multicolumn{4}{l}{\bf (i) Standard BCSS dataset:}\\		
+%		\includegraphics[width=1.7in]{img/cnn_QQ_pcam.pdf} &
+ 		&\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.pdf} &
+		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.pdf} & \\
+%		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.pdf}\\	
+		\multicolumn{4}{l}{\bf (ii) BCSS with class distribution shift.:}\\		
+		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
+		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 		&
 		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
-            \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
-            \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}
-		\\	
+        \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
+        \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}\\
 		A & B & C & D
 	\end{tabular}
-	\caption{\bf FDR control with p-values for CheXpert dataset.}
-	\label{fig:chexpert}
-\end{figure}
+	\caption{{\bf Performance evaluation of FDR controling methods.} Plot explanation is same as in Figure \ref{fig:pcam}. }
+	\label{fig:bcss}
+\end{figure} 
+
+%
+%\begin{figure}
+%	\centering
+%	\begin{tabular}{cccc}
+% 		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 
+% 		&
+%		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
+%            \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
+%            \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}
+%		\\	
+%		A & B & C & D
+%	\end{tabular}
+%	\caption{\bf FDR control with p-values for CheXpert dataset.}
+%	\label{fig:chexpert}
+%\end{figure}
 
 
 \section{Conclusions}
