@@ -41,20 +41,22 @@
 %\email{akerteszfarkas@hse.ru}
 %\phone{+7 (499) 152-07-41}
 
-\title{Accurate false discovery rate control in classification problems with valid empirical p-values under distribution shift}
+\title{Towards reliable false discovery rate control in classification problems under distribution shift}
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-	The performance of machine learning-based classifiers can significantly degrade in software production due to domain shifts of batch effects that was not considered during training and validation. In this paper, we present a simple to accurately estimate and control the false discovery rate (FDR) on the test data without using class labels which is also robust to domain shifts. Our technique is based on valid, i.e. uniformly distributed, empirical p-values derived from the distribution of the prediction scores of the negative data, i.e. the null-distribution, produced by the classifier. Then, the FDR can be accurately controlled with, for instance, Benjamini-Hochberg protocol or similar ones. Domain shits can be visually detected by comparing the null distributions of the train and test sets with Q-Q plots. In case of domain shift, simply by re-scaling the test null distribution to the train one provides  accurate FDR control. We compared our method with the Learn-Then-Test approach recently developed by Michael Jordan's lab and our experimental results shows that our technique is more robust to data- and class-label distribution shits. 
+	The performance of machine learning-based classifiers can significantly degrade in software production due to domain shifts or batch effects that was not considered during training and validation. This can particularly be problematic in automated medical diagnostic systems. Here, we present a simple yet robust heuristic method to mitigate the bias in false discovery rate control in case of data shift. This method is based on the adjustment of the null distribution of test prediction scores, thereby we termed it Test Null Adjustment (NTA) method. The adjusted null distribution then can be used to calculate empirical p-values (EPVs) to be used in the Benjamini-Hochberg (BH) protocol to maintain false discover rate (FDR) control. The main advantage of our TNA method is that it's application does not require any domain specific knowledge, it is fully data-driven, and it operates in the 1-dimensional space of the prediction scores of a classifier ensuring stable operation. We have performed four experimental tests on biomedical image analysis domain we demonstrated that our TNA method almost entirely can mitigate the bias in FDR induced by data shift. 
+	
+	%In this paper, we present a simple to accurately estimate and control the false discovery rate (FDR) on the test data without using class labels which is also robust to domain shifts. Our technique is based on valid, i.e. uniformly distributed, empirical p-values derived from the distribution of the prediction scores of the negative data, i.e. the null-distribution, produced by the classifier. Then, the FDR can be accurately controlled with, for instance, Benjamini-Hochberg protocol or similar ones. Domain shits can be visually detected by comparing the null distributions of the train and test sets with Q-Q plots. In case of domain shift, simply by re-scaling the test null distribution to the train one provides  accurate FDR control. We compared our method with the Learn-Then-Test approach recently developed by Michael Jordan's lab and our experimental results shows that our technique is more robust to data- and class-label distribution shits. 
 	
 	 
 %Artificial Intelligence has been demonstrated as an incredibly useful instrument for a broad range of tasks. One of them — Bioinformatics — proposed fundamentally novel techniques at the intersection of machine learning and statistics. Despite their potential, these methods have not been utilized for more general tasks yet. Accordingly, in our work, we elaborate a drastically new approach called empirical p-values (EPV). Assuming negative training data of classification task to be the null hypothesis distribution, we calculate the corresponding p-values for the test samples. Later, we expand the BH procedure to control FDR, making it possible both to regulate the interrelation of train and test data distributions, as well as to predict new labels based on those already investigated. The major goal is to accurately predict number of accepted discoveries at each level without true labels.
 
 
 \end{abstract}
-\textbf{Key words:} P-values, Empirical P-values, False Discover Rate, Error Control, False Discovery Rate Control, Benjamini-Hochberg Protocol
+\textbf{Key words:} Empirical P-values, False Discover Rate, Data Shift, Batch Effect
 
 \section{Introduction}
 
@@ -179,7 +181,7 @@ When the train null distribution $N_0$ is different from the null distribution $
 \end{enumerate}
 
 
-	Finally, calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at a desired level.
+	Finally, calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at a desired level. \todo{AB}{Please draw a sketch to illustrate the TBA method.}
 	
 	
 	
@@ -336,6 +338,26 @@ However, when we run the tests on a single images, \todo{AB}{come on!}
 %\end{figure}
 
 
+
+\subsection{BCSS: Breast cancer semantic segmentation dataset}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=3in]{img/bcss_instance.jpeg}
+	\caption{{\bf An instance from BCSS dataset.}}
+	\label{fig:bcss_example}
+\end{figure} 
+
+The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Necrosis', 'Tumor' and 'Others', and the corresponding class ratios in both the training and test sets are: X,Y,V,W\todo{AB}{Get the ratios}. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the four classes. The model achieved an 84 \% and 82 \% accuracies on the training and test datasets. 
+
+We note that, because this dataset involves multi-class classification, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the minimal q-value and its class label  to each test instance. Therefore, an trusted prediction means that a sample is correctly classified.
+
+Our FDR evaluation is presented in Figure \ref{fig:bcss}-(i). We note that, we did not evaluate LTT here, because it is not clear how to adjust it to multi-class classification problems. The results reveal that BH with standard EPVs becomes overly liberal, possibly to data shift, while BH with TNA EPVs remains somewhat close to the ground truth. We also note that the ``flat step'' at the beginning of the ground truth indicates that the model's most confident predictions are incorrect. 
+
+However, when we run the tests on a single images,  the standard BH becomes even worse or better. \todo{AB}{come on!} 
+
+
+
 \begin{figure}[h!]
 	
 	\begin{tabular}{cccc}
@@ -364,24 +386,6 @@ However, when we run the tests on a single images, \todo{AB}{come on!}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
 	\label{fig:pcam}
 \end{figure} 
-
-\subsection{BCSS: Breast cancer semantic segmentation dataset}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=3in]{img/bcss_instance.jpeg}
-	\caption{{\bf An instance from BCSS dataset.}}
-	\label{fig:bcss_example}
-\end{figure} 
-
-The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Necrosis', 'Tumor' and 'Others', and the corresponding class ratios in both the training and test sets are: X,Y,V,W\todo{AB}{Get the ratios}. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the four classes. The model achieved an 84 \% and 82 \% accuracies on the training and test datasets. 
-
-We note that, because this dataset involves multi-class classification, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the minimal q-value and its class label  to each test instance. Therefore, an trusted prediction means that a sample is correctly classified.
-
-Our FDR evaluation is presented in Figure \ref{fig:bcss}-(i). We note that, we did not evaluate LTT here, because it is not clear how to adjust it to multi-class classification problems. The results reveal that BH with standard EPVs becomes overly liberal, possibly to data shift, while BH with TNA EPVs remains somewhat close to the ground truth. We also note that the ``flat step'' at the beginning of the ground truth indicates that the model's most confident predictions are incorrect. 
-
-However, when we run the tests on a single images,  the standard BH becomes even worse or better. \todo{AB}{come on!} 
-
 \subsection{CheXpert: chest x-ray dataset}
 
 The CheXpert dataset comprises a total of 224,316 radiographs of both frontal and lateral views of the thorax from $\sim$65,000 patients in order to facilitate the automated interpretation of chest X-rays for multi-label classification tasks. We used the deep neural network model, called DenseNet121, from the \texttt{Torchxrayvision} package \cite{cohen2020limits,Cohen2022xrv}, specifically developed for this CheXpert dataset. While CheXpert is of multi-labeled, we turned it to a binary classification in which we treated the Pleural Effusion class as positive and all others as negative. The proportion of the positive class was 27 \% and 23 \% in the training and test datasets. and fine-tuned the DenseNet121 model accordingly, and it achieved 89 \% and 84 \% accuracies on the training and test sets.
@@ -392,7 +396,7 @@ We run our evaluation and we found out that all methods: BH with standard EPVs a
 
 %As for the selected model, a DenseNet121, being specifically elaborated for the CheXpert dataset as a part of extensive package called 'Torchxrayvision' \cite{cohen2020limits}\cite{Cohen2022xrv}, was chosen. While it initially was designed to solve a task of multilabel classification among xray images, we further finetuned it for classifying 'Pleural Effusion' only. The proportion of positive class within the training set reached 27\%, insignificantly overwhelming the same number for test - 23\%. Similar situation is seen in context of the measured quality: 89\% accuracy against 84\% for train and test respectively. Therefore, no significant shift of data or class proportion rebalance is identified, which in turn might lead to challenges for those models trained when dealing with real-life applications. For instance, in \cite{joseph_d__viviano__2019} authors elaborate on the issue of poor generalisation abilities of algorithms being trained on a specific dataset of xray images and then tested on another, being a straight consequence of data distribution shifts.
 
-\begin{figure}
+\begin{figure}[h]
 		\centering
 %	\advance\leftskip-0.5cm
 	\includegraphics[width=3in]{img/chexpert.jpg}
@@ -421,26 +425,17 @@ We run our evaluation and we found out that all methods: BH with standard EPVs a
 	\label{fig:bcss}
 \end{figure} 
 
-%
-%\begin{figure}
-%	\centering
-%	\begin{tabular}{cccc}
-% 		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 
-% 		&
-%		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
-%            \includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
-%            \includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}
-%		\\	
-%		A & B & C & D
-%	\end{tabular}
-%	\caption{\bf FDR control with p-values for CheXpert dataset.}
-%	\label{fig:chexpert}
-%\end{figure}
-
-
 \section{Conclusions}
-\todo{andrey}{rewrite conclusion, add discussion}
-The original exact p-value (XPV) calculation methods for scoring tandem mass spectrometry data using a dot-product-like scoring function were introduced for low-resolution fragmentation settings almost 15 years ago. Until now, it has remained an open question whether this algorithm can be made suitable for high resolution fragmentation settings. In this article we showed a generalization of the XPV method, termed HR-XPV, which is capable of producing accurate and well calibrated exact p-values for XCorr scores obtained with scoring high resolution MS/MS data. Unfortunately, our solution can be considered rather slow, which raise questions about its practicality. However, we hope that, the ideas in HR-XPV presented might be a significant step toward the development of efficient methods for calibrating exact p-values for high resolution MS/MS data. 
+
+In this study, we investigated the effects of data shift on False Discovery Rate (FDR) control. In our opinion, BH procedure with standard EPVs provide very accurate FDR control in the absence of any data shift. Unfortunately, data shift is rather common in practice, and we demonstrated that standard BH and the LTT methods are quite sensitive even to small data of class distribution shift. In this paper, we presented a simple, but robust method, called Test Null Adjustment (TNA), in order to mitigate the effect of the data shift on FDR control. Our method operates in the space of prediction scores, thereby it is not effected by the course of conditionality problem, which often hinders methods that aim to mitigate data shift in the input feature space. The TNA method consists of two main steps. First, it approximates the null distribution among the scores of the test instances via certain statistics from the distributions of the scores of the training instances. Second, it recalibrates the test scores so that the test and train null distributions would move closer to each other. TNA is fully data-driven, it does not rely on any theoretical assumptions or forms of the data. We have demonstrated in our experimental test with four biomedical datasets that NTA can successfully mitigate the bias caused by data shift; while, leaving the distributions intact in the absence of data shift. We note that, handling data shift in practice is hard, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased without any additional assumptions; hence it is a heuristic in its general form.  
+
+With this study, we also aim to emphasize and popularize the importance of accurate error control in any predictions in the biomedical domain. We have shown that the deviations in the simple QQ plots of the calculated vs. the theoretical p-values can be used to detect data shifts between the training and test data. Moreover, we also hope that the FDR control and plot using q-values will become a standard metric in performance evaluation for prediction systems in the biomedical domain.
+
+
+
+
+%\todo{andrey}{rewrite conclusion, add discussion}
+%The original exact p-value (XPV) calculation methods for scoring tandem mass spectrometry data using a dot-product-like scoring function were introduced for low-resolution fragmentation settings almost 15 years ago. Until now, it has remained an open question whether this algorithm can be made suitable for high resolution fragmentation settings. In this article we showed a generalization of the XPV method, termed HR-XPV, which is capable of producing accurate and well calibrated exact p-values for XCorr scores obtained with scoring high resolution MS/MS data. Unfortunately, our solution can be considered rather slow, which raise questions about its practicality. However, we hope that, the ideas in HR-XPV presented might be a significant step toward the development of efficient methods for calibrating exact p-values for high resolution MS/MS data. 
 
 \section*{Author contributions}
 \ifdefined\DOUBLEBLINDREVIEW
