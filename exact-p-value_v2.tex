@@ -396,12 +396,16 @@ We run our evaluation and we found out that all methods: BH with standard EPVs a
 
 %As for the selected model, a DenseNet121, being specifically elaborated for the CheXpert dataset as a part of extensive package called 'Torchxrayvision' \cite{cohen2020limits}\cite{Cohen2022xrv}, was chosen. While it initially was designed to solve a task of multilabel classification among xray images, we further finetuned it for classifying 'Pleural Effusion' only. The proportion of positive class within the training set reached 27\%, insignificantly overwhelming the same number for test - 23\%. Similar situation is seen in context of the measured quality: 89\% accuracy against 84\% for train and test respectively. Therefore, no significant shift of data or class proportion rebalance is identified, which in turn might lead to challenges for those models trained when dealing with real-life applications. For instance, in \cite{joseph_d__viviano__2019} authors elaborate on the issue of poor generalisation abilities of algorithms being trained on a specific dataset of xray images and then tested on another, being a straight consequence of data distribution shifts.
 
-\begin{figure}[h]
-		\centering
-%	\advance\leftskip-0.5cm
-	\includegraphics[width=3in]{img/chexpert.jpg}
-	\caption{{\bf An instance from CheXpert dataset.}\todo{AB}{Could oyu please put the 4 images in one row, just like for the PCam or TissueNet.}}
-	\label{fig:chexpert_example}
+\begin{figure}[h!]
+	\centering
+	\begin{tabular}{cccc}
+ 		\includegraphics[width=1.in]{img/chx_1.jpg} &
+		\includegraphics[width=1.in]{img/chx_2.jpg} & 
+            \includegraphics[width=1.in]{img/chx_3.jpg} &
+             \includegraphics[width=1.in]{img/chx_4.jpg}
+        \end{tabular}
+	\caption{{\bf Instances of CheXpert dataset.}}
+	\label{fig:pcam_example}
 \end{figure} 
 
 
