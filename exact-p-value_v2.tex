@@ -348,7 +348,7 @@ However, when we run the tests on a single images, \todo{AB}{come on!}
 	\label{fig:bcss_example}
 \end{figure} 
 
-The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Necrosis', 'Tumor' and 'Others', and the corresponding class ratios in both the training and test sets are: X,Y,V,W\todo{AB}{Get the ratios}. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the four classes. The model achieved an 84 \% and 82 \% accuracies on the training and test datasets. 
+The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Tumor' and 'Others', and the corresponding class ratios in both the training and test sets are: 54\% : 38\% : 8\%. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the four classes. The model achieved an 84 \% and 82 \% accuracies on the training and test datasets. 
 
 We note that, because this dataset involves multi-class classification, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the minimal q-value and its class label  to each test instance. Therefore, an trusted prediction means that a sample is correctly classified.
 
@@ -377,10 +377,10 @@ However, when we run the tests on a single images,  the standard BH becomes even
 		\includegraphics[width=1.7in]{img/cnn_cells_segment_TA_fdr_control_loc.png} & 
 		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment_TA.png}\\	
 		\multicolumn{4}{l}{\bf (iv) TissueNet with class distribution shift.:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced_TA_log.png} &
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_TA_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced_TA.png}\\			
+		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced01.png} &
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control01.png} & 
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control_loc01.png} & 
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced01.png}\\			
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
