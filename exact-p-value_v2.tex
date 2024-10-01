@@ -129,13 +129,12 @@ The p-values of the test samples are calculated with using eq. \ref{eq:epv} with
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
-		\includegraphics[width=1.7in]{img/cls_overview.png}&
-		\includegraphics[width=1.7in]{img/cnn_QQ_classical_lin.png} &
-		\includegraphics[width=1.7in]{img/cnn_classical_fdr_control.png} &
-		\includegraphics[width=1.7in]{img/cnn_FDRQQ_classical.png} \\
+		\includegraphics[width=1.78in]{img/cls_overview.png}&
+		\includegraphics[width=1.73in]{img/cnn_QQ_classical.png} &
+		\includegraphics[width=1.69in]{img/cnn_classical_fdr_control.png} &
+		\includegraphics[width=1.68in]{img/cnn_FDRQQ_classical.png} \\
 			
 		A & B & C & D \\
-
 	\end{tabular}
 	\caption{{\bf FDR control in MNIST predictions with empirical p-values. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).}.(B) The QQ plot of the empirical p-values of the test samples against the theoretical uniform distribution. (C) The number of true and accepted positive predictions by LTT and BH at various FDR levels (Q-values).  (D)  (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), and (ii) LTT (blue line). \todo{AB}{The legends should be: 1. BH with EPV, 2. LTT} }
 	\label{fig:binary}
@@ -222,12 +221,11 @@ When the train null distribution $N_0$ is different from the null distribution $
 		\includegraphics[width=1.72in]{img/cnn_intensity_down_fdr_control_loc.png} &
 		\includegraphics[width=1.7in]{img/cnn_intensity_down_fdr_control.png} & 
 		\includegraphics[width=1.59in]{img/cnn_FDPscat_intensity_down.png} \\
-		\multicolumn{4}{l}{\bf (ii) Class distribution shift:}\\
+		\multicolumn{4}{l}{\bf (ii) Class distribution shit:}\\
 		\includegraphics[width=1.66in]{img/cnn_QQ_balanced.png}&
 		\includegraphics[width=1.72in]{img/cnn_balanced_fdr_control_loc.png} &
 		\includegraphics[width=1.7in]{img/cnn_balanced_fdr_control.png} & 
 		\includegraphics[width=1.59in]{img/cnn_FDPscat_balanced.png} \\		
-
 		A & B & C & D \\
 	\end{tabular}
 	\caption{{\bf  FDR control with empirical p-values.}
@@ -375,12 +373,12 @@ However, when we run the tests on a single images,  the standard BH becomes even
 		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment.png} &
 		\includegraphics[width=1.7in]{img/cnn_cells_segment_fdr_control.png} & 
 		\includegraphics[width=1.7in]{img/cnn_cells_segment_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment.png}\\
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment.png}\\	
 		\multicolumn{4}{l}{\bf (iv) TissueNet with class distribution shift.:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced.png} &
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced.png}\\			
+		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced01.png} &
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control01.png} & 
+		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control_loc01.png} & 
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced01.png}\\			
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} (A) QQ plot of the EPVs (red dots) and the TNA EPVs (green dots) against the theoretical uniform distribution. The results of the Fisher's combination tests are indicated in the legend. (B) The number of accepted classifications as a function of the Q-values obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA EPV (green), and (iv) LTT (blue). (C) Same as (B) but over a critical Q-value range. (D) Deviation of the estimated FDR from the actual FDR obtained with (i) BH with EPV (red line), (ii) BH with EPV and TNA (green line), (iii) LTT (blue line).}
@@ -398,7 +396,7 @@ We run our evaluation and we found out that all methods: BH with standard EPVs a
 
 \begin{figure}[h!]
 	\centering
- 		\includegraphics[width=4.in]{img/chx.png}
+ 		\includegraphics[width=1.in]{img/chx.png}
 	\caption{{\bf Instances of CheXpert dataset.}}
 	\label{fig:pcam_example}
 \end{figure} 
@@ -408,10 +406,10 @@ We run our evaluation and we found out that all methods: BH with standard EPVs a
 	
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard BCSS dataset:}\\		
-%		\includegraphics[width=1.7in]{img/cnn_QQ_pcam.pdf} &
- 		&\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.pdf} &
-		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.pdf} & \\
-%		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.pdf}\\	
+		\includegraphics[width=1.7in]{img/cnn_QQ_multi_sa_bcss.png} &
+ 		&\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.png} &
+		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.png} & \\
+		\includegraphics[width=1.7in]{img/cnn_FDPscat_sa_bcss.png}\\	
 		\multicolumn{4}{l}{\bf (ii) BCSS with class distribution shift.:}\\		
 		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
 		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 		&
