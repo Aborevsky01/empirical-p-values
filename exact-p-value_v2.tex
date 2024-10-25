@@ -99,7 +99,7 @@ The TNA method operates solely at the space of prediction score, which is typica
 \section{Test null adjustment (TNA) method}
 \subsection{Preliminaries}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The training null distribution is constructed as $N_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the training target distribution is constructed as $N_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score distribution is $N_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$, and the true score $T_s$ distributions are constructed in a similar way from the test samples with using the true labels. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be an appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The training null distribution is constructed as $X_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the training target distribution is constructed as $X_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score distribution is $X_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$, and the test score $T_s$ distributions are constructed in a similar way with uring the true labels. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation*}
 	FDP(s_t,K)=\frac{1+|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
 \end{equation*}
@@ -108,7 +108,8 @@ Let us suppose that we are given a domain $D$ such as images, text, speech, grap
 
 % For binary classification problems (K=2), let $f:D\rightarrow R$ be a trained discriminator (classifier), $N_0=\{f(t):t\in X,\, Y_t=0\}$ the train null distribution,  $N_1=\{f(t):t\in X,\, Y_t=1\}$ the train target distribution, and $FDP(s_t)=(1+{|\{t: Y_t=0,\,f(t)\ge s_t\}|)/|\{t:f(t)\ge s_t\}|}$. We say that we trust the positive prediction of sample $t$ if and only if $f(t)>s_t$. We note that the FDR control is not related to FSR control in this case. 
 
-The empirical  p-values (EPVs) of the test samples are calculated with using eq. \ref{eq:epv} with respect to $N_0$. The p-value calculation can be time consuming for large $N_0$ sets, in this case, a binned, empirical cumulative distribution function of $N_0$ could be used to calculate the p-values accordingly in a fast way. The FDR in a set $T$ can be controlled with using the $BH$ protocol at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong} in the following way: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z\le f(t)}FDP( z, T )$; that is the minimum $\alpha$ level when the sample $t$ would become a trusted positive prediction. Smaller q-value of a sample indicates a more trusted positive prediction. 
+The empirical  p-values (EPVs) of the test samples are calculated with using eq. \ref{eq:epv} with respect to $X_0$. The p-value calculation can be time consuming for large $X_0$ sets, in this case, a binned, empirical cumulative distribution function of $X_0$ could be used to calculate the p-values accordingly in a fast way. Then, the FDR in a set $T$ can be controlled with using the $BH$ protocol and the EPVs at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong} in the following way: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda\} )/(m(1-\lambda))$ for $\lambda\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z\le f(t)}FDP( z, T )$; that is the minimum $\alpha$ level when the sample $t$ would become a trusted positive prediction. %A test sample with smaller q-value indicates that it is a more trusted positive prediction. 
+The smaller the q-value of a test sample $t$ is, the more trusted positive prediction $t$ is. Note that, the q-value of a sample not only depends on its prediction score, but it also depends on the other samples in the set. 
 %
 % THIS IS WITH MULTI CLASS CLASSIFICATION
 %Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,\dots, K-1\}$ denote the true class label of sample $t\in D$. Let $f_k:D\rightarrow R$ be appropriately trained discriminators (classifiers), such as a deep neural network, to indicate class memberships ($k=0,1,\dots,K-1$), where $R$ denotes the real values. Without loss of generality, we assume that higher score $f_k(t)$ indicates a stronger membership to class $k$. Then, let $f(t)= \max_k\{f_k(t) \}$ and $L(t)=\text{argmax}_k\{f_k(t)\}$ be the predicted class label for $t\in D$. The train null distribution is constructed as $N_0=\{f(t): L(t) \ne Y_t,\,\,  t\in X\}$ from the scores of incorrect classifications, the train target distribution is constructed as $N_1=\{f(t): L(t) = Y_t,\,\,  t\in X\}$ from the scores of correct classifications. The true test null and true test target distributions are constructed in a similar way from the test samples with using the true labels, respectively.  We say that, we trust a prediction $L(t)$ for a sample $t$  if $f(t)\ge s_t$ for a decision threshold $s_t$, and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $\{t\in D\}$ at a score threshold $s_t$ is calculated as 
@@ -130,7 +131,7 @@ The empirical  p-values (EPVs) of the test samples are calculated with using eq.
 
 The relevant results are presented in Figure \ref{fig:binary}. The Figure \ref{fig:binary}A shows the training and test null and target distributions. %This plot indicates that there is no shift between the training and test distributions. 
 The Figure \ref{fig:binary}B shows a QQ plot of the EPVs against the theoretical uniform distribution; that is the scatter plot of the EPV vs. its normalized rank in our case. The dots line up along the diagonal line which shows that the EPVs calculated are uniformly distributed and valid. This also indicates that there is no shift between the training and test distributions. %We also performed the Fisher's combined test to check whether the empirical p-values are uniformly distribution. The test produces a p-value of 0.934 indicating uniformly distributed empirical p-values. 
-The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions as positives at various q-values (FDR levels $\alpha$). The ground truth (black solid line) was calculated using the true test labels and we consider it correct. Any FDR controlling method (a) yielding more trusted predictions than the ground truth is liberally biased, and (b) yielding less trusted predictions is conservatively biased. The BH procedure with EPVs (red dashed line) yields closely the same number of trusted prediction at various FDR levels of $\alpha$ (calculated without using the true test labels). This indicates that the EVPs are uniform and BH procedure is unbiased  The LTT method also accurately controls the FDR at any $\alpha$ levels (blue dotted line) in the absence of data or class distribution shift. Finally, the Figure \ref{fig:binary}D shows that the deviation of the estimated FDRs from the true FDRs is small.
+The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions as positives at various q-values ($\alpha$ level of FDR). The ground truth (black solid line) was calculated using the true test labels and we consider it correct. Any FDR controlling method (a) yielding more trusted predictions than the ground truth is liberally biased, and (b) yielding less trusted predictions is conservatively biased. The BH procedure with EPVs (red dashed line) yields closely the same number of trusted prediction at various FDR levels of $\alpha$ (calculated without using the true test labels). This indicates that the EVPs are uniform and BH procedure is an unbiased method. The LTT method also accurately controls the FDR at any $\alpha$ levels (blue dotted line) in the absence of data or class distribution shift. Finally, the Figure \ref{fig:binary}D shows that the deviation of the estimated FDRs from the true FDRs is small.
 
 
 %, and with the BH procedure using the standard EPVs (red dashed lines)
@@ -147,44 +148,30 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 		\includegraphics[width=1.68in]{img/cnn_FDRQQ_classical.png} \\
 		A & B & C & D \\
 	\end{tabular}
-	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($N_0$), Train target ($N_1$), Test null ($T_0$), Test target ($T_1$).} (B) The QQ plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the the estimated and the true FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
+	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($X_0$), Train target ($X_1$), Test null ($T_0$), Test target ($T_1$).} (B) The QQ plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
 	\label{fig:binary}
 \end{figure}
  
-
-%
-%\section{Test Null Approximation}
-%When the train null distribution $N_0$ is different from the null distribution $T_0$ of the test instances, then the empirical p-values will not be uniformly distributed resulting in liberal or conservative bias in  FDR estimation.
-%
-%
-%The approximation of the null distribution in the distribution of the test scores is performed through the following steps.
-%
-%
-%\begin{enumerate}%[label=\arabic*.]
-%    \item The train null distribution $N_0$ is adjusted to the distribution of the negative test predictions. Let $\mu_{T_0}$ and $\sigma_{T_0}$ denote the mean and the standard deviation of $T_0$. The train null is adjusted via $\hat{N_0} = \frac{N_0-\nu_{T_0}}{\sigma_{T_0}+\epsilon}$, where $\epsilon$ is a small numerical regularization parameter.
-%    
-%    \item The proportions of the nulls among the test instances is estimated $\hat{\pi_0}=N_t/(N_t+P_t)$, where $N$ and $P$ denote the  number of negative and positive test predictions, respectively. We note that, this ratio can be very different from the one of the train data. 
-%    
-%    \item A histograms of $\hat{N_0}$ and $T$ is constructed with the same binning. The histograms are denoted with $H_{N_0}$ and $H_T$, and $H[i]$ denotes the counts in bin $i$. In our experiments the bin width was set to 1.0 and it worked fine.
-%    
-%    \item Finally, we construct the histogram of the test null $H_{T_0}$ via $H_{T_0}[i]= H_T[i]*c_i*\hat{\pi_0}$, where $c_i=P[i]/N[i]$, i.e. the fraction of the negatives among the train data in the ith bin, in the histogram.
-%    
-%\end{enumerate}
-%
-%This final histogram $H_{T_0}$ is used to calculate the empirical p-values for each test instances. 
-%    
-
 \paragraph{TNA.}
 
-When the training null distribution $N_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe the TNA method that adjusts the prediction scores so that the approximated test null distribution $T_0$ aligns the actual training null distribution $N_0$.
+When the training null distribution $X_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe the TNA method that adjusts the prediction scores so that the approximated test null distribution $T_0$ aligns the actual training null distribution $X_0$.
 
 \begin{enumerate}%[label=\arabic*.]
 	\itemsep-3pt  		
-	\item Get the count histograms of $N_0$, $N$, and $T$ distributions with identical bin borders and denote them as $H_0$, $H_N$, and $H_T$, respectively. $H[i]$ denotes the count in bin $i$.  We used 100 bins in our experiments and it worked fine.
+	\item Get the count histograms of $X_0$, $X_s$, and $T_s$ distributions with identical bin borders and denote them as $H_0$, $H_X$, and $H_T$, respectively. $H[i]$ denotes the count in bin $i$.  We used 100 bins in our experiments and it worked fine.
 	
-	\item Let $\pi_N$ be the proportions of negative samples in the training data. This can be calculated with the true training class labels. Let $\pi_T$ be the proportions of the negative predictions among all test predictions. This can be calculated with the predicted class labels. Finally, Let $\tau=\pi_T/\pi_N$. 
+
+	\item We create a new histogram $\hat{T_0}$ that will be an approximation of the unknown score distribution of the negative test samples $T_0$ (test null). The counts of the negative test samples in $\hat{T_0}[i]$ will be estimated by $\hat{T_0}[i] = H_T[i]\cdot \frac{H_0[i]}{H_X[i]}$. This estimation assumes that the ratio of the positive and negative instances remain the same in the training and test data.
 	
-	\item Let us create a new histogram, which will be an approximation of the test null distribution, $\hat{T_0}[i]=T[i]\cdot c_i\cdot \tau$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
+	\item Let $\pi_X$ be the proportions of negative samples in the training data. This can be calculated with the true training class labels. Let $\pi_T$ be the proportions of the negative predictions among all test predictions. This can be calculated with the predicted class labels. Finally, Let $\tau=\pi_T/\pi_X$. 
+	
+	%The counts of the negative test samples in $\hat{T_0}[i]$ will be estimated by $\hat{T_0}[i] = H_T[i]\cdot \frac{H_0[i]}{H_N[i]}$.
+	 
+	 
+%	the $\hat{T_0}[i]=T[i]\cdot c_i\cdot$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
+
+	
+	%\item Let us create a new histogram $\hat{T_0}$, which will be an approximation of the unknown test null distribution $T_0$. To estimate the counts of the negative $\hat{T_0}[i]=T[i]\cdot c_i\cdot$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
 	
 	\item Let $\mu_{N_0}$, $\sigma_{N_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $N_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
