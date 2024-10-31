@@ -152,40 +152,31 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 	\label{fig:binary}
 \end{figure}
  
-\paragraph{TNA.}
-
-When the training null distribution $X_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe the TNA method that adjusts the prediction scores so that the approximated test null distribution $T_0$ aligns the actual training null distribution $X_0$.
+\paragraph{TNA protocol.} When the training null distribution $X_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe the TNA method that adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to the actual training null distribution $X_0$. Our method relies on the following formulation: $X_s = (\pi_0) \cdot X_0 + (1-\pi_0) \cdot X_1$, where $\pi_0$ is the proportion of the negative training samples; therefore, the null distribution can be expressed as $X_0 = (X_s - (1-\pi_0) \cdot X_1)/\pi_0$.
 
 \begin{enumerate}%[label=\arabic*.]
 	\itemsep-3pt  		
-	\item Get the count histograms of $X_0$, $X_s$, and $T_s$ distributions with identical bin borders and denote them as $H_0$, $H_X$, and $H_T$, respectively. $H[i]$ denotes the count in bin $i$.  We used 100 bins in our experiments and it worked fine.
+	\item Get the density histograms of $X_0$, $X_1$, and $T_s$ distributions with identical bin borders and denote them as $\overline{X}_0$, $\overline{X}_1$, and $\overline{T}_s$, respectively. The $\overline{X}[i]$ denotes the value of bin $i$.  We used 100 bins in our experiments and it worked fine.
 	
-
-	\item We create a new histogram $\hat{T_0}$ that will be an approximation of the unknown score distribution of the negative test samples $T_0$ (test null). The counts of the negative test samples in $\hat{T_0}[i]$ will be estimated by $\hat{T_0}[i] = H_T[i]\cdot \frac{H_0[i]}{H_X[i]}$. This estimation assumes that the ratio of the positive and negative instances remain the same in the training and test data.
+	\item Let $\hat{\pi}_0$ be the proportions of the negative test predictions. This is approximated with using the number of positive and negative test predictions. 
 	
-	\item Let $\pi_X$ be the proportions of negative samples in the training data. This can be calculated with the true training class labels. Let $\pi_T$ be the proportions of the negative predictions among all test predictions. This can be calculated with the predicted class labels. Finally, Let $\tau=\pi_T/\pi_X$. 
+	\item We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = (\overline{T}_s[i] - (1-\hat{\pi}_0)\cdot \overline{X}_1[i])/\hat{\pi}_0$. Note that, the unknown $T_1$ is approximated by $X_1$ here. 
 	
-	%The counts of the negative test samples in $\hat{T_0}[i]$ will be estimated by $\hat{T_0}[i] = H_T[i]\cdot \frac{H_0[i]}{H_N[i]}$.
-	 
-	 
-%	the $\hat{T_0}[i]=T[i]\cdot c_i\cdot$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
-
+	\item We polish the distribution approximation a bit. Let $k$ be the smallest bin index, where $\hat{T}_0[k] <0$ and then let $\hat{T}_0[l] =0$ for $l\ge k$. 
+		
+	\item Let $\mu_{X_0}$, $\sigma_{X_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $X_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
-	%\item Let us create a new histogram $\hat{T_0}$, which will be an approximation of the unknown test null distribution $T_0$. To estimate the counts of the negative $\hat{T_0}[i]=T[i]\cdot c_i\cdot$, where $c_i=H_0[i]/H_N[i]$ is the proportion of negative training samples in bin $i$.
-	
-	\item Let $\mu_{N_0}$, $\sigma_{N_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $N_0$ and the $\hat{T_0}$ distributions, respectively. 
-	
-	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{N_0}} + \mu_{N_0}$ for approximated as negative test instances $t$ of distribution $\hat{T_0}$.
+	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{X_0}} + \mu_{X_0}$.
 \end{enumerate}
 
-	Finally, calculate the empirical p-values for each $\hat{t_s}$ with the $N_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\beta= ..$, and run BH procedure to control the FDR at a desired level. 
+	Finally, calculate the TNA EPVs for each $\hat{t_s}$ with respect to the $X_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\lambda= 0.8$, and run BH procedure to control the FDR at a desired level. 
 	
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=3in]{img/TNA_sketch.jpg}
-	\caption{{\bf Illustration of the TNA method.} d}
-	\label{fig:tna-skecth}
-\end{figure}  
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=3in]{img/TNA_sketch.jpg}
+%	\caption{{\bf Illustration of the TNA method.} d}
+%	\label{fig:tna-skecth}
+%\end{figure}  
 	
 	
 %	
@@ -241,7 +232,7 @@ When the training null distribution $X_0$ is different from the test null distri
 \paragraph{Example 2.} To illustrate the case of data distribution shift, we down-scaled the pixel intensity by 10\% of the test images in the MNIST dataset (but training images remained the same). The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remained at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}-(i). The plots and tests show that standard EPVs became biased in the case of data distribution shift; however, TNA can correct the EPVs so that FDR control becomes unbiased.
 
 
-\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles, e.g.  \cite{joseph_d__viviano__2019}. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remaind at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_rebalance}-(ii). The results show that, in general, the EPV methods can adjust to the changed class proportions thanks to the $\pi_0$ estimation among the test instances for the BH protocol. However, the LTT method calibrates its parameters about class proportion with using a validation set, hence it becomes biased when class proportion change in the test data. 
+\paragraph{Example 3.} To illustrate the case of class distribution shift, we resampled the test data so that number of true negative and positive instances are equal. This approach was used in other articles, e.g.  \cite{joseph_d__viviano__2019}. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remaind at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}-(ii). The results show that, in general, the EPV methods can adjust to the changed class proportions thanks to the $\pi_0$ estimation among the test instances for the BH protocol. However, the LTT method calibrates its parameters about class proportion with using a validation set, hence it becomes biased when class proportion change in the test data. 
 %
 %\begin{figure}[h!]
 %	\centering
