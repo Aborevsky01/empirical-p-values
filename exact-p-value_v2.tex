@@ -86,20 +86,20 @@ In this paper we propose a test score calibration method in order to maintain ac
 
 %In this paper, we propose a method to adapt the distribution of the scores of negative test samples to the null (i.e. the distribution of the scores of the negative training samples) in order to maintain accurate FDR control under data distribution shift. In detail, the empirical p-values of the test samples are calculated with using the whole negative training data as $H_0$ with eq. \ref{eq:epv}. In the absence of data shift, the p-values should be uniformly distributed. We propose to visually monitor the uniformity of the p-values with Q-Q plots, in which the p-values are plotted against their ordered normalized positions. Any deviation from the diagonal line of the Q-Q plot would indicate data shift. Alternatively, the Fisher's combinatorial test may also be used to test uniformity \cite{fisher1928statistical}. The distribution of the test scores are adjusted so that the mode of the predicted negative test samples fits to the distribution of scores of the negative training samples. \todo{akf-ab}{summarize the method and cite}. Then, the decision threshold can be calibrated with $\pi_0$-BH method directly for the actual test samples so that it controls the FDR at a predefined $\alpha$-level. This approach is also robust to data label shifts because the $pi_0$ estimation automatically considers the actual rate of the classes; therefore adaptation to altered class balances is not required.
 
-The TNA method operates solely at the space of prediction score, which is typically one dimensional for each class. Therefore, TNA is not hindered by the curse-of-dimensionality \cite{donoho2000high}. It can be employed with any machine learning model, given that the classification is based on discriminative scores; this includes deep neural networks, black box models, support vector machines \cite{cristianini2000introduction}, with any kind of data such as tabular, text, audio, image, graph data. The TNA method is data driven; that is, it does not rely on any class of analytical distributions. The only assumption we have for the TNA method is that the score distributions and the decision thresholds should resemble to the ones on Figure \ref{fig:illustration}.
+The TNA method operates solely at the space of prediction score, which is typically one dimensional for each class. Therefore, TNA is not hindered by the curse-of-dimensionality \cite{donoho2000high}. It can be employed with any machine learning model, given that the classification is based on discriminative scores; this includes deep neural networks, black box models, support vector machines \cite{cristianini2000introduction}, with any kind of data such as tabular, text, audio, image, graph data. The TNA method is data driven; that is, it does not rely on any class of analytical distributions. The only assumption we have for the TNA method is that the score distributions resemble to the ones on Figure \ref{fig:binary}A.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=5in]{img/synthetic_overview.pdf}
-	\caption{{\bf Error in decision making.} fd}
-	\label{fig:illustration}
-\end{figure}  
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=5in]{img/synthetic_overview.pdf}
+%	\caption{{\bf Error in decision making.} fd}
+%	\label{fig:illustration}
+%\end{figure}  
 
 
 \section{Test null adjustment (TNA) method}
 \subsection{Preliminaries}
 
-Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be an appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The training null distribution is constructed as $X_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the training target distribution is constructed as $X_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score distribution is $X_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$, and the test score $T_s$ distributions are constructed in a similar way with uring the true labels. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
+Let us suppose that we are given a domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be an appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The training null distribution is constructed as $X_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the training target distribution is constructed as $X_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score distribution is $X_s=\{f(t): t\in X\}$. The true test null $T_0$, true test target $T_1$, and the test score $T_s$ distributions are constructed in a similar way with using true labels. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation*}
 	FDP(s_t,K)=\frac{1+|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
 \end{equation*}
@@ -158,11 +158,11 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 	\itemsep-3pt  		
 	\item Get the density histograms of $X_0$, $X_1$, and $T_s$ distributions with identical bin borders and denote them as $\overline{X}_0$, $\overline{X}_1$, and $\overline{T}_s$, respectively. The $\overline{X}[i]$ denotes the value of bin $i$.  We used 100 bins in our experiments and it worked fine.
 	
-	\item Let $\hat{\pi}_0$ be the proportions of the negative test predictions. This is approximated with using the number of positive and negative test predictions. 
+	\item Let $\hat{\pi}_0$ be an approximated proportions of the negative test predictions calculated with using the number of positive and negative test predictions. 
 	
-	\item We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = (\overline{T}_s[i] - (1-\hat{\pi}_0)\cdot \overline{X}_1[i])/\hat{\pi}_0$. Note that, the unknown $T_1$ is approximated by $X_1$ here. 
-	
-	\item We polish the distribution approximation a bit. Let $k$ be the smallest bin index, where $\hat{T}_0[k] <0$ and then let $\hat{T}_0[l] =0$ for $l\ge k$. 
+	\item We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = (\overline{T}_s[i] -  (1-\hat{\pi}_0)\hat{T_1}[i])/\hat{\pi}_0$. The unknown $T_1$ is approximated by $T_s$ scaled with the proportion of the target calculated from the training data; that is, 
+	$$\hat{T_1}[i] = \overline{T_s}[i]\cdot \frac {\overline{X_1}[i]}{\hat{\pi}_0 \overline{X_0}[i] + (1-\hat{\pi}_0) \overline{X_1}[i]}.$$ 
+	Mind that the training null and target distributions ($X_0,X_1$) are weighted with test class proportions  $\hat{\pi}_0$. The outcome of division by zero is set to zero.
 		
 	\item Let $\mu_{X_0}$, $\sigma_{X_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $X_0$ and the $\hat{T_0}$ distributions, respectively. 
 	
@@ -170,6 +170,8 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 \end{enumerate}
 
 	Finally, calculate the TNA EPVs for each $\hat{t_s}$ with respect to the $X_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\lambda= 0.8$, and run BH procedure to control the FDR at a desired level. 
+	
+	We note that $T_1$ could be approximated simply with $X_1$; however, this approximation would be more off when $T_1$ and $X_1$ differ because the difference $T_1-X_1$ would be accounted for the null distribution.
 	
 %\begin{figure}[h!]
 %	\centering
