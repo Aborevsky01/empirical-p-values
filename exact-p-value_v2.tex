@@ -125,7 +125,7 @@ The smaller the q-value of a test sample $t$ is, the more trusted positive predi
 
 %\paragraph{Example 1.} For demonstration, we trained a two-layer convolutional neural network containing 8 kernels with size of $3\times3$ at each layers, respectively, to predict the hand-written digits of the MNIST samples. The MNIST dataset contains 60K training and 10K test images of 28x28 pixels in 10 classes. There is no shift in the test set. The accuracy of the trained model is 0.975. The score distributions 
 
-\paragraph{LTT.} The LTT .. \todo{AB}{Add a description how you run LTT. how it was parameteriezed, etc.}
+\paragraph{LTT.} The LTT is being launched based on the original authors' code, with the following set of hyperparameters being selected: 100 uniformly distributed queried levels of FDR control are iteratively being processed, starting from the 1e-3, with the most appropriate threshold $\lambda$ being selected among the 300 potential threshold values for each iteration. The remainder of the methodology is entirely dependent on the published pipeline, including the comprehensive calculation of the p-values for each threshold during each alpha level test, with a further Bonferroni procedure employed to select the most appropriate border. The final value of the test false positive rate is equal to the number of samples with higher scores than the selected $\lambda$. 
 
 \paragraph{Example 	 1.} \label{ex:vanilla} We used the well-known MNIST dataset for demonstration. The MNIST dataset contains 60K training and 10K test images of 28x28 grey-scaled pixels in 10 classes. There is no shift between the training and test data. We trained a convolutional neural network to classify the digit '1' as target (positive) against all the other digits (negative) (binary classification for the sake of simplicity). Our ConvNet model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ at each layers, and it was trained with Adam optimizer with a learning rate of 0.01 for three epochs. Our trained model achieved a 99\% accuracy on the test set. 
 
@@ -148,7 +148,7 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 		\includegraphics[width=1.68in]{img/cnn_FDRQQ_classical.png} \\
 		A & B & C & D \\
 	\end{tabular}
-	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. \todo{AB}{The legends should be: Train null ($X_0$), Train target ($X_1$), Test null ($T_0$), Test target ($T_1$).} (B) The QQ plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
+	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. (B) The QQ plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
 	\label{fig:binary}
 \end{figure}
  
