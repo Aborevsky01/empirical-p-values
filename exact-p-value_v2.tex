@@ -20,6 +20,10 @@
 \newcommand{\correction}[2]{{\color{red} \st{#1} }{\color{red} #2}}
 %\newcommand{\correction}[2]{#2}  % Use this to make a document with hiding track changes.
 
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\alph{enumii}.}
+
+
 %\usepackage[backend=biber,style=nature,articletitle=false]{biblatex}
 %\usepackage[backend=biber,style=nature]{biblatex}
 %\addbibresource{bibliography.bib}
@@ -152,23 +156,31 @@ The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions 
 	\label{fig:binary}
 \end{figure}
  
-\paragraph{TNA protocol.} When the training null distribution $X_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe the TNA method that adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to the actual training null distribution $X_0$. Our method relies on the following formulation: $X_s = (\pi_0) \cdot X_0 + (1-\pi_0) \cdot X_1$, where $\pi_0$ is the proportion of the negative samples; therefore, the null distribution can be expressed as $X_0 = (X_s - (1-\pi_0) \cdot X_1)/\pi_0$.
+\paragraph{TNA protocol.} When the training null distribution $X_0$ is different from the test null distribution $T_0$, then the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe two versions of TNA methods that both adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to the actual training null distribution $X_0$. The first variation, called TNA- (TNA minus), relies on the train null distribution, while the TNA+ (TNA plus) relies on the the target distribution. The two approaches differ only in the 3rd step. 
 
 \begin{enumerate}%[label=\arabic*.]
 	\itemsep-3pt  		
-	\item Get the density histograms of $X_0$, $X_1$, and $T_s$ distributions with identical bin borders and denote them as $\overline{X}_0$, $\overline{X}_1$, and $\overline{T}_s$, respectively. The $\overline{X}[i]$ denotes the value of bin $i$.  We used 100 bins in our experiments and it worked fine.
+	\item[1.] Get the density histograms of $X_0$, $X_1$, and $T_s$ distributions with identical bin borders and denote them as $\overline{X}_0$, $\overline{X}_1$, and $\overline{T}_s$, respectively. The $\overline{X}[i]$ denotes the value of bin $i$.  We used 100 bins in our experiments and it worked fine.
 	
-	\item Let $\hat{\pi}_0$ be an approximated proportions of the negative test predictions calculated with using the number of positive and negative test predictions. 
-	
-	\item We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = (\overline{T}_s[i] -  (1-\hat{\pi}_0)\hat{T_1}[i])/\hat{\pi}_0$. The unknown $T_1$ is approximated by $T_s$ scaled with the proportion of the target calculated from the training data; that is, 
-	$$\hat{T_1}[i] = \overline{T_s}[i]\cdot \frac {\overline{X_1}[i]}{\hat{\pi}_0 \overline{X_0}[i] + (1-\hat{\pi}_0) \overline{X_1}[i]}.$$ 
-	Mind that the training null and target distributions ($X_0,X_1$) are weighted with test class proportions  $\hat{\pi}_0$. The outcome of division by zero is set to zero.
-		
-	\item Let $\mu_{X_0}$, $\sigma_{X_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $X_0$ and the $\hat{T_0}$ distributions, respectively. 
-	
-	\item Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{X_0}} + \mu_{X_0}$.
-\end{enumerate}
+	\item[2.] Let $\hat{\pi}_0$ be an approximated proportions of the negative test predictions calculated with using the number of positive and negative test predictions. 
 
+%    \stepcounter{enumi}
+%	\begin{enumerate}
+%		\itemsep-3pt  		
+	\item [3a.] TNA-:  We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = \overline{T}_s[i]\cdot c[i]$, where $c[i]=X_0[i]/X_s[i]$. 
+	\item [3b.] TNA+: This approach relies on the following formulation: $X_s = (\pi_0) \cdot X_0 + (1-\pi_0) \cdot X_1$, where $\pi_0$ is the proportion of the negative samples; therefore, the null distribution can be expressed as $X_0 = (X_s - (1-\pi_0) \cdot X_1)/\pi_0$. We create a new density histogram $\hat{T}_0$ that will be an approximation of the test null $T_0$. The value of the histogram bin $i$ is calculated  by $\hat{T}_0[i] = (\overline{T}_s[i] -  (1-\hat{\pi}_0)\hat{T_1}[i])/\hat{\pi}_0$. The unknown $\hat{T_1}$ is approximated by $T_s$ scaled with the proportion of the target calculated from the training data; that is: 
+$$\hat{T_1}[i] = \overline{T_s}[i]\cdot \frac {\overline{X_1}[i]}{\hat{\pi}_0 \overline{X_0}[i] + (1-\hat{\pi}_0) \overline{X_1}[i]}.$$ 
+Mind that the training null and target distributions ($X_0,X_1$) are weighted with test class proportions  $\hat{\pi}_0$. The outcome of division by zero is set to zero.
+%	\end{enumerate}
+	
+		
+	\item[4.] Let $\mu_{X_0}$, $\sigma_{X_0}$, $\mu_{\hat{T_0}}$, and $\sigma_{\hat{T_0}}$ are the mean and std of the $X_0$ and the $\hat{T_0}$ distributions, respectively. 
+	
+	\item[5.] Adjust the test scores $\hat{t_s} = (t_s-\mu_{\hat{T_0}})/\sigma_{\hat{T_0}} \cdot \sigma_{\hat{X_0}} + \mu_{X_0}$.
+\end{enumerate}
+	
+	Just for clarification, TNA- uses the 3a. step (without 3b.), while TNA+ method uses the step 3b. (without 3a.).
+	
 	Finally, calculate the TNA EPVs for each $\hat{t_s}$ with respect to the $X_0$ distribution, estimate  $\hat{\pi_0}$ for the test instances with the Storey method with $\lambda= 0.8$, and run BH procedure to control the FDR at a desired level. 
 	
 	We note that $T_1$ could be approximated simply with $X_1$; however, this approximation would be more off when $T_1$ and $X_1$ differ because the difference $T_1-X_1$ would be accounted for the null distribution.
@@ -367,7 +379,7 @@ The situation changes when we evaluate the segmentation problem only with one im
 
 The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma', 'Tumor' and 'Others', and the corresponding class ratios in the training and test sets are: 56\%-38\%-6\% and 33\%-59\%-8\%, respectively. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the three classes. The model achieved an accuracies of 84 \% and 82 \% on the training and test datasets. 
 
-We note that, because this dataset involves multi-class classification problem, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the pixel class label to the smallest q-value. Therefore, a trusted prediction means that a pixel is correctly classified to its own class. We note that, we did not evaluate LTT on this benchmark, because it is not clear how to adjust it to multi-class classification problems.
+We note that, because this dataset involves multi-class classification problem, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to a single class (deemed as positive); then we associated the pixel class label to the smallest q-value. Therefore, a trusted prediction means that a pixel is correctly classified to its own class. We note that, we did not evaluate LTT on this benchmark, because it is not clear how to adjust it to multi-class classification problems.
 
 The evaluation of the FDR controlling methods are presented in Figure \ref{fig:ii}-(iii). At first glance, the results suggests that this datasets is challenging and it  has a strong shift between the training and test data or the deep learning model seriously overfit. The QQ plots of the EPVs and the TNA EPVs are far from uniform (Fig. \ref{fig:ii}-(iii)-A). Over the critical range of q-values (0-0.1), the BH with standard EPV is conservatively biased, but the BH with TNA EVS are relatively accurate (Fig. \ref{fig:ii}-(iii)-C); however, over the broader range of q-values(0.1-0.4), BH seems to be more accurate with EVPs than with TNA EPVs. Our conclusion with this benchmark datasets is that the deviations in QQ plots and sharp turns in the plot of trusted predictions (without the ground truth) should be alarming to researchers about the performance of their models. 
 \begin{figure}[h!]
@@ -401,7 +413,7 @@ The evaluation of the FDR controlling methods are presented in Figure \ref{fig:i
 
 \section{Conclusions}
 
-In this study, we investigated the effects of data shift on False Discovery Rate (FDR) control. In our opinion, BH procedure with standard EPVs provide very accurate FDR control in the absence of any data shift. Unfortunately, data shift is rather common in practice, and we demonstrated that standard BH and the LTT methods are quite sensitive even to small data of class distribution shift. In this paper, we presented a simple, but robust method, called Test Null Adjustment (TNA), in order to mitigate the effect of the data shift on FDR control. Our method operates in the space of prediction scores, thereby it is not effected by the curse-of-conditionality problem, which often hinders methods that aim to mitigate data shift in the input feature space. The TNA method consists of two main steps. First, it approximates the null distribution among the scores of the test instances via certain statistics from the scores of the training instances. Second, it recalibrates the test scores so that the test and train null distributions would move closer to each other. TNA is fully data-driven, it does not rely on any theoretical assumptions or forms of the data. We have demonstrated in our experimental test with four biomedical datasets that TNA can successfully mitigate the bias caused by data shift; while, leaving the distributions intact in the absence of data shift. We note that, handling data shift in practice is hard, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased without any additional assumptions; hence it is a heuristic in its general form.  
+In this study, we investigated the effects of data shift on False Discovery Rate (FDR) control. In our opinion, BH procedure with standard EPVs provide very accurate FDR control in the absence of any data shift. Unfortunately, data shift is rather common in practice, and we demonstrated that standard BH and the LTT methods are quite sensitive even to small data or class distribution shift. In this paper, we presented a simple, but robust method, called Test Null Adjustment (TNA), in order to mitigate the effect of the data shift on FDR control. Our method operates in the space of prediction scores, thereby it is not effected by the curse-of-dimensionality problem, which often hinders methods that aim to mitigate data shift in the input feature space. The TNA method consists of two main steps. First, it approximates the null distribution among the scores of the test instances via certain statistics from the scores of the training instances. Second, it recalibrates the test scores so that the test and train null distributions would move closer to each other. TNA is fully data-driven, it does not rely on any theoretical assumptions or forms of the data. We have demonstrated in our experimental test with four biomedical datasets that TNA can successfully mitigate the bias caused by data shift; while, leaving the distributions intact in the absence of data shift. We note that, handling data shift in practice is hard, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased without any additional assumptions; hence it is a heuristic in its general form.  
 
 With this study, we also aim to emphasize and popularize the importance of accurate error control in any predictions in the biomedical domain. We have shown that the deviations in the simple QQ plots of the calculated vs. the theoretical p-values can be used to detect data shifts between the training and test data. Moreover, we also hope that the FDR control and plots with q-values will become a standard metric in performance evaluation for prediction systems in the biomedical domain.
 
