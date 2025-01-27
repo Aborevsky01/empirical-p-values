@@ -296,25 +296,25 @@ In our opinion, the actual class proportions in real-life applications can be si
 	
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard PCam dataset:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_pcam.png} &
-		\includegraphics[width=1.7in]{img/cnn_pcam_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_pcam_fdr_control_loc.png} &
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam.png}\\	
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.png}\\	
 		\multicolumn{4}{l}{\bf (ii) PCam with class distribution shift:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_pcam_balanced.png} &
-		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_pcam_balanced_fdr_control_loc.png} &
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_pcam_balanced.png}\\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.png}\\
 		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
-		\includegraphics[width=1.7in]{img/cnn_QQ_chx.png} 		&
-		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_chx_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_chx.png}\\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.png} 		&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.png}\\
 		\multicolumn{4}{l}{\bf (iv) CheXpert dataset with class distribution shift:}\\	
-		\includegraphics[width=1.7in]{img/cnn_QQ_chx_balanced.png} 		&
-		\includegraphics[width=1.7in]{img/cnn_chx_balanced_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_chx_balanced_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_chx_balanced.png}\\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.png} 		&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.png}\\
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} See the caption of Figure \ref{fig:mnist_shfit} for plot descriptions. }
@@ -370,28 +370,25 @@ The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019Structured
 We note that, because this dataset involves multi-class classification problem, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations and then the corresponding q-values with BH procedure with respect to single classes; then we associated the pixel class label to the smallest q-value. Therefore, a trusted prediction means that a pixel is correctly classified to its own class. We note that, we did not evaluate LTT on this benchmark, because it is not clear how to adjust it to multi-class classification problems.
 
 The evaluation of the FDR controlling methods are presented in Figure \ref{fig:ii}-(iii). At first glance, the results suggests that this datasets is challenging and it  has a strong shift between the training and test data or the deep learning model seriously overfit. The QQ plots of the EPVs and the TNA EPVs are far from uniform (Fig. \ref{fig:ii}-(iii)-A). Over the critical range of q-values (0-0.1), the BH with standard EPV is conservatively biased, but the BH with TNA EVS are relatively accurate (Fig. \ref{fig:ii}-(iii)-C); however, over the broader range of q-values(0.1-0.4), BH seems to be more accurate with EVPs than with TNA EPVs. Our conclusion with this benchmark datasets is that the deviations in QQ plots and sharp turns in the plot of trusted predictions (without the ground truth) should be alarming to researchers about the performance of their models. 
-\begin{figure}[h!]
-	
+
+\begin{figure}
+	\centering
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard TissueNet dataset:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_cells_segment.png} &
-		\includegraphics[width=1.7in]{img/cnn_cells_segment_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_cells_segment_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_segment.png}\\	
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.png}\\	
 		\multicolumn{4}{l}{\bf (ii) TissueNet with single image:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_cells_balanced.png} &
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control.png} & 
-		\includegraphics[width=1.7in]{img/cnn_cells_balanced_fdr_control_loc.png} & 
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_cells_balanced.png}\\			
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.png}\\			
 		\multicolumn{4}{l}{\bf (iii) Standard BCSS dataset:}\\		
-		\includegraphics[width=1.7in]{img/cnn_QQ_multi_sa_bcss.png} &
-		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control.png} &
-		\includegraphics[width=2in]{img/cnn_multi_sa_bcss_fdr_control_loc.png}  &
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_sa_bcss.png}\\
-        \includegraphics[width=1.7in]{img/cnn_QQ_old_DELETE.png} &
-		\includegraphics[width=2in]{img/cnn_old_DELETE_fdr_control.png} &
-		\includegraphics[width=2in]{img/cnn_old_DELETE_fdr_control_loc.png}  &
-		\includegraphics[width=1.7in]{img/cnn_FDPscat_old_DELETE.png}\\	
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_multi_sa_bcss.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_multi_sa_bcss_fdr_control.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_multi_sa_bcss_fdr_control_loc.png}  &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_sa_bcss.png}\\
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.}  See the caption of Figure \ref{fig:mnist_shfit} for plot descriptions.}
