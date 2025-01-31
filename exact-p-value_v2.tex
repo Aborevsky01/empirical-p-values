@@ -134,10 +134,6 @@ The Figure \ref{fig:binary}B shows a QQ plot of the test EPVs against the theore
 The Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions as positives at various q-values ($\alpha$ level of FDR). The ground truth (black solid line) was calculated using the true test labels and we consider it correct. Any FDR controlling method (a) yielding more trusted predictions than the ground truth is liberally biased, and (b) yielding less trusted predictions is conservatively biased. The BH procedure with EPVs (red dashed line) yields closely the same number of trusted prediction at various FDR levels of $\alpha$ (calculated without using the true test labels). This indicates that the EVPs are uniform and BH procedure is an unbiased method. The LTT method also accurately controls the FDR at any $\alpha$ levels (blue dotted line). Finally, the Figure \ref{fig:binary}D shows that the deviation of the estimated FDPs from the true FDPs is small.
 
 
-%, and with the BH procedure using the standard EPVs (red dashed lines)
-%Therefore, BH can control the FDR accurately at various levels (q-values). This is shown in \ref{fig:binary}C, where the true (black solid line) and the accepted predictions (green dashed line) are closely overlap at various FDR levels (q-values). As a comparison, we also evaluated the LTT method \cite{angelopoulos2021learn} (dashed blue line), and results confirm that LTT is also an accurate method to control the FDR in the absence of data distribution shift. 
-
-\todo{AB}{Remove the TNA from figure 2B and 2C}.
 
 \begin{figure}
 	\centering
@@ -314,19 +310,7 @@ In our opinion, the actual class proportions in real-life applications can be si
 	\label{fig:I}
 \end{figure} 
 
-\begin{figure}[h!]
-	\begin{tabular}{ccc}
-            \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png}\\
-        \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png} \\
-		A & B & C
-	\end{tabular}
-	\caption{{\bf BCSS dists 0 - 1 - 2 classes. }}
-	\label{fig:I}
-\end{figure} 
+
 
 \begin{figure}[h!]
 	\centering
@@ -372,11 +356,13 @@ The situation changes when we evaluate the segmentation problem only with one im
 	\label{fig:bcss_example}
 \end{figure} 
 
-The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma' (class id: 0), 'Tumor' (class id: 1) and 'Others' (class id: 3), and the corresponding class ratios in the training and test sets are: 56\%-38\%-6\% and 33\%-59\%-8\%, respectively. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the three classes. The model achieved an accuracies of 84 \% and 82 \% on the training and test datasets. 
+The Breast Cancer Semantic Segmentation (BCSS) dataset \cite{Amgad2019StructuredCE} contains around 20,000 image segmentation images annotated with Digital Slide Archive, with a particular focus on tissue regions derived from breast cancer imagery obtained from The Cancer Genome Atlas (TCGA). The image pixels are labeled by: 'Stroma' (class id: 0), 'Tumor' (class id: 1) and 'Others' (class id: 3), and the corresponding class ratios in the training and test sets are: 56\%-38\%-6\% and 33\%-59\%-8\%, respectively. We used the deep learning model called \texttt{'fcn resnet50 unet-bcss'} from the TIA (Tissue Image Analysis) toolbox \cite{Pocock2022} to classify the pixels to one of the three classes. The model achieved an accuracies of 84 \% and 82 \% on the training and test datasets, respectively. 
 
-We note that, because this dataset involves multi-class classification problem, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations with BH procedure with respect to a single class (deemed as positive); thus, for each pixels, we got three p-values, each corresponding to one of the three classes. Then we concatenated all of these p-values and calculated the q-values. We note that, we did not evaluate LTT on this benchmark, because it is not clear how to adjust it to multi-class classification problems.
+We note that, because this dataset involves multi-class classification problem, we slightly modified the FDR control procedure. We calculated the p-values, the $\pi_0$ estimations with Storey method with respect to a single class (deemed as positive); thus, for each pixels, we got three p-values, each corresponding to one of the three classes. Then we concatenated all of these p-values and calculated the q-values. We note that, we did not evaluate LTT on this benchmark, because it is not clear how to adjust it to multi-class classification problems.
 
-The evaluation of the FDR controlling methods are presented in Figure \ref{fig:ii}-(iii). At first glance, the results suggests that this datasets is challenging and it  has a strong shift between the training and test data and/or the deep learning model seriously overfit. The QQ plots of the EPVs and the TNA EPVs are far from uniform (Fig. \ref{fig:ii}-(iii)-A). Over the critical range of q-values (0-0.1), the BH with standard EPV is conservatively biased, but the BH with TNA EVS are relatively accurate (Fig. \ref{fig:ii}-(iii)-C); however, over the broader range of q-values(0.1-0.4), BH seems to be more accurate with EVPs than with TNA EPVs. Our conclusion with this benchmark datasets is that the deviations in QQ plots and sharp turns in the plot of trusted predictions (without the ground truth) should be alarming to researchers about the performance of their models. 
+
+
+%Our conclusion with this benchmark datasets is that the deviations in QQ plots and sharp turns in the plot of trusted predictions (without the ground truth) should be alarming to researchers about the performance of their models. 
 
 \begin{figure}
 	\centering
@@ -402,6 +388,24 @@ The evaluation of the FDR controlling methods are presented in Figure \ref{fig:i
 	\label{fig:ii}
 \end{figure} 
 
+The evaluation of the FDR controlling methods are presented in Figure \ref{fig:ii}-(iii). At first glance, the results suggests that this datasets is challenging and it  has a strong shift between the training and test data and/or the deep learning model seriously overfit. The QQ plots of the EPVs and the TNA EPVs are far from uniform (Fig. \ref{fig:ii}-(iii)-A). Th BH control with standard and TNA EPVs is conservative in general (Fig. \ref{fig:ii}-(iii)-B), but it is slightly liberal over the the critical range of q-values (0-0.1) (Fig. \ref{fig:ii}-(iii)-C). BH protocol seems to be more accurate with EVPs than with TNA EPVs. The FDR estimation error is significant (Fig. \ref{fig:ii}-(iii)-D). Then, we further analyzed the results in each classes separately. We plotted the training and test positive and negative discriminative score distributions, respectively, provided by the deep learning model (Fig. \ref{fig:BCSS-classwise} first row) for each class. The distribution plots show that the test scores are differently distributed from the train scores in each classes. Then we also plotted the distribution of the adjusted scores of the negative test samples, adjusted by our TNA methods (green and purple lines in Fig. \ref{fig:BCSS-classwise}) in order to see how well they are aligned to the train null distribution.  In the case of the Stroma class, the mode of adjusted test scores (green and purple lines) move a bit closer to the mode of the true train null distribution (X0, filled orange bars); however, the their tails on the right hand side remains off. In the cases of the Tumor and the Others classes, the adjusted test scores align visibly better to the train null distribution (X0). The corresponding FDR curves are shown in the second row of the Figure \ref{fig:BCSS-classwise}. Both, the TNA- and the TNA+ methods worsen the results in the case of the Stroma class; however, they make the FDR control more accurate in the other two classes. This is mainly due to that the Storey method provided better $\pi_0$ estimation using the TNA EPVs. 
+
+
+
+\begin{figure}[h!]
+	\centering	
+	\begin{tabular}{ccc}
+		Stroma & Tumor & Others \\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{experiments/bcss_0_neg_score_dist.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{experiments/bcss_1_neg_score_dist.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{experiments/bcss_2_neg_score_dist.png} \\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png} \\
+	\end{tabular}
+	\caption{{\bf Classwise score distributions and FDR control in the BCSS dataset.}}
+	\label{fig:BCSS-classwise}
+\end{figure} 
 
 \section{Conclusions}
 
@@ -422,7 +426,7 @@ With this study, we also aim to emphasize and popularize the importance of accur
 \ifdefined\DOUBLEBLINDREVIEW
 Omitted for double-blind peer-review.
 \else
-AKF concieved the idea that accurate empirical p-values would be derived from training data. AB worked out the methods and carried out experiments. AKF and AB wrote the manuscript.
+AKF concieved the idea and supervised the project,  AB worked out the methods and carried out experiments. AKF and AB wrote the manuscript.
 \fi 
 \section*{Data availability}
 The data used in this study are secondary data obtained from publicly available sources. All data sources are properly cited within the manuscript. No new primary data were generated or analyzed in this research. For access to the datasets used, please refer to the original sources as indicated in the references section.
