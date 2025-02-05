@@ -1,0 +1,1237 @@
+@article{kall2007semi,
+	title={Semi-supervised learning for peptide identification from shotgun proteomics datasets},
+	author={K{\"a}ll, Lukas and Canterbury, Jesse D and Weston, Jason and Noble, William Stafford and MacCoss, Michael J},
+	journal={Nature methods},
+	volume={4},
+	number={11},
+	pages={923},
+	year={2007},
+	publisher={Nature Publishing Group}
+}
+
+@article{howbert2014computing,
+	title={Computing exact p-values for a cross-correlation shotgun proteomics score function},
+	author={Howbert, J Jeffry and Noble, William Stafford},
+	journal={Molecular \& Cellular Proteomics},
+	volume={13},
+	number={9},
+	pages={2467--2479},
+	year={2014},
+	publisher={ASBMB}
+}
+
+
+@article{elias2007target,
+	title={Target-decoy search strategy for increased confidence in large-scale protein identifications by mass spectrometry},
+	author={Elias, Joshua E and Gygi, Steven P},
+	journal={Nature methods},
+	volume={4},
+	number={3},
+	pages={207},
+	year={2007},
+	publisher={Nature Publishing Group}
+}
+
+@article{yates1995method,
+	title={Method to correlate tandem mass spectra of modified peptides to amino acid sequences in the protein database},
+	author={Yates, John R and Eng, Jimmy K and McCormack, Ashley L and Schieltz, David},
+	journal={Analytical chemistry},
+	volume={67},
+	number={8},
+	pages={1426--1436},
+	year={1995},
+	publisher={ACS Publications}
+}
+
+@article{fenyo2003method,
+	title={A method for assessing the statistical significance of mass spectrometry-based protein identifications using general scoring schemes},
+	author={Feny{\"o}, David and Beavis, Ronald C},
+	journal={Analytical chemistry},
+	volume={75},
+	number={4},
+	pages={768--774},
+	year={2003},
+	publisher={ACS Publications}
+}
+@article{cox2011andromeda,
+	title={Andromeda: a peptide search engine integrated into the MaxQuant environment},
+	author={Cox, Jurgen and Neuhauser, Nadin and Michalski, Annette and Scheltema, Richard A and Olsen, Jesper V and Mann, Matthias},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={4},
+	pages={1794--1805},
+	year={2011},
+	publisher={ACS Publications}
+}
+@article{kim2008spectral,
+	title={Spectral probabilities and generating functions of tandem mass spectra: a strike against decoy databases},
+	author={Kim, Sangtae and Gupta, Nitin and Pevzner, Pavel A},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={8},
+	pages={3354--3363},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{kim2010generating,
+	title={The generating function of CID, ETD, and CID/ETD pairs of tandem mass spectra: applications to database search},
+	author={Kim, Sangtae and Mischerikow, Nikolai and Bandeira, Nuno and Navarro, J Daniel and Wich, Louis and Mohammed, Shabaz and Heck, Albert JR and Pevzner, Pavel A},
+	journal={Molecular \& Cellular Proteomics},
+	volume={9},
+	number={12},
+	pages={2840--2852},
+	year={2010},
+	publisher={ASBMB}
+}
+
+@article{noble2009multiple_testing_correction,
+	title={How does multiple testing correction work?},
+	author={Noble, William S},
+	journal={Nature biotechnology},
+	volume={27},
+	number={12},
+	pages={1135},
+	year={2009},
+	publisher={Nature Publishing Group}
+}
+
+@article{diament2011faster,
+	title={Faster SEQUEST searching for peptide identification from tandem mass spectra},
+	author={Diament, Benjamin J and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={9},
+	pages={3871--3879},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{pease2013global,
+	title={Global analysis of protein expression and phosphorylation of three stages of Plasmodium falciparum intraerythrocytic development},
+	author={Pease, Brittany N and Huttlin, Edward L and Jedrychowski, Mark P and Talevich, Eric and Harmon, John and Dillman, Timothy and Kannan, Natarajan and Doerig, Christian and Chakrabarti, Ratna and Gygi, Steven P and Chakrabarti, D},
+	journal={Journal of Proteome Research},
+	volume={12},
+	number={9},
+	pages={4028--4045},
+	year={2013},
+	publisher={ACS Publications}
+}
+
+
+@book{oweapons,
+	author = {O'Neil, Cathy},
+	title = {Weapons of math destruction},
+	date = {2016},
+	year = {2016},
+	publisher = {Crown Random House},
+	location = {New York City, NY},
+	isbn = {0553418815},
+}
+
+@inproceedings{halloran2014learning_porc,
+  title={Learning peptide-spectrum alignment models for tandem mass spectrometry},
+  author={Halloran, John T and Bilmes, Jeff A and Noble, William S},
+  booktitle={Conference on Uncertainty in Artificial Intelligence},
+  volume={30},
+  pages={320},
+  year={2014},
+  organization={NIH Public Access}
+}
+@article{halloran2014learning,
+	title={Learning peptide-spectrum alignment models for tandem mass spectrometry},
+	author={Halloran, John T and Bilmes, Jeff A and Noble, William S},
+	journal={Conference on Uncertainty in Artificial Intelligence},
+	volume={30},
+	pages={320},
+	year={2014},
+	organization={NIH Public Access}
+}
+
+@article{kim2014ms,
+	title={MS-GF+ makes progress towards a universal database search tool for proteomics},
+	author={Kim, Sangtae and Pevzner, Pavel A},
+	journal={Nature communications},
+	volume={5},
+	pages={5277},
+	year={2014},
+	publisher={Nature Publishing Group}
+}
+
+@article{rodriguez2007does,
+	title={Does trypsin cut before proline?},
+	author={Rodriguez, Jesse and Gupta, Nitin and Smith, Richard D and Pevzner, Pavel A},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={01},
+	pages={300--305},
+	year={2007},
+	publisher={ACS Publications}
+}
+
+@article{mcilwain2014crux,
+	title={Crux: rapid open source protein tandem mass spectrometry analysis},
+	author={McIlwain, Sean and Tamura, Kaipo and Kertesz-Farkas, Attila and Grant, Charles E and Diament, Benjamin and Frewen, Barbara and Howbert, J Jeffry and Hoopmann, Michael R and K\"all, Lukas and Eng, Jimmy K and others},
+	journal={Journal of Proteome Research},
+	volume={13},
+	number={10},
+	pages={4488--4491},
+	year={2014},
+	publisher={ACS Publications}
+}
+
+@article{kall2007semi,
+	title={Semi-supervised learning for peptide identification from shotgun proteomics datasets},
+	author={K{\"a}ll, Lukas and Canterbury, Jesse D and Weston, Jason and Noble, William Stafford and MacCoss, Michael J},
+	journal={Nature methods},
+	volume={4},
+	number={11},
+	pages={923},
+	year={2007},
+	publisher={Nature Publishing Group}
+}
+
+@article{howbert2014computing,
+	title={Computing exact p-values for a cross-correlation shotgun proteomics score function},
+	author={Howbert, J Jeffry and Noble, William Stafford},
+	journal={Molecular \& Cellular Proteomics},
+	volume={13},
+	number={9},
+	pages={2467--2479},
+	year={2014},
+	publisher={ASBMB}
+}
+
+@article{elias2007target,
+	title={Target-decoy search strategy for increased confidence in large-scale protein identifications by mass spectrometry},
+	author={Elias, Joshua E and Gygi, Steven P},
+	journal={Nature methods},
+	volume={4},
+	number={3},
+	pages={207},
+	year={2007},
+	publisher={Nature Publishing Group}
+}
+
+@article{yates1995method,
+	title={Method to correlate tandem mass spectra of modified peptides to amino acid sequences in the protein database},
+	author={Yates, John R and Eng, Jimmy K and McCormack, Ashley L and Schieltz, David},
+	journal={Analytical chemistry},
+	volume={67},
+	number={8},
+	pages={1426--1436},
+	year={1995},
+	publisher={ACS Publications}
+}
+
+@article{fenyo2003method,
+	title={A method for assessing the statistical significance of mass spectrometry-based protein identifications using general scoring schemes},
+	author={Feny{\"o}, David and Beavis, Ronald C},
+	journal={Analytical chemistry},
+	volume={75},
+	number={4},
+	pages={768--774},
+	year={2003},
+	publisher={ACS Publications}
+}
+@article{cox2011andromeda,
+	title={Andromeda: a peptide search engine integrated into the MaxQuant environment},
+	author={Cox, Jurgen and Neuhauser, Nadin and Michalski, Annette and Scheltema, Richard A and Olsen, Jesper V and Mann, Matthias},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={4},
+	pages={1794--1805},
+	year={2011},
+	publisher={ACS Publications}
+}
+@article{kim2008spectral,
+	title={Spectral probabilities and generating functions of tandem mass spectra: a strike against decoy databases},
+	author={Kim, Sangtae and Gupta, Nitin and Pevzner, Pavel A},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={8},
+	pages={3354--3363},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{kim2010generating,
+	title={The generating function of CID, ETD, and CID/ETD pairs of tandem mass spectra: applications to database search},
+	author={Kim, Sangtae and Mischerikow, Nikolai and Bandeira, Nuno and Navarro, J Daniel and Wich, Louis and Mohammed, Shabaz and Heck, Albert JR and Pevzner, Pavel A},
+	journal={Molecular \& Cellular Proteomics},
+	volume={9},
+	number={12},
+	pages={2840--2852},
+	year={2010},
+	publisher={ASBMB}
+}
+
+@article{noble2009multiple_testing_correction,
+	title={How does multiple testing correction work?},
+	author={Noble, William S},
+	journal={Nature biotechnology},
+	volume={27},
+	number={12},
+	pages={1135},
+	year={2009},
+	publisher={Nature Publishing Group}
+}
+
+@article{diament2011faster,
+	title={Faster SEQUEST searching for peptide identification from tandem mass spectra},
+	author={Diament, Benjamin J and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={9},
+	pages={3871--3879},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{pease2013global,
+	title={Global analysis of protein expression and phosphorylation of three stages of Plasmodium falciparum intraerythrocytic development},
+	author={Pease, Brittany N and Huttlin, Edward L and Jedrychowski, Mark P and Talevich, Eric and Harmon, John and Dillman, Timothy and Kannan, Natarajan and Doerig, Christian and Chakrabarti, Ratna and Gygi, Steven P and others},
+	journal={Journal of Proteome Research},
+	volume={12},
+	number={9},
+	pages={4028--4045},
+	year={2013},
+	publisher={ACS Publications}
+}
+
+
+
+@inproceedings{halloran2014learning,
+	title={Learning peptide-spectrum alignment models for tandem mass spectrometry},
+	author={Halloran, John T and Bilmes, Jeff A and Noble, William S},
+	booktitle={Conference on Uncertainty in Artificial Intelligence},
+	volume={30},
+	pages={320},
+	year={2014},
+	organization={NIH Public Access}
+}
+
+@article{kim2014ms,
+	title={MS-GF+ makes progress towards a universal database search tool for proteomics},
+	author={Kim, Sangtae and Pevzner, Pavel A},
+	journal={Nature communications},
+	volume={5},
+	pages={5277},
+	year={2014},
+	publisher={Nature Publishing Group}
+}
+
+@article{rodriguez2007does,
+	title={Does trypsin cut before proline?},
+	author={Rodriguez, Jesse and Gupta, Nitin and Smith, Richard D and Pevzner, Pavel A},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={01},
+	pages={300--305},
+	year={2007},
+	publisher={ACS Publications}
+}
+
+@article{granholm2011using,
+	title={On using samples of known protein content to assess the statistical calibration of scores assigned to peptide-spectrum matches in shotgun proteomics},
+	author={Granholm, Viktor and Noble, William Stafford and K\"all, Lukas},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={5},
+	pages={2671--2678},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{eng1994approach,
+	title={An approach to correlate tandem mass spectral data of peptides with amino acid sequences in a protein database},
+	author={Eng, Jimmy K and McCormack, Ashley L and Yates, John R},
+	journal={Journal of the American Society for Mass Spectrometry},
+	volume={5},
+	number={11},
+	pages={976--989},
+	year={1994},
+	publisher={Springer}
+}
+
+@article{perkins1999probability,
+	title={Probability-based protein identification by searching sequence databases using mass spectrometry data},
+	author={Perkins, David N and Pappin, Darryl JC and Creasy, David M and Cottrell, John S},
+	journal={ELECTROPHORESIS: An International Journal},
+	volume={20},
+	number={18},
+	pages={3551--3567},
+	year={1999},
+	publisher={Wiley Online Library}
+}
+
+@article{wenger2013proteomics,
+	title={A proteomics search algorithm specifically designed for high-resolution tandem mass spectra},
+	author={Wenger, Craig D and Coon, Joshua J},
+	journal={Journal of Proteome Research},
+	volume={12},
+	number={3},
+	pages={1377--1386},
+	year={2013},
+	publisher={ACS Publications}
+}
+
+@article{dorfer2014ms,
+	title={MS Amanda, a universal identification algorithm optimized for high accuracy tandem mass spectra},
+	author={Dorfer, Viktoria and Pichler, Peter and Stranzl, Thomas and Stadlmann, Johannes and Taus, Thomas and Winkler, Stephan and Mechtler, Karl},
+	journal={Journal of Proteome Research},
+	volume={13},
+	number={8},
+	pages={3679--3684},
+	year={2014},
+	publisher={ACS Publications}
+}
+
+@article{noble2012computational,
+	title={Computational and statistical analysis of protein mass spectrometry data},
+	author={Noble, William Stafford and MacCoss, Michael J},
+	journal={PLoS computational biology},
+	volume={8},
+	number={1},
+	pages={e1002296},
+	year={2012},
+	publisher={Public Library of Science}
+}
+
+@article{kajan2006application,
+	title={Application of a simple likelihood ratio approximant to protein sequence classification},
+	author={Kaj{\'a}n, L{\'a}szl{\'o} and Kert{\'e}sz-Farkas, Attila and Franklin, Dino and Ivanova, Neli and Kocsor, Andr{\'a}s and Pongor, S{\'a}ndor},
+	journal={Bioinformatics},
+	volume={22},
+	number={23},
+	pages={2865--2869},
+	year={2006},
+	publisher={Oxford University Press}
+}
+
+@article{reiz2013chemical,
+	title={Chemical rule-based filtering of MS/MS spectra},
+	author={Reiz, Be{\'a}ta and Kert{\'e}sz-Farkas, Attila and Pongor, S{\'a}ndor and Myers, Michael P},
+	journal={Bioinformatics},
+	volume={29},
+	number={7},
+	pages={925--932},
+	year={2013},
+	publisher={Oxford University Press}
+}
+
+@article{reiz2014precursor,
+	title={Precursor mass dependent filtering of mass spectra for proteomics analysis},
+	author={Reiz, Be{\'a}ta and P Myers, Michael and Pongor, S{\'a}ndor and Kert{\'e}sz-Farkas, Attila},
+	journal={Protein and peptide letters},
+	volume={21},
+	number={8},
+	pages={858--863},
+	year={2014},
+	publisher={Bentham Science Publishers}
+}
+
+@inproceedings{halloran2017gradients,
+	title={Gradients of Generative Models for Improved Discriminative Analysis of Tandem Mass Spectra},
+	author={Halloran, John T and Rocke, David M},
+	booktitle={Advances in Neural Information Processing Systems},
+	pages={5724--5733},
+	year={2017}
+}
+
+@incollection{halloran2018analyzing,
+	title={Analyzing Tandem Mass Spectra Using the DRIP Toolkit: Training, Searching, and Post-Processing},
+	author={Halloran, John T},
+	booktitle={Data Mining for Systems Biology},
+	pages={163--180},
+	year={2018},
+	publisher={Springer}
+}
+
+@article{halloran2016dynamic,
+	title={Dynamic bayesian network for accurate detection of peptides from tandem mass spectra},
+	author={Halloran, John T and Bilmes, Jeff A and Noble, William S},
+	journal={Journal of Proteome Research},
+	volume={15},
+	number={8},
+	pages={2749--2759},
+	year={2016},
+	publisher={ACS Publications}
+}
+
+@inproceedings{halloran2014learning,
+	title={Learning peptide-spectrum alignment models for tandem mass spectrometry},
+	author={Halloran, John T and Bilmes, Jeff A and Noble, William S},
+	booktitle={Uncertainty in artificial intelligence: proceedings of the... conference. Conference on Uncertainty in Artificial Intelligence},
+	volume={30},
+	pages={320},
+	year={2014},
+	organization={NIH Public Access}
+}
+
+@inproceedings{singh2012spectrum,
+	title={Spectrum identification using a dynamic bayesian network model of tandem mass spectra},
+	author={Singh, Ajit P and Halloran, John and Bilmes, Jeff A and Kirchoff, Katrin and Noble, William S},
+	booktitle={Uncertainty in artificial intelligence: proceedings of the... conference. Conference on Uncertainty in Artificial Intelligence},
+	volume={28},
+	pages={775},
+	year={2012},
+	organization={NIH Public Access}
+}
+
+@article{vsidak1967rectangular,
+	title={Rectangular confidence regions for the means of multivariate normal distributions},
+	author={{\v{S}}id{\'a}k, Zbyn{\v{e}}k},
+	journal={Journal of the American Statistical Association},
+	volume={62},
+	number={318},
+	pages={626--633},
+	year={1967},
+	publisher={Taylor \& Francis}
+}
+
+@article{storey2003statistical,
+	title={Statistical significance for genomewide studies},
+	author={Storey, John D and Tibshirani, Robert},
+	journal={Proceedings of the National Academy of Sciences},
+	volume={100},
+	number={16},
+	pages={9440--9445},
+	year={2003},
+	publisher={National Acad Sciences}
+}
+
+@incollection{hinton2012practical,
+	title={A practical guide to training restricted Boltzmann machines},
+	author={Hinton, Geoffrey E},
+	booktitle={Neural networks: Tricks of the trade},
+	pages={599--619},
+	year={2012},
+	publisher={Springer}
+}
+
+@inproceedings{fischer2012introduction,
+	title={An introduction to restricted Boltzmann machines},
+	author={Fischer, Asja and Igel, Christian},
+	booktitle={Iberoamerican Congress on Pattern Recognition},
+	pages={14--36},
+	year={2012},
+	organization={Springer}
+}
+
+@article{reiz2012data,
+	title={Data preprocessing and filtering in mass spectrometry based proteomics},
+	author={Reiz, Be{\'a}ta and Kert{\'e}sz-Farkas, Attila and Pongor, S{\'a}ndor and P Myers, Michael},
+	journal={Current Bioinformatics},
+	volume={7},
+	number={2},
+	pages={212--220},
+	year={2012},
+	publisher={Bentham Science Publishers}
+}
+
+@InProceedings{sulimov2019guided,
+	author="Sulimov, Pavel
+	and Sukmanova, Elena
+	and Chereshnev, Roman
+	and Kert{\'e}sz-Farkas, Attila",
+	editor="van der Aalst, Wil M. P. 
+	and Batagelj, Vladimir
+	and Ignatov, Dmitry I.
+	and Khachay, Michael
+	and Kuskova, Valentina
+	and Kutuzov, Andrey
+	and Kuznetsov, Sergei O.
+	and Lomazova, Irina A.
+	and Loukachevitch, Natalia
+	and Napoli, Amedeo
+	and Pardalos, Panos M.
+	and Pelillo, Marcello
+	and Savchenko, Andrey V.
+	and Tutubalina, Elena",
+	title="Guided Layer-Wise Learning for Deep Models Using Side Information",
+	booktitle="Analysis of Images, Social Networks and Texts. AIST 2019. Communications in Computer and Information Science, vol 1086.",
+	year="2020",
+	publisher="Springer International Publishing",
+	address="Cham",
+	pages="50--61",
+	isbn="978-3-030-39575-9"
+}
+
+
+
+@article{bish2008conjugation,
+	title={Conjugation of complex polyubiquitin chains to WRNIP1},
+	author={Bish, Rebecca A and Fregoso, Oliver I and Piccini, Antonella and Myers, Michael P},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={8},
+	pages={3481--3489},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{granholm2011quality,
+	title={Quality assessments of peptide--spectrum matches in shotgun proteomics},
+	author={Granholm, Viktor and K{\"a}ll, Lukas},
+	journal={Proteomics},
+	volume={11},
+	number={6},
+	pages={1086--1093},
+	year={2011},
+	publisher={Wiley Online Library}
+}
+
+@article{gupta2011target,
+	title={Target-decoy approach and false discovery rate: when things may go wrong},
+	author={Gupta, Nitin and Bandeira, Nuno and Keich, Uri and Pevzner, Pavel A},
+	journal={Journal of the American Society for Mass Spectrometry},
+	volume={22},
+	number={7},
+	pages={1111--1120},
+	year={2011},
+	publisher={Springer}
+}
+
+@article{he2015theoretical,
+	title={A theoretical foundation of the target-decoy search strategy for false discovery rate control in proteomics},
+	author={He, Kun and Fu, Yan and Zeng, Wen-Feng and Luo, Lan and Chi, Hao and Liu, Chao and Qing, Lai-Yun and Sun, Rui-Xiang and He, Si-Min},
+	journal={arXiv preprint arXiv:1501.00537},
+	year={2015}
+}
+
+@article{levitsky2016unbiased,
+	title={Unbiased false discovery rate estimation for shotgun proteomics based on the target-decoy approach},
+	author={Levitsky, Lev I and Ivanov, Mark V and Lobas, Anna A and Gorshkov, Mikhail V},
+	journal={Journal of Proteome Research},
+	volume={16},
+	number={2},
+	pages={393--397},
+	year={2016},
+	publisher={ACS Publications}
+}
+
+@article{wang2008decoy,
+	title={Decoy methods for assessing false positives and false discovery rates in shotgun proteomics},
+	author={Wang, Guanghui and Wu, Wells W and Zhang, Zheng and Masilamani, Shyama and Shen, Rong-Fong},
+	journal={Analytical chemistry},
+	volume={81},
+	number={1},
+	pages={146--159},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{zhang2017null,
+	title={The Null-Test for peptide identification algorithm in Shotgun proteomics},
+	author={Zhang, Shu-Rong and Shan, Yi-Chu and Jiang, Hao and Liu, Jian-Hui and Zhou, Yuan and Zhang, Li-Hua and Zhang, Yu-Kui},
+	journal={Journal of Proteomics},
+	volume={163},
+	pages={118--125},
+	year={2017},
+	publisher={Elsevier}
+}
+
+@article{keich2018averaging,
+	title={Averaging Strategy To Reduce Variability in Target-Decoy Estimates of False Discovery Rate},
+	author={Keich, Uri and Tamura, Kaipo and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={18},
+	number={2},
+	pages={585--593},
+	year={2018},
+	publisher={ACS Publications}
+}
+
+@article{kertesz2012database,
+	title={Database searching in mass spectrometry based proteomics},
+	author={Kert{\'e}sz-Farkas, Attila and Reiz, Be{\'a}ta and P Myers, Michael and Pongor, S{\'a}ndor},
+	journal={Current Bioinformatics},
+	volume={7},
+	number={2},
+	pages={221--230},
+	year={2012},
+	publisher={Bentham Science Publishers}
+}
+
+@article{granholm2011using,
+	title={On using samples of known protein content to assess the statistical calibration of scores assigned to peptide-spectrum matches in shotgun proteomics},
+	author={Granholm, Viktor and Noble, William Stafford and Käll, Lukas},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={5},
+	pages={2671--2678},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{klammer2006effects,
+	title={Effects of modified digestion schemes on the identification of proteins from complex mixtures},
+	author={Klammer, Aaron A and MacCoss, Michael J},
+	journal={Journal of Proteome Research},
+	volume={5},
+	number={3},
+	pages={695--700},
+	year={2006},
+	publisher={ACS Publications}
+}
+
+@article{colinge2003olav,
+	title={OLAV: Towards high-throughput tandem mass spectrometry data identification},
+	author={Colinge, Jacques and Masselot, Alexandre and Giron, Marc and Dessingy, Thierry and Magnin, J{\'e}r{\^o}me},
+	journal={PROTEOMICS: International Edition},
+	volume={3},
+	number={8},
+	pages={1454--1463},
+	year={2003},
+	publisher={Wiley Online Library}
+}
+
+@article{feng2007probability,
+	title={Probability-based pattern recognition and statistical framework for randomization: modeling tandem mass spectrum/peptide sequence false match frequencies},
+	author={Feng, Jian and Naiman, Daniel Q and Cooper, Bret},
+	journal={Bioinformatics},
+	volume={23},
+	number={17},
+	pages={2210--2217},
+	year={2007},
+	publisher={Oxford University Press}
+}
+
+@article{sticker2017mass,
+	title={Mass spectrometrists should search for all peptides, but assess only the ones they care about},
+	author={Sticker, Adriaan and Martens, Lennart and Clement, Lieven},
+	journal={Nature methods},
+	volume={14},
+	number={7},
+	pages={643},
+	year={2017},
+	publisher={Nature Publishing Group}
+}
+
+@article{eng2013comet,
+	title={Comet: an open-source MS/MS sequence database search tool},
+	author={Eng, Jimmy K and Jahan, Tahmina A and Hoopmann, Michael R},
+	journal={Proteomics},
+	volume={13},
+	number={1},
+	pages={22--24},
+	year={2013},
+	publisher={Wiley Online Library}
+}
+
+@article{aebersold2003mass,
+	title={Mass spectrometry-based proteomics},
+	author={Aebersold, Ruedi and Mann, Matthias},
+	journal={Nature},
+	volume={422},
+	number={6928},
+	pages={198},
+	year={2003},
+	publisher={Nature Publishing Group}
+}
+
+@article{nesvizhskii2004analysis,
+	title={Analysis, statistical validation and dissemination of large-scale proteomics datasets generated by tandem MS},
+	author={Nesvizhskii, Alexey I and Aebersold, Ruedi},
+	journal={Drug discovery today},
+	volume={9},
+	number={4},
+	pages={173--181},
+	year={2004},
+	publisher={Elsevier}
+}
+
+@article{geer2004open,
+	title={Open mass spectrometry search algorithm},
+	author={Geer, Lewis Y and Markey, Sanford P and Kowalak, Jeffrey A and Wagner, Lukas and Xu, Ming and Maynard, Dawn M and Yang, Xiaoyu and Shi, Wenyao and Bryant, Stephen H},
+	journal={Journal of Proteome Research},
+	volume={3},
+	number={5},
+	pages={958--964},
+	year={2004},
+	publisher={ACS Publications}
+}
+
+@article{keich2014importance,
+	title={On the importance of well-calibrated scores for identifying shotgun proteomics spectra},
+	author={Keich, Uri and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={14},
+	number={2},
+	pages={1147--1160},
+	year={2014},
+	publisher={ACS Publications}
+}
+
+@article{lin2018combining,
+	title={Combining High-Resolution and Exact Calibration To Boost Statistical Power: A Well-Calibrated Score Function for High-Resolution MS2 Data},
+	author={Lin, Andy and Howbert, J Jeffry and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={17},
+	number={11},
+	pages={3644--3656},
+	year={2018},
+	publisher={ACS Publications}
+}
+
+@article{eng2008fast,
+	title={A fast SEQUEST cross correlation algorithm},
+	author={Eng, Jimmy K and Fischer, Bernd and Grossmann, Jonas and MacCoss, Michael J},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={10},
+	pages={4598--4602},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{granholm2013determining,
+	title={Determining the calibration of confidence estimation procedures for unique peptides in shotgun proteomics},
+	author={Granholm, Viktor and Navarro, Jos{\'e} Fern{\'a}ndez and Noble, William Stafford and K{\"a}ll, Lukas},
+	journal={Journal of proteomics},
+	volume={80},
+	pages={123--131},
+	year={2013},
+	publisher={Elsevier}
+}
+
+@article{kall2007assigning,
+	title={Assigning significance to peptides identified by tandem mass spectrometry using decoy databases},
+	author={K{\"a}ll, Lukas and Storey, John D and MacCoss, Michael J and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={7},
+	number={01},
+	pages={29--34},
+	year={2007},
+	publisher={ACS Publications}
+}
+
+
+@article{goloborodko2013pyteomics,
+	title={Pyteomics—a Python framework for exploratory data analysis and rapid software prototyping in proteomics},
+	author={Goloborodko, Anton A and Levitsky, Lev I and Ivanov, Mark V and Gorshkov, Mikhail V},
+	journal={Journal of The American Society for Mass Spectrometry},
+	volume={24},
+	number={2},
+	pages={301--304},
+	year={2013},
+	publisher={Springer}
+}
+
+@article{levitsky2018pyteomics,
+	title={Pyteomics 4.0: five years of development of a Python proteomics framework},
+	author={Levitsky, Lev I and Klein, Joshua A and Ivanov, Mark V and Gorshkov, Mikhail V},
+	journal={Journal of Proteome Research},
+	volume={18},
+	number={2},
+	pages={709--714},
+	year={2018},
+	publisher={ACS Publications}
+}
+
+@article{granholm2011using,
+	title={On using samples of known protein content to assess the statistical calibration of scores assigned to peptide-spectrum matches in shotgun proteomics},
+	author={Granholm, Viktor and Noble, William Stafford and Käll, Lukas},
+	journal={Journal of Proteome Research},
+	volume={10},
+	number={5},
+	pages={2671--2678},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{danilova2019bias,
+	title={Bias in false discovery rate estimation in mass-spectrometry-based peptide identification},
+	author={Danilova, Yulia and Voronkova, Anastasia and Sulimov, Pavel and Kertesz-Farkas, Attila},
+	journal={Journal of Proteome Research},
+	year={2019},
+	volume={18},
+	number={5},
+	pages={2354--2358},
+	publisher={ACS Publications}
+}
+
+@article{klammer2009statistical,
+	title={Statistical calibration of the SEQUEST XCorr function},
+	author={Klammer, Aaron A and Park, Christopher Y and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={8},
+	number={4},
+	pages={2106--2113},
+	year={2009},
+	publisher={ACS Publications}
+}
+
+@article{spirin2011assigning,
+	title={Assigning spectrum-specific p-values to protein identifications by mass spectrometry},
+	author={Spirin, Victor and Shpunt, Alexander and Seebacher, Jan and Gentzel, Marc and Shevchenko, Andrej and Gygi, Steven and Sunyaev, Shamil},
+	journal={Bioinformatics},
+	volume={27},
+	number={8},
+	pages={1128--1134},
+	year={2011},
+	publisher={Oxford University Press}
+}
+
+@article{nesvizhskii2003statistical,
+	title={A statistical model for identifying proteins by tandem mass spectrometry},
+	author={Nesvizhskii, Alexey I and Keller, Andrew and Kolker, Eugene and Aebersold, Ruedi},
+	journal={Analytical chemistry},
+	volume={75},
+	number={17},
+	pages={4646--4658},
+	year={2003},
+	publisher={ACS Publications}
+}
+
+@article{nesvizhskii2005interpretation,
+	title={Interpretation of shotgun proteomic data: the protein inference problem},
+	author={Nesvizhskii, Alexey I and Aebersold, Ruedi},
+	journal={Molecular \& cellular proteomics},
+	volume={4},
+	number={10},
+	pages={1419--1440},
+	year={2005},
+	publisher={ASBMB}
+}
+
+@article{glatter2009integrated,
+	title={An integrated workflow for charting the human interaction proteome: insights into the PP2A system},
+	author={Glatter, Timo and Wepf, Alexander and Aebersold, Ruedi and Gstaiger, Matthias},
+	journal={Molecular systems biology},
+	volume={5},
+	number={1},
+	pages={237},
+	year={2009},
+	publisher={EMBO Press}
+}
+
+@article{hoopmann2009post,
+	title={Post analysis data acquisition for the iterative MS/MS sampling of proteomics mixtures},
+	author={Hoopmann, Michael R and Merrihew, Gennifer E and von Haller, Priska D and MacCoss, Michael J},
+	journal={Journal of Proteome Research},
+	volume={8},
+	number={4},
+	pages={1870--1875},
+	year={2009},
+	publisher={ACS Publications}
+}
+
+@article{hsieh2009comparison,
+	title={Comparison of database search strategies for high precursor mass accuracy MS/MS data},
+	author={Hsieh, Edward J and Hoopmann, Michael R and MacLean, Brendan and MacCoss, Michael J},
+	journal={Journal of Proteome Research},
+	volume={9},
+	number={2},
+	pages={1138--1143},
+	year={2009},
+	publisher={ACS Publications}
+}
+
+
+@article{keich2015improved,
+	title={Improved false discovery rate estimation procedure for shotgun proteomics},
+	author={Keich, Uri and Kertesz-Farkas, Attila and Noble, William Stafford},
+	journal={Journal of Proteome Research},
+	volume={14},
+	number={8},
+	pages={3148--3161},
+	year={2015},
+	publisher={ACS Publications}
+}
+
+@article{kertesz2015tandem,
+	title={Tandem mass spectrum identification via cascaded search},
+	author={Kertesz-Farkas, Attila and Keich, Uri and Noble, William Stafford},
+	journal={Journal of proteome research},
+	volume={14},
+	number={8},
+	pages={3027--3038},
+	year={2015},
+	publisher={ACS Publications}
+}
+
+@article{lecun2015deep,
+	title={Deep learning},
+	author={LeCun, Yann and Bengio, Yoshua and Hinton, Geoffrey},
+	journal={Nature},
+	volume={521},
+	number={7553},
+	pages={436},
+	year={2015},
+	publisher={Nature Publishing Group}
+}
+
+@article{tran2017novo,
+	title={De novo peptide sequencing by deep learning},
+	author={Tran, Ngoc Hieu and Zhang, Xianglilan and Xin, Lei and Shan, Baozhen and Li, Ming},
+	journal={Proceedings of the National Academy of Sciences},
+	volume={114},
+	number={31},
+	pages={8247--8252},
+	year={2017},
+	publisher={National Acad Sciences}
+}
+
+@article{hinton2006reducing,
+	title={Reducing the dimensionality of data with neural networks},
+	author={Hinton, Geoffrey E and Salakhutdinov, Ruslan R},
+	journal={Science},
+	volume={313},
+	number={5786},
+	pages={504--507},
+	year={2006},
+	publisher={American Association for the Advancement of Science}
+}
+
+@article{mohamed2011acoustic,
+	title={Acoustic modeling using deep belief networks},
+	author={Mohamed, Abdel-rahman and Dahl, George E and Hinton, Geoffrey},
+	journal={IEEE transactions on audio, speech, and language processing},
+	volume={20},
+	number={1},
+	pages={14--22},
+	year={2011},
+	publisher={IEEE}
+}
+
+@inproceedings{salakhutdinov2007restricted,
+	title={Restricted Boltzmann machines for collaborative filtering},
+	author={Salakhutdinov, Ruslan and Mnih, Andriy and Hinton, Geoffrey},
+	booktitle={Proceedings of the 24th International Conference on Machine learning},
+	pages={791--798},
+	year={2007},
+	organization={ACM}
+}
+
+@article{sulimov2019tailor,
+	title={Tailor: universal, rapid, non-parametric score calibration method for database search-based peptide identification in shotgun proteomics},
+	author={Pavel Sulimov and Attila Kert{\'e}sz-Farkas},
+	journal={bioRxiv preprint bioRxiv:10.1101/831776},
+	year={2019}
+}
+
+@article{chalkley2014proteome,
+	title={Proteome informatics research group (iPRG) \_2012: a study on detecting modified peptides in a complex mixture},
+	author={Chalkley, Robert J and Bandeira, Nuno and Chambers, Matthew C and Clauser, Karl R and Cottrell, John S and Deutsch, Eric W and Kapp, Eugene A and Lam, Henry HN and McDonald, W Hayes and Neubert, Thomas A and others},
+	journal={Molecular \& Cellular Proteomics},
+	volume={13},
+	number={1},
+	pages={360--371},
+	year={2014},
+	publisher={ASBMB}
+}
+
+@article{eng2015deeper,
+	title={A deeper look into Comet—implementation and features},
+	author={Eng, Jimmy K and Hoopmann, Michael R and Jahan, Tahmina A and Egertson, Jarrett D and Noble, William S and MacCoss, Michael J},
+	journal={Journal of the American Society for Mass Spectrometry},
+	volume={26},
+	number={11},
+	pages={1865--1874},
+	year={2015},
+	publisher={ACS Publications}
+}
+
+@article{gessulat2019prosit,
+	title={Prosit: proteome-wide prediction of peptide tandem mass spectra by deep learning},
+	author={Gessulat, Siegfried and Schmidt, Tobias and Zolg, Daniel Paul and Samaras, Patroklos and Schnatbaum, Karsten and Zerweck, Johannes and Knaute, Tobias and Rechenberger, Julia and Delanghe, Bernard and Huhmer, Andreas and others},
+	journal={Nature methods},
+	volume={16},
+	number={6},
+	pages={509},
+	year={2019},
+	publisher={Nature Publishing Group}
+}
+
+@article{zhou2017pdeep,
+	title={pDeep: predicting MS/MS spectra of peptides with deep learning},
+	author={Zhou, Xie-Xuan and Zeng, Wen-Feng and Chi, Hao and Luo, Chunjie and Liu, Chao and Zhan, Jianfeng and He, Si-Min and Zhang, Zhifei},
+	journal={Analytical chemistry},
+	volume={89},
+	number={23},
+	pages={12690--12697},
+	year={2017},
+	publisher={ACS Publications}
+}
+
+@article{tiwary2019high,
+	title={High-quality MS/MS spectrum prediction for data-dependent and data-independent acquisition data analysis},
+	author={Tiwary, Shivani and Levy, Roie and Gutenbrunner, Petra and Soto, Favio Salinas and Palaniappan, Krishnan K and Deming, Laura and Berndl, Marc and Brant, Arthur and Cimermancic, Peter and Cox, J{\"u}rgen},
+	journal={Nature methods},
+	volume={16},
+	number={6},
+	pages={519},
+	year={2019},
+	publisher={Nature Publishing Group}
+}
+@article{bekker2017optimized,
+	title={An optimized shotgun strategy for the rapid generation of comprehensive human proteomes},
+	author={Bekker-Jensen, Dorte B and Kelstrup, Christian D and Batth, Tanveer S and Larsen, Sara C and Haldrup, Christa and Bramsen, Jesper B and S{\o}rensen, Karina D and H{\o}yer, S{\o}ren and {\O}rntoft, Torben F and Andersen, Claus L and others},
+	journal={Cell systems},
+	volume={4},
+	number={6},
+	pages={587--599},
+	year={2017},
+	publisher={Elsevier}
+}
+
+@article{keller2002empirical,
+	title={Empirical statistical model to estimate the accuracy of peptide identifications made by MS/MS and database search},
+	author={Keller, Andrew and Nesvizhskii, Alexey I and Kolker, Eugene and Aebersold, Ruedi},
+	journal={Analytical chemistry},
+	volume={74},
+	number={20},
+	pages={5383--5392},
+	year={2002},
+	publisher={ACS Publications}
+}
+
+@article{halloran2020deep,
+	title={Deep Semi-Supervised Learning Improves Universal Peptide Identification of Shotgun Proteomics Data},
+	author={Halloran, John Timothy and Urban, Gregor and Rocke, David M and Baldi, Pierre F},
+	journal={bioRxiv preprint https://doi.org/10.1101/2020.11.12.380881},
+	year={2020},
+	publisher={Cold Spring Harbor Laboratory}
+}
+
+@article{sulimov2020annotation,
+	title={Annotation of tandem mass spectrometry data using stochastic neural networks in shotgun proteomics},
+	author={Sulimov, Pavel and Voronkova, Anastasia and Kert{\'e}sz-Farkas, Attila},
+	journal={Bioinformatics},
+	volume={36},
+	number={12},
+	pages={3781--3787},
+	year={2020},
+	publisher={Oxford University Press}
+}
+
+@article{davis2017expanding,
+	title={Expanding proteome coverage with CHarge Ordered Parallel Ion aNalysis (CHOPIN) combined with broad specificity proteolysis},
+	author={Davis, Simon and Charles, Philip D and He, Lin and Mowlds, Peter and Kessler, Benedikt M and Fischer, Roman},
+	journal={Journal of proteome research},
+	volume={16},
+	number={3},
+	pages={1288--1299},
+	year={2017},
+	publisher={ACS Publications}
+}
+
+@inproceedings{ioffe2015batch,
+	title={Batch normalization: Accelerating deep network training by reducing internal covariate shift},
+	author={Ioffe, Sergey and Szegedy, Christian},
+	booktitle={International conference on machine learning},
+	pages={448--456},
+	year={2015},
+	organization={PMLR}
+}
+
+@article{gabriels2019updated,
+	title={Updated MS$^2$PIP web server delivers fast and accurate MS$^2$ peak intensity prediction for multiple fragmentation methods, instruments and labeling techniques},
+	author={Gabriels, Ralf and Martens, Lennart and Degroeve, Sven},
+	journal={Nucleic acids research},
+	volume={47},
+	number={W1},
+	pages={W295--W299},
+	year={2019},
+	publisher={Oxford University Press}
+}
+
+@article{sadygov2003hypergeometric,
+	title={A hypergeometric probability model for protein identification and validation using tandem mass spectral data and protein sequence databases},
+	author={Sadygov, Rovshan G and Yates, John R},
+	journal={Analytical chemistry},
+	volume={75},
+	number={15},
+	pages={3792--3798},
+	year={2003},
+	publisher={ACS Publications}
+}
+
+
+@article{park2008rapid,
+	title={Rapid and accurate peptide identification from tandem mass spectra},
+	author={Park, Christopher Y and Klammer, Aaron A and Kall, Lukas and MacCoss, Michael J and Noble, William S},
+	journal={Journal of proteome research},
+	volume={7},
+	number={7},
+	pages={3022--3027},
+	year={2008},
+	publisher={ACS Publications}
+}
+
+@article{diament2011faster,
+	title={Faster SEQUEST searching for peptide identification from tandem mass spectra},
+	author={Diament, Benjamin J and Noble, William Stafford},
+	journal={Journal of proteome research},
+	volume={10},
+	number={9},
+	pages={3871--3879},
+	year={2011},
+	publisher={ACS Publications}
+}
+
+@article{kudriavtseva2021deep,
+	title={Deep Convolutional Neural Networks Help Scoring Tandem Mass Spectrometry Data in Database-Searching Approaches},
+	author={Kudriavtseva, Polina and Kashkinov, Matvey and Kert{\'e}sz-Farkas, Attila},
+	journal={Journal of proteome research},
+	volume={20},
+	number={10},
+	pages={4708--4717},
+	year={2021},
+	publisher={ACS Publications}
+}
+
+@article{alves2010raid_aps,
+	title={RAId\_aPS: MS/MS analysis with multiple scoring functions and spectrum-specific statistics},
+	author={Alves, Gelio and Ogurtsov, Aleksey Y and Yu, Yi-Kuo},
+	journal={PloS one},
+	volume={5},
+	number={11},
+	pages={e15438},
+	year={2010},
+	publisher={Public Library of Science San Francisco, USA}
+}
+@article{gillette2020proteogenomic,
+	title={Proteogenomic characterization reveals therapeutic vulnerabilities in lung adenocarcinoma},
+	author={Gillette, Michael A and Satpathy, Shankha and Cao, Song and Dhanasekaran, Saravana M and Vasaikar, Suhas V and Krug, Karsten and Petralia, Francesca and Li, Yize and Liang, Wen-Wei and Reva, Boris and others},
+	journal={Cell},
+	volume={182},
+	number={1},
+	pages={200--225},
+	year={2020},
+	publisher={Elsevier}
+}
+
+@article{muller2020proteome,
+	title={The proteome landscape of the kingdoms of life},
+	author={M{\"u}ller, Johannes B and Geyer, Philipp E and Colaco, Ana R and Treit, Peter V and Strauss, Maximilian T and Oroshi, Mario and Doll, Sophia and Virreira Winter, Sebastian and Bader, Jakob M and K{\"o}hler, Niklas and others},
+	journal={Nature},
+	volume={582},
+	number={7813},
+	pages={592--596},
+	year={2020},
+	publisher={Nature Publishing Group}
+}
+
+@article{hinkson2017comprehensive,
+	title={A comprehensive infrastructure for big data in cancer research: accelerating cancer research and precision medicine},
+	author={Hinkson, Izumi V and Davidsen, Tanja M and Klemm, Juli D and Chandramouliswaran, Ishwar and Kerlavage, Anthony R and Kibbe, Warren A},
+	journal={Frontiers in cell and developmental biology},
+	volume={5},
+	pages={83},
+	year={2017},
+	publisher={Frontiers}
+}
+
+@article{leek2010tackling,
+  title={Tackling the widespread and critical impact of batch effects in high-throughput data},
+  author={Leek, Jeffrey T and Scharpf, Robert B and Bravo, H{\'e}ctor Corrada and Simcha, David and Langmead, Benjamin and Johnson, W Evan and Geman, Donald and Baggerly, Keith and Irizarry, Rafael A},
+  journal={Nature Reviews Genetics},
+  volume={11},
+  number={10},
+  pages={733--739},
+  year={2010},
+  publisher={Nature Publishing Group UK London}
+}
