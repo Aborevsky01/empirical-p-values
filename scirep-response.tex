@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{multirow} % Allow multirow entries in tables.
+\usepackage[sort&compress,super]{natbib}
+
+\newcommand{\response}[1]{\vspace*{1ex} \color{blue} \noindent #1 \color{black}
+\vspace*{2ex}}
+
+\newcommand{\edit}[1]{\begin{quotation}\color{red}\noindent #1
+\color{black}\end{quotation}}
+
+\newcommand{\myinput}[1]{\color{red}\input{#1}\color{black}}
+
+\newcommand{\fixme}[1]{{\color{red} FIXME: #1 }}
+
+% Make a code block.
+\newcommand{\codeblock}[1]{{\small \color{cyan}\begin{verbatim}{{#1}}\end{verbatim}}}
+
+\begin{document}
+	
+\noindent
+\today\\[2ex]
+
+\noindent
+Dear Dr.\ Alessandro Barbiero:\\[2ex]
+
+We thank you and the reviewers for your kind consideration of our manuscript.
+Below, we address each of the points raised by the three reviewers and describe the changes we have made to the manuscript.
+In what follows, the reviewer's comments are shown in black type, interleaved with our responses (in blue) and, where appropriate, the modified text (in red).
+We have also made the formatting changes that you requested.
+
+In general, the reviewers have pointed out few issues with the text. We also think ...
+
+Thank you very much for your consideration.\\[2ex]
+
+\noindent
+Best regards,\\[2ex]
+
+\noindent
+Bill Noble\\
+University of Washington
+
+\clearpage
+\section*{Reviewer 1}
+
+This paper incorporates the proportion of the null hypothesis to adjust the distribution shift from training to testing data in order to control the FDR. 
+
+\response{Thank you for this accurate summary of our work.}
+
+I found the paper not well presented and it is very difficult to follow the logic flow. I have the following questions for the authors to consider:
+
+1. It is not transparent to me regarding the rationale of the proposed method. The goal of multiple testing is to separate the non-null from the null. How can we estimate the density function of null and non-null without knowing which one is from which? Perhaps we can use the empirical distribution of the test statistic, assuming the null distribution, to derive the alternative distribution as that in Gao and Zhao (2024).
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+2. Many methods are proposed to estimate the proportion of null hypothesis, for instance, the ones proposed in Meinshausen and Rice (2006); Wang, H.-Q. et al. (2011). In Wang, H.-Q. et al. (2011), the method adjusts for dependence, which should be particularly relevant to the applications con- sidered in this paper. Can the authors try these approaches and compare the results?
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+3. Furthermore, it is assumed that the variance of training and testing are the same, which is a strong assumption. Is there any way to relax this?
+
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+4. In practice, how do you determine the number of histogram bins and how many bins we should use?
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+
+
+\clearpage
+\section*{Reviewer 2}
+1. The proposed TNA method aims to address the issue of distribution shifts between the calibration data and target data in conformal classification.
+However, distribution shifts can manifest in various forms, including covariate shift, class-wise covariate shift, label shift, or posterior shift.
+I suggest the authors clarify which specific types of distribution shifts the proposed method can handle, and provide the rationale for the effectiveness.
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+2. The aim of the article is to provide false discovery rate control in the presence of distribution shift.
+However, with the proposed TNA method, it remains unclear to me whether the FDR is controlled with respect to the distribution of target data or the calibration data, as the target scores are adjusted to align with the calibration scores in TNA.
+I suggest the authors provide a discussion on this potential issue.
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+3. The quantity $\hat{\pi}_0$ appears in TNA+ method, but it causes confusion with the Storey null proportion estimator in the final BH procedure.
+The authors should provide more detailed explanation on how to obtain $\hat{\pi}_0$ in step 3.b.
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+4. The introduced LTT in Section 2.1 is misleading, as the primary focus of LTT in Angelopoulos et al. (2021, arxiv) differs from the false discovery rate control that is essentially related with the BH algorithm.
+Besides, the use of notation $\lambda$ in LTT causes confusion with the $\lambda$ in Storey null proportion estimator.
+I suggest the authors provide a clearer explanation on the LTT if it is necessary for the current problem.
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+\section*{Reviewer 3}
+
+The authors propose a new method for the false discovery rate control in classification problems. They adjust the test prediction scores so that the test null distribution
+aligns to the training null distribution, and more accuarte p-vlaues of the test samples can be computed.
+
+Question:
+
+1.TNA- (or TNA+) assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i] (or T_1[i]/T_s[i]= X_1[i]/X_S[i] )$. Why is this assumption made? Do the authors assume that the proportion of the true null hypothesis remains constant between the training and test samples?"
+
+\response{We added the following text to the manuscript:}
+
+\edit{Todo:}
+
+
+\bibliographystyle{unsrt}
+\bibliography{refs} % See https://github.com/Noble-Lab/noble-lab-references
+
+\end{document}
