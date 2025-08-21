@@ -99,14 +99,18 @@ I suggest the authors provide a discussion on this potential issue.
 3. The quantity $\hat{\pi}_0$ appears in TNA+ method, but it causes confusion with the Storey null proportion estimator in the final BH procedure.
 The authors should provide more detailed explanation on how to obtain $\hat{\pi}_0$ in step 3.b.
 
-\response{We added the following text to the manuscript:}
+\response{We thank the reviewer for pointing out this potential confusion. We renamed the  $\hat{\pi}_0$ to $\hat{\pi}_{0_{T}}$ in our manuscript. We also added a calrifying sentence about the $\hat{\pi}_{0_{T}}$ calculation as the reviewer requested}
 
 \edit{Todo:}
 
 4. The introduced LTT in Section 2.1 is misleading, as the primary focus of LTT in Angelopoulos et al. (2021, arxiv) differs from the false discovery rate control that is essentially related with the BH algorithm.
 Besides, the use of notation $\lambda$ in LTT causes confusion with the $\lambda$ in Storey null proportion estimator.
 I suggest the authors provide a clearer explanation on the LTT if it is necessary for the current problem.
-\response{We added the following text to the manuscript:}
+
+\response{Indeed, The LTT method has been introduced to control risk in general. The risks they can control includes the FDR too. We quote from the abstract of the LTT paper from Angelopoulos, et al. (2021, arxiv):\\
+{\em ``The framework [LTT] addresses, among other examples, false discovery rate control in multi-label classification, intersection-over-union control in instance segmentation, and the simultaneous control of the type-1 error of outlier detection and confidence set coverage in classification or regression. ''}}
+
+\response{We thank the reviewer for pointing out the confusions with the Lambdas in Storey and LTT. We introduced $\lambda_s$ and $\lambda_l$, respectively, in order to avoid this confusion.}
 
 \edit{Todo:}
 
@@ -115,11 +119,22 @@ I suggest the authors provide a clearer explanation on the LTT if it is necessar
 The authors propose a new method for the false discovery rate control in classification problems. They adjust the test prediction scores so that the test null distribution
 aligns to the training null distribution, and more accuarte p-vlaues of the test samples can be computed.
 
+\response{We thank the reviewer for this accurate summary of our work.}
+
 Question:
 
-1.TNA- (or TNA+) assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i] (or T_1[i]/T_s[i]= X_1[i]/X_S[i] )$. Why is this assumption made? Do the authors assume that the proportion of the true null hypothesis remains constant between the training and test samples?"
+1.TNA- (or TNA+) assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i] (or T_1[i]/T_s[i]= X_1[i]/X_S[i] )$. Why is this assumption made? 
 
-\response{We added the following text to the manuscript:}
+\response{TNA+ does not assumes $T_1[i]/T_s[i]= X_1[i]/X_S[i]$. In the formula of TNA+ in 3b we use a $\pi_0$ estimation of the true nulls in the test set. That is the $\pi_0$ is not derived from the proportion of the null in the training set. Therefore $X_S \ne  $. The reviewer is right that TNA- assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i]$. Unfortunately,  }
+
+
+
+2. Do the authors assume that the proportion of the true null hypothesis remains constant between the training and test samples?
+
+
+\response{No, as we argued above.}
+%\response{The nulls and the non-nulls are mixed in the test case, and we do not know which test scores comes from which distribution (null or non-null). We had to make an assumption for practical applications, and our assumption relies on that the the test null is not significantly different from the train null in the case of TNA-. The assumption in the case of TNA+ is that the target test is not significantly different from the training target. We note that, TNA is a heuristic approach that may work in practice, but we cannot provide solid theoretical guaranties. Probably, nobody can without further assumptions. }
+
 
 \edit{Todo:}
 
