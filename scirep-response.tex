@@ -59,102 +59,96 @@ I found the paper not well presented and it is very difficult to follow the logi
 
 1. It is not transparent to me regarding the rationale of the proposed method. The goal of multiple testing is to separate the non-null from the null. How can we estimate the density function of null and non-null without knowing which one is from which? Perhaps we can use the empirical distribution of the test statistic, assuming the null distribution, to derive the alternative distribution as that in Gao and Zhao (2024).
 
-\response{We are very grateful for the reviewer for pointing out this issue. We approached this problem entirely from practical point of view during manuscript preparation, and we did not consider readers from the theoretical side. We have added a long paragraph to the introduction that summarizes the problem statement and our method in a more formal way. It now reads as follows.}
+\response{We are very grateful for the reviewer for pointing out this issue. We approached this problem entirely from practical point of view during manuscript preparation, and we did not consider readers from the theoretical side. But the reviewer is right, it was our mistake. We also admit that we did not separate the p-value adjustment problem from FDR control. We have revised the whole introduction, and added a few more paragraphs to the introduction that summarizes the problem statement and our method in a more formal way. Additionally, we also created and included a sketch about the aim of the TNA method.
+	
+Briefly responding to the reviewer's critiques is the following. The reviewer is right that we do not know which test instance comes from null or non-null distributions  In certain practical applications, it is possible to label some of the test data as negative with high confidence. For instance, decoy peptides\cite{elias2007target} in tandem mass spectrometry and internal negative control proteins \cite{gao2023simultaneous} in proteomic profiling serve this purpose. However, this is not the case with general machine learning applications, and we propose to approximate the unknown test null distribution with the empirical training null distribution. 
 
-\edit{Formally speaking, we are }
+We kindly ask the reviewer to see the introduction of  our revised manuscript. Changes are marked with red.}
 
-2. Many methods are proposed to estimate the proportion of null hypothesis, for instance, the ones proposed in Meinshausen and Rice (2006); Wang, H.-Q. et al. (2011). In Wang, H.-Q. et al. (2011), the method adjusts for dependence, which should be particularly relevant to the applications con- sidered in this paper. Can the authors try these approaches and compare the results?
-\response{We added the following text to the manuscript:}
 
-\edit{Todo:}
+
+2. Many methods are proposed to estimate the proportion of null hypothesis, for instance, the ones proposed in Meinshausen and Rice (2006); Wang, H.-Q. et al. (2011). In Wang, H.-Q. et al. (2011), the method adjusts for dependence, which should be particularly relevant to the applications considered in this paper. Can the authors try these approaches and compare the results?
+
+
+\response{Thank you for pointing out this issue. In the revised manuscript we now emphasize that the main aim of the TNA methods is to provide valid p-values for raw test prediction scores under data shift in classification problems. And then we demonstrate that TNA adjusted p-values results in more accurate FDR estimation. At the input of the TNA method we are given a set or raw prediction scores (not p-values) and we use the number of positive and negative predictions, predicted by the given classifier, to estimate the $pi0$. This is done in the step 2 of the TNA method. We also revised step 2 of the TNA method to emphasize this, changes are marked with red. The pi0 estimation methods suggested by the reviewer, and in general statistical methods to estimate pi0, rely on valid p-values (not raw scores). Therefore, we could not use usual statistical methods for pi0 estimation. We note that, once the TNA-adjusted p-values are obtained, the user may use any statistical methods that rely on valid p-values to estimate pi0, control various errors, etc. We happened to use Storey method to estimate pi0, and BH to control FDR. In our manuscript we did not aim to develop novel statistical methods to estimate pi0 or control FDR. 
+	
+However, out of curiosity, we have evaluated several statistical methods for pi0 estimation, and we included these results below:}
+
+
+\begin{table}[h!]
+	\centering
+	\footnotesize
+	\caption{Various $\pi_0$ estimations for test data .}
+	\label{tab:pi0-estimatinos}
+	\begin{tabular}{l *{9}{S[table-format=1.3]}}
+		\toprule
+		& \multicolumn{9}{c}{Methods} \\
+		\cmidrule(lr){2-10}
+		& {TNA, step 2.} & {Storey} & {Meinshausen} & {Jiang} & {Nettleton} & {Slim} & {Pounds} & {Last hist} & {True $\pi_0$} \\
+		\bottomrule
+		PCAM Standard & 0.318 & 0.269 & 0.716 & 0.289 & 0.303 & 0.355 & 0.316 & 0.257 & 0.339 \\
+		\midrule
+		PCAM w/ shift & 0.950 & 0.950 & 0.284 & 0.858 & 0.714 & 0.724 & 0.808 & 0.744 & 0.668 \\
+		\bottomrule
+		CheXpert Standard & 0.779 & 0.760 & 0.184 & 0.779 & 0.785 & 0.861 & 0.809 & 0.763 & 0.749 \\
+		\midrule
+		CheXpert w/ shift & 0.897 & 0.881 & 0.087 & 0.891 & 0.890 & 0.925 & 0.902 & 0.878 & 0.870 \\
+		\bottomrule
+		TissueNet Standard & 0.572 & 0.580 & 0.422 & 0.569 & 0.564 & 0.626 & 0.583 & 0.575 &  0.503 \\
+		\midrule
+		TissueNet w/ shift & 0.937 & 0.967 & 0.128 & 0.904 & 0.863 & 0.876 & 0.887 & 0.953 &  0.835 \\
+		\bottomrule
+	\end{tabular}\\
+	\raggedright{We note it looks like that Meinshausen provides an estimation for $1-\pi_0$.}
+\end{table}
 
 3. Furthermore, it is assumed that the variance of training and testing are the same, which is a strong assumption. Is there any way to relax this?
 
 
-\response{We added the following text to the manuscript:}
+\response{Thank you for this comment, this was also raised by another reviewer. We added the following clarification text in the manuscript: 
 
-\edit{Todo:}
+\ 
+
+{\em In the following steps, we describe two versions of TNA methods that both adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to the actual training null distribution $X_0$. The first variation, called TNA- (TNA minus), relies on that the shapes of the train null ($X_0$) and test null ($T_0$) distributions are similar, but there is no assumption on the form of the non-null distributions. The second variation, called TNA+ (TNA plus), relies on that the shapes of the training non-null ($X_1$) and test non-null ($T_1$) distributions are similar, but there is no assumption on the form of the null distributions. The proportion of the nulls may freely vary between the training and test data in the case of both TNA methods, there is no assumption on this.
+}
+
+\ 
+
+We kindly ask the reviewer to check this paragraph in the section of TNA protocol. All updates to the text is marked with red.
+}
+
 
 4. In practice, how do you determine the number of histogram bins and how many bins we should use?
 
-\response{We added the following text to the manuscript:}
+\response{Unfortunately, we do not have good recommendation on the number of bins or on the width of the bins. It depends on the support of the distributions and the number of the test instances. In general, bins should not be empty. We added this comment to the End of the section TNA Protocol in the manuscript, it is marked with red. }
 
-\edit{Todo:}
-
-\begin{table}[htbp]
-\centering
-\caption{$\pi_0$ estimation for the TissueNet dataset. Real train proportion: 0.407.}
-\label{tab:tissuenet}
-\begin{tabular}{l *{9}{S[table-format=1.3]}}
-\toprule
-& \multicolumn{9}{c}{Methods} \\
-\cmidrule(lr){2-10}
-& {Our} & {Storey} & {Meinshausen} & {Jiang} & {Nettleton} & {Slim} & {Pounds} & {Last hist} & {Real test} \\
-\midrule
-Standard & 0.318 & 0.269 & 0.716 & 0.289 & 0.303 & 0.355 & 0.316 & 0.257 & 0.339 \\
-\midrule
-Rebalanced & 0.950 & 0.950 & 0.284 & 0.858 & 0.714 & 0.724 & 0.808 & 0.744 & 0.668 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[htbp]
-\centering
-\caption{$\pi_0$ estimation for the Chexpert dataset. Real train proportion: 0.745.}
-\label{tab:chexpert}
-\begin{tabular}{l *{9}{S[table-format=1.3]}}
-\toprule
-& \multicolumn{9}{c}{Methods} \\
-\cmidrule(lr){2-10}
-& {Our} & {Storey} & {Meinshausen} & {Jiang} & {Nettleton} & {Slim} & {Pounds} & {Last hist} & {Real test} \\
-\midrule
-Standard & 0.779 & 0.760 & 0.184 & 0.779 & 0.785 & 0.861 & 0.809 & 0.763 & 0.749 \\
-\midrule
-Rebalanced & 0.897 & 0.881 & 0.087 & 0.891 & 0.890 & 0.925 & 0.902 & 0.878 & 0.870 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[htbp]
-\centering
-\caption{$\pi_0$ estimation for the PCAM dataset. Real train proportion: 0.509.}
-\label{tab:pcam}
-\begin{tabular}{l *{9}{S[table-format=1.3]}}
-\toprule
-& \multicolumn{9}{c}{Methods} \\
-\cmidrule(lr){2-10}
-& {Our} & {Storey} & {Meinshausen} & {Jiang} & {Nettleton} & {Slim} & {Pounds} & {Last hist} & {Real test} \\
-\midrule
-Standard & 0.572 & 0.580 & 0.422 & 0.569 & 0.564 & 0.626 & 0.583 & 0.575 &  0.503 \\
-\midrule
-Rebalanced & 0.937 & 0.967 & 0.128 & 0.904 & 0.863 & 0.876 & 0.887 & 0.953 &  0.835 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\clearpage 
 
 \section*{Reviewer 2}
 1. The proposed TNA method aims to address the issue of distribution shifts between the calibration data and target data in conformal classification.
 However, distribution shifts can manifest in various forms, including covariate shift, class-wise covariate shift, label shift, or posterior shift.
 I suggest the authors clarify which specific types of distribution shifts the proposed method can handle, and provide the rationale for the effectiveness.
 
-\response{We added the following text to the manuscript:}
+\response{Thank you for this comment, TNA does not have any assumptions on the type of the source of the data shift. TNA operates in the space of the raw discriminative scores, that is usually one dimensional per class. TNA does not aim to reverse the data shift in the input data space.}
 
-\edit{Todo:}
 
 2. The aim of the article is to provide false discovery rate control in the presence of distribution shift.
 However, with the proposed TNA method, it remains unclear to me whether the FDR is controlled with respect to the distribution of target data or the calibration data, as the target scores are adjusted to align with the calibration scores in TNA.
 I suggest the authors provide a discussion on this potential issue.
 
-\response{We added the following text to the manuscript:}
+\response{Thank you very much for pointing out this important issue. In the revised manuscript, we added the following text at the end of the TNA protocol section, as follows:
 
-\edit{Todo:}
+\
+
+{\em Finally, calculate the TNA EPVs for each adjusted $\hat{t_s}$ test score with respect to the $X_0$ distribution with using Eq. [1]. The TNA EPVs then can be used in any statistical applications that rely on valid p-values. In our experiments in the following sections, we demonstrated the usability of the TNA EPVs in FDR control with BH procedure.}
+
+}
 
 3. The quantity $\hat{\pi}_0$ appears in TNA+ method, but it causes confusion with the Storey null proportion estimator in the final BH procedure.
 The authors should provide more detailed explanation on how to obtain $\hat{\pi}_0$ in step 3.b.
 
 \response{We thank the reviewer for pointing out this potential confusion. We renamed the  $\hat{\pi}_0$ to $\hat{\pi}_{0_{T}}$ in our manuscript. We also added a calrifying sentence about the $\hat{\pi}_{0_{T}}$ calculation as the reviewer requested}
 
-\edit{Todo:}
 
 4. The introduced LTT in Section 2.1 is misleading, as the primary focus of LTT in Angelopoulos et al. (2021, arxiv) differs from the false discovery rate control that is essentially related with the BH algorithm.
 Besides, the use of notation $\lambda$ in LTT causes confusion with the $\lambda$ in Storey null proportion estimator.
@@ -165,7 +159,7 @@ I suggest the authors provide a clearer explanation on the LTT if it is necessar
 
 \response{We thank the reviewer for pointing out the confusions with the Lambdas in Storey and LTT. We introduced $\lambda_s$ and $\lambda_l$, respectively, in order to avoid this confusion.}
 
-\edit{Todo:}
+\clearpage
 
 \section*{Reviewer 3}
 
@@ -176,23 +170,31 @@ aligns to the training null distribution, and more accuarte p-vlaues of the test
 
 Question:
 
-1.TNA- (or TNA+) assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i] (or T_1[i]/T_s[i]= X_1[i]/X_S[i] )$. Why is this assumption made? 
+1.TNA- (or TNA+) assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i]$ (or $T_1[i]/T_s[i]= X_1[i]/X_S[i]$ ). Why is this assumption made? 
 
-\response{TNA+ does not assumes $T_1[i]/T_s[i]= X_1[i]/X_S[i]$. In the formula of TNA+ in 3b we use a $\pi_0$ estimation of the true nulls in the test set. That is the $\pi_0$ is not derived from the proportion of the null in the training set. Therefore $X_S \ne  $. The reviewer is right that TNA- assumes that $T_0[i]/T_s[i]= X_0[i]/X_S[i]$. Unfortunately,  }
+\response{About TNA+: TNA+ does NOT assumes $T_1[i]/T_s[i]= X_1[i]/X_S[i]$. In the formula of TNA+ in Step 3b, we use a $\pi_0$ estimation of the true nulls in the test set. That is, the $\hat{\pi}_0$ is not derived from the proportion of the null in the training set. It is stated in Step 2 of the TNA method. Therefore,  $$X_S \ne  \hat{\pi}_0 \overline{X_0}[i] + (1-\hat{\pi}_0) \overline{X_1}[i].$$ 
+Once again: $X_0$ and $X_1$ corresponds to the training data, $\pi_0$ estimation corresponds to the test data.
+	
+	
+About the TNA-: unfortunately, we made a mistake in the formula, and we missed the correction factor about the change in the proportion of null. We changed the formulation of the TNA method from count histograms to density histograms,  but shamefully, we forgot to update the TNA- methods. We even missed the bars above $X_0$ and $X_s$ We have corrected the TNA- method. The TNA- method correctly: $\hat{T}_0[i] = \overline{T}_s[i]\cdot c[i]$, where  $c[i]=X_0[i]/X_s[i]\cdot \pi^{X}_{0}/\hat{\pi}_{0_T}$ and $\pi^{X}_{0}$ is the actual proportion of the null samples in the training data calculated with using the true class labels. That is:
 
+$$\pi_0\hat{T}_0[i] /\overline{T}_s[i]= \pi^{X}_{0} X_0[i]/X_s[i]$$
+
+We added a more detailed description about the  $\hat{\pi}_0$ estimation in the test set to the Step 2 of the TNA methods. The changes are marked with red, and we kindly ask the reviewer to check this in the revised manuscript. We did double check our code, and the code was correct, so luckily we did not need to redo our experiments.}
 
 
 2. Do the authors assume that the proportion of the true null hypothesis remains constant between the training and test samples?
 
+\response{In summary, TNA method does not assume fixed null proportions in training and test sets, as we argued above.}
 
-\response{No, as we argued above.}
+ \
+
+\response{We are very grateful to the reviewer for noticing this issue.}
+
 %\response{The nulls and the non-nulls are mixed in the test case, and we do not know which test scores comes from which distribution (null or non-null). We had to make an assumption for practical applications, and our assumption relies on that the the test null is not significantly different from the train null in the case of TNA-. The assumption in the case of TNA+ is that the target test is not significantly different from the training target. We note that, TNA is a heuristic approach that may work in practice, but we cannot provide solid theoretical guaranties. Probably, nobody can without further assumptions. }
 
 
-\edit{Todo:}
-
-
 \bibliographystyle{unsrt}
-\bibliography{refs} % See https://github.com/Noble-Lab/noble-lab-references
+\bibliography{bibliography} % See https://github.com/Noble-Lab/noble-lab-references
 
 \end{document}
