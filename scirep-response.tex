@@ -39,7 +39,7 @@ We thank you and the reviewers for your kind consideration of our manuscript.
 
 \ 
 
-In general, the reviewers have cited the difficulties in following the logic flow; one reviewer have asked for additional experimental tests. The reviewers were right in the clarity. We have added a lengthy paragraph to the introduction about our motivation. We have also added several long sentences to the introduction here and there explaining our motivation. We have also added detailed description about the mathematical/statistical assumptions of our method (TNA) to the methods section. All changes in the revised manuscript are marked with red. We note that Reviewer 3 did not raised any substantial issues, and his critique was not very constructive. 
+In general, the reviewers have cited the difficulties in following the logic flow; one reviewer have asked for additional experimental tests. The reviewers were right in the clarity. We have added a lengthy paragraph to the introduction about our motivation. We have also added several long sentences to the introduction here and there explaining our motivation. We have also added detailed description about the mathematical/statistical assumptions of our method (TNA) to the methods section. We are submitting two versions of our manuscript. One is a clean version of it (\url{exact-p-value_v3_clean.pdf}), the other tacks the changes with red (\url{exact-p-value_v3_track_changes.pdf}). We note that Reviewer 3 did not raised any substantial issues, and his critique was not very constructive. 
 
  \ 
  
@@ -66,7 +66,7 @@ HSE University
 
 This paper incorporates the proportion of the null hypothesis to adjust the distribution shift from training to testing data in order to control the FDR. 
 
-\response{Thank you for this accurate summary of our work.}
+\response{Thank you for this accurate summary of our work. We are submitting two versions of our manuscript. One is a clean version of it (\url{exact-p-value_v3_clean.pdf}), the other tacks the changes with red (\url{exact-p-value_v3_track_changes.pdf}).}
 
 I found the paper not well presented and it is very difficult to follow the logic flow. I have the following questions for the authors to consider:
 
@@ -83,40 +83,40 @@ We kindly ask the reviewer to see the introduction of  our revised manuscript. C
 
 \response{Thank you for pointing out this issue. In the revised manuscript we now emphasize that the main aim of the TNA methods is to provide valid p-values for raw test prediction scores under data shift in general classification problems. And then we demonstrate the usability of the TNA adjusted p-values in FDR control with Benjamini-Hochberg (BH) method. At the input of the TNA method we are given a set or raw prediction scores (not p-values) and we use the number of positive and negative predictions, predicted by the given classifier, to estimate the $pi0$. This is done in the step 2 of the TNA method. We also revised step 2 of the TNA method to emphasize this, changes are marked with red. The pi0 estimation methods suggested by the reviewer, and in general statistical methods to estimate pi0, rely on valid p-values (not raw scores). Therefore, we could not use usual statistical methods for pi0 estimation. We note that, once the TNA-adjusted p-values are obtained, the user may use any statistical methods that rely on valid p-values, for instance: to estimate pi0, control various errors, etc. We happened to use Storey method to estimate pi0, and BH to control FDR. In our manuscript we did not aim to develop novel statistical methods to estimate pi0 or control FDR. 
 	
-However, out of curiosity, we have evaluated several statistical methods for $\pi_0$ estimation, and we included these results below, see Table \ref{tab:pi0-est}.}
+However, out of curiosity, we have evaluated several statistical methods for $\pi_0$ estimation, and we included these results below, see Table \ref{tab:pi0-est}. In our opinion, all these methods provide better $\pi_0$ estimation with TNA EPVs than with standard EPVs, except in case of standard PCAM dataset. In our opinion, these results do not seem to be closely relevant to our paper, hence we do not include the table to our manuscript. However, if the reviewer thinks otherway, we can append the table to our manuscript.}
 
 
 \begin{table}[h!]
-\footnotesize
+\scriptsize
 	\caption{Several $\pi_0$ estimations with different methods.}
 	\label{tab:pi0-est}
 		\begin{tabular}{lll*{8}{c}}
 			\toprule
-			Dataset Type & True $\pi_0$ & EPV & {TNA Step 2.} & {Storey} & {Meinshausen} & {Jiang} & {Nettleton} & {Slim} & {Pounds} & {Last hist} \\
+			Dataset Type & True $\pi_0$ & EPV & {TNA Step 2.} & {Storey\cite{storey2003statistical}} & {Meinshausen\cite{meinshausen2006estimating}} & {Jiang\cite{jiang2008estimating}} & {Nettleton\cite{nettleton2006estimating}} & {Slim\cite{wang2011slim}} & {Pounds\cite{pounds2003estimating}} & {Last hist \cite{murray2021fdrestimation}} \\
 			\midrule
-			\multirow{3}{*}{PCAM} & \multirow{3}{*}{0.339} & Standard & 0.318 & 0.269 & 0.716 & 0.289 & 0.303 & 0.355 & 0.316 & 0.257 \\
-			&& TNA- & 0.317 & 0.378 & 0.699 & 0.352 & 0.311 & 0.361 & 0.341 & 0.357 \\
-			&& TNA+ & 0.313 & 0.353 & 0.703 & 0.338 & 0.308 & 0.358 & 0.334 & 0.352 \\
-			\cmidrule(lr){1-11}
-			\multirow{3}{*}{PCAM /w shift} & \multirow{3}{*}{0.668}  & Standard & 0.950 & 0.950 & 0.284 & 0.858 & 0.714 & 0.724 & 0.808 & 0.744 \\
-			&& TNA- & 0.678 & 0.348 & 0.659 & 0.554 & 0.673 & 0.693 & 0.637 & 0.282 \\
-			&& TNA+ & 0.660 & 0.370 & 0.603 & 0.584 & 0.688 & 0.699 & 0.662 & 0.246 \\
-			\bottomrule
-			\multirow{3}{*}{TissueNet} & \multirow{3}{*}{0.749} & Standard & 0.779 & 0.760 & 0.184 & 0.779 & 0.785 & 0.861 & 0.809 & 0.763 \\
-			&& TNA- & 0.753 & 0.743 & 0.187 & 0.769 & 0.779 & 0.866 & 0.805 & 0.750  \\ 
-			&& TNA+ & 0.788 & 0.755 & 0.173 & 0.791 & 0.802 & 0.871 & 0.820 & 0.750  \\ 
-			\cmidrule(lr){1-11}
-			\multirow{3}{*}{TissueNet w/ shift} & \multirow{3}{*}{0.870} & Standard & 0.897 & 0.881 & 0.087 & 0.891 & 0.890 & 0.925 & 0.902 & 0.878 \\
-			&& TNA- & 0.811 & 0.828 & 0.131 & 0.825 & 0.831 & 0.916 & 0.859 & 0.852  \\ 
-			&& TNA+ & 0.854 & 0.841 & 0.095 & 0.867 & 0.873 & 0.924 & 0.890 & 0.837  \\
-			\bottomrule
-			\multirow{3}{*}{CheXpert}& \multirow{3}{*}{0.503} & Standard & 0.572 & 0.580 & 0.422 & 0.569 & 0.564 & 0.626 & 0.583 & 0.575 \\
-			&& TNA- & 0.613 & 0.650 & 0.383 & 0.622 & 0.608 & 0.639 & 0.624 & 0.641 \\
-			&& TNA+ & 0.608 & 0.653 & 0.376 & 0.628 & 0.615 & 0.641 & 0.629 & 0.640 \\
-			\cmidrule(lr){1-11}
-			\multirow{3}{*}{CheXpert w/ shift} & \multirow{3}{*}{0.835} &  Standard & 0.937 & 0.967 & 0.128 & 0.904 & 0.863 & 0.876 & 0.887 & 0.953 \\
-			&& TNA- & 0.844 & 0.878 & 0.153 & 0.853 & 0.836 & 0.866 & 0.852 & 0.869 \\
-			&& TNA+ & 0.845 & 0.868 & 0.120 & 0.884 & 0.871 & 0.880 & 0.884 & 0.829 \\
+			\multirow{3}{*}{PCAM}& \multirow{3}{*}{0.503} & Standard &N.A. & 0.580 & 0.422 & 0.569 & 0.564 & 0.626 & 0.583 & 0.575 \\
+&& TNA- & 0.608 & 0.650 & 0.383 & 0.622 & 0.608 & 0.639 & 0.624 & 0.641 \\
+&& TNA+ & 0.608 & 0.653 & 0.376 & 0.628 & 0.615 & 0.641 & 0.629 & 0.640 \\
+\cmidrule(lr){1-11}
+\multirow{3}{*}{PCAM w/ shift} & \multirow{3}{*}{0.835} &  Standard &N.A. & 0.967 & 0.128 & 0.904 & 0.863 & 0.876 & 0.887 & 0.953 \\
+&& TNA- & 0.845 & 0.878 & 0.153 & 0.853 & 0.836 & 0.866 & 0.852 & 0.869 \\
+&& TNA+ & 0.845 & 0.868 & 0.120 & 0.884 & 0.871 & 0.880 & 0.884 & 0.829 \\
+\bottomrule
+\multirow{3}{*}{CheXpert} & \multirow{3}{*}{0.749} & Standard & N.A. & 0.760 & 0.184 & 0.779 & 0.785 & 0.861 & 0.809 & 0.763 \\
+&& TNA- & 0.788 & 0.743 & 0.187 & 0.769 & 0.779 & 0.866 & 0.805 & 0.750  \\ 
+&& TNA+ & 0.788 & 0.755 & 0.173 & 0.791 & 0.802 & 0.871 & 0.820 & 0.750  \\ 
+\cmidrule(lr){1-11}
+\multirow{3}{*}{CheXpert w/ shift} & \multirow{3}{*}{0.870} & Standard & N.A. & 0.881 & 0.087 & 0.891 & 0.890 & 0.925 & 0.902 & 0.878 \\
+&& TNA- & 0.854 & 0.828 & 0.131 & 0.825 & 0.831 & 0.916 & 0.859 & 0.852  \\ 
+&& TNA+ & 0.854 & 0.841 & 0.095 & 0.867 & 0.873 & 0.924 & 0.890 & 0.837  \\
+\bottomrule
+\multirow{3}{*}{TissueNet} & \multirow{3}{*}{0.339} & Standard & N.A. & 0.269 & 0.716 & 0.289 & 0.303 & 0.355 & 0.316 & 0.257 \\
+&& TNA- & 	0.313 & 0.378 & 0.699 & 0.352 & 0.311 & 0.361 & 0.341 & 0.357 \\
+&& TNA+ & 0.313 & 0.353 & 0.703 & 0.338 & 0.308 & 0.358 & 0.334 & 0.352 \\
+\cmidrule(lr){1-11}
+\multirow{3}{*}{TissueNet /w shift} & \multirow{3}{*}{0.668}  & Standard & N.A. & 0.950 & 0.284 & 0.858 & 0.714 & 0.724 & 0.808 & 0.744 \\
+&& TNA- & 0.660 & 0.659 & 0.348  & 0.554 & 0.673 & 0.693 & 0.637 & 0.282 \\
+&& TNA+ & 0.660 & 0.603 & 0.370  & 0.584 & 0.688 & 0.699 & 0.662 & 0.246 \\
 			\bottomrule
 	\end{tabular}
 \raggedright  We note that Meinshausen seems to estimate $1-\pi_0$.
@@ -204,6 +204,9 @@ However, out of curiosity, we have evaluated several statistical methods for $\p
 
 \section*{Reviewer 2}
 1. The proposed TNA method aims to address the issue of distribution shifts between the calibration data and target data in conformal classification.
+
+\response{Thank you for this accurate summary of our work. We are submitting two versions of our manuscript. One is a clean version of it (\url{exact-p-value_v3_clean.pdf}), the other tacks the changes with red (\url{exact-p-value_v3_track_changes.pdf}).}
+
 However, distribution shifts can manifest in various forms, including covariate shift, class-wise covariate shift, label shift, or posterior shift.
 I suggest the authors clarify which specific types of distribution shifts the proposed method can handle, and provide the rationale for the effectiveness.
 
@@ -247,7 +250,7 @@ I suggest the authors provide a clearer explanation on the LTT if it is necessar
 The authors propose a new method for the false discovery rate control in classification problems. They adjust the test prediction scores so that the test null distribution
 aligns to the training null distribution, and more accuarte p-vlaues of the test samples can be computed.
 
-\response{We thank the reviewer for this accurate summary of our work.}
+\response{Thank you for this accurate summary of our work. We are submitting two versions of our manuscript. One is a clean version of it (\url{exact-p-value_v3_clean.pdf}), the other tacks the changes with red (\url{exact-p-value_v3_track_changes.pdf}).}
 
 Question:
 
