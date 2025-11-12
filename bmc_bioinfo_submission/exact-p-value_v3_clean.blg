@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: exact-p-value_v3_clean.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+Database file #1: bibliography.bib
+Warning--empty journal in Veeling2018-qh
+Warning--empty journal in shebl2018parapneumonic
+Warning--empty journal in cellpose
+You've used 61 entries,
+            1791 wiz_defined-function locations,
+            808 strings with 18106 characters,
+and the built_in function-call counts, 15988 in all, are:
+= -- 1271
+> -- 1054
+< -- 6
++ -- 374
+- -- 313
+* -- 1272
+:= -- 2663
+add.period$ -- 186
+call.type$ -- 61
+change.case$ -- 57
+chr.to.int$ -- 0
+cite$ -- 64
+duplicate$ -- 618
+empty$ -- 1387
+format.name$ -- 313
+if$ -- 3427
+int.to.chr$ -- 0
+int.to.str$ -- 61
+missing$ -- 61
+newline$ -- 306
+num.names$ -- 61
+pop$ -- 160
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 272
+stack$ -- 0
+substring$ -- 1008
+swap$ -- 128
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 3
+while$ -- 137
+width$ -- 63
+write$ -- 655
+(There were 3 warnings)

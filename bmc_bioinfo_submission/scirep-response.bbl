@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{elias2007target}
+Joshua~E Elias and Steven~P Gygi.
+\newblock Target-decoy search strategy for increased confidence in large-scale
+  protein identifications by mass spectrometry.
+\newblock {\em Nature methods}, 4(3):207, 2007.
+
+\bibitem{gao2023simultaneous}
+Zijun Gao and Qingyuan Zhao.
+\newblock Simultaneous hypothesis testing using internal negative controls with
+  an application to proteomics.
+\newblock {\em arXiv preprint arXiv:2303.01552}, 2023.
+
+\bibitem{storey2003statistical}
+John~D Storey and Robert Tibshirani.
+\newblock Statistical significance for genomewide studies.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  100(16):9440--9445, 2003.
+
+\bibitem{meinshausen2006estimating}
+Nicolai Meinshausen and John Rice.
+\newblock Estimating the proportion of false null hypotheses among a large
+  number of independently tested hypotheses.
+\newblock 2006.
+
+\bibitem{jiang2008estimating}
+Hongmei Jiang and RW~Doerge.
+\newblock Estimating the proportion of true null hypotheses for multiple
+  comparisons.
+\newblock {\em Cancer informatics}, 6:117693510800600001, 2008.
+
+\bibitem{nettleton2006estimating}
+Dan Nettleton, JT~Gene Hwang, Rico~A Caldo, and Roger~P Wise.
+\newblock Estimating the number of true null hypotheses from a histogram of p
+  values.
+\newblock {\em Journal of agricultural, biological, and environmental
+  statistics}, 11(3):337--356, 2006.
+
+\bibitem{wang2011slim}
+Hong-Qiang Wang, Lindsey~K Tuominen, and Chung-Jui Tsai.
+\newblock Slim: a sliding linear model for estimating the proportion of true
+  null hypotheses in datasets with dependence structures.
+\newblock {\em Bioinformatics}, 27(2):225--231, 2011.
+
+\bibitem{pounds2003estimating}
+Stan Pounds and Stephan~W Morris.
+\newblock Estimating the occurrence of false positives and false negatives in
+  microarray studies by approximating and partitioning the empirical
+  distribution of p-values.
+\newblock {\em Bioinformatics}, 19(10):1236--1242, 2003.
+
+\bibitem{murray2021fdrestimation}
+Megan~H Murray and Jeffrey~D Blume.
+\newblock Fdrestimation: flexible false discovery rate computation in r.
+\newblock {\em F1000Research}, 10:441, 2021.
+
+\end{thebibliography}
