@@ -14,6 +14,7 @@
 \usepackage{algorithmicx}%
 \usepackage{algpseudocode}%
 \usepackage{listings}%
+\usepackage{dsfont}
 
 \theoremstyle{thmstyleone}%
 \newtheorem{theorem}{Theorem}%  meant for 
@@ -25,6 +26,7 @@
 
 \theoremstyle{thmstylethree}%
 \newtheorem{definition}{Definition}%
+\newcommand{\mathone}{\mathds{1}}
 
 \raggedbottom
 
@@ -89,7 +91,7 @@ The TNA method operates solely at the space of prediction score, which is typica
 
 Let us suppose that we are given domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be an appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The empirical training null distribution is constructed as $X_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the empirical training target distribution is constructed as $X_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score set is $X_s=\{f(t): t\in X\}$. The true test null $T_0$, and true test target $T_1$ are unobserved, but the observed test score set is $ T_s=\{f(t): t\in T\}$. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
 \begin{equation*}
-	FDP(s_t,K)=\frac{1+|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
+	FDP(s_t,K)=\frac{|\{t\in K: Y_t=0,\,f(t)\ge s_t\}|}{|\{t\in K:f(t)\ge s_t\}|},
 \end{equation*}
 \noindent where $|.|$ denotes set cardinality. We reserve FDR for the statistical expectation of FDP. FDR control methods aim to calibrate the threshold  $s_t$ so that the error rate among trusted predictions is at most level of $\alpha$. 
 
