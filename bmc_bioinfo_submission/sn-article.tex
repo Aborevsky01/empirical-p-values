@@ -24,8 +24,10 @@
 \newtheorem{example}{Example}%
 \newtheorem{remark}{Remark}%
 
+
 \theoremstyle{thmstylethree}%
 \newtheorem{definition}{Definition}%
+
 \newcommand{\mathone}{\mathds{1}}
 
 \raggedbottom
@@ -38,18 +40,39 @@
 \author[1]{\fnm{Andrey} \sur{Borevskiy}}\email{aoborevskiy@hse.ru}
 
 \author*[1]{\fnm{Attila} \sur{Kertesz-Farkas}}\email{kfattila@yandex.com}
-\equalcont{These authors contributed equally to this work.}
 
 
 \affil*[1]{\orgdiv{Laboratory on AI for Computational Biology, Faculty of Computer Science}, \orgname{HSE University}, \orgaddress{\street{11 Pokrovsky Bvld}, \city{Moscow}, \postcode{109028}, \country{Russian Federation}}}
 
-\abstract{Domain shifts or batch effects can significantly degrade the performance of machine learning-based classifiers in software production without any warning. This can particularly be problematic in medical applications which involve human lives. The shift changes the shape of the prediction score distribution of the test samples compared to that of the training samples; hence, decision boundary re-calibration would be required to conform to the expected performance standards. We present a simple, yet robust heuristic method to calculate valid p-values (uniformly distributed) for raw prediction scores of test samples under data shift in general classification problems. Our method is based on an adjustment of the test prediction scores so that the test null distribution (approximated distribution of the prediction scores of negative test samples) aligns to the training null distribution (actual distribution of prediction scores of the negative training samples). We termed it the Test Null Adjustment (TNA) method. Then, empirical p-values of the adjusted test prediction scores can be calculated with respect to the training null distribution to be used in any statistical applications which require test samples accompanied by valid p-values. We demonstrate the usability of our TNA method in FDR control with Benjamini-Hochberg (BH) protocol. The main advantage of the TNA method is that its application does not require any domain specific knowledge.  It works in binary and multi-label classification scenarios, it is fully data-driven, and it operates in the 1-dimensional space of the prediction scores ensuring stable numerical calculations. We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. }
+\abstract{\textbf{Background:} Domain shifts or batch effects can significantly degrade the performance of machine learning-based classifiers in software production without any warning. This can particularly be problematic in medical applications which involve human lives. The shift changes the shape of the prediction score distribution of the test samples compared to that of the training samples; hence, decision boundary re-calibration would be required to conform to the expected performance standards. 
+
+\textbf{Results:} We present a simple, yet robust heuristic method to calculate valid p-values (uniformly distributed) for raw prediction scores of test samples under data shift in general classification problems. Our method is based on an adjustment of the test prediction scores so that the test null distribution (approximated distribution of the prediction scores of negative test samples) aligns to the training null distribution (actual distribution of prediction scores of the negative training samples). We termed it the Test Null Adjustment (TNA) method. Then, empirical p-values of the adjusted test prediction scores can be calculated with respect to the training null distribution to be used in any statistical applications which require test samples accompanied by valid p-values. We demonstrate the usability of our TNA method in FDR control with Benjamini-Hochberg (BH) protocol. 
+
+\textbf{Conclusion:} The main advantage of the TNA method is that its application does not require any domain specific knowledge.  It works in binary and multi-label classification scenarios, it is fully data-driven, and it operates in the 1-dimensional space of the prediction scores ensuring stable numerical calculations. We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. }
 
 \keywords{Empirical P-values, False Discovery Rate, Data Shift, Batch Effect}
 
 \maketitle
 
-\section{Introduction}\label{sec1}
+\begin{table}[h]
+\centering
+\caption{List of Abbreviations}
+\label{tab:abbreviations}
+\begin{tabular}{ll}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+BH & Benjamini-Hochberg procedure \\
+EPV & Empirical p-values \\
+FDR & False discovery rate \\
+FDP & False discovery proportion \\
+LTT & Learn-then-test \\
+TNA & Test-null adjustment \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Background}\label{sec1}
 
 Modern AI applications not only need to increase their discriminative power to reduce the overall number of incorrect predictions, but also need to simultaneously minimize the quantified risks of false positive (FP) and negative (FN) error by an optimal decision threshold calibration while also being able to handle (or detect) data distribution shift \cite{feng2022clinical, al2023artificial}. False positive (type I) and false negative (type II) errors can have significantly different costs or impacts on people and society \cite{wynants2019three}. For instance, a false positive HIV, COVID-19 or cancer diagnosis can cause emotional trauma and the person may undergo invasive treatments with undesirable complications and side effects \cite{newman2021rate, salz2010meta, Tosteson2014Consequences, xu2016frequency} until a more elaborate clinical test establishes the correct diagnosis. However, a failure to diagnose an infectious disease may lead to a false sense of safety \cite{mouliou2021false}, and may put not only their own but also other people's lives in danger \cite{woloshin2020false}. An undetected cancer may either delay or hinder treatment \cite{bradley2021interpreting}, and misdiagnosed human papillomavirus (HPV) may progress to cancer precursor lesions \cite{macios2022false,pinsky2015principles}. 
 
@@ -86,7 +109,7 @@ In this paper, we propose a method to calculate EPVs for raw test scores under d
 
 The TNA method operates solely at the space of prediction score, which is typically one dimensional for each class. Therefore, TNA is not hindered by the curse-of-dimensionality \cite{donoho2000high}. It can be employed with any machine learning model, given that the classification is based on discriminative scores. This includes deep neural networks, black box models, support vector machines \cite{cristianini2000introduction}, with any kind of data such as tabular, text, audio, image, graph data. The TNA method is data driven as it does not rely on any class of analytical distributions. The only assumption we have for the TNA method is that the score distributions ``somewhat resemble'' the ones in Figure \ref{fig:binary}A or in Figure \ref{fig:BCSS-classwise} that are typical. 
 
-\section{Test null adjustment (TNA) method}
+\section{Methods}
 \subsection{Preliminaries}
 
 Let us suppose that we are given domain $D$ such as images, text, speech, graphs, time series, tabular data, or the mix of these; furthermore, let $X\subseteq D$ and $T\subseteq D$ denote the training and  the test data samples, respectively. Let $Y_t\in\{0,1\}$ denote the true class label of sample $t\in D$. Let $f:D\rightarrow R$ be an appropriately trained binary discriminator (classifier), such as a deep neural network, to predict positive instances, where $R$ denotes the real numbers. Without loss of generality, we assume that higher score $f(t)$ indicates a stronger membership to the positive class. The empirical training null distribution is constructed as $X_0=\{f(t):Y_t = 0,\,\,  t\in X\}$ from the scores of negative instances, the empirical training target distribution is constructed as $X_1=\{f(t): Y_t = 1,\,\,  t\in X\}$ from the scores of positive instances, and the training score set is $X_s=\{f(t): t\in X\}$. The true test null $T_0$, and true test target $T_1$ are unobserved, but the observed test score set is $ T_s=\{f(t): t\in T\}$. We say that we trust (or accept) a  sample $t$ predicted as positive if and only if $f(t)>s_t$ for a given decision threshold  $s_t$ and we make indecision for samples if $f(t) < s_t$. The false discovery proportion (FDP) in a set of samples $K=\{t\in D\}$ at a score threshold $s_t$ is calculated as 
@@ -98,7 +121,7 @@ Let us suppose that we are given domain $D$ such as images, text, speech, graphs
 The empirical  p-values (EPVs) of the test samples are calculated using eq. \ref{eq:epv} with respect to $X_0$. The p-value calculation can be time consuming for large $X_0$ sets, in this case, a binned, empirical cumulative distribution function of $X_0$ could be used to calculate the p-values accordingly in an accelerated way. Then, the FDR of a set $T$ can be controlled using the $BH$ protocol and the EPVs at a predetermined $\alpha$ level. For the sake of simplicity, we replace the $\alpha$ with $\alpha/\hat{\pi_0}$ inside BH algorithm, where $\hat{\pi_0}$ is an estimation of $\pi_0$ introduced by Storey \cite{storey2004strong} in the following way: $\hat{\pi_0} = (1+\sum_{i=1}^m \mathone\{p_i\ge\lambda_S\} )/(m(1-\lambda_S))$ for $\lambda_S\in (0,1)$. The q-value of a test sample $t\in T$ is defined as $q_t=\min_{z\le f(t)}FDP( z, T )$; that is the minimum $\alpha$ level when the sample $t$ would become a trusted positive prediction. 
 The smaller the q-value of a test sample $t$ is, the more trusted positive prediction $t$ is. Note that, the q-value of a sample depends not only on its prediction score, but also on the other samples in the set. 
 
-\paragraph{Learn-then-test (LTT).} We acquired the LTT code from its authors' GitHub repository. We  specified the following hyperparameters as following: 100 uniformly distributed queried levels of FDR control are iteratively being processed, starting from the 1e-3, with the most appropriate threshold $\lambda_L$ being selected among the 300 potential threshold values for each iteration. The remainder of the methodology is entirely dependent on the published pipeline, including the comprehensive calculation of the p-values for each threshold during each alpha level test, with a further Bonferroni procedure employed to select the most appropriate border. The final value of the test false positive rate is equal to the number of samples with higher scores than the selected $\lambda_L$. 
+\subsubsection{Learn-then-test (LTT).} We acquired the LTT code from its authors' GitHub repository. We  specified the following hyperparameters as following: 100 uniformly distributed queried levels of FDR control are iteratively being processed, starting from the 1e-3, with the most appropriate threshold $\lambda_L$ being selected among the 300 potential threshold values for each iteration. The remainder of the methodology is entirely dependent on the published pipeline, including the comprehensive calculation of the p-values for each threshold during each alpha level test, with a further Bonferroni procedure employed to select the most appropriate border. The final value of the test false positive rate is equal to the number of samples with higher scores than the selected $\lambda_L$. 
 
 \paragraph{Example 	 1.} \label{ex:vanilla} We used the well-known MNIST dataset for demonstration. It contains 60K training and 10K test images of 28x28 grey-scaled pixels in 10 classes. There is no data or label shift between the training and test data. We trained a convolutional neural network to classify the digit '1' as target (positive) against all the other digits (negative) (binary classification for the sake of simplicity). Our ConvNet model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ each, and it was trained with an Adam optimizer with a learning rate of 0.01 for three epochs. Our trained model achieved a 99\% accuracy on the test set. 
 
@@ -120,7 +143,7 @@ Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions as p
 	\label{fig:binary}
 \end{figure}
  
-\paragraph{TNA protocol.} When the empirical training null distribution $X_0$ is different from the unobserved, true test null distribution $T_0$, the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe two versions of TNA methods that both adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to $X_0$. The first variation, called TNA- (TNA minus), relies on the assumption that the shapes of the training null ($X_0$) and test null ($T_0$) distributions are ``similar'', but there is no assumption on the form of the non-null distributions. The second variation, called TNA+ (TNA plus), relies on that the shapes of the training non-null ($X_1$) and test non-null ($T_1$) distributions are ``similar'', but there is no assumption on the analytical form of the null distributions. By ``similar'' distributions we mean that they are close in a statistical sense, such as having a small Wasserstein distance of a Jensen-Shannon divergence; intuitively, their histograms can be aligned without major reshaping. TNA's performance is robust to minor distributional shifts in practice, but it degrades gracefully as this distance increases. The proportion of the nulls may freely vary between the training and test data in the case of both TNA methods, there is no assumption on this. The two approaches differ only at the 3rd step of the following algorithm. 
+\subsubsection{TNA protocol.} When the empirical training null distribution $X_0$ is different from the unobserved, true test null distribution $T_0$, the EPVs will not be uniformly distributed and the BH procedure results in liberal or conservative bias in FDR estimation. In the following steps, we describe two versions of TNA methods that both adjusts the prediction scores so that the approximated test null distribution $\hat{T}_0$ aligns to $X_0$. The first variation, called TNA- (TNA minus), relies on the assumption that the shapes of the training null ($X_0$) and test null ($T_0$) distributions are ``similar'', but there is no assumption on the form of the non-null distributions. The second variation, called TNA+ (TNA plus), relies on that the shapes of the training non-null ($X_1$) and test non-null ($T_1$) distributions are ``similar'', but there is no assumption on the analytical form of the null distributions. By ``similar'' distributions we mean that they are close in a statistical sense, such as having a small Wasserstein distance of a Jensen-Shannon divergence; intuitively, their histograms can be aligned without major reshaping. TNA's performance is robust to minor distributional shifts in practice, but it degrades gracefully as this distance increases. The proportion of the nulls may freely vary between the training and test data in the case of both TNA methods, there is no assumption on this. The two approaches differ only at the 3rd step of the following algorithm. 
 
 \begin{enumerate}%[label=\arabic*.]
 	\itemsep-3pt  		
@@ -170,7 +193,7 @@ Figure \ref{fig:binary}C shows the number of accepted (trusted) predictions as p
 
 \paragraph{Example 3.} The FDR estimation is sensitive to changes in class proportions. To illustrate the case of class distribution shift, we resampled the test data so that the number of true negative and positive instances became equal. This approach was used in other articles, e.g.  \cite{joseph_d__viviano__2019}. The accuracy of the CNN classifier (the same as trained in Example \ref{ex:vanilla}) remained at 99 \%. The evaluation plots are shown in Figure \ref{fig:mnist_shfit}(ii). The Q-Q plot (Fig. \ref{fig:mnist_shfit}(ii)A) shows that the EPVs (red) remained unbiased and so did TNA EPVs (green, purple). This is in  fact expected, because the shift in class distributions should not affect the actual null distributions; Therefore, the results of BH-based methods rely on the $\hat{\pi_0}$ estimation. BH with EPV and TNA EPV remained accurate and produced results close to the ground truth (red, green, and purple lines in Fig \ref{fig:mnist_shfit}(ii)BCD) indicating successful $\hat{\pi_0}$ estimation. The BH procedure is robust to changes in class proportions because it can involve the (re-)estimation of the negative data proportion ($\hat{\pi_0}$) that can be done with, e.g. Storey method. The LTT is also sensitive to changes in class proportions because it relies on the class proportions that are calculated with the training (validation) datasets, and it assumes that class proportions remain unchanged in test phase. Here, LTT resulted in conservative FDR control even at the critical range of q-values (blue in Fig. \ref{fig:mnist_shfit}(ii)BC). The bias in FDR produced by LTT (blue) is also visible in Figure \ref{fig:mnist_shfit}(ii)D. 
 
-\section{Experimental results}
+\section{Results}
 
 \subsection{PCam: tumor classification}
 
@@ -337,17 +360,33 @@ With this study, we also aim to emphasize and popularize the importance of accur
 %\bibliographystyle{unsrt}           % Style BST file.
 \bibliography{bibliography}
 
-\section*{Author contributions}
+\section*{Declarations}
+
+\subsection{Ethics approval and consent to participate}
+Not applicable. This study did not involve the recruitment of human participants or the collection of new human-related data.
+
+\subsection{Consent for publication}
+Not applicable. Manuscript contains no individual person's data in any form. 
+
+\subsection{Data availability}
+The data used in this study are secondary data obtained from publicly available sources. All data sources are properly cited within the manuscript. No new primary data were generated or analyzed in this research. For access to the datasets used, please refer to the original sources as indicated in the references section.
+
+
+\subsection{Funding}
+
+Funding of the research was fully conducted by HSE University.
+
 \ifdefined\DOUBLEBLINDREVIEW
 Omitted for double-blind peer-review.
 \else
+\subsection{Authors' contribution}
 AKF conceived the idea and supervised the project,  AB worked out the methods and carried out experiments. AKF and AB wrote the manuscript.
 \fi 
-\section*{Data availability}
-The data used in this study are secondary data obtained from publicly available sources. All data sources are properly cited within the manuscript. No new primary data were generated or analyzed in this research. For access to the datasets used, please refer to the original sources as indicated in the references section.
 
-\section*{Additional information}
-The authors declare no conflicts of interest.
+\subsection{Competing interests}
+The authors declare no conflicts of interest and no competing interests.
 
+\subsection{Acknowledgements}
+Not applicable.
 
 \end{document}
