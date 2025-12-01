@@ -1,5 +1,6 @@
 \documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% 
 
+\UseRawInputEncoding
 \usepackage{graphicx}%
 \usepackage{multirow}%
 \usepackage{amsmath,amssymb,amsfonts}%
@@ -15,6 +16,11 @@
 \usepackage{algpseudocode}%
 \usepackage{listings}%
 \usepackage{dsfont}
+\usepackage{booktabs}
+\usepackage{tabularx} 
+\usepackage{hyperref}  
+\usepackage{xurl}      
+
 
 \theoremstyle{thmstyleone}%
 \newtheorem{theorem}{Theorem}%  meant for 
@@ -123,7 +129,7 @@ The smaller the q-value of a test sample $t$ is, the more trusted positive predi
 
 \subsubsection{Learn-then-test (LTT).} We acquired the LTT code from its authors' GitHub repository. We  specified the following hyperparameters as following: 100 uniformly distributed queried levels of FDR control are iteratively being processed, starting from the 1e-3, with the most appropriate threshold $\lambda_L$ being selected among the 300 potential threshold values for each iteration. The remainder of the methodology is entirely dependent on the published pipeline, including the comprehensive calculation of the p-values for each threshold during each alpha level test, with a further Bonferroni procedure employed to select the most appropriate border. The final value of the test false positive rate is equal to the number of samples with higher scores than the selected $\lambda_L$. 
 
-\paragraph{Example 	 1.} \label{ex:vanilla} We used the well-known MNIST dataset for demonstration. It contains 60K training and 10K test images of 28x28 grey-scaled pixels in 10 classes. There is no data or label shift between the training and test data. We trained a convolutional neural network to classify the digit '1' as target (positive) against all the other digits (negative) (binary classification for the sake of simplicity). Our ConvNet model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ each, and it was trained with an Adam optimizer with a learning rate of 0.01 for three epochs. Our trained model achieved a 99\% accuracy on the test set. 
+\paragraph{Example 	 1.} \label{ex:vanilla} We used the well-known MNIST dataset for demonstration \cite{lecun1998gradient}. It contains 60K training and 10K test images of 28x28 grey-scaled pixels in 10 classes. There is no data or label shift between the training and test data. We trained a convolutional neural network to classify the digit '1' as target (positive) against all the other digits (negative) (binary classification for the sake of simplicity). Our ConvNet model contained two convolutional layers consisting of 8 kernels with size of $3\times3$ each, and it was trained with an Adam optimizer with a learning rate of 0.01 for three epochs. Our trained model achieved a 99\% accuracy on the test set. 
 
 The relevant results are presented in Figure \ref{fig:binary}. Figure \ref{fig:binary}A shows the training and test null and target distributions. %This plot indicates that there is no shift between the training and test distributions. 
 Figure \ref{fig:binary}B shows a Q-Q plot of the test EPVs against the theoretical uniform distribution; that is the scatter plot of the EPV against its normalized rank in our case. The dots line up along the diagonal line which shows that the EPVs calculated are uniformly distributed and, consequently, valid. This also indicates that there is no shift between the training and test distributions. %We also performed the Fisher's combined test to check whether the empirical p-values are uniformly distribution. The test produces a p-value of 0.934 indicating uniformly distributed empirical p-values. 
@@ -257,7 +263,7 @@ In our opinion, the actual class proportions in real-life applications can be si
 
 \subsection{CheXpert: chest x-ray dataset}
 
-The CheXpert dataset contains a total of 224,316 radiographs of both frontal and lateral views of the thorax from $\sim$65K patients in order to facilitate the automated interpretation of chest X-rays for multi-label classification tasks (i.e. multiple labels can be predicted for each instances) with a total of 14 labels.  An arbitrarily chosen sample data is shown in Figure \ref{fig:CheXpert_example}.  We used the deep neural network model, called DenseNet121, from the \texttt{Torchxrayvision} package \cite{cohen2020limits,Cohen2022xrv}, specifically developed for this CheXpert dataset. For the sake of simplicity, we turned the CheXpert dataset into a binary classification task by treating all instances of pleural effusion as positive and all the others as negative. We selected this label because this was the most prevalent  disease in the dataset. The proportion of the positive class became 27 \% and 23 \% in the training and test datasets, respectively. The DenseNet121 model achieved accuracies of 89 \% and 84 \% on the training and test sets, respectively.
+The CheXpert dataset contains a total of 224,316 radiographs of both frontal and lateral views of the thorax from $\sim$65K patients in order to facilitate the automated interpretation of chest X-rays for multi-label classification tasks (i.e. multiple labels can be predicted for each instances) with a total of 14 labels \cite{irvin2019chexpert}.  An arbitrarily chosen sample data is shown in Figure \ref{fig:CheXpert_example}.  We used the deep neural network model, called DenseNet121, from the \texttt{Torchxrayvision} package \cite{cohen2020limits,Cohen2022xrv}, specifically developed for this CheXpert dataset. For the sake of simplicity, we turned the CheXpert dataset into a binary classification task by treating all instances of pleural effusion as positive and all the others as negative. We selected this label because this was the most prevalent  disease in the dataset. The proportion of the positive class became 27 \% and 23 \% in the training and test datasets, respectively. The DenseNet121 model achieved accuracies of 89 \% and 84 \% on the training and test sets, respectively.
 
 We evaluated the four FDR controlling methods and plotted the results on Figure \ref{fig:I}-(iii). Interestingly, the most confident prediction of the DenseNet121 model in the test set is wrong. This can be seen by the flat region of the ground truth evaluation (black line) at low q-values around 0-0.05 (Fig, \ref{fig:I}-(iii)-C). Fortunately, all four FDR controlling methods under investigations managed to capture this and remain close to the ground truth (Fig, \ref{fig:I}-(iii)-B-D). The standard EPVs (red dots) tend to be off at the critical range (p-value $<$ 0.1), but this does not affect the FDR controlling results in this benchmark, perhaps because of the confident incorrect predictions. Overall, we conclude that all four methods provide accurate FDR control. In our opinion, this indicates the absence of any database distribution shits. These plots also show that our TNA- and TNA+ algorithms do not corrupt  the EPVs in the absence of data shift.
 
@@ -274,7 +280,7 @@ The actual frequency of pleural effusion may be different among all chest x-ray 
 	\label{fig:tissue_example}
 \end{figure} 
 
-TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues. Each images has size of 512x512 pixels, was manually segmented at the pixel level and paired whole-cell and nuclear annotations. An arbitrarily chosen sample data is shown in Figure \ref{fig:tissue_example}.  Our binary classification task was to predict whether a pixel is inside a cell (positive) or not (negative). The overall positive-negative ratio was 59\%:41\% in the training data and in contrast to 66\%:34\% in the test data. However, the class ratio varies over the images considerably. We used the Cellpose pre-trained deep neural network model \cite{cellpose} and fine-tuned it for five epochs. It achieved accuracy of 95\% and 94\% on training and test data, respectively. Our evaluation is reported in Figure \ref{fig:ii}-(i). The plots reveal that the BH protocol with standard EPVs becomes liberally biased (Fig. \ref{fig:ii}-(i)-B-C). The latter possibly originates from the data distribution shift or from overfitting. Both LTT and the BH with TNA EPV remain accurate. 
+TissueNet dataset contains 1.3 million microscopic images of cells obtained from six various platforms and nine organs including both histologically healthy and diseased tissues \cite{greenwald2022whole}. Each images has size of 512x512 pixels, was manually segmented at the pixel level and paired whole-cell and nuclear annotations. An arbitrarily chosen sample data is shown in Figure \ref{fig:tissue_example}.  Our binary classification task was to predict whether a pixel is inside a cell (positive) or not (negative). The overall positive-negative ratio was 59\%:41\% in the training data and in contrast to 66\%:34\% in the test data. However, the class ratio varies over the images considerably. We used the Cellpose pre-trained deep neural network model \cite{cellpose} and fine-tuned it for five epochs. It achieved accuracy of 95\% and 94\% on training and test data, respectively. Our evaluation is reported in Figure \ref{fig:ii}-(i). The plots reveal that the BH protocol with standard EPVs becomes liberally biased (Fig. \ref{fig:ii}-(i)-B-C). The latter possibly originates from the data distribution shift or from overfitting. Both LTT and the BH with TNA EPV remain accurate. 
 
 The situation changes when we evaluate the segmentation problem with a single image. We arbitrarily chose one test image (ID: 007-008-009) and run the Cellpose model to classify each pixel. The positive and negative class balance was: 33\%:67\%. The Q-Q plot (Fig. \ref{fig:ii}-(ii)-A) of the test EPVs (red dots) indicates that the scores of negative samples from training and test datasets are different. The TNA EPVs on the Q-Q plot shows that the TNA methods have managed to adjust the p-values of the test samples (green and purple dots) closer to the uniform distribution. The plots on Fig. \ref{fig:ii}-(ii)-B-D indicate that LTT has turned out to be liberally biased, the BH method with standard EPVs strongly conservative. The BH with TNA- EPVs (green) and with TNA+ EPVs (purple) remain accurate in the critical region of q-values (0-0.4). Thus, the TNA methods have succeeded in correcting the p-values at the critical range at least. 
 
@@ -370,6 +376,31 @@ Not applicable. Manuscript contains no individual person's data in any form.
 
 \subsection{Data availability}
 The data used in this study are secondary data obtained from publicly available sources. All data sources are properly cited within the manuscript. No new primary data were generated or analyzed in this research. For access to the datasets used, please refer to the original sources as indicated in the references section.
+
+The datasets analysed in this study are publicly available from the following repositories:
+
+\begin{table}[ht]
+\centering
+\small % Уменьшаем шрифт для компактности
+\caption{Data Availability Statement containing dataset names, repositories, and accession details.}
+\label{tab:data_availability}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Dataset} & \textbf{Full Name} & \textbf{Repository} & \textbf{Accession / URL} \\
+\midrule
+MNIST & MNIST Database of Handwritten Digits & Yann LeCun's Website; UCI ML Repository & DOI: \href{https://doi.org/10.24432/C53K8Q}{10.24432/C53K8Q}; \url{http://yann.lecun.com/exdb/mnist/} \\
+\addlinespace
+BCSS & Breast Cancer Semantic Segmentation Dataset & GitHub & DOI: \href{https://doi.org/10.1093/bioinformatics/btz083}{10.1093/bioinformatics/btz083}; \url{https://github.com/PathologyDataScience/BCSS} \\
+\addlinespace
+CheXpert & CheXpert Chest X-ray Dataset & Stanford AIMI & \url{https://aimi.stanford.edu/datasets/chexpert-chest-x-rays} \\
+\addlinespace
+PatchCamelyon & PatchCamelyon (PCam) Benchmark Dataset & Zenodo & DOI: \href{https://doi.org/10.5281/zenodo.2546921}{10.5281/zenodo.2546921} \\
+\addlinespace
+TissueNet & TissueNet Cell Segmentation Dataset & DeepCell Datasets & DOI: \href{https://doi.org/10.1038/s41587-021-01094-0}{10.1038/s41587-021-01094-0}; \url{https://datasets.deepcell.org/} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
 
 
 \subsection{Funding}
