@@ -1,0 +1,1096 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{62}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{Feng et~al.}{2022}]{feng2022clinical}
+\begin{barticle}
+\bauthor{\bsnm{Feng}, \binits{J.}},
+\bauthor{\bsnm{Phillips}, \binits{R.V.}},
+\bauthor{\bsnm{Malenica}, \binits{I.}},
+\bauthor{\bsnm{Bishara}, \binits{A.}},
+\bauthor{\bsnm{Hubbard}, \binits{A.E.}},
+\bauthor{\bsnm{Celi}, \binits{L.A.}},
+\bauthor{\bsnm{Pirracchio}, \binits{R.}}:
+\batitle{Clinical artificial intelligence quality improvement: towards
+  continual monitoring and updating of ai algorithms in healthcare}.
+\bjtitle{npj Digital Medicine}
+\bvolume{5}(\bissue{1}),
+\bfpage{66}
+(\byear{2022})
+\end{barticle}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{Al-Antari}{2023}]{al2023artificial}
+\begin{botherref}
+\oauthor{\bsnm{Al-Antari}, \binits{M.A.}}:
+Artificial Intelligence for Medical Diagnostics—Existing and Future AI
+  Technology!
+MDPI
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{Wynants et~al.}{2019}]{wynants2019three}
+\begin{barticle}
+\bauthor{\bsnm{Wynants}, \binits{L.}},
+\bauthor{\bsnm{Van~Smeden}, \binits{M.}},
+\bauthor{\bsnm{McLernon}, \binits{D.J.}},
+\bauthor{\bsnm{Timmerman}, \binits{D.}},
+\bauthor{\bsnm{Steyerberg}, \binits{E.W.}},
+\bauthor{\bsnm{Van~Calster}, \binits{B.}},
+\bauthor{\bsnm{tests}, \binits{T.G.}},
+\bauthor{\bsnm{STRATOS~initiative}}:
+\batitle{Three myths about risk thresholds for prediction models}.
+\bjtitle{BMC medicine}
+\bvolume{17},
+\bfpage{1}--\blpage{7}
+(\byear{2019})
+\end{barticle}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{Newman-Toker et~al.}{2021}]{newman2021rate}
+\begin{barticle}
+\bauthor{\bsnm{Newman-Toker}, \binits{D.E.}},
+\bauthor{\bsnm{Wang}, \binits{Z.}},
+\bauthor{\bsnm{Zhu}, \binits{Y.}},
+\bauthor{\bsnm{Nassery}, \binits{N.}},
+\bauthor{\bsnm{Tehrani}, \binits{A.S.S.}},
+\bauthor{\bsnm{Schaffer}, \binits{A.C.}},
+\bauthor{\bsnm{Yu-Moe}, \binits{C.W.}},
+\bauthor{\bsnm{Clemens}, \binits{G.D.}},
+\bauthor{\bsnm{Fanai}, \binits{M.}},
+\bauthor{\bsnm{Siegal}, \binits{D.}}:
+\batitle{Rate of diagnostic errors and serious misdiagnosis-related harms for
+  major vascular events, infections, and cancers: toward a national incidence
+  estimate using the “big three”}.
+\bjtitle{Diagnosis}
+\bvolume{8}(\bissue{1}),
+\bfpage{67}--\blpage{84}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{Salz et~al.}{2010}]{salz2010meta}
+\begin{barticle}
+\bauthor{\bsnm{Salz}, \binits{T.}},
+\bauthor{\bsnm{Richman}, \binits{A.R.}},
+\bauthor{\bsnm{Brewer}, \binits{N.T.}}:
+\batitle{Meta-analyses of the effect of false-positive mammograms on generic
+  and specific psychosocial outcomes}.
+\bjtitle{Psycho-Oncology}
+\bvolume{19}(\bissue{10}),
+\bfpage{1026}--\blpage{1034}
+(\byear{2010})
+\end{barticle}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{Tosteson
+  et~al.}{2014}]{Tosteson2014Consequences}
+\begin{barticle}
+\bauthor{\bsnm{Tosteson}, \binits{A.N.A.}},
+\bauthor{\bsnm{Fryback}, \binits{D.G.}},
+\bauthor{\bsnm{Hammond}, \binits{C.S.}},
+\bauthor{\bsnm{Hanna}, \binits{L.G.}},
+\bauthor{\bsnm{Grove}, \binits{M.R.}},
+\bauthor{\bsnm{Brown}, \binits{M.}},
+\bauthor{\bsnm{Wang}, \binits{Q.}},
+\bauthor{\bsnm{Lindfors}, \binits{K.}},
+\bauthor{\bsnm{Pisano}, \binits{E.D.}}:
+\batitle{{Consequences of False-Positive Screening Mammograms}}.
+\bjtitle{JAMA Internal Medicine}
+\bvolume{174}(\bissue{6}),
+\bfpage{954}--\blpage{961}
+(\byear{2014})
+\doiurl{10.1001/jamainternmed.2014.981}
+{\href{https://arxiv.org/abs/https://jamanetwork.com/journals/jamainternalmedicine/articlepdf/1861037/ioi140027.pdf}{{https://jamanetwork.com/journals/jamainternalmedicine/articlepdf/1861037/ioi140027.pdf}}}
+\end{barticle}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{Xu et~al.}{2016}]{xu2016frequency}
+\begin{barticle}
+\bauthor{\bsnm{Xu}, \binits{Y.}},
+\bauthor{\bsnm{Nguyen}, \binits{D.}},
+\bauthor{\bsnm{Mohamed}, \binits{A.}},
+\bauthor{\bsnm{Carcel}, \binits{C.}},
+\bauthor{\bsnm{Li}, \binits{Q.}},
+\bauthor{\bsnm{Kutlubaev}, \binits{M.A.}},
+\bauthor{\bsnm{Anderson}, \binits{C.S.}},
+\bauthor{\bsnm{Hackett}, \binits{M.L.}}:
+\batitle{Frequency of a false positive diagnosis of epilepsy: a systematic
+  review of observational studies}.
+\bjtitle{Seizure}
+\bvolume{41},
+\bfpage{167}--\blpage{174}
+(\byear{2016})
+\end{barticle}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{Mouliou and
+  Gourgoulianis}{2021}]{mouliou2021false}
+\begin{barticle}
+\bauthor{\bsnm{Mouliou}, \binits{D.S.}},
+\bauthor{\bsnm{Gourgoulianis}, \binits{K.I.}}:
+\batitle{False-positive and false-negative covid-19 cases: respiratory
+  prevention and management strategies, vaccination, and further perspectives}.
+\bjtitle{Expert review of respiratory medicine}
+\bvolume{15}(\bissue{8}),
+\bfpage{993}--\blpage{1002}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{Woloshin et~al.}{2020}]{woloshin2020false}
+\begin{barticle}
+\bauthor{\bsnm{Woloshin}, \binits{S.}},
+\bauthor{\bsnm{Patel}, \binits{N.}},
+\bauthor{\bsnm{Kesselheim}, \binits{A.S.}}:
+\batitle{False negative tests for sars-cov-2 infection—challenges and
+  implications}.
+\bjtitle{New England Journal of Medicine}
+\bvolume{383}(\bissue{6}),
+\bfpage{38}
+(\byear{2020})
+\end{barticle}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Bradley
+  et~al.}{2021}]{bradley2021interpreting}
+\begin{barticle}
+\bauthor{\bsnm{Bradley}, \binits{S.H.}},
+\bauthor{\bsnm{Nicholson}, \binits{B.D.}},
+\bauthor{\bsnm{Funston}, \binits{G.}}:
+\batitle{Interpreting negative test results when assessing cancer risk in
+  general practice}.
+\bjtitle{British Journal of General Practice}
+\bvolume{71}(\bissue{708}),
+\bfpage{298}--\blpage{299}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{Macios and Nowakowski}{2022}]{macios2022false}
+\begin{barticle}
+\bauthor{\bsnm{Macios}, \binits{A.}},
+\bauthor{\bsnm{Nowakowski}, \binits{A.}}:
+\batitle{False negative results in cervical cancer screening—risks, reasons
+  and implications for clinical practice and public health}.
+\bjtitle{Diagnostics}
+\bvolume{12}(\bissue{6}),
+\bfpage{1508}
+(\byear{2022})
+\end{barticle}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Pinsky}{2015}]{pinsky2015principles}
+\begin{barticle}
+\bauthor{\bsnm{Pinsky}, \binits{P.F.}}:
+\batitle{Principles of cancer screening}.
+\bjtitle{Surgical Clinics}
+\bvolume{95}(\bissue{5}),
+\bfpage{953}--\blpage{966}
+(\byear{2015})
+\end{barticle}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Benjamini and
+  Hochberg}{1995}]{Benjamini1995Controlling}
+\begin{barticle}
+\bauthor{\bsnm{Benjamini}, \binits{Y.}},
+\bauthor{\bsnm{Hochberg}, \binits{Y.}}:
+\batitle{Controlling the false discovery rate: a practical and powerful
+  approach to multiple testing}.
+\bjtitle{J. Roy. Statist. Soc. Ser. B}
+\bvolume{57}(\bissue{1}),
+\bfpage{289}--\blpage{300}
+(\byear{1995})
+\end{barticle}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{Koos et~al.}{2021}]{koos2021automatic}
+\begin{barticle}
+\bauthor{\bsnm{Koos}, \binits{K.}},
+\bauthor{\bsnm{Ol{\'a}h}, \binits{G.}},
+\bauthor{\bsnm{Balassa}, \binits{T.}},
+\bauthor{\bsnm{Mihut}, \binits{N.}},
+\bauthor{\bsnm{R{\'o}zsa}, \binits{M.}},
+\bauthor{\bsnm{Ozsv{\'a}r}, \binits{A.}},
+\bauthor{\bsnm{Tasnadi}, \binits{E.}},
+\bauthor{\bsnm{Barz{\'o}}, \binits{P.}},
+\bauthor{\bsnm{Farag{\'o}}, \binits{N.}},
+\bauthor{\bsnm{Pusk{\'a}s}, \binits{L.}}, \betal:
+\batitle{Automatic deep learning-driven label-free image-guided patch clamp
+  system}.
+\bjtitle{Nature communications}
+\bvolume{12}(\bissue{1}),
+\bfpage{1}--\blpage{11}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Moshkov et~al.}{2024}]{moshkov2024learning}
+\begin{barticle}
+\bauthor{\bsnm{Moshkov}, \binits{N.}},
+\bauthor{\bsnm{Bornholdt}, \binits{M.}},
+\bauthor{\bsnm{Benoit}, \binits{S.}},
+\bauthor{\bsnm{Smith}, \binits{M.}},
+\bauthor{\bsnm{McQuin}, \binits{C.}},
+\bauthor{\bsnm{Goodman}, \binits{A.}},
+\bauthor{\bsnm{Senft}, \binits{R.A.}},
+\bauthor{\bsnm{Han}, \binits{Y.}},
+\bauthor{\bsnm{Babadi}, \binits{M.}},
+\bauthor{\bsnm{Horvath}, \binits{P.}}, \betal:
+\batitle{Learning representations for image-based profiling of perturbations}.
+\bjtitle{Nature Communications}
+\bvolume{15}(\bissue{1}),
+\bfpage{1594}
+(\byear{2024})
+\end{barticle}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Falk et~al.}{2019}]{falk2019u}
+\begin{barticle}
+\bauthor{\bsnm{Falk}, \binits{T.}},
+\bauthor{\bsnm{Mai}, \binits{D.}},
+\bauthor{\bsnm{Bensch}, \binits{R.}},
+\bauthor{\bsnm{{\c{C}}i{\c{c}}ek}, \binits{{\"O}.}},
+\bauthor{\bsnm{Abdulkadir}, \binits{A.}},
+\bauthor{\bsnm{Marrakchi}, \binits{Y.}},
+\bauthor{\bsnm{B{\"o}hm}, \binits{A.}},
+\bauthor{\bsnm{Deubner}, \binits{J.}},
+\bauthor{\bsnm{J{\"a}ckel}, \binits{Z.}},
+\bauthor{\bsnm{Seiwald}, \binits{K.}}, \betal:
+\batitle{U-net: deep learning for cell counting, detection, and morphometry}.
+\bjtitle{Nature methods}
+\bvolume{16}(\bissue{1}),
+\bfpage{67}--\blpage{70}
+(\byear{2019})
+\end{barticle}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Storey}{2002}]{storey2002direct}
+\begin{barticle}
+\bauthor{\bsnm{Storey}, \binits{J.D.}}:
+\batitle{A direct approach to false discovery rates}.
+\bjtitle{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}
+\bvolume{64}(\bissue{3}),
+\bfpage{479}--\blpage{498}
+(\byear{2002})
+\end{barticle}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{Storey and
+  Tibshirani}{2003}]{storey2003statistical}
+\begin{barticle}
+\bauthor{\bsnm{Storey}, \binits{J.D.}},
+\bauthor{\bsnm{Tibshirani}, \binits{R.}}:
+\batitle{Statistical significance for genomewide studies}.
+\bjtitle{Proceedings of the National Academy of Sciences}
+\bvolume{100}(\bissue{16}),
+\bfpage{9440}--\blpage{9445}
+(\byear{2003})
+\end{barticle}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Barber and
+  Cand{\`e}s}{2015}]{barber2015controlling}
+\begin{botherref}
+\oauthor{\bsnm{Barber}, \binits{R.F.}},
+\oauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}}:
+Controlling the false discovery rate via knockoffs.
+The Annals of statistics,
+2055--2085
+(2015)
+\end{botherref}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Elias and Gygi}{2007}]{elias2007target}
+\begin{barticle}
+\bauthor{\bsnm{Elias}, \binits{J.E.}},
+\bauthor{\bsnm{Gygi}, \binits{S.P.}}:
+\batitle{Target-decoy search strategy for increased confidence in large-scale
+  protein identifications by mass spectrometry}.
+\bjtitle{Nature methods}
+\bvolume{4}(\bissue{3}),
+\bfpage{207}
+(\byear{2007})
+\end{barticle}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{Zhao and Su}{2023}]{zhao2023controlling}
+\begin{botherref}
+\oauthor{\bsnm{Zhao}, \binits{G.}},
+\oauthor{\bsnm{Su}, \binits{Z.}}:
+Controlling fsr in selective classification.
+arXiv preprint arXiv:2311.03811
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{Rava et~al.}{2021}]{rava2021burden}
+\begin{botherref}
+\oauthor{\bsnm{Rava}, \binits{B.}},
+\oauthor{\bsnm{Sun}, \binits{W.}},
+\oauthor{\bsnm{James}, \binits{G.M.}},
+\oauthor{\bsnm{Tong}, \binits{X.}}:
+A burden shared is a burden halved: A fairness-adjusted approach to
+  classification.
+arXiv preprint arXiv:2110.05720
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 23
+\bibitem[\protect\citeauthoryear{Gao and Zhao}{2023}]{gao2023simultaneous}
+\begin{botherref}
+\oauthor{\bsnm{Gao}, \binits{Z.}},
+\oauthor{\bsnm{Zhao}, \binits{Q.}}:
+Simultaneous hypothesis testing using internal negative controls with an
+  application to proteomics.
+arXiv preprint arXiv:2303.01552
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 24
+\bibitem[\protect\citeauthoryear{Bates et~al.}{2023}]{bates2023testing}
+\begin{barticle}
+\bauthor{\bsnm{Bates}, \binits{S.}},
+\bauthor{\bsnm{Cand{\`e}s}, \binits{E.}},
+\bauthor{\bsnm{Lei}, \binits{L.}},
+\bauthor{\bsnm{Romano}, \binits{Y.}},
+\bauthor{\bsnm{Sesia}, \binits{M.}}:
+\batitle{Testing for outliers with conformal p-values}.
+\bjtitle{The Annals of Statistics}
+\bvolume{51}(\bissue{1}),
+\bfpage{149}--\blpage{178}
+(\byear{2023})
+\end{barticle}
+\endbibitem
+
+%%% 25
+\bibitem[\protect\citeauthoryear{Marandon et~al.}{2023}]{marandon2023adaptive}
+\begin{botherref}
+\oauthor{\bsnm{Marandon}, \binits{A.}},
+\oauthor{\bsnm{Lei}, \binits{L.}},
+\oauthor{\bsnm{Mary}, \binits{D.}},
+\oauthor{\bsnm{Roquain}, \binits{E.}}:
+Adaptive novelty detection with false discovery rate guarantee
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 26
+\bibitem[\protect\citeauthoryear{Angelopoulos
+  et~al.}{2021}]{angelopoulos2021learn}
+\begin{botherref}
+\oauthor{\bsnm{Angelopoulos}, \binits{A.N.}},
+\oauthor{\bsnm{Bates}, \binits{S.}},
+\oauthor{\bsnm{Cand{\`e}s}, \binits{E.J.}},
+\oauthor{\bsnm{Jordan}, \binits{M.I.}},
+\oauthor{\bsnm{Lei}, \binits{L.}}:
+Learn then test: Calibrating predictive algorithms to achieve risk control.
+arXiv preprint arXiv:2110.01052
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 27
+\bibitem[\protect\citeauthoryear{Quionero-Candela
+  et~al.}{2009}]{Candela2009DatasetShift}
+\begin{bbook}
+\bauthor{\bsnm{Quionero-Candela}, \binits{J.}},
+\bauthor{\bsnm{Sugiyama}, \binits{M.}},
+\bauthor{\bsnm{Schwaighofer}, \binits{A.}},
+\bauthor{\bsnm{Lawrence}, \binits{N.D.}}:
+\bbtitle{Dataset Shift in Machine Learning}.
+\bpublisher{The MIT Press}, \blocation{???}
+(\byear{2009})
+\end{bbook}
+\endbibitem
+
+%%% 28
+\bibitem[\protect\citeauthoryear{Leek et~al.}{2010}]{leek2010tackling}
+\begin{barticle}
+\bauthor{\bsnm{Leek}, \binits{J.T.}},
+\bauthor{\bsnm{Scharpf}, \binits{R.B.}},
+\bauthor{\bsnm{Bravo}, \binits{H.C.}},
+\bauthor{\bsnm{Simcha}, \binits{D.}},
+\bauthor{\bsnm{Langmead}, \binits{B.}},
+\bauthor{\bsnm{Johnson}, \binits{W.E.}},
+\bauthor{\bsnm{Geman}, \binits{D.}},
+\bauthor{\bsnm{Baggerly}, \binits{K.}},
+\bauthor{\bsnm{Irizarry}, \binits{R.A.}}:
+\batitle{Tackling the widespread and critical impact of batch effects in
+  high-throughput data}.
+\bjtitle{Nature Reviews Genetics}
+\bvolume{11}(\bissue{10}),
+\bfpage{733}--\blpage{739}
+(\byear{2010})
+\end{barticle}
+\endbibitem
+
+%%% 29
+\bibitem[\protect\citeauthoryear{Bray et~al.}{2016}]{bray2016cell}
+\begin{barticle}
+\bauthor{\bsnm{Bray}, \binits{M.-A.}},
+\bauthor{\bsnm{Singh}, \binits{S.}},
+\bauthor{\bsnm{Han}, \binits{H.}},
+\bauthor{\bsnm{Davis}, \binits{C.T.}},
+\bauthor{\bsnm{Borgeson}, \binits{B.}},
+\bauthor{\bsnm{Hartland}, \binits{C.}},
+\bauthor{\bsnm{Kost-Alimova}, \binits{M.}},
+\bauthor{\bsnm{Gustafsdottir}, \binits{S.M.}},
+\bauthor{\bsnm{Gibson}, \binits{C.C.}},
+\bauthor{\bsnm{Carpenter}, \binits{A.E.}}:
+\batitle{Cell painting, a high-content image-based assay for morphological
+  profiling using multiplexed fluorescent dyes}.
+\bjtitle{Nature protocols}
+\bvolume{11}(\bissue{9}),
+\bfpage{1757}--\blpage{1774}
+(\byear{2016})
+\end{barticle}
+\endbibitem
+
+%%% 30
+\bibitem[\protect\citeauthoryear{Phua et~al.}{2022}]{phua2022perspectives}
+\begin{botherref}
+\oauthor{\bsnm{Phua}, \binits{S.-X.}},
+\oauthor{\bsnm{Lim}, \binits{K.-P.}},
+\oauthor{\bsnm{Goh}, \binits{W.W.-B.}}:
+Perspectives for better batch effect correction in mass-spectrometry-based
+  proteomics.
+Computational and Structural Biotechnology Journal
+(2022)
+\end{botherref}
+\endbibitem
+
+%%% 31
+\bibitem[\protect\citeauthoryear{{\v{C}}uklina
+  et~al.}{2021}]{vcuklina2021diagnostics}
+\begin{barticle}
+\bauthor{\bsnm{{\v{C}}uklina}, \binits{J.}},
+\bauthor{\bsnm{Lee}, \binits{C.H.}},
+\bauthor{\bsnm{Williams}, \binits{E.G.}},
+\bauthor{\bsnm{Sajic}, \binits{T.}},
+\bauthor{\bsnm{Collins}, \binits{B.C.}},
+\bauthor{\bsnm{Rodr{\'\i}guez~Mart{\'\i}nez}, \binits{M.}},
+\bauthor{\bsnm{Sharma}, \binits{V.S.}},
+\bauthor{\bsnm{Wendt}, \binits{F.}},
+\bauthor{\bsnm{Goetze}, \binits{S.}},
+\bauthor{\bsnm{Keele}, \binits{G.R.}}, \betal:
+\batitle{Diagnostics and correction of batch effects in large-scale proteomic
+  studies: A tutorial}.
+\bjtitle{Molecular systems biology}
+\bvolume{17}(\bissue{8}),
+\bfpage{10240}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 32
+\bibitem[\protect\citeauthoryear{Ramey}{2016}]{ramey2016macroeconomic}
+\begin{barticle}
+\bauthor{\bsnm{Ramey}, \binits{V.A.}}:
+\batitle{Macroeconomic shocks and their propagation}.
+\bjtitle{Handbook of macroeconomics}
+\bvolume{2},
+\bfpage{71}--\blpage{162}
+(\byear{2016})
+\end{barticle}
+\endbibitem
+
+%%% 33
+\bibitem[\protect\citeauthoryear{Clement et~al.}{2023}]{clement2023coping}
+\begin{bchapter}
+\bauthor{\bsnm{Clement}, \binits{T.}},
+\bauthor{\bsnm{Nguyen}, \binits{H.T.T.}},
+\bauthor{\bsnm{Kemmerzell}, \binits{N.}},
+\bauthor{\bsnm{Abdelaal}, \binits{M.}},
+\bauthor{\bsnm{Stjelja}, \binits{D.}}:
+\bctitle{Coping with data distribution shifts: Xai-based adaptive learning with
+  shap clustering for energy consumption prediction}.
+In: \bbtitle{Australasian Joint Conference on Artificial Intelligence},
+pp. \bfpage{147}--\blpage{159}
+(\byear{2023}).
+\bcomment{Springer}
+\end{bchapter}
+\endbibitem
+
+%%% 34
+\bibitem[\protect\citeauthoryear{Kritzman et~al.}{2012}]{kritzman2012regime}
+\begin{barticle}
+\bauthor{\bsnm{Kritzman}, \binits{M.}},
+\bauthor{\bsnm{Page}, \binits{S.}},
+\bauthor{\bsnm{Turkington}, \binits{D.}}:
+\batitle{Regime shifts: Implications for dynamic strategies (corrected)}.
+\bjtitle{Financial analysts journal}
+\bvolume{68}(\bissue{3}),
+\bfpage{22}--\blpage{39}
+(\byear{2012})
+\end{barticle}
+\endbibitem
+
+%%% 35
+\bibitem[\protect\citeauthoryear{Guo et~al.}{2023}]{guo2023predict}
+\begin{botherref}
+\oauthor{\bsnm{Guo}, \binits{Y.}},
+\oauthor{\bsnm{Hu}, \binits{C.}},
+\oauthor{\bsnm{Yang}, \binits{Y.}}:
+Predict the future from the past? on the temporal data distribution shift in
+  financial sentiment classifications.
+arXiv preprint arXiv:2310.12620
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 36
+\bibitem[\protect\citeauthoryear{Zhang}{2021}]{Zhang:EECS-2021-262}
+\begin{botherref}
+\oauthor{\bsnm{Zhang}, \binits{M.}}:
+Adaptation based approaches to distribution shift problems.
+PhD thesis,
+EECS Department, University of California, Berkeley
+(Dec 2021).
+\url{http://www2.eecs.berkeley.edu/Pubs/TechRpts/2021/EECS-2021-262.html}
+\end{botherref}
+\endbibitem
+
+%%% 37
+\bibitem[\protect\citeauthoryear{Dasu et~al.}{2009}]{dasu2009change}
+\begin{bchapter}
+\bauthor{\bsnm{Dasu}, \binits{T.}},
+\bauthor{\bsnm{Krishnan}, \binits{S.}},
+\bauthor{\bsnm{Lin}, \binits{D.}},
+\bauthor{\bsnm{Venkatasubramanian}, \binits{S.}},
+\bauthor{\bsnm{Yi}, \binits{K.}}:
+\bctitle{Change (detection) you can believe in: Finding distributional shifts
+  in data streams}.
+In: \bbtitle{Advances in Intelligent Data Analysis VIII: 8th International
+  Symposium on Intelligent Data Analysis, IDA 2009, Lyon, France, August
+  31-September 2, 2009. Proceedings 8},
+pp. \bfpage{21}--\blpage{34}
+(\byear{2009}).
+\bcomment{Springer}
+\end{bchapter}
+\endbibitem
+
+%%% 38
+\bibitem[\protect\citeauthoryear{Kulinski et~al.}{2020}]{kulinski2020feature}
+\begin{barticle}
+\bauthor{\bsnm{Kulinski}, \binits{S.}},
+\bauthor{\bsnm{Bagchi}, \binits{S.}},
+\bauthor{\bsnm{Inouye}, \binits{D.I.}}:
+\batitle{Feature shift detection: Localizing which features have shifted via
+  conditional distribution tests}.
+\bjtitle{Advances in neural information processing systems}
+\bvolume{33},
+\bfpage{19523}--\blpage{19533}
+(\byear{2020})
+\end{barticle}
+\endbibitem
+
+%%% 39
+\bibitem[\protect\citeauthoryear{Lipton et~al.}{2018}]{lipton2018detecting}
+\begin{bchapter}
+\bauthor{\bsnm{Lipton}, \binits{Z.}},
+\bauthor{\bsnm{Wang}, \binits{Y.-X.}},
+\bauthor{\bsnm{Smola}, \binits{A.}}:
+\bctitle{Detecting and correcting for label shift with black box predictors}.
+In: \bbtitle{International Conference on Machine Learning},
+pp. \bfpage{3122}--\blpage{3130}
+(\byear{2018}).
+\bcomment{PMLR}
+\end{bchapter}
+\endbibitem
+
+%%% 40
+\bibitem[\protect\citeauthoryear{Budhathoki et~al.}{2021}]{budhathoki2021did}
+\begin{bchapter}
+\bauthor{\bsnm{Budhathoki}, \binits{K.}},
+\bauthor{\bsnm{Janzing}, \binits{D.}},
+\bauthor{\bsnm{Bloebaum}, \binits{P.}},
+\bauthor{\bsnm{Ng}, \binits{H.}}:
+\bctitle{Why did the distribution change?}
+In: \bbtitle{International Conference on Artificial Intelligence and
+  Statistics},
+pp. \bfpage{1666}--\blpage{1674}
+(\byear{2021}).
+\bcomment{PMLR}
+\end{bchapter}
+\endbibitem
+
+%%% 41
+\bibitem[\protect\citeauthoryear{Kulinski and
+  Inouye}{2023}]{kulinski2023towards}
+\begin{bchapter}
+\bauthor{\bsnm{Kulinski}, \binits{S.}},
+\bauthor{\bsnm{Inouye}, \binits{D.I.}}:
+\bctitle{Towards explaining distribution shifts}.
+In: \bbtitle{International Conference on Machine Learning},
+pp. \bfpage{17931}--\blpage{17952}
+(\byear{2023}).
+\bcomment{PMLR}
+\end{bchapter}
+\endbibitem
+
+%%% 42
+\bibitem[\protect\citeauthoryear{Sui et~al.}{2024}]{sui2024unleashing}
+\begin{botherref}
+\oauthor{\bsnm{Sui}, \binits{Y.}},
+\oauthor{\bsnm{Wu}, \binits{Q.}},
+\oauthor{\bsnm{Wu}, \binits{J.}},
+\oauthor{\bsnm{Cui}, \binits{Q.}},
+\oauthor{\bsnm{Li}, \binits{L.}},
+\oauthor{\bsnm{Zhou}, \binits{J.}},
+\oauthor{\bsnm{Wang}, \binits{X.}},
+\oauthor{\bsnm{He}, \binits{X.}}:
+Unleashing the power of graph data augmentation on covariate distribution
+  shift.
+Advances in Neural Information Processing Systems
+\textbf{36}
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 43
+\bibitem[\protect\citeauthoryear{Zhang et~al.}{2021}]{zhang2021adaptive}
+\begin{barticle}
+\bauthor{\bsnm{Zhang}, \binits{M.}},
+\bauthor{\bsnm{Marklund}, \binits{H.}},
+\bauthor{\bsnm{Dhawan}, \binits{N.}},
+\bauthor{\bsnm{Gupta}, \binits{A.}},
+\bauthor{\bsnm{Levine}, \binits{S.}},
+\bauthor{\bsnm{Finn}, \binits{C.}}:
+\batitle{Adaptive risk minimization: Learning to adapt to domain shift}.
+\bjtitle{Advances in Neural Information Processing Systems}
+\bvolume{34},
+\bfpage{23664}--\blpage{23678}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 44
+\bibitem[\protect\citeauthoryear{Zhang et~al.}{2022}]{zhang2022memo}
+\begin{barticle}
+\bauthor{\bsnm{Zhang}, \binits{M.}},
+\bauthor{\bsnm{Levine}, \binits{S.}},
+\bauthor{\bsnm{Finn}, \binits{C.}}:
+\batitle{Memo: Test time robustness via adaptation and augmentation}.
+\bjtitle{Advances in Neural Information Processing Systems}
+\bvolume{35},
+\bfpage{38629}--\blpage{38642}
+(\byear{2022})
+\end{barticle}
+\endbibitem
+
+%%% 45
+\bibitem[\protect\citeauthoryear{Donoho et~al.}{2000}]{donoho2000high}
+\begin{barticle}
+\bauthor{\bsnm{Donoho}, \binits{D.L.}}, \betal:
+\batitle{High-dimensional data analysis: The curses and blessings of
+  dimensionality}.
+\bjtitle{AMS math challenges lecture}
+\bvolume{1}(\bissue{2000}),
+\bfpage{32}
+(\byear{2000})
+\end{barticle}
+\endbibitem
+
+%%% 46
+\bibitem[\protect\citeauthoryear{Cristianini}{2000}]{cristianini2000introduction}
+\begin{bbook}
+\bauthor{\bsnm{Cristianini}, \binits{N.}}:
+\bbtitle{An Introduction to Support Vector Machines and Other Kernel-based
+  Learning Methods}.
+\bpublisher{Cambridge University Press}, \blocation{???}
+(\byear{2000})
+\end{bbook}
+\endbibitem
+
+%%% 47
+\bibitem[\protect\citeauthoryear{Storey et~al.}{2004}]{storey2004strong}
+\begin{barticle}
+\bauthor{\bsnm{Storey}, \binits{J.D.}},
+\bauthor{\bsnm{Taylor}, \binits{J.E.}},
+\bauthor{\bsnm{Siegmund}, \binits{D.}}:
+\batitle{Strong control, conservative point estimation and simultaneous
+  conservative consistency of false discovery rates: a unified approach}.
+\bjtitle{Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}
+\bvolume{66}(\bissue{1}),
+\bfpage{187}--\blpage{205}
+(\byear{2004})
+\end{barticle}
+\endbibitem
+
+%%% 48
+\bibitem[\protect\citeauthoryear{LeCun et~al.}{1998}]{lecun1998gradient}
+\begin{barticle}
+\bauthor{\bsnm{LeCun}, \binits{Y.}},
+\bauthor{\bsnm{Bottou}, \binits{L.}},
+\bauthor{\bsnm{Bengio}, \binits{Y.}},
+\bauthor{\bsnm{Haffner}, \binits{P.}}:
+\batitle{Gradient-based learning applied to document recognition}.
+\bjtitle{Proceedings of the IEEE}
+\bvolume{86}(\bissue{11}),
+\bfpage{2278}--\blpage{2324}
+(\byear{1998})
+\doiurl{10.1109/5.726791}
+\end{barticle}
+\endbibitem
+
+%%% 49
+\bibitem[\protect\citeauthoryear{Viviano
+  et~al.}{2021}]{joseph_d__viviano__2019}
+\begin{bchapter}
+\bauthor{\bsnm{Viviano}, \binits{J.D.}},
+\bauthor{\bsnm{Simpson}, \binits{B.}},
+\bauthor{\bsnm{Dutil}, \binits{F.}},
+\bauthor{\bsnm{Bengio}, \binits{Y.}},
+\bauthor{\bsnm{Cohen}, \binits{J.P.}}:
+\bctitle{Saliency is a possible red herring when diagnosing poor
+  generalization}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2021}).
+\burl{https://openreview.net/forum?id=c9-WeM-ceB}
+\end{bchapter}
+\endbibitem
+
+%%% 50
+\bibitem[\protect\citeauthoryear{Veeling et~al.}{2018}]{Veeling2018-qh}
+\begin{botherref}
+\oauthor{\bsnm{Veeling}, \binits{B.S.}},
+\oauthor{\bsnm{Linmans}, \binits{J.}},
+\oauthor{\bsnm{Winkens}, \binits{J.}},
+\oauthor{\bsnm{Cohen}, \binits{T.}},
+\oauthor{\bsnm{Welling}, \binits{M.}}:
+Rotation equivariant {CNNs} for digital pathology
+(2018)
+{\href{https://arxiv.org/abs/1806.03962}{{arXiv:1806.03962}}}
+{[cs.CV]}
+\end{botherref}
+\endbibitem
+
+%%% 51
+\bibitem[\protect\citeauthoryear{Ehteshami~Bejnordi et~al.}{2017}]{camelyon16}
+\begin{barticle}
+\bauthor{\bsnm{Ehteshami~Bejnordi}, \binits{B.}},
+\bauthor{\bsnm{Veta}, \binits{M.}},
+\bauthor{\bsnm{Diest}, \binits{P.}},
+\bauthor{\bsnm{Ginneken}, \binits{B.}},
+\bauthor{\bsnm{Karssemeijer}, \binits{N.}},
+\bauthor{\bsnm{Litjens}, \binits{G.}},
+\bauthor{\bsnm{Laak}, \binits{J.A.W.M.}},
+\bauthor{},
+\bauthor{\bsnm{CAMELYON16~Consortium}}:
+\batitle{{Diagnostic Assessment of Deep Learning Algorithms for Detection of
+  Lymph Node Metastases in Women With Breast Cancer}}.
+\bjtitle{JAMA}
+\bvolume{318}(\bissue{22}),
+\bfpage{2199}--\blpage{2210}
+(\byear{2017})
+\doiurl{10.1001/jama.2017.14585}
+{\href{https://arxiv.org/abs/https://jamanetwork.com/journals/jama/articlepdf/2665774/jama\_ehteshami\_bejnordi\_2017\_oi\_170113.pdf}{{https://jamanetwork.com/journals/jama/articlepdf/2665774/jama\_ehteshami\_bejnordi\_2017\_oi\_170113.pdf}}}
+\end{barticle}
+\endbibitem
+
+%%% 52
+\bibitem[\protect\citeauthoryear{Pocock et~al.}{2022}]{Pocock2022}
+\begin{barticle}
+\bauthor{\bsnm{Pocock}, \binits{J.}},
+\bauthor{\bsnm{Graham}, \binits{S.}},
+\bauthor{\bsnm{Vu}, \binits{Q.D.}},
+\bauthor{\bsnm{Jahanifar}, \binits{M.}},
+\bauthor{\bsnm{Deshpande}, \binits{S.}},
+\bauthor{\bsnm{Hadjigeorghiou}, \binits{G.}},
+\bauthor{\bsnm{Shephard}, \binits{A.}},
+\bauthor{\bsnm{Bashir}, \binits{R.M.S.}},
+\bauthor{\bsnm{Bilal}, \binits{M.}},
+\bauthor{\bsnm{Lu}, \binits{W.}},
+\bauthor{\bsnm{Epstein}, \binits{D.}},
+\bauthor{\bsnm{Minhas}, \binits{F.}},
+\bauthor{\bsnm{Rajpoot}, \binits{N.M.}},
+\bauthor{\bsnm{Raza}, \binits{S.E.A.}}:
+\batitle{{TIAToolbox as an end-to-end library for advanced tissue image
+  analytics}}.
+\bjtitle{Communications Medicine}
+\bvolume{2}(\bissue{1}),
+\bfpage{120}
+(\byear{2022})
+\doiurl{10.1038/s43856-022-00186-5}
+\end{barticle}
+\endbibitem
+
+%%% 53
+\bibitem[\protect\citeauthoryear{Irvin et~al.}{2019}]{irvin2019chexpert}
+\begin{bchapter}
+\bauthor{\bsnm{Irvin}, \binits{J.}},
+\bauthor{\bsnm{Rajpurkar}, \binits{P.}},
+\bauthor{\bsnm{Ko}, \binits{M.}},
+\bauthor{\bsnm{Yu}, \binits{Y.}},
+\bauthor{\bsnm{Ciurea-Ilcus}, \binits{S.}},
+\bauthor{\bsnm{Chute}, \binits{C.}},
+\bauthor{\bsnm{Marklund}, \binits{H.}},
+\bauthor{\bsnm{Haghgoo}, \binits{B.}},
+\bauthor{\bsnm{Ball}, \binits{R.}},
+\bauthor{\bsnm{Shpanskaya}, \binits{K.}},
+\bauthor{\bsnm{Seekins}, \binits{J.}},
+\bauthor{\bsnm{Mong}, \binits{D.A.}},
+\bauthor{\bsnm{Halabi}, \binits{S.S.}},
+\bauthor{\bsnm{Sandberg}, \binits{J.K.}},
+\bauthor{\bsnm{Jones}, \binits{R.}},
+\bauthor{\bsnm{Larson}, \binits{D.B.}},
+\bauthor{\bsnm{Langlotz}, \binits{C.P.}},
+\bauthor{\bsnm{Patel}, \binits{B.N.}},
+\bauthor{\bsnm{Lungren}, \binits{M.P.}},
+\bauthor{\bsnm{Ng}, \binits{A.Y.}}:
+\bctitle{{CheXpert}: A large chest radiograph dataset with uncertainty labels
+  and expert comparison}.
+In: \bbtitle{Proceedings of the AAAI Conference on Artificial Intelligence},
+vol. \bseriesno{33},
+pp. \bfpage{590}--\blpage{597}
+(\byear{2019}).
+\doiurl{10.1609/aaai.v33i01.3301590}
+\end{bchapter}
+\endbibitem
+
+%%% 54
+\bibitem[\protect\citeauthoryear{Cohen et~al.}{2020}]{cohen2020limits}
+\begin{bchapter}
+\bauthor{\bsnm{Cohen}, \binits{J.P.}},
+\bauthor{\bsnm{Hashir}, \binits{M.}},
+\bauthor{\bsnm{Brooks}, \binits{R.}},
+\bauthor{\bsnm{Bertrand}, \binits{H.}}:
+\bctitle{On the limits of cross-domain generalization in automated x-ray
+  prediction}.
+In: \bbtitle{Medical Imaging with Deep Learning}
+(\byear{2020}).
+\burl{https://arxiv.org/abs/2002.02497}
+\end{bchapter}
+\endbibitem
+
+%%% 55
+\bibitem[\protect\citeauthoryear{Cohen et~al.}{2022}]{Cohen2022xrv}
+\begin{bchapter}
+\bauthor{\bsnm{Cohen}, \binits{J.P.}},
+\bauthor{\bsnm{Viviano}, \binits{J.D.}},
+\bauthor{\bsnm{Bertin}, \binits{P.}},
+\bauthor{\bsnm{Morrison}, \binits{P.}},
+\bauthor{\bsnm{Torabian}, \binits{P.}},
+\bauthor{\bsnm{Guarrera}, \binits{M.}},
+\bauthor{\bsnm{Lungren}, \binits{M.P.}},
+\bauthor{\bsnm{Chaudhari}, \binits{A.}},
+\bauthor{\bsnm{Brooks}, \binits{R.}},
+\bauthor{\bsnm{Hashir}, \binits{M.}},
+\bauthor{\bsnm{Bertrand}, \binits{H.}}:
+\bctitle{{TorchXRayVision: A library of chest X-ray datasets and models}}.
+In: \bbtitle{Medical Imaging with Deep Learning}
+(\byear{2022}).
+\burl{https://github.com/mlmed/torchxrayvision}
+\end{bchapter}
+\endbibitem
+
+%%% 56
+\bibitem[\protect\citeauthoryear{Zaki et~al.}{2024}]{Zaki2024}
+\begin{barticle}
+\bauthor{\bsnm{Zaki}, \binits{H.A.}},
+\bauthor{\bsnm{Albaroudi}, \binits{B.}},
+\bauthor{\bsnm{Shaban}, \binits{E.E.}},
+\bauthor{\bsnm{Shaban}, \binits{A.}},
+\bauthor{\bsnm{Elgassim}, \binits{M.}},
+\bauthor{\bsnm{Almarri}, \binits{N.D.}},
+\bauthor{\bsnm{Basharat}, \binits{K.}},
+\bauthor{\bsnm{Azad}, \binits{A.M.}}:
+\batitle{Advancement in pleura effusion diagnosis: a systematic review and
+  meta-analysis of point-of-care ultrasound versus radiographic thoracic
+  imaging}.
+\bjtitle{The Ultrasound Journal}
+\bvolume{16}(\bissue{1}),
+\bfpage{3}
+(\byear{2024})
+\doiurl{10.1186/s13089-023-00356-z}
+\end{barticle}
+\endbibitem
+
+%%% 57
+\bibitem[\protect\citeauthoryear{Cashen and
+  Petersen}{2017}]{Cashen2017PleuralEA}
+\begin{barticle}
+\bauthor{\bsnm{Cashen}, \binits{K.}},
+\bauthor{\bsnm{Petersen}, \binits{T.L.}}:
+\batitle{Pleural effusions and pneumothoraces}.
+\bjtitle{Pediatrics in Review}
+\bvolume{38},
+\bfpage{170}--\blpage{181}
+(\byear{2017})
+\end{barticle}
+\endbibitem
+
+%%% 58
+\bibitem[\protect\citeauthoryear{Mahesh et~al.}{2022}]{mahesh2022patient}
+\begin{barticle}
+\bauthor{\bsnm{Mahesh}, \binits{M.}},
+\bauthor{\bsnm{Ansari}, \binits{A.J.}},
+\bauthor{\bsnm{Mettler~Jr}, \binits{F.A.}}:
+\batitle{Patient exposure from radiologic and nuclear medicine procedures in
+  the united states and worldwide: 2009--2018}.
+\bjtitle{Radiology}
+\bvolume{307}(\bissue{1}),
+\bfpage{221263}
+(\byear{2022})
+\end{barticle}
+\endbibitem
+
+%%% 59
+\bibitem[\protect\citeauthoryear{Shebl and Paul}{2018}]{shebl2018parapneumonic}
+\begin{botherref}
+\oauthor{\bsnm{Shebl}, \binits{E.}},
+\oauthor{\bsnm{Paul}, \binits{M.}}:
+Parapneumonic pleural effusions and empyema thoracis
+(2018)
+\end{botherref}
+\endbibitem
+
+%%% 60
+\bibitem[\protect\citeauthoryear{Greenwald et~al.}{2022}]{greenwald2022whole}
+\begin{barticle}
+\bauthor{\bsnm{Greenwald}, \binits{N.F.}},
+\bauthor{\bsnm{Miller}, \binits{G.}},
+\bauthor{\bsnm{Moen}, \binits{E.}},
+\bauthor{\bsnm{Kong}, \binits{A.}},
+\bauthor{\bsnm{Kagel}, \binits{A.}},
+\bauthor{\bsnm{Dougherty}, \binits{T.}},
+\bauthor{\bsnm{Fullaway}, \binits{C.C.}},
+\bauthor{\bsnm{McIntosh}, \binits{B.J.}},
+\bauthor{\bsnm{Leow}, \binits{K.X.}},
+\bauthor{\bsnm{Schwartz}, \binits{M.S.}}, \betal:
+\batitle{Whole-cell segmentation of tissue images with human-level performance
+  using large-scale data annotation and deep learning}.
+\bjtitle{Nature Biotechnology}
+\bvolume{40}(\bissue{4}),
+\bfpage{555}--\blpage{565}
+(\byear{2022})
+\doiurl{10.1038/s41587-021-01094-0}
+\end{barticle}
+\endbibitem
+
+%%% 61
+\bibitem[\protect\citeauthoryear{Stringer et~al.}{2020}]{cellpose}
+\begin{botherref}
+\oauthor{\bsnm{Stringer}, \binits{C.}},
+\oauthor{\bsnm{Michaelos}, \binits{M.}},
+\oauthor{\bsnm{Pachitariu}, \binits{M.}}:
+Cellpose: A generalist algorithm for cellular segmentation
+(2020)
+\doiurl{10.1101/2020.02.02.931238}
+\end{botherref}
+\endbibitem
+
+%%% 62
+\bibitem[\protect\citeauthoryear{Amgad et~al.}{2019}]{Amgad2019StructuredCE}
+\begin{barticle}
+\bauthor{\bsnm{Amgad}, \binits{M.}},
+\bauthor{\bsnm{Elfandy}, \binits{H.}},
+\bauthor{\bsnm{Hussein}, \binits{H.}},
+\bauthor{\bsnm{Atteya}, \binits{L.A.}},
+\bauthor{\bsnm{Elsebaie}, \binits{M.A.T.}},
+\bauthor{\bsnm{Elnasr}, \binits{L.S.A.}},
+\bauthor{\bsnm{Sakr}, \binits{R.A.}},
+\bauthor{\bsnm{Salem}, \binits{H.S.E.}},
+\bauthor{\bsnm{Ismail}, \binits{A.F.}},
+\bauthor{\bsnm{Saad}, \binits{A.M.}},
+\bauthor{\bsnm{Ahmed}, \binits{J.}},
+\bauthor{\bsnm{Elsebaie}, \binits{M.A.T.}},
+\bauthor{\bsnm{Rahman}, \binits{M.}},
+\bauthor{\bsnm{Ruhban}, \binits{I.A.}},
+\bauthor{\bsnm{Elgazar}, \binits{N.M.}},
+\bauthor{\bsnm{Alagha}, \binits{Y.}},
+\bauthor{\bsnm{Osman}, \binits{M.H.}},
+\bauthor{\bsnm{Alhusseiny}, \binits{A.M.}},
+\bauthor{\bsnm{Khalaf}, \binits{M.M.}},
+\bauthor{\bsnm{Younes}, \binits{A.-A.F.}},
+\bauthor{\bsnm{Abdulkarim}, \binits{A.}},
+\bauthor{\bsnm{Younes}, \binits{D.M.}},
+\bauthor{\bsnm{Gadallah}, \binits{A.M.}},
+\bauthor{\bsnm{Elkashash}, \binits{A.M.}},
+\bauthor{\bsnm{Fala}, \binits{S.Y.}},
+\bauthor{\bsnm{Zaki}, \binits{B.M.}},
+\bauthor{\bsnm{Beezley}, \binits{J.D.}},
+\bauthor{\bsnm{Chittajallu}, \binits{D.R.}},
+\bauthor{\bsnm{Manthey}, \binits{D.}},
+\bauthor{\bsnm{Gutman}, \binits{D.A.}},
+\bauthor{\bsnm{Cooper}, \binits{L.A.D.}}:
+\batitle{Structured crowdsourcing enables convolutional segmentation of
+  histology images}.
+\bjtitle{Bioinformatics}
+\bvolume{35},
+\bfpage{3461}--\blpage{3467}
+(\byear{2019})
+\end{barticle}
+\endbibitem
+
+\end{thebibliography}

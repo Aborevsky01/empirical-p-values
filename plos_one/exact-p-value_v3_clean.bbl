@@ -1,0 +1,398 @@
+\begin{thebibliography}{10}
+
+\bibitem{feng2022clinical}
+Jean Feng, Rachael~V Phillips, Ivana Malenica, Andrew Bishara, Alan~E Hubbard,
+  Leo~A Celi, and Romain Pirracchio.
+\newblock Clinical artificial intelligence quality improvement: towards
+  continual monitoring and updating of ai algorithms in healthcare.
+\newblock {\em npj Digital Medicine}, 5(1):66, 2022.
+
+\bibitem{al2023artificial}
+Mugahed~A Al-Antari.
+\newblock Artificial intelligence for medical diagnostics—existing and future
+  ai technology!, 2023.
+
+\bibitem{wynants2019three}
+Laure Wynants, Maarten Van~Smeden, David~J McLernon, Dirk Timmerman, Ewout~W
+  Steyerberg, Ben Van~Calster, Topic Group~‘Evaluating diagnostic tests, and
+  prediction models’ of~the STRATOS~initiative.
+\newblock Three myths about risk thresholds for prediction models.
+\newblock {\em BMC medicine}, 17:1--7, 2019.
+
+\bibitem{newman2021rate}
+David~E Newman-Toker, Zheyu Wang, Yuxin Zhu, Najlla Nassery, Ali S~Saber
+  Tehrani, Adam~C Schaffer, Chihwen~Winnie Yu-Moe, Gwendolyn~D Clemens, Mehdi
+  Fanai, and Dana Siegal.
+\newblock Rate of diagnostic errors and serious misdiagnosis-related harms for
+  major vascular events, infections, and cancers: toward a national incidence
+  estimate using the “big three”.
+\newblock {\em Diagnosis}, 8(1):67--84, 2021.
+
+\bibitem{salz2010meta}
+Talya Salz, Alice~R Richman, and Noel~T Brewer.
+\newblock Meta-analyses of the effect of false-positive mammograms on generic
+  and specific psychosocial outcomes.
+\newblock {\em Psycho-Oncology}, 19(10):1026--1034, 2010.
+
+\bibitem{Tosteson2014Consequences}
+Anna N.~A. Tosteson, Dennis~G. Fryback, Cristina~S. Hammond, Lucy~G. Hanna,
+  Margaret~R. Grove, Mary Brown, Qianfei Wang, Karen Lindfors, and Etta~D.
+  Pisano.
+\newblock {Consequences of False-Positive Screening Mammograms}.
+\newblock {\em JAMA Internal Medicine}, 174(6):954--961, 06 2014.
+
+\bibitem{xu2016frequency}
+Ying Xu, Dennis Nguyen, Armin Mohamed, Cheryl Carcel, Qiang Li, Mansur~A
+  Kutlubaev, Craig~S Anderson, and Maree~L Hackett.
+\newblock Frequency of a false positive diagnosis of epilepsy: a systematic
+  review of observational studies.
+\newblock {\em Seizure}, 41:167--174, 2016.
+
+\bibitem{mouliou2021false}
+Dimitra~S Mouliou and Konstantinos~I Gourgoulianis.
+\newblock False-positive and false-negative covid-19 cases: respiratory
+  prevention and management strategies, vaccination, and further perspectives.
+\newblock {\em Expert review of respiratory medicine}, 15(8):993--1002, 2021.
+
+\bibitem{woloshin2020false}
+Steven Woloshin, Neeraj Patel, and Aaron~S Kesselheim.
+\newblock False negative tests for sars-cov-2 infection—challenges and
+  implications.
+\newblock {\em New England Journal of Medicine}, 383(6):e38, 2020.
+
+\bibitem{bradley2021interpreting}
+Stephen~H Bradley, Brian~D Nicholson, and Garth Funston.
+\newblock Interpreting negative test results when assessing cancer risk in
+  general practice.
+\newblock {\em British Journal of General Practice}, 71(708):298--299, 2021.
+
+\bibitem{macios2022false}
+Anna Macios and Andrzej Nowakowski.
+\newblock False negative results in cervical cancer screening—risks, reasons
+  and implications for clinical practice and public health.
+\newblock {\em Diagnostics}, 12(6):1508, 2022.
+
+\bibitem{pinsky2015principles}
+Paul~F Pinsky.
+\newblock Principles of cancer screening.
+\newblock {\em Surgical Clinics}, 95(5):953--966, 2015.
+
+\bibitem{Benjamini1995Controlling}
+Yoav Benjamini and Yosef Hochberg.
+\newblock Controlling the false discovery rate: a practical and powerful
+  approach to multiple testing.
+\newblock {\em J. Roy. Statist. Soc. Ser. B}, 57(1):289--300, 1995.
+
+\bibitem{koos2021automatic}
+Krisztian Koos, G{\'a}sp{\'a}r Ol{\'a}h, Tamas Balassa, Norbert Mihut,
+  M{\'a}rton R{\'o}zsa, Attila Ozsv{\'a}r, Ervin Tasnadi, P{\'a}l Barz{\'o},
+  N{\'o}ra Farag{\'o}, L{\'a}szl{\'o} Pusk{\'a}s, et~al.
+\newblock Automatic deep learning-driven label-free image-guided patch clamp
+  system.
+\newblock {\em Nature communications}, 12(1):1--11, 2021.
+
+\bibitem{moshkov2024learning}
+Nikita Moshkov, Michael Bornholdt, Santiago Benoit, Matthew Smith, Claire
+  McQuin, Allen Goodman, Rebecca~A Senft, Yu~Han, Mehrtash Babadi, Peter
+  Horvath, et~al.
+\newblock Learning representations for image-based profiling of perturbations.
+\newblock {\em Nature Communications}, 15(1):1594, 2024.
+
+\bibitem{falk2019u}
+Thorsten Falk, Dominic Mai, Robert Bensch, {\"O}zg{\"u}n {\c{C}}i{\c{c}}ek,
+  Ahmed Abdulkadir, Yassine Marrakchi, Anton B{\"o}hm, Jan Deubner, Zoe
+  J{\"a}ckel, Katharina Seiwald, et~al.
+\newblock U-net: deep learning for cell counting, detection, and morphometry.
+\newblock {\em Nature methods}, 16(1):67--70, 2019.
+
+\bibitem{storey2002direct}
+John~D Storey.
+\newblock A direct approach to false discovery rates.
+\newblock {\em Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 64(3):479--498, 2002.
+
+\bibitem{storey2003statistical}
+John~D Storey and Robert Tibshirani.
+\newblock Statistical significance for genomewide studies.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  100(16):9440--9445, 2003.
+
+\bibitem{barber2015controlling}
+Rina~Foygel Barber and Emmanuel~J Cand{\`e}s.
+\newblock Controlling the false discovery rate via knockoffs.
+\newblock {\em The Annals of statistics}, pages 2055--2085, 2015.
+
+\bibitem{elias2007target}
+Joshua~E Elias and Steven~P Gygi.
+\newblock Target-decoy search strategy for increased confidence in large-scale
+  protein identifications by mass spectrometry.
+\newblock {\em Nature methods}, 4(3):207, 2007.
+
+\bibitem{zhao2023controlling}
+Guanlan Zhao and Zhonggen Su.
+\newblock Controlling fsr in selective classification.
+\newblock {\em arXiv preprint arXiv:2311.03811}, 2023.
+
+\bibitem{rava2021burden}
+Bradley Rava, Wenguang Sun, Gareth~M James, and Xin Tong.
+\newblock A burden shared is a burden halved: A fairness-adjusted approach to
+  classification.
+\newblock {\em arXiv preprint arXiv:2110.05720}, 2021.
+
+\bibitem{gao2023simultaneous}
+Zijun Gao and Qingyuan Zhao.
+\newblock Simultaneous hypothesis testing using internal negative controls with
+  an application to proteomics.
+\newblock {\em arXiv preprint arXiv:2303.01552}, 2023.
+
+\bibitem{danilova2019bias}
+Yulia Danilova, Anastasia Voronkova, Pavel Sulimov, and Attila Kertesz-Farkas.
+\newblock Bias in false discovery rate estimation in mass-spectrometry-based
+  peptide identification.
+\newblock {\em Journal of Proteome Research}, 18(5):2354--2358, 2019.
+
+\bibitem{bates2023testing}
+Stephen Bates, Emmanuel Cand{\`e}s, Lihua Lei, Yaniv Romano, and Matteo Sesia.
+\newblock Testing for outliers with conformal p-values.
+\newblock {\em The Annals of Statistics}, 51(1):149--178, 2023.
+
+\bibitem{marandon2023adaptive}
+Ariane Marandon, Lihua Lei, David Mary, and Etienne Roquain.
+\newblock Adaptive novelty detection with false discovery rate guarantee, 2023.
+
+\bibitem{angelopoulos2021learn}
+Anastasios~N Angelopoulos, Stephen Bates, Emmanuel~J Cand{\`e}s, Michael~I
+  Jordan, and Lihua Lei.
+\newblock Learn then test: Calibrating predictive algorithms to achieve risk
+  control.
+\newblock {\em arXiv preprint arXiv:2110.01052}, 2021.
+
+\bibitem{dmlsbook2022}
+Chip Huyen.
+\newblock {\em {Designing Machine Learning Systems}}.
+\newblock O'Reilly Media, USA, 2022.
+
+\bibitem{Candela2009DatasetShift}
+Joaquin Quionero-Candela, Masashi Sugiyama, Anton Schwaighofer, and Neil~D.
+  Lawrence.
+\newblock {\em Dataset Shift in Machine Learning}.
+\newblock The MIT Press, 2009.
+
+\bibitem{leek2010tackling}
+Jeffrey~T Leek, Robert~B Scharpf, H{\'e}ctor~Corrada Bravo, David Simcha,
+  Benjamin Langmead, W~Evan Johnson, Donald Geman, Keith Baggerly, and Rafael~A
+  Irizarry.
+\newblock Tackling the widespread and critical impact of batch effects in
+  high-throughput data.
+\newblock {\em Nature Reviews Genetics}, 11(10):733--739, 2010.
+
+\bibitem{bray2016cell}
+Mark-Anthony Bray, Shantanu Singh, Han Han, Chadwick~T Davis, Blake Borgeson,
+  Cathy Hartland, Maria Kost-Alimova, Sigrun~M Gustafsdottir, Christopher~C
+  Gibson, and Anne~E Carpenter.
+\newblock Cell painting, a high-content image-based assay for morphological
+  profiling using multiplexed fluorescent dyes.
+\newblock {\em Nature protocols}, 11(9):1757--1774, 2016.
+
+\bibitem{phua2022perspectives}
+Ser-Xian Phua, Kai-Peng Lim, and Wilson Wen-Bin Goh.
+\newblock Perspectives for better batch effect correction in
+  mass-spectrometry-based proteomics.
+\newblock {\em Computational and Structural Biotechnology Journal}, 2022.
+
+\bibitem{vcuklina2021diagnostics}
+Jelena {\v{C}}uklina, Chloe~H Lee, Evan~G Williams, Tatjana Sajic, Ben~C
+  Collins, Mar{\'\i}a Rodr{\'\i}guez~Mart{\'\i}nez, Varun~S Sharma, Fabian
+  Wendt, Sandra Goetze, Gregory~R Keele, et~al.
+\newblock Diagnostics and correction of batch effects in large-scale proteomic
+  studies: A tutorial.
+\newblock {\em Molecular systems biology}, 17(8):e10240, 2021.
+
+\bibitem{ramey2016macroeconomic}
+Valerie~A Ramey.
+\newblock Macroeconomic shocks and their propagation.
+\newblock {\em Handbook of macroeconomics}, 2:71--162, 2016.
+
+\bibitem{clement2023coping}
+Tobias Clement, Hung Truong~Thanh Nguyen, Nils Kemmerzell, Mohamed Abdelaal,
+  and Davor Stjelja.
+\newblock Coping with data distribution shifts: Xai-based adaptive learning
+  with shap clustering for energy consumption prediction.
+\newblock In {\em Australasian Joint Conference on Artificial Intelligence},
+  pages 147--159. Springer, 2023.
+
+\bibitem{kritzman2012regime}
+Mark Kritzman, Sebastien Page, and David Turkington.
+\newblock Regime shifts: Implications for dynamic strategies (corrected).
+\newblock {\em Financial analysts journal}, 68(3):22--39, 2012.
+
+\bibitem{guo2023predict}
+Yue Guo, Chenxi Hu, and Yi~Yang.
+\newblock Predict the future from the past? on the temporal data distribution
+  shift in financial sentiment classifications.
+\newblock {\em arXiv preprint arXiv:2310.12620}, 2023.
+
+\bibitem{Zhang:EECS-2021-262}
+Marvin Zhang.
+\newblock {\em Adaptation Based Approaches to Distribution Shift Problems}.
+\newblock PhD thesis, EECS Department, University of California, Berkeley, Dec
+  2021.
+
+\bibitem{dasu2009change}
+Tamraparni Dasu, Shankar Krishnan, Dongyu Lin, Suresh Venkatasubramanian, and
+  Kevin Yi.
+\newblock Change (detection) you can believe in: Finding distributional shifts
+  in data streams.
+\newblock In {\em Advances in Intelligent Data Analysis VIII: 8th International
+  Symposium on Intelligent Data Analysis, IDA 2009, Lyon, France, August
+  31-September 2, 2009. Proceedings 8}, pages 21--34. Springer, 2009.
+
+\bibitem{kulinski2020feature}
+Sean Kulinski, Saurabh Bagchi, and David~I Inouye.
+\newblock Feature shift detection: Localizing which features have shifted via
+  conditional distribution tests.
+\newblock {\em Advances in neural information processing systems},
+  33:19523--19533, 2020.
+
+\bibitem{lipton2018detecting}
+Zachary Lipton, Yu-Xiang Wang, and Alexander Smola.
+\newblock Detecting and correcting for label shift with black box predictors.
+\newblock In {\em International conference on machine learning}, pages
+  3122--3130. PMLR, 2018.
+
+\bibitem{budhathoki2021did}
+Kailash Budhathoki, Dominik Janzing, Patrick Bloebaum, and Hoiyi Ng.
+\newblock Why did the distribution change?
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}, pages 1666--1674. PMLR, 2021.
+
+\bibitem{kulinski2023towards}
+Sean Kulinski and David~I Inouye.
+\newblock Towards explaining distribution shifts.
+\newblock In {\em International Conference on Machine Learning}, pages
+  17931--17952. PMLR, 2023.
+
+\bibitem{sui2024unleashing}
+Yongduo Sui, Qitian Wu, Jiancan Wu, Qing Cui, Longfei Li, Jun Zhou, Xiang Wang,
+  and Xiangnan He.
+\newblock Unleashing the power of graph data augmentation on covariate
+  distribution shift.
+\newblock {\em Advances in Neural Information Processing Systems}, 36, 2024.
+
+\bibitem{zhang2021adaptive}
+Marvin Zhang, Henrik Marklund, Nikita Dhawan, Abhishek Gupta, Sergey Levine,
+  and Chelsea Finn.
+\newblock Adaptive risk minimization: Learning to adapt to domain shift.
+\newblock {\em Advances in Neural Information Processing Systems},
+  34:23664--23678, 2021.
+
+\bibitem{zhang2022memo}
+Marvin Zhang, Sergey Levine, and Chelsea Finn.
+\newblock Memo: Test time robustness via adaptation and augmentation.
+\newblock {\em Advances in Neural Information Processing Systems},
+  35:38629--38642, 2022.
+
+\bibitem{donoho2000high}
+David~L Donoho et~al.
+\newblock High-dimensional data analysis: The curses and blessings of
+  dimensionality.
+\newblock {\em AMS math challenges lecture}, 1(2000):32, 2000.
+
+\bibitem{cristianini2000introduction}
+Nello Cristianini.
+\newblock {\em An Introduction to Support Vector Machines and other
+  kernel-based learning methods}.
+\newblock Cambridge University Press, 2000.
+
+\bibitem{storey2004strong}
+John~D Storey, Jonathan~E Taylor, and David Siegmund.
+\newblock Strong control, conservative point estimation and simultaneous
+  conservative consistency of false discovery rates: a unified approach.
+\newblock {\em Journal of the Royal Statistical Society Series B: Statistical
+  Methodology}, 66(1):187--205, 2004.
+
+\bibitem{joseph_d__viviano__2019}
+Joseph~D Viviano, Becks Simpson, Francis Dutil, Yoshua Bengio, and Joseph~Paul
+  Cohen.
+\newblock Saliency is a possible red herring when diagnosing poor
+  generalization.
+\newblock In {\em International Conference on Learning Representations}, 2021.
+
+\bibitem{Veeling2018-qh}
+Bastiaan~S Veeling, Jasper Linmans, Jim Winkens, Taco Cohen, and Max Welling.
+\newblock Rotation equivariant {CNNs} for digital pathology.
+\newblock June 2018.
+
+\bibitem{camelyon16}
+Babak Ehteshami~Bejnordi, Mitko Veta, Paul Johannes~van Diest, Bram van
+  Ginneken, Nico Karssemeijer, Geert Litjens, Jeroen A. W.~M. van~der Laak, ,
+  and the CAMELYON16~Consortium.
+\newblock {Diagnostic Assessment of Deep Learning Algorithms for Detection of
+  Lymph Node Metastases in Women With Breast Cancer}.
+\newblock {\em JAMA}, 318(22):2199--2210, 12 2017.
+
+\bibitem{Pocock2022}
+Johnathan Pocock, Simon Graham, Quoc~Dang Vu, Mostafa Jahanifar, Srijay
+  Deshpande, Giorgos Hadjigeorghiou, Adam Shephard, Raja Muhammad~Saad Bashir,
+  Mohsin Bilal, Wenqi Lu, David Epstein, Fayyaz Minhas, Nasir~M Rajpoot, and
+  Shan E~Ahmed Raza.
+\newblock {TIAToolbox as an end-to-end library for advanced tissue image
+  analytics}.
+\newblock {\em Communications Medicine}, 2(1):120, sep 2022.
+
+\bibitem{cohen2020limits}
+Joseph~Paul Cohen, Mohammad Hashir, Rupert Brooks, and Hadrien Bertrand.
+\newblock On the limits of cross-domain generalization in automated x-ray
+  prediction.
+\newblock In {\em Medical Imaging with Deep Learning}, 2020.
+
+\bibitem{Cohen2022xrv}
+Joseph~Paul Cohen, Joseph~D. Viviano, Paul Bertin, Paul Morrison, Parsa
+  Torabian, Matteo Guarrera, Matthew~P Lungren, Akshay Chaudhari, Rupert
+  Brooks, Mohammad Hashir, and Hadrien Bertrand.
+\newblock {TorchXRayVision: A library of chest X-ray datasets and models}.
+\newblock In {\em Medical Imaging with Deep Learning}, 2022.
+
+\bibitem{Zaki2024}
+Hany~A. Zaki, Bilal Albaroudi, Eman~E. Shaban, Ahmed Shaban, Mohamed Elgassim,
+  Nood~Dhafi Almarri, Kaleem Basharat, and Aftab~Mohammad Azad.
+\newblock Advancement in pleura effusion diagnosis: a systematic review and
+  meta-analysis of point-of-care ultrasound versus radiographic thoracic
+  imaging.
+\newblock {\em The Ultrasound Journal}, 16(1):3, Jan 2024.
+
+\bibitem{Cashen2017PleuralEA}
+Katherine Cashen and Tara~L Petersen.
+\newblock Pleural effusions and pneumothoraces.
+\newblock {\em Pediatrics in Review}, 38:170 -- 181, 2017.
+
+\bibitem{mahesh2022patient}
+Mahadevappa Mahesh, Armin~J Ansari, and Fred~A Mettler~Jr.
+\newblock Patient exposure from radiologic and nuclear medicine procedures in
+  the united states and worldwide: 2009--2018.
+\newblock {\em Radiology}, 307(1):e221263, 2022.
+
+\bibitem{shebl2018parapneumonic}
+Eman Shebl and Manju Paul.
+\newblock Parapneumonic pleural effusions and empyema thoracis.
+\newblock 2018.
+
+\bibitem{cellpose}
+Carsen Stringer, Michalis Michaelos, and Marius Pachitariu.
+\newblock Cellpose: A generalist algorithm for cellular segmentation.
+\newblock 02 2020.
+
+\bibitem{Amgad2019StructuredCE}
+Mohamed Amgad, Habiba Elfandy, Hagar Hussein, Lamees~A. Atteya, Mai A~T.
+  Elsebaie, Lamia S.~Abo Elnasr, Rokia~Adel Sakr, Hazem S.~E. Salem, Ahmed~F.
+  Ismail, Anas~M. Saad, Joumana Ahmed, Maha A.~T. Elsebaie, Mustafijur Rahman,
+  Inas~A Ruhban, Nada~M. Elgazar, Yahya Alagha, Mohamed~Hosny Osman, Ahmed~M.
+  Alhusseiny, Mariam~M. Khalaf, Abo-Alela~F. Younes, Ali Abdulkarim, Duaa~M.
+  Younes, Ahmed~M. Gadallah, Ahmad~M. Elkashash, Salma~Y. Fala, Basma~Mostafa
+  Zaki, Jonathan~D. Beezley, Deepak~Roy Chittajallu, David Manthey, David~A.
+  Gutman, and Lee A.~D. Cooper.
+\newblock Structured crowdsourcing enables convolutional segmentation of
+  histology images.
+\newblock {\em Bioinformatics}, 35:3461 -- 3467, 2019.
+
+\end{thebibliography}

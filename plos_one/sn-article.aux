@@ -1,0 +1,170 @@
+\relax 
+\bibstyle{sn-mathphys-num}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\Newlabel{1}{1}
+\citation{feng2022clinical,al2023artificial}
+\citation{wynants2019three}
+\citation{newman2021rate,salz2010meta,Tosteson2014Consequences,xu2016frequency}
+\citation{mouliou2021false}
+\citation{woloshin2020false}
+\citation{bradley2021interpreting}
+\citation{macios2022false,pinsky2015principles}
+\citation{Benjamini1995Controlling}
+\citation{koos2021automatic}
+\citation{moshkov2024learning}
+\citation{falk2019u}
+\citation{storey2002direct,storey2003statistical,barber2015controlling}
+\citation{elias2007target}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces List of Abbreviations}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:abbreviations}{{1}{2}{List of Abbreviations}{table.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Background}{2}{section.1}\protected@file@percent }
+\newlabel{sec1}{{1}{2}{Background}{section.1}{}}
+\citation{zhao2023controlling}
+\citation{rava2021burden}
+\citation{elias2007target}
+\citation{gao2023simultaneous}
+\citation{bates2023testing}
+\citation{gao2023simultaneous}
+\citation{bates2023testing,marandon2023adaptive}
+\citation{rava2021burden,angelopoulos2021learn}
+\citation{Candela2009DatasetShift}
+\citation{leek2010tackling}
+\citation{bray2016cell}
+\citation{phua2022perspectives,vcuklina2021diagnostics}
+\citation{ramey2016macroeconomic}
+\citation{clement2023coping}
+\citation{kritzman2012regime,guo2023predict,Zhang:EECS-2021-262}
+\newlabel{eq:epv}{{1}{3}{Background}{section.1}{}}
+\citation{dasu2009change}
+\citation{kulinski2020feature}
+\citation{lipton2018detecting}
+\citation{budhathoki2021did,kulinski2023towards}
+\citation{sui2024unleashing,zhang2021adaptive,zhang2022memo}
+\citation{donoho2000high}
+\citation{donoho2000high}
+\citation{cristianini2000introduction}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces {\bf  Sketch of TNA. } (A) The plot illustrates the distribution shift of the discriminative scores of the test (blue) instances from the training (red) instances. The shaded areas illustrate the observed training and unobserved test null distributions, respectively. The black arrow indicates that the test scores should be shifted to leftward. The TNA method aims to approximate the unknown test null distribution (blue shaded area) based on the known true training null distribution (red shaded area). (B) TNA aims to perform a test score adjustment so that the test null aligns to training null distributions better. }}{5}{figure.1}\protected@file@percent }
+\newlabel{fig:tna_sketch}{{1}{5}{{\bf Sketch of TNA. } (A) The plot illustrates the distribution shift of the discriminative scores of the test (blue) instances from the training (red) instances. The shaded areas illustrate the observed training and unobserved test null distributions, respectively. The black arrow indicates that the test scores should be shifted to leftward. The TNA method aims to approximate the unknown test null distribution (blue shaded area) based on the known true training null distribution (red shaded area). (B) TNA aims to perform a test score adjustment so that the test null aligns to training null distributions better}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{5}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Preliminaries}{5}{subsection.2.1}\protected@file@percent }
+\citation{storey2004strong}
+\citation{lecun1998gradient}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Learn-then-test (LTT).}{6}{subsubsection.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Example 1.}{6}{section*.2}\protected@file@percent }
+\newlabel{ex:vanilla}{{2.1.1}{6}{Example 1}{section*.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces {\bf  FDR control in MNIST with EPVs. } (A) The discriminative score distributions. (B) The Q-Q plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}}{7}{figure.2}\protected@file@percent }
+\newlabel{fig:binary}{{2}{7}{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. (B) The Q-Q plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}TNA protocol.}{7}{subsubsection.2.1.2}\protected@file@percent }
+\citation{joseph_d__viviano__2019}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces {\bf  FDR control under data (top row) and label (bottom row) shift.} (A) Q-Q plot of the EPVs (red dots), the TNA- EPVs (green dots) and the TNA+ EPVs (purple dots) against the theoretical uniform distribution (normalized rank). (B) The number of accepted classifications as a function of the Q-values over a critical range (0-0.1) obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA- EPV (green), (iv) BH with TNA- EPV (purple), and (v) LTT (blue). (C) Same as (B) but over the entire q-value range. (D) Deviation of the estimated FDP from the true FDP obtained with (i) BH with EPV (red line), (ii) BH with TNA- EPV (green line), (iii) BH with TNA+ EPV (purple line), and (iv) LTT (blue line).}}{9}{figure.3}\protected@file@percent }
+\newlabel{fig:mnist_shfit}{{3}{9}{{\bf FDR control under data (top row) and label (bottom row) shift.} (A) Q-Q plot of the EPVs (red dots), the TNA- EPVs (green dots) and the TNA+ EPVs (purple dots) against the theoretical uniform distribution (normalized rank). (B) The number of accepted classifications as a function of the Q-values over a critical range (0-0.1) obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA- EPV (green), (iv) BH with TNA- EPV (purple), and (v) LTT (blue). (C) Same as (B) but over the entire q-value range. (D) Deviation of the estimated FDP from the true FDP obtained with (i) BH with EPV (red line), (ii) BH with TNA- EPV (green line), (iii) BH with TNA+ EPV (purple line), and (iv) LTT (blue line)}{figure.3}{}}
+\@writefile{toc}{\contentsline {paragraph}{Example 2.}{9}{section*.3}\protected@file@percent }
+\citation{Veeling2018-qh}
+\citation{camelyon16}
+\citation{Pocock2022}
+\@writefile{toc}{\contentsline {paragraph}{Example 3.}{10}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{10}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}PCam: tumor classification}{10}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Data Availability Statement containing dataset names, repositories, and accession details.}}{11}{table.2}\protected@file@percent }
+\newlabel{tab:data_availability}{{2}{11}{Data Availability Statement containing dataset names, repositories, and accession details}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces {\bf  Instances of PCam dataset.}}}{11}{figure.4}\protected@file@percent }
+\newlabel{fig:pcam_example}{{4}{11}{\bf Instances of PCam dataset}{figure.4}{}}
+\citation{irvin2019chexpert}
+\citation{cohen2020limits,Cohen2022xrv}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces {\bf  Performance evaluation of FDR controlling methods.} See the caption of Figure \ref {fig:mnist_shfit} for plot descriptions. }}{12}{figure.5}\protected@file@percent }
+\newlabel{fig:I}{{5}{12}{{\bf Performance evaluation of FDR controlling methods.} See the caption of Figure \ref {fig:mnist_shfit} for plot descriptions}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}CheXpert: chest x-ray dataset}{12}{subsection.3.2}\protected@file@percent }
+\citation{Zaki2024,Cashen2017PleuralEA}
+\citation{mahesh2022patient}
+\citation{Cashen2017PleuralEA}
+\citation{shebl2018parapneumonic}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces {\bf  Instances of CheXpert dataset.}}}{13}{figure.6}\protected@file@percent }
+\newlabel{fig:CheXpert_example}{{6}{13}{\bf Instances of CheXpert dataset}{figure.6}{}}
+\citation{greenwald2022whole}
+\citation{cellpose}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}TissueNet: cells segmentation}{14}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces {\bf  Instance of TissueNet dataset.} Two-channel original images are being processed by the model, in turn producing masks \& flows to correctly segment cells}}{14}{figure.7}\protected@file@percent }
+\newlabel{fig:tissue_example}{{7}{14}{{\bf Instance of TissueNet dataset.} Two-channel original images are being processed by the model, in turn producing masks \& flows to correctly segment cells}{figure.7}{}}
+\citation{Amgad2019StructuredCE}
+\citation{Pocock2022}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}BCSS: Breast cancer semantic segmentation dataset}{15}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces {\bf  An instance from BCSS dataset.}}}{15}{figure.8}\protected@file@percent }
+\newlabel{fig:bcss_example}{{8}{15}{\bf An instance from BCSS dataset}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces {\bf  Performance evaluation of FDR controlling methods.} See the caption of Figure \ref {fig:mnist_shfit} for plot descriptions.}}{16}{figure.9}\protected@file@percent }
+\newlabel{fig:ii}{{9}{16}{{\bf Performance evaluation of FDR controlling methods.} See the caption of Figure \ref {fig:mnist_shfit} for plot descriptions}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces {\bf  Classwise score distributions and FDR control in the BCSS dataset.}}}{17}{figure.10}\protected@file@percent }
+\newlabel{fig:BCSS-classwise}{{10}{17}{\bf Classwise score distributions and FDR control in the BCSS dataset}{figure.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusions}{17}{section.4}\protected@file@percent }
+\bibdata{bibliography}
+\bibcite{feng2022clinical}{{1}{2022}{{Feng et~al.}}{{}}}
+\bibcite{al2023artificial}{{2}{2023}{{Al-Antari}}{{}}}
+\bibcite{wynants2019three}{{3}{2019}{{Wynants et~al.}}{{}}}
+\bibcite{newman2021rate}{{4}{2021}{{Newman-Toker et~al.}}{{}}}
+\bibcite{salz2010meta}{{5}{2010}{{Salz et~al.}}{{}}}
+\bibcite{Tosteson2014Consequences}{{6}{2014}{{Tosteson et~al.}}{{}}}
+\bibcite{xu2016frequency}{{7}{2016}{{Xu et~al.}}{{}}}
+\bibcite{mouliou2021false}{{8}{2021}{{Mouliou and Gourgoulianis}}{{}}}
+\bibcite{woloshin2020false}{{9}{2020}{{Woloshin et~al.}}{{}}}
+\bibcite{bradley2021interpreting}{{10}{2021}{{Bradley et~al.}}{{}}}
+\bibcite{macios2022false}{{11}{2022}{{Macios and Nowakowski}}{{}}}
+\bibcite{pinsky2015principles}{{12}{2015}{{Pinsky}}{{}}}
+\bibcite{Benjamini1995Controlling}{{13}{1995}{{Benjamini and Hochberg}}{{}}}
+\bibcite{koos2021automatic}{{14}{2021}{{Koos et~al.}}{{}}}
+\bibcite{moshkov2024learning}{{15}{2024}{{Moshkov et~al.}}{{}}}
+\bibcite{falk2019u}{{16}{2019}{{Falk et~al.}}{{}}}
+\bibcite{storey2002direct}{{17}{2002}{{Storey}}{{}}}
+\bibcite{storey2003statistical}{{18}{2003}{{Storey and Tibshirani}}{{}}}
+\bibcite{barber2015controlling}{{19}{2015}{{Barber and Cand{\`e}s}}{{}}}
+\bibcite{elias2007target}{{20}{2007}{{Elias and Gygi}}{{}}}
+\bibcite{zhao2023controlling}{{21}{2023}{{Zhao and Su}}{{}}}
+\bibcite{rava2021burden}{{22}{2021}{{Rava et~al.}}{{}}}
+\bibcite{gao2023simultaneous}{{23}{2023}{{Gao and Zhao}}{{}}}
+\bibcite{bates2023testing}{{24}{2023}{{Bates et~al.}}{{}}}
+\bibcite{marandon2023adaptive}{{25}{2023}{{Marandon et~al.}}{{}}}
+\bibcite{angelopoulos2021learn}{{26}{2021}{{Angelopoulos et~al.}}{{}}}
+\bibcite{Candela2009DatasetShift}{{27}{2009}{{Quionero-Candela et~al.}}{{}}}
+\bibcite{leek2010tackling}{{28}{2010}{{Leek et~al.}}{{}}}
+\bibcite{bray2016cell}{{29}{2016}{{Bray et~al.}}{{}}}
+\bibcite{phua2022perspectives}{{30}{2022}{{Phua et~al.}}{{}}}
+\bibcite{vcuklina2021diagnostics}{{31}{2021}{{{\v {C}}uklina et~al.}}{{}}}
+\bibcite{ramey2016macroeconomic}{{32}{2016}{{Ramey}}{{}}}
+\bibcite{clement2023coping}{{33}{2023}{{Clement et~al.}}{{}}}
+\bibcite{kritzman2012regime}{{34}{2012}{{Kritzman et~al.}}{{}}}
+\bibcite{guo2023predict}{{35}{2023}{{Guo et~al.}}{{}}}
+\bibcite{Zhang:EECS-2021-262}{{36}{2021}{{Zhang}}{{}}}
+\bibcite{dasu2009change}{{37}{2009}{{Dasu et~al.}}{{}}}
+\bibcite{kulinski2020feature}{{38}{2020}{{Kulinski et~al.}}{{}}}
+\bibcite{lipton2018detecting}{{39}{2018}{{Lipton et~al.}}{{}}}
+\bibcite{budhathoki2021did}{{40}{2021}{{Budhathoki et~al.}}{{}}}
+\bibcite{kulinski2023towards}{{41}{2023}{{Kulinski and Inouye}}{{}}}
+\bibcite{sui2024unleashing}{{42}{2024}{{Sui et~al.}}{{}}}
+\bibcite{zhang2021adaptive}{{43}{2021}{{Zhang et~al.}}{{}}}
+\bibcite{zhang2022memo}{{44}{2022}{{Zhang et~al.}}{{}}}
+\bibcite{donoho2000high}{{45}{2000}{{Donoho et~al.}}{{}}}
+\bibcite{cristianini2000introduction}{{46}{2000}{{Cristianini}}{{}}}
+\bibcite{storey2004strong}{{47}{2004}{{Storey et~al.}}{{}}}
+\bibcite{lecun1998gradient}{{48}{1998}{{LeCun et~al.}}{{}}}
+\bibcite{joseph_d__viviano__2019}{{49}{2021}{{Viviano et~al.}}{{}}}
+\bibcite{Veeling2018-qh}{{50}{2018}{{Veeling et~al.}}{{}}}
+\bibcite{camelyon16}{{51}{2017}{{Ehteshami~Bejnordi et~al.}}{{}}}
+\bibcite{Pocock2022}{{52}{2022}{{Pocock et~al.}}{{}}}
+\bibcite{irvin2019chexpert}{{53}{2019}{{Irvin et~al.}}{{}}}
+\bibcite{cohen2020limits}{{54}{2020}{{Cohen et~al.}}{{}}}
+\bibcite{Cohen2022xrv}{{55}{2022}{{Cohen et~al.}}{{}}}
+\bibcite{Zaki2024}{{56}{2024}{{Zaki et~al.}}{{}}}
+\bibcite{Cashen2017PleuralEA}{{57}{2017}{{Cashen and Petersen}}{{}}}
+\bibcite{mahesh2022patient}{{58}{2022}{{Mahesh et~al.}}{{}}}
+\bibcite{shebl2018parapneumonic}{{59}{2018}{{Shebl and Paul}}{{}}}
+\bibcite{greenwald2022whole}{{60}{2022}{{Greenwald et~al.}}{{}}}
+\bibcite{cellpose}{{61}{2020}{{Stringer et~al.}}{{}}}
+\bibcite{Amgad2019StructuredCE}{{62}{2019}{{Amgad et~al.}}{{}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Ethics approval and consent to participate}{24}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Consent for publication}{24}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Data availability}{24}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Funding}{24}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Authors' contribution}{24}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Competing interests}{24}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Acknowledgements}{24}{subsection.4.7}\protected@file@percent }
+\gdef \@abspage@last{24}
