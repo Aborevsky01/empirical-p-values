@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{9}
+
+\begin{figure}[h!]
+	\centering	
+	\begin{tabular}{ccc}
+		Stroma & Tumor & Others \\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_0_neg_score_dist.pdf} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_1_neg_score_dist.pdf} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_2_neg_score_dist.pdf} \\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png} \\
+	\end{tabular}
+	\caption{{\bf Classwise score distributions and FDR control in the BCSS dataset.}}
+	\label{fig:BCSS-classwise}
+\end{figure} 
+	
+	
+\end{document}
+

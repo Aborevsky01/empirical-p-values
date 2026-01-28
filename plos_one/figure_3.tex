@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{2}
+\begin{figure}[h!]
+	\centering
+	\begin{tabular}{cccc}
+		\multicolumn{4}{l}{\bf (i) Data distribution shift:}\\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_shifted.pdf}&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control_loc.pdf} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control.pdf} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_shifted.pdf} \\
+		\multicolumn{4}{l}{\bf (ii) Class distribution shift:}\\
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_balanced.pdf}&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control_loc.pdf} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control.pdf} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_balanced.pdf} \\		
+		A & B & C & D \\
+	\end{tabular}
+	\caption{{\bf  FDR control under data (top row) and label (bottom row) shift.}
+		(A) Q-Q plot of the EPVs (red dots), the TNA- EPVs (green dots) and the TNA+ EPVs (purple dots) against the theoretical uniform distribution (normalized rank). (B) The number of accepted classifications as a function of the Q-values over a critical range (0-0.1) obtained with (i) ground truth (black line), (ii) BH with EPV (red), (iii) BH with TNA- EPV (green), (iv) BH with TNA- EPV (purple), and (v) LTT (blue). (C) Same as (B) but over the entire q-value range. (D) Deviation of the estimated FDP from the true FDP obtained with (i) BH with EPV (red line), (ii) BH with TNA- EPV  (green line),  (iii) BH with TNA+ EPV  (purple line), and (iv) LTT (blue line).}
+	\label{fig:mnist_shfit}
+\end{figure}
+
+	
+	
+\end{document}

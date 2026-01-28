@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{4}
+	
+
+
+\begin{figure}[h!]
+	
+	\begin{tabular}{cccc}
+		\multicolumn{4}{l}{\bf (i) Standard PCam dataset:}\\		
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.png}\\	
+		\multicolumn{4}{l}{\bf (ii) PCam with class distribution shift:}\\		
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.png}\\
+		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.png} 		&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.png}\\
+		\multicolumn{4}{l}{\bf (iv) CheXpert dataset with class distribution shift:}\\	
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.png} 		&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.png}\\
+		A & B & C & D
+	\end{tabular}
+	\caption{{\bf Performance evaluation of FDR controlling methods.} See the caption of Fig \ref{fig:mnist_shfit} for plot descriptions. }
+	\label{fig:I}
+\end{figure} 
+	
+\end{document}
+

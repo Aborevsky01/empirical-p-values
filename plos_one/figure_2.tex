@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{1}
+\begin{figure}
+	\centering
+	\begin{tabular}{cccc}
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cls_overview.png}&
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_classical.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_classical_fdr_control.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_classical.png} \\
+		A & B & C & D \\
+	\end{tabular}
+	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. (B) The Q-Q plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
+	\label{fig:binary}
+\end{figure}
+
+
+\end{document}

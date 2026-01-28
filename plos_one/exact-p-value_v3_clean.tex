@@ -83,7 +83,7 @@
 \usepackage{tabularx} 
 \usepackage{hyperref}  
 \usepackage{xurl} 
-
+\usepackage{dsfont}
 % textcomp package and marvosym package for additional characters
 \usepackage{textcomp,marvosym}
 
@@ -147,6 +147,7 @@
 \renewcommand{\@biblabel}[1]{\quad#1.}
 \makeatother
 
+\newcommand{\mathone}{\mathds{1}}
 
 
 % Header and Footer with logo
@@ -182,8 +183,8 @@
 \newline
 % Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
 \\
-Andrey Borevskiy\textsuperscript{1\Yinyang},
-Attila Kertesz-Farkas\textsuperscript{1\Yinyang},
+Andrey Borevskiy\textsuperscript{1},
+Attila Kertesz-Farkas\textsuperscript{1,$\ast$},
 \\
 \bigskip
 \textbf{1} Laboratory on AI for Computational Biology, Faculty of Computer Science, HSE University, 11 Pokrovsky Bvld, Moscow, 109028, Russian Federation
@@ -195,10 +196,10 @@ Attila Kertesz-Farkas\textsuperscript{1\Yinyang},
 % Remove or comment out the author notes below if they aren't used.
 %
 % Primary Equal Contribution Note
-\Yinyang These authors contributed equally to this work.
-\\
+%\Yinyang These authors contributed equally to this work.
+
 % Use the asterisk to denote corresponding authorship and provide email address in note below.
-* kfattila@yandex.com
+$\ast$ kfattila@yandex.com
 
 \end{flushleft}
 % Please keep the abstract below 300 words
@@ -259,8 +260,8 @@ The TNA method operates solely at the space of prediction score, which is typica
 \begin{figure}
 	\centering
 	\begin{tabular}{cc}
-		\includegraphics[width=0.45\linewidth]{TNA_sketch_before.pdf}&
-		\includegraphics[width=0.45\linewidth]{TNA_sketch_after.pdf} \\
+%		\includegraphics[width=0.45\linewidth]{TNA_sketch_before.pdf}&
+%		\includegraphics[width=0.45\linewidth]{TNA_sketch_after.pdf} \\
 		A & B  \\
 	\end{tabular}
 	\caption{{\bf Sketch of TNA. } (A) The plot illustrates the distribution shift of the discriminative scores of the test (blue) instances from the training (red) instances. The shaded areas illustrate the observed training and unobserved test null distributions, respectively. The black arrow indicates that the test scores should be shifted to leftward. The TNA method aims to approximate the unknown test null distribution (blue shaded area) based on the known true training null distribution (red shaded area). (B) TNA aims to perform a test score adjustment so that the test null aligns to training null distributions better. }
@@ -291,10 +292,10 @@ Fig \ref{fig:binary}C shows the number of accepted (trusted) predictions as posi
 \begin{figure}
 	\centering
 	\begin{tabular}{cccc}
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cls_overview.png}&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_classical.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_classical_fdr_control.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_classical.png} \\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cls_overview.png}&
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_classical.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_classical_fdr_control.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_classical.png} \\
 		A & B & C & D \\
 	\end{tabular}
 	\caption{{\bf FDR control in MNIST with EPVs. } (A) The discriminative score distributions. (B) The Q-Q plot of the EPVs of the test samples against the theoretical uniform distribution. (C) The number of the accepted (trusted) positive predictions at various q-values calculated with true labels (black solid line), BH with EPVs (red dashed line), and LTT (blue dotted line). (D) Deviation between the true and the estimated FDR produced by BH with EPV (red line) and LTT (blue dots), respectively.}
@@ -329,15 +330,15 @@ Fig \ref{fig:binary}C shows the number of accepted (trusted) predictions as posi
 	\centering
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Data distribution shift:}\\
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_shifted.png}&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control_loc.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_shifted.png} \\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_shifted.png}&
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control_loc.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_shifted_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_shifted.png} \\
 		\multicolumn{4}{l}{\bf (ii) Class distribution shift:}\\
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_balanced.png}&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control_loc.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_balanced.png} \\		
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_balanced.png}&
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control_loc.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_balanced_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_balanced.png} \\		
 		A & B & C & D \\
 	\end{tabular}
 \caption{{\bf  FDR control under data (top row) and label (bottom row) shift.}
@@ -360,19 +361,19 @@ The datasets analyzed in this study are listed in Table \ref{tab:data_availabili
 \small % Уменьшаем шрифт для компактности
 \caption{Data Availability Statement containing dataset names, repositories, and accession details.}
 \label{tab:data_availability}
-\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
-\textbf{Dataset} & \textbf{Full Name} & \textbf{Repository} & \textbf{Accession / URL} \\
+\textbf{Dataset} & \textbf{Full Name} & \textbf{Accession / URL} \\
 \midrule
-MNIST & MNIST Database of Handwritten Digits & Yann LeCun's Website; UCI ML Repository & DOI: \href{https://doi.org/10.24432/C53K8Q}{10.24432/C53K8Q}; \url{http://yann.lecun.com/exdb/mnist/} \\
+MNIST & MNIST Database of Handwritten Digits &  DOI: \href{https://doi.org/10.24432/C53K8Q}{10.24432/C53K8Q}; \url{http://yann.lecun.com/exdb/mnist/} \\
 \addlinespace
-BCSS & Breast Cancer Semantic Segmentation Dataset & GitHub & DOI: \href{https://doi.org/10.1093/bioinformatics/btz083}{10.1093/bioinformatics/btz083}; \url{https://github.com/PathologyDataScience/BCSS} \\
+BCSS & Breast Cancer Semantic Segmentation Dataset &DOI: \href{https://doi.org/10.1093/bioinformatics/btz083}{10.1093/bioinformatics/btz083}; \url{https://github.com/PathologyDataScience/BCSS} \\
 \addlinespace
-CheXpert & CheXpert Chest X-ray Dataset & Stanford AIMI & \url{https://aimi.stanford.edu/datasets/chexpert-chest-x-rays} \\
+CheXpert & CheXpert Chest X-ray Dataset & \url{https://aimi.stanford.edu/datasets/chexpert-chest-x-rays} \\
 \addlinespace
-PatchCamelyon & PatchCamelyon (PCam) Benchmark Dataset & Zenodo & DOI: \href{https://doi.org/10.5281/zenodo.2546921}{10.5281/zenodo.2546921} \\
+PatchCamelyon & PatchCamelyon (PCam) Benchmark Dataset & DOI: \href{https://doi.org/10.5281/zenodo.2546921}{10.5281/zenodo.2546921} \\
 \addlinespace
-TissueNet & TissueNet Cell Segmentation Dataset & DeepCell Datasets & DOI: \href{https://doi.org/10.1038/s41587-021-01094-0}{10.1038/s41587-021-01094-0}; \url{https://datasets.deepcell.org/} \\
+TissueNet & TissueNet Cell Segmentation Dataset & DOI: \href{https://doi.org/10.1038/s41587-021-01094-0}{10.1038/s41587-021-01094-0}; \url{https://datasets.deepcell.org/} \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -387,12 +388,12 @@ The PatchCamelyon (PCam) benchmark dataset is a collection of histopathologic sc
 \begin{figure}[h!]
 	\centering
 	\begin{tabular}{cccc}
-		\includegraphics[width=1.in]{img/pcam1.jpg} &
-		\includegraphics[width=1.in]{img/pcam2.jpg} & 
-		\includegraphics[width=1.in]{img/pcam3.jpg} &
-		\includegraphics[width=1.in]{img/pcam4.jpg}
+%		\includegraphics[width=1.in]{img/pcam1.jpg} &
+%		\includegraphics[width=1.in]{img/pcam2.jpg} & 
+%		\includegraphics[width=1.in]{img/pcam3.jpg} &
+%		\includegraphics[width=1.in]{img/pcam4.jpg}
 	\end{tabular}
-	\caption{{\bf Instances of PCam dataset.}}
+	\caption{{\bf Instances from PCam dataset.}}
 	\label{fig:pcam_example}
 \end{figure} 
  
@@ -405,25 +406,25 @@ In our opinion, the actual class proportions in real-life applications can be si
 	
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard PCam dataset:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.png}\\	
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.png}\\	
 		\multicolumn{4}{l}{\bf (ii) PCam with class distribution shift:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.png}\\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.png}\\
 		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.png} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.png}\\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.png} 		&
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.png}\\
 		\multicolumn{4}{l}{\bf (iv) CheXpert dataset with class distribution shift:}\\	
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.png} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.png}\\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.png} 		&
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.png}\\
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} See the caption of Fig \ref{fig:mnist_shfit} for plot descriptions. }
@@ -432,7 +433,7 @@ In our opinion, the actual class proportions in real-life applications can be si
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=5.in]{img/chx.png}
+%	\includegraphics[width=5.in]{img/chx.png}
 	\caption{{\bf Instances of CheXpert dataset.}}
 	\label{fig:CheXpert_example}
 \end{figure} 
@@ -451,7 +452,7 @@ The actual frequency of pleural effusion may be different among all chest x-ray 
 
 \begin{figure}[h!]
     \centering
-	\includegraphics[width=5in]{img/tissuenet.pdf}
+%	\includegraphics[width=5in]{img/tissuenet.pdf}
 	\caption{{\bf Instance of TissueNet dataset.} Two-channel original images are being processed by the model, in turn producing masks \& flows to correctly segment cells}
 	\label{fig:tissue_example}
 \end{figure} 
@@ -464,7 +465,7 @@ The situation changes when we evaluate the segmentation problem with a single im
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=3in]{img/bcss_instance.jpeg}
+%	\includegraphics[width=3in]{img/bcss_instance.jpeg}
 	\caption{{\bf An instance from BCSS dataset.}}
 	\label{fig:bcss_example}
 \end{figure} 
@@ -484,20 +485,20 @@ The evaluation of the FDR controlling methods is shown in Fig \ref{fig:ii}-(iii)
 	\centering
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard TissueNet dataset:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.png}\\	
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.png}\\	
 		\multicolumn{4}{l}{\bf (ii) TissueNet with single image:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.png}\\			
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.png}\\			
 		\multicolumn{4}{l}{\bf (iii) Standard BCSS dataset:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_bcss.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control_loc.png}  &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_bcss.png}\\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_bcss.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control_loc.png}  &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_bcss.png}\\
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.}  See the caption of Fig \ref{fig:mnist_shfit} for plot descriptions.}
@@ -510,12 +511,12 @@ Next, we further analyzed the results by each class separately. We plotted the t
 	\centering	
 	\begin{tabular}{ccc}
 		Stroma & Tumor & Others \\
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_0_neg_score_dist.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_1_neg_score_dist.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_2_neg_score_dist.png} \\
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png} \\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_0_neg_score_dist.pdf} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_1_neg_score_dist.pdf} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/bcss_2_neg_score_dist.pdf} \\
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_0th_bcss_class_fdr_control.png} &
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_1st_bcss_class_fdr_control.png} & 
+%		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_2nd_bcss_class_fdr_control.png} \\
 	\end{tabular}
 	\caption{{\bf Classwise score distributions and FDR control in the BCSS dataset.}}
 	\label{fig:BCSS-classwise}
@@ -541,8 +542,8 @@ With this study, we also aim to emphasize and popularize the importance of accur
 % \bibitem{}
 % Text
 % \end{thebibliography}
-
-\bibliography{plos/bibliography}
+\bibliographystyle{plos2025.bst}
+\bibliography{bibliography}
 
 \end{document}
 

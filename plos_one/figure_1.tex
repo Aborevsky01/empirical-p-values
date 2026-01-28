@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+\setcounter{figure}{0}
+\begin{figure}
+	\centering
+	\begin{tabular}{cc}
+		\includegraphics[width=0.45\linewidth]{TNA_sketch_before.pdf}&
+		\includegraphics[width=0.45\linewidth]{TNA_sketch_after.pdf} \\
+		A & B  \\
+	\end{tabular}
+	\caption{{\bf Sketch of TNA. } (A) The plot illustrates the distribution shift of the discriminative scores of the test (blue) instances from the training (red) instances. The shaded areas illustrate the observed training and unobserved test null distributions, respectively. The black arrow indicates that the test scores should be shifted to leftward. The TNA method aims to approximate the unknown test null distribution (blue shaded area) based on the known true training null distribution (red shaded area). (B) TNA aims to perform a test score adjustment so that the test null aligns to training null distributions better. }
+	\label{fig:tna_sketch}
+\end{figure}
+	
+\end{document}

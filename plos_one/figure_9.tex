@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{8}
+	
+
+\begin{figure}
+	\centering
+	\begin{tabular}{cccc}
+		\multicolumn{4}{l}{\bf (i) Standard TissueNet dataset:}\\		
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.png}\\	
+		\multicolumn{4}{l}{\bf (ii) TissueNet with single image:}\\		
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.png} & 
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.png}\\			
+		\multicolumn{4}{l}{\bf (iii) Standard BCSS dataset:}\\		
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_bcss.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control.png} &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control_loc.png}  &
+		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_bcss.png}\\
+		A & B & C & D
+	\end{tabular}
+	\caption{{\bf Performance evaluation of FDR controlling methods.}  See the caption of Fig \ref{fig:mnist_shfit} for plot descriptions.}
+	\label{fig:ii}
+\end{figure} 
+	
+	
+\end{document}
+
