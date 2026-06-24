@@ -761,6 +761,47 @@ This divergence between the training and test null modes is most pronounced for 
 \end{figure}
 
 
+\subsection*{Robustness to the number of bins}
+ 
+A major free hyperparameter of the EPV TNA algorithm is the number of histogram bins
+used to approximate the score densities in step~1. To assess how strongly the FDR
+control depends on this choice, we recomputed the TNA-- and TNA+ EPVs while varying
+the number of bins from $5$ to $200$, and compared the resulting numbers of trusted
+predictions to the ground truth. Fig~\ref{fig:binning} shows the result for an
+unshifted dataset (CheXpert) and a class-distribution-shifted one (PCam), over both
+the full and the critical low-FDR q-value ranges. For both methods and both datasets,
+the curves obtained with $20$ bins or more are essentially indistinguishable from one
+another and track the ground truth closely; only the extremely coarse binnings
+($5$--$10$ bins) deviate noticeably, as expected when the density histograms become
+too crude to capture the shape of the null. TNA is therefore insensitive to its only
+hyperparameter across a wide range of values, and any sufficiently fine binning
+(a few dozen training samples per bin, see the rule of thumb above) yields
+practically the same FDR control.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tabular}{cc}
+		Full range & Critical range \\
+		\includegraphics[width=0.46\linewidth]{img/binning_combined_chexpert_full.png} &
+		\includegraphics[width=0.46\linewidth]{img/binning_combined_chexpert_local.png} \\
+		\multicolumn{2}{c}{(A, B) CheXpert --- no shift} \\[4pt]
+		\includegraphics[width=0.46\linewidth]{img/binning_combined_pcam_shift_full.png} &
+		\includegraphics[width=0.46\linewidth]{img/binning_combined_pcam_shift_local.png} \\
+		\multicolumn{2}{c}{(C, D) PCam --- class distribution shift} \\
+	\end{tabular}
+	\caption{{\bf Robustness of TNA to the number of histogram bins.}
+		Number of accepted (trusted) positive predictions as a function of the q-value
+		for TNA-- (green) and TNA+ (purple) EPVs, with the number of histogram bins (step~1
+		of the TNA algorithm) varied from 5 to 200; darker shades correspond to more bins,
+		and the very coarse binnings (5, 10, 20, 30) are additionally drawn with dotted/dashed
+		line styles. The black line is the ground truth computed from the true labels.
+		(A, C) show the full q-value range and (B, D) the critical low-FDR range
+		($q\le0.3$ for CheXpert, $q\le0.1$ for PCam).}
+	\label{fig:binning}
+\end{figure}
+ 
+
+
 \section*{Conclusion}
 
 In this study, we examined the effects of data shift on False Discovery Rate (FDR) control.
