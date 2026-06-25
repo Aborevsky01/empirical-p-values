@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{graphicx}
+\begin{document}
+	\setcounter{figure}{10}
+
+\begin{figure}[h!]
+	\centering
+	\begin{tabular}{ccc}
+		PCam & CheXpert & TissueNet \\
+		\includegraphics[width=0.33\linewidth]{img/binning_combined_pcam_shift_full.png} &
+		\includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} &
+		% \includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} \\
+	\end{tabular}
+	\caption{{\bf Robustness to histogram binning.} See the caption of Fig \ref{fig:mnist_shfit} C for plot descriptions.}
+	\label{fig:binning}
+\end{figure}
+
+
+\end{document}

@@ -65,21 +65,19 @@ HSE University
 
 1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming.
 
-\response{Thank you. We have checked the manuscript against the PLOS ONE formatting templates (main body and title/authors/affiliations) and adjusted the file naming of the manuscript and figure files accordingly for resubmission. \fixme{Please confirm the final file names used on resubmission (Manuscript, Figures, Revised Manuscript with Track Changes) follow the PLOS ONE convention before uploading.}}
+\response{Thank you. We have checked the manuscript against the PLOS ONE formatting templates (main body and title/authors/affiliations) and adjusted the file naming of the manuscript and figure files accordingly for resubmission. We are using ``Template for PLoS Version 3.7 Aug 2025''}
 
 2. Please note that PLOS ONE has specific guidelines on code sharing for submissions in which author-generated code underpins the findings in the manuscript.
 
-\response{We agree, and apologize for not making this explicit earlier. Our implementation code is publicly available at \url{https://github.com/Aborevsky01/empirical-p-values}, without restriction. We have added a statement to the manuscript pointing to this repository, and we are supplementing it with an environment specification (\texttt{requirements.txt}/\texttt{environment.yml}) and a short README describing how to reproduce the experiments, as also requested by Reviewer 2 below (point 3). \fixme{Add the code-availability sentence to the manuscript (e.g., in Materials and methods or as a new ``Code availability'' note) once the repository's README/environment file is finalized.}}
+\response{We agree, and apologize for not making this earlier. Our implementation code is now publicly available at \url{https://github.com/Aborevsky01/empirical-p-values}, without restriction. We have added a statement to the manuscript pointing to this repository.}
 
 3. Please note that your Data Availability Statement is currently missing the repository name and the DOI/accession number of each dataset OR a direct link to access each database.
 
-\response{Thank you for flagging this. The manuscript already lists, for each of the five datasets used (MNIST, BCSS, CheXpert, PCam, TissueNet), the dataset name together with its DOI and/or URL in Table 1 (``Data Availability Statement containing dataset names, repositories, and accession details''). \fixme{The separate Data Availability Statement field in the submission system appears to be empty/incomplete; we will populate it with the same repository names and DOIs/URLs already listed in Table 1 at resubmission.}}
+\response{Thank you for flagging this. The manuscript already lists, for each of the five datasets used (MNIST, BCSS, CheXpert, PCam, TissueNet), the dataset name together with its DOI and/or URL in Table 1 (``Data Availability Statement containing dataset names, repositories, and accession details''). If separate Data Availability Statement field in the submission system appears to be empty/incomplete; we populate it with the same repository names and DOIs/URLs already listed in Table 1 at resubmission.}
 
 4. We note that you have included the phrase ``data not shown'' in your manuscript.
 
-\response{Thank you for catching this. The phrase referred to an exploratory comparison with one-dimensional optimal transportation (OT), which is not a core part of our study; we have therefore removed the reference to unshown data and rephrased the sentence instead of adding a citation or a new repository entry for it. The revised sentence now reads:}
-
-\edit{We also note that we tested a one-dimensional optimal transportation (OT) approach to adjust the training null to the test null. Unfortunately, this approach is very sensitive to the test null approximation, especially at the decision boundary. In our exploratory experiments, OT severely overfitted, while TNA remained more robust to poor tail approximation of the null distributions; consequently, we did not pursue OT further as a baseline in this study.}
+\response{Thank you for catching this. The phrase referred to an exploratory comparison with one-dimensional optimal transportation (OT), which is not a core part of our study; we have therefore removed the reference to unshown data and rephrased the sentence instead of adding a citation or a new repository entry for it.}
 
 5. If the reviewer comments include a recommendation to cite specific previously published works...
 
@@ -87,7 +85,7 @@ HSE University
 
 6. Please review your reference list to ensure that it is complete and correct.
 
-\response{We have reviewed our reference list and, to the best of our knowledge, none of the cited works have been retracted. \fixme{Please double-check the bibliography (bibliography.bib) once more against the Retraction Watch database before final submission, since this is best verified by the corresponding author.}}
+\response{We have reviewed our reference list and, to the best of our knowledge, none of the cited works have been retracted. }
 
 \clearpage
 \section*{Reviewer 1}
@@ -110,13 +108,17 @@ I found this manuscript interesting, timely, and potentially valuable. [...] I t
 
 \edit{We note that the actual number of bins or the size of bin-width in step 1 may depend on the range and/or the number of the discriminative scores. Essentially, there should be enough data in each bin to ensure accurate estimations. This might require the analyst to manually adjust the bins in practice; as a practical rule of thumb, we suggest starting from a bin width such that each bin contains at least a few dozen training samples, and coarsening the bins if the resulting density histograms appear noisy.}
 
-\response{\fixme{Optionally, we could add a small sensitivity experiment (e.g., re-running one dataset with 25/50/100/200 bins) to quantify this effect empirically if the reviewer or editor requests it; we have not included this in the current revision.}}
+\response{In addition, we have now carried out an empirical sensitivity experiment to quantify this effect directly. We re-ran TNA- and TNA+ over a range of histogram bin counts, from 5 to 200, on the PCam and CheXpert datasets, and compared the resulting numbers of trusted predictions to the ground truth. We added the following new subsection to the Results section, along with a corresponding figure (Fig \ref{fig:binning}):}
+
+\edit{Finally, we investigate the robustness of TNA to the histogram binning. We run TNA- and TNA+ over various numbers of histogram bins from $5$ to $200$, and compared the resulting numbers of trusted predictions to the ground truth. Results are shown on Fig~\ref{fig:binning}. The results obtained with $30$ bins or more are essentially the same; only the extremely coarse binnings ($5$--$20$ bins) deviate noticeably, because the density histograms become too crude to capture the shape of the null. TNA is therefore robust to the binning, and any sufficiently fine binning yields practically the same results.}
+
+\response{In short, our observation is that TNA's results are stable once the histogram is fine enough to resolve the shape of the null distribution; only very coarse binning (5--20 bins) noticeably degrades the FDR control, while 30 bins or more already give essentially the same results. We kindly ask the reviewer to check the new ``Robustness to binning'' subsection at the end of the Results section of the revised manuscript.}
 
 3. The interpretation of the weaker performance on the BCSS dataset.
 
-\response{Thank you for this comment. The manuscript already discusses the BCSS results at some length (class-wise score distributions, the conservative bias of BH with both standard and TNA EPVs, and the apparent, but likely accidental, accuracy of LTT due to canceling biases between the Stroma and Tumor classes). We have added a sentence to make the interpretation more explicit:}
+\response{Thank you for this comment. The manuscript already discusses the BCSS results at some length (class-wise score distributions, the conservative bias of BH with both standard and TNA EPVs, and the apparent, but likely accidental, accuracy of LTT due to canceling biases between the Stroma and Tumor classes). We have revised and expanded our interpretation of the weaker performance as follows:}
 
-\edit{We note that the comparatively weaker performance of the standard and the TNA EPVs on the BCSS dataset stems from the combination of a severe, class-wise data shift with the one-vs-rest decomposition required for multi-class FDR control: because the negative scores used to build the null for one class are partly composed of samples that are positive evidence for another class, the resulting training null only partially represents the corresponding test null, which limits how well the histogram-alignment step of TNA can compensate. This effect is most pronounced for the Stroma class, where TNA still improves the $\hat{\pi}_0$ estimation, but least pronounced for the Tumor and Others classes.}
+\edit{In our opinion, the comparatively weaker performance of the TNA method on the BCSS dataset stems from subpopulation shift (proportions of different subclasses change). The shapes of the modes of the training and test null distributions differ more substantially than in the other benchmark datasets. In such cases, a simple affine adjustment of the test scores cannot adjust the test null mode close to the training null mode. The differing shapes of the modes across the three classes can be seen in Fig \ref{fig:BCSS-classwise}. This divergence between the training and test null modes is most pronounced for the Tumor class.}
 
 \response{We kindly ask the reviewer to check this addition at the end of the BCSS subsection in the Results section.}
 
@@ -136,6 +138,8 @@ The manuscript shows some methodological vulnerabilities, including the absence 
 \edit{We note that the handling of data shifts in practice is challenging, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased, without any additional assumptions; hence TNA is heuristic in its general form. Deriving formal error bounds for TNA under explicit shift models (e.g., bounded Wasserstein distance between $X_0$ and $T_0$) is an interesting direction that we leave for future work.}
 
 \response{We respectfully note that, to our knowledge, no existing method for FDR control under unconstrained, general distribution shift currently offers such guarantees either; we therefore frame TNA as a practically useful, model-agnostic alternative rather than as a theoretically certified procedure.}
+
+\response{More fundamentally, we think that a formal error bound cannot be derived without committing to some specific assumption on how the test distribution may differ from the training distribution (e.g., a bound on the Wasserstein distance or the Jensen-Shannon divergence between $X_0$ and $T_0$); without such a restriction, the test null could in principle differ arbitrarily from the training null, and no method could guarantee accurate FDR control from a finite sample alone. This is not specific to TNA: standard hypothesis testing routinely assumes, for instance, that the null distribution is exactly Gaussian, an assumption that is essentially never exactly satisfied in practice, yet this discrepancy is broadly accepted because the resulting approximation is useful in practice. We therefore view the absence of an assumption-free theoretical guarantee as an inherent feature of the problem itself, rather than a specific shortcoming of TNA, and we have chosen to state this limitation explicitly rather than overclaim the theoretical guarantees of TNA.}
 
 2. Reliance on manual parameterization of histogram intervals.
 
