@@ -3,17 +3,22 @@
 \begin{document}
 	\setcounter{figure}{10}
 
+
 \begin{figure}[h!]
-	\centering
+	\centering	
 	\begin{tabular}{ccc}
 		PCam & CheXpert & TissueNet \\
-		\includegraphics[width=0.33\linewidth]{img/binning_combined_pcam_shift_full.png} &
-		\includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} &
-		% \includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} \\
+		\includegraphics[width=0.3\linewidth]{img/binning_pcam_full.png} &
+		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_full.png} &
+		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_full.png} \\
+		\includegraphics[width=0.3\linewidth]{img/binning_pcam_shift_full.png} &
+		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_shift_full.png} &
+		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_shift_full.png} \\
 	\end{tabular}
-	\caption{{\bf Robustness to histogram binning.} See the caption of Fig \ref{fig:mnist_shfit} C for plot descriptions.}
+	\caption{{\bf Robustness to histogram binning.} Top row: no shift; bottom row: class distribution shift.}
 	\label{fig:binning}
 \end{figure}
+
 
 
 \end{document}

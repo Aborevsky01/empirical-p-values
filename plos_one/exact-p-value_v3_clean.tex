@@ -227,7 +227,7 @@ We demonstrate the usability of our TNA method in FDR control with Benjamini-Hoc
 
 \textbf{Conclusion:} The main advantage of the TNA method is that its application does not require any domain specific knowledge.
 It works in binary and multi-label classification scenarios, it is fully data-driven, and it operates in the 1-dimensional space of the prediction scores ensuring stable numerical calculations.
-We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. 
+We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. \url{https://github.com/Aborevsky01/TNA}
 
 
 % Please keep the Author Summary between 150 and 200 words. Use first person.
@@ -438,11 +438,11 @@ The two approaches differ only at the 3rd step of the following algorithm.
 	Finally, calculate the TNA EPVs for each adjusted $\hat{t_s}$ test score with respect to the empirical training null ($X_0$) with using Eq. [1].
 	The TNA EPVs then can be used in any statistical applications that rely on valid p-values.
 	In our experiments in the following sections, we demonstrate the usability of the TNA EPVs in FDR control with BH procedure.
-	With TNA EPVs, we re-estimate $\hat{\pi_0}$ for the test instances with the Storey method with $\lambda_S= 0.8$, and run BH procedure to control the FDR at a desired level. 
+	With TNA EPVs, we re-estimate $\hat{\pi_0}$ for the test instances with the Storey method with $\lambda_S= 0.8$, and run BH procedure to control the FDR at a desired level. \edit{The TNA code is publicly available at \url{https://github.com/Aborevsky01/TNA}.}
 	
 	We note that the actual number of bins or the size of bin-width in step 1 may depend on the range and/or the number of the discriminative scores.
 	Essentially, there should be enough data in each bins to ensure accurate estimations.
-	This might require the the analyst to manually adjust the bins in practice.
+	This might require the analyst to manually adjust the bins in practice.
 	\edit{As a practical rule of thumb, we suggest starting from a bin width such that each bin contains at least a few dozen training samples, and coarsening the bins if the resulting density histograms appear noisy.}
 	
 	We also note that we tested a one-dimensional optimal transportation (OT) to adjust training null to test null.
@@ -524,7 +524,7 @@ TissueNet & TissueNet Cell Segmentation Dataset & DOI: \href{https://doi.org/10.
 \end{tabularx}
 \end{table}
 
-\edit{The implementation code used to produce the results reported in this manuscript is publicly available at \url{https://github.com/Aborevsky01/empirical-p-values}.}
+\edit{The implementation code used to produce the results reported in this manuscript is publicly available at \url{https://github.com/Aborevsky01/TNA}.}
 
 \subsection*{PCam: tumor classification}
 
@@ -739,7 +739,7 @@ The LTT method is overly liberal with the Stroma class, and it is overly conserv
 We suspect that LTT appears to be accurate by chance on the whole dataset because the two types of bias cancel each other out in the Stroma and the Tumor classes.
 These two classes account for the the 94 \% of the whole data.
 
-\edit{In our opinion, the comparatively weaker performance of the TNA method on the BCSS dataset stems from subpopulation shift (proportions of different subclasses change). 
+\edit{In our opinion, the comparatively weaker performance of the TNA method on the BCSS dataset stems from subpopulation shift (proportions of different subclasses change from training to test sets). 
 The shapes of the modes of the training and test null distributions differ more substantially than in the other benchmark datasets.
 In such cases, a simple affine adjustment of the test scores cannot adjust the test null mode close to the training null mode. 
 The differing shapes of the modes across the three classes can be seen in Fig \ref{fig:BCSS-classwise}. 
@@ -770,15 +770,19 @@ bins or more are essentially the same; only the extremely coarse binnings
 too crude to capture the shape of the null. TNA is therefore robust to the binning,
 and any sufficiently fine binning yields practically the same results.
 }
+
 \begin{figure}[h!]
 	\centering	
 	\begin{tabular}{ccc}
 		PCam & CheXpert & TissueNet \\
-%		\includegraphics[width=0.33\linewidth]{img/binning_combined_pcam_shift_full.png} &
-%		\includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} &
-%		\includegraphics[width=0.33\linewidth]{img/binning_combined_chexpert_full.png} \\
+		% \includegraphics[width=0.3\linewidth]{img/binning_pcam_full.png} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_chexpert_full.png} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_tissuenet_full.png} \\
+		% \includegraphics[width=0.3\linewidth]{img/binning_pcam_shift_full.png} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_chexpert_shift_full.png} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_tissuenet_shift_full.png} \\
 	\end{tabular}
-	\caption{{\bf Robustness to histogram binning.} See the caption of Fig \ref{fig:mnist_shfit} C for plot descriptions.}
+	\caption{{\bf Robustness to histogram binning.} Top row: no shift; bottom row: class distribution shift.}
 	\label{fig:binning}
 \end{figure}
 
