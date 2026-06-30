@@ -112,6 +112,23 @@ I found this manuscript interesting, timely, and potentially valuable. [...] I t
 
 \edit{Finally, we investigate the robustness of TNA to the histogram binning. We run TNA- and TNA+ over various numbers of histogram bins from $5$ to $200$, and compared the resulting numbers of trusted predictions to the ground truth. Results are shown on Fig~\ref{fig:binning}. The results obtained with $30$ bins or more are essentially the same; only the extremely coarse binnings ($5$--$20$ bins) deviate noticeably, because the density histograms become too crude to capture the shape of the null. TNA is therefore robust to the binning, and any sufficiently fine binning yields practically the same results.}
 
+\begin{figure}[h!]
+	\centering	
+	\begin{tabular}{ccc}
+		PCam & CheXpert & TissueNet \\
+		\includegraphics[width=0.3\linewidth]{img/binning_pcam_full.pdf} &
+		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_full.pdf} &
+		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_full.pdf} \\
+		\includegraphics[width=0.3\linewidth]{img/binning_pcam_shift_full.pdf} &
+		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_shift_full.pdf} &
+		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_shift_full.pdf} \\
+	\end{tabular}
+	\caption{{\bf Robustness to histogram binning.} Top row: no shift; bottom row: class distribution shift.}
+	\label{fig:binning}
+\end{figure}
+
+
+
 \response{In short, our observation is that TNA's results are stable once the histogram is fine enough to resolve the shape of the null distribution; only very coarse binning (5--20 bins) noticeably degrades the FDR control, while 30 bins or more already give essentially the same results. We kindly ask the reviewer to check the new ``Robustness to binning'' subsection at the end of the Results section of the revised manuscript.}
 
 3. The interpretation of the weaker performance on the BCSS dataset.
@@ -133,9 +150,9 @@ The manuscript shows some methodological vulnerabilities, including the absence 
 
 1. Absence of theoretical validation/formal error bounds across degrees of distributional shift.
 
-\response{We agree, and we already state this limitation explicitly in our Conclusion: TNA is presented as a practical heuristic, not as a method with proven error bounds. We have kept and slightly emphasized this statement:}
+\response{We agree, and we already state this limitation explicitly in our Conclusion: TNA is presented as a practical heuristic, not as a method with proven error bounds. We have kept it:}
 
-\edit{We note that the handling of data shifts in practice is challenging, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased, without any additional assumptions; hence TNA is heuristic in its general form. Deriving formal error bounds for TNA under explicit shift models (e.g., bounded Wasserstein distance between $X_0$ and $T_0$) is an interesting direction that we leave for future work.}
+\edit{We note that the handling of data shifts in practice is challenging, and unfortunately our method does not provide any theoretical guarantee that the FDR control with TNA EPVs becomes accurate, or conservatively or liberally biased, without any additional assumptions; hence TNA is heuristic in its general form. }
 
 \response{We respectfully note that, to our knowledge, no existing method for FDR control under unconstrained, general distribution shift currently offers such guarantees either; we therefore frame TNA as a practically useful, model-agnostic alternative rather than as a theoretically certified procedure.}
 

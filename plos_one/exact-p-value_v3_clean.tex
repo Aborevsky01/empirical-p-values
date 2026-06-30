@@ -169,7 +169,8 @@
 
 \newcommand{\lorem}{\textbf{LOREM}}
 \newcommand{\ipsum}{\textbf{IPSUM}}
-\newcommand{\edit}[1]{\color{red}#1\color{black}}
+% \newcommand{\edit}[1]{\color{red}#1\color{black}}   % use this for track changes
+\newcommand{\edit}[1]{#1} % use this for clean version 
 
 %% END MACROS SECTION
 
@@ -227,7 +228,7 @@ We demonstrate the usability of our TNA method in FDR control with Benjamini-Hoc
 
 \textbf{Conclusion:} The main advantage of the TNA method is that its application does not require any domain specific knowledge.
 It works in binary and multi-label classification scenarios, it is fully data-driven, and it operates in the 1-dimensional space of the prediction scores ensuring stable numerical calculations.
-We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. \url{https://github.com/Aborevsky01/TNA}
+We have performed four experimental tests on the biomedical image analysis domain to demonstrate that the TNA method is able to mitigate the bias in FDR induced by data shift in real-life applications. \edit{TNA is available at \url{https://github.com/Aborevsky01/TNA}}
 
 
 % Please keep the Author Summary between 150 and 200 words. Use first person.
@@ -570,25 +571,25 @@ The LTT method became liberal in FDR control, the BH protocol with standard EPVs
 	
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard PCam dataset:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.pdf}\\	
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_fdr_control_loc.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam.pdf}\\	
 		\multicolumn{4}{l}{\bf (ii) PCam with class distribution shift:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.pdf}\\
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_pcam_balanced.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_pcam_balanced_fdr_control_loc.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_pcam_balanced.pdf}\\
 		\multicolumn{4}{l}{\bf (iii) Standard CheXpert dataset:}\\	
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.pdf} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.pdf}\\
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx.pdf} 		&
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_fdr_control_loc.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx.pdf}\\
 		\multicolumn{4}{l}{\bf (iv) CheXpert dataset with class distribution shift:}\\	
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.pdf} 		&
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.pdf}\\
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_chx_balanced.pdf} 		&
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_chx_balanced_fdr_control_loc.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_chx_balanced.pdf}\\
 		A & B & C & D
 	\end{tabular}
 	\caption{{\bf Performance evaluation of FDR controlling methods.} See the caption of Fig \ref{fig:mnist_shfit} for plot descriptions. }
@@ -704,15 +705,15 @@ The FDR estimation error with BH is significant (Fig. \ref{fig:ii}-(iii)-D).
 	\centering
 	\begin{tabular}{cccc}
 		\multicolumn{4}{l}{\bf (i) Standard TissueNet dataset:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.pdf}\\	
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_segment.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_segment_fdr_control_loc.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_segment.pdf}\\	
 		\multicolumn{4}{l}{\bf (ii) TissueNet with single image:}\\		
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.pdf} &
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.pdf} & 
-		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.pdf}\\			
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_cells_balanced.pdf} &
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_cells_balanced_fdr_control_loc.pdf} & 
+		% \includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_FDPscat_cells_balanced.pdf}\\			
 		\multicolumn{4}{l}{\bf (iii) Standard BCSS dataset:}\\		
 %		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_QQ_bcss.png} &
 %		\includegraphics[width=0.225\linewidth, height=0.225\linewidth]{img/cnn_bcss_fdr_control.png} &
@@ -775,12 +776,12 @@ and any sufficiently fine binning yields practically the same results.
 	\centering	
 	\begin{tabular}{ccc}
 		PCam & CheXpert & TissueNet \\
-		\includegraphics[width=0.3\linewidth]{img/binning_pcam_full.pdf} &
-		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_full.pdf} &
-		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_full.pdf} \\
-		\includegraphics[width=0.3\linewidth]{img/binning_pcam_shift_full.pdf} &
-		\includegraphics[width=0.3\linewidth]{img/binning_chexpert_shift_full.pdf} &
-		\includegraphics[width=0.3\linewidth]{img/binning_tissuenet_shift_full.pdf} \\
+		% \includegraphics[width=0.3\linewidth]{img/binning_pcam_full.pdf} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_chexpert_full.pdf} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_tissuenet_full.pdf} \\
+		% \includegraphics[width=0.3\linewidth]{img/binning_pcam_shift_full.pdf} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_chexpert_shift_full.pdf} &
+		% \includegraphics[width=0.3\linewidth]{img/binning_tissuenet_shift_full.pdf} \\
 	\end{tabular}
 	\caption{{\bf Robustness to histogram binning.} Top row: no shift; bottom row: class distribution shift.}
 	\label{fig:binning}
